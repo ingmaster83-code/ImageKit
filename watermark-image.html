@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 워터마크 추가 무료 — 온라인 텍스트 워터마크 | 이미지킷</title>
+  <meta name="description" content="이미지에 텍스트 워터마크를 무료로 추가. 위치·폰트 크기·투명도·색상 설정 가능. 브라우저에서 바로 처리, 서버 저장 없음.">
+  <meta name="keywords" content="워터마크추가, 이미지워터마크, 텍스트워터마크, 무료워터마크, 온라인워터마크, 이미지저작권표시">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/watermark-image.html">
+  <meta property="og:title" content="이미지 워터마크 추가 무료 | 이미지킷">
+  <meta property="og:description" content="이미지에 텍스트 워터마크 추가. 위치·투명도·색상 설정. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/watermark-image.html">
+  <meta property="og:locale" content="ko_KR">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="이미지킷">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .position-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 44px);
+      gap: 6px;
+    }
+    .pos-btn {
+      width: 44px; height: 44px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pos-btn.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .pos-btn:hover { border-color: var(--primary); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">이미지킷 <span>| ImageKit</span></a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">Linker Services</span>
+  <div class="our-sites-links">
+    <a href="https://linker.wooahouse.com/" target="_blank" rel="noopener">🔗 Linker</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 PDFKit</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ ImageKit</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 MacTools</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ PCTools</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 VSKit</a>
+  </div>
+</div>
+
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>워터마크 추가</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">💧</span>
+    <h1>워터마크 추가</h1>
+    <p>이미지에 텍스트 워터마크를 삽입합니다. 위치, 크기, 투명도, 색상을 자유롭게 설정하세요.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG, WebP 파일을 업로드하세요</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">워터마크 설정</div>
+
+    <div class="option-row">
+      <span class="option-label">워터마크 텍스트</span>
+      <div class="option-control" style="flex:1;">
+        <input type="text" id="wmText" value="© ImageKit" style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); font-size:0.92rem;">
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">글자 색상</span>
+      <div class="option-control" style="display:flex; align-items:center; gap:10px;">
+        <input type="color" id="wmColor" value="#ffffff" style="width:48px; height:36px; border:1px solid var(--border); border-radius:6px; cursor:pointer;">
+        <span id="wmColorHex" style="font-size:0.9rem; color:var(--text-light);">#ffffff</span>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">글자 크기: <strong id="fontSizeVal">40</strong>px</span>
+      <div class="option-control" style="flex:1; max-width:320px;">
+        <input type="range" id="fontSize" min="10" max="200" value="40" style="width:100%;">
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">투명도: <strong id="opacityVal">70</strong>%</span>
+      <div class="option-control" style="flex:1; max-width:320px;">
+        <input type="range" id="opacity" min="5" max="100" value="70" style="width:100%;">
+      </div>
+    </div>
+
+    <div class="option-row" style="align-items:flex-start;">
+      <span class="option-label" style="padding-top:4px;">위치</span>
+      <div class="option-control">
+        <div class="position-grid" id="positionGrid">
+          <button class="pos-btn" data-pos="top-left" title="좌상">↖</button>
+          <button class="pos-btn" data-pos="top-center" title="중상">↑</button>
+          <button class="pos-btn" data-pos="top-right" title="우상">↗</button>
+          <button class="pos-btn" data-pos="middle-left" title="좌중">←</button>
+          <button class="pos-btn" data-pos="center" title="중앙">✛</button>
+          <button class="pos-btn" data-pos="middle-right" title="우중">→</button>
+          <button class="pos-btn" data-pos="bottom-left" title="좌하">↙</button>
+          <button class="pos-btn" data-pos="bottom-center" title="중하">↓</button>
+          <button class="pos-btn active" data-pos="bottom-right" title="우하">↘</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">출력 형식</span>
+      <div class="option-control">
+        <select id="outputFormat">
+          <option value="image/jpeg">JPG</option>
+          <option value="image/png">PNG</option>
+          <option value="image/webp">WebP</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="canvas-preview-wrap" id="canvasWrap" style="display:none">
+      <canvas id="previewCanvas"></canvas>
+    </div>
+
+    <button class="btn-convert" id="downloadBtn">⬇️ 워터마크 이미지 다운로드</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 이미지킷. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let selectedFile = null;
+  let origImg = null;
+  let currentPos = 'bottom-right';
+
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  // Position grid
+  document.querySelectorAll('.pos-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.pos-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentPos = this.dataset.pos;
+      renderPreview();
+    });
+  });
+
+  ['wmText','wmColor','fontSize','opacity','outputFormat'].forEach(id => {
+    document.getElementById(id).addEventListener('input', function() {
+      if (id === 'wmColor') document.getElementById('wmColorHex').textContent = this.value;
+      if (id === 'fontSize') document.getElementById('fontSizeVal').textContent = this.value;
+      if (id === 'opacity') document.getElementById('opacityVal').textContent = this.value;
+      renderPreview();
+    });
+  });
+
+  async function loadFile(file) {
+    if (!file.type.startsWith('image/')) {
+      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+    }
+    hideError();
+    selectedFile = file;
+    origImg = await loadImage(file);
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)} · ${origImg.naturalWidth}×${origImg.naturalHeight}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('canvasWrap').style.display = 'block';
+    renderPreview();
+  }
+
+  function renderPreview() {
+    if (!origImg) return;
+    const canvas = document.getElementById('previewCanvas');
+    const W = origImg.naturalWidth;
+    const H = origImg.naturalHeight;
+    canvas.width = W;
+    canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(origImg, 0, 0);
+
+    const text = document.getElementById('wmText').value || '© ImageKit';
+    const color = document.getElementById('wmColor').value;
+    const size = parseInt(document.getElementById('fontSize').value);
+    const opacity = parseInt(document.getElementById('opacity').value) / 100;
+    const padding = Math.max(20, size * 0.5);
+
+    ctx.save();
+    ctx.globalAlpha = opacity;
+    ctx.font = `bold ${size}px Arial, sans-serif`;
+    ctx.fillStyle = color;
+    ctx.textBaseline = 'middle';
+
+    const tm = ctx.measureText(text);
+    const tw = tm.width;
+    const th = size;
+
+    let x, y;
+    switch(currentPos) {
+      case 'top-left':     x = padding; y = padding + th/2; ctx.textAlign='left'; break;
+      case 'top-center':   x = W/2; y = padding + th/2; ctx.textAlign='center'; break;
+      case 'top-right':    x = W - padding; y = padding + th/2; ctx.textAlign='right'; break;
+      case 'middle-left':  x = padding; y = H/2; ctx.textAlign='left'; break;
+      case 'center':       x = W/2; y = H/2; ctx.textAlign='center'; break;
+      case 'middle-right': x = W - padding; y = H/2; ctx.textAlign='right'; break;
+      case 'bottom-left':  x = padding; y = H - padding - th/2; ctx.textAlign='left'; break;
+      case 'bottom-center':x = W/2; y = H - padding - th/2; ctx.textAlign='center'; break;
+      case 'bottom-right': x = W - padding; y = H - padding - th/2; ctx.textAlign='right'; break;
+      default:             x = W - padding; y = H - padding - th/2; ctx.textAlign='right';
+    }
+
+    // Shadow for visibility
+    ctx.shadowColor = 'rgba(0,0,0,0.5)';
+    ctx.shadowBlur = 4;
+    ctx.fillText(text, x, y);
+    ctx.restore();
+  }
+
+  function clearFile() {
+    selectedFile = null; origImg = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('canvasWrap').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', async () => {
+    if (!origImg) return;
+    renderPreview();
+    const canvas = document.getElementById('previewCanvas');
+    const fmt = document.getElementById('outputFormat').value;
+    const quality = fmt === 'image/png' ? undefined : 0.92;
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, fmt, quality));
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const extMap = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp' };
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_watermark' + (extMap[fmt] || '.jpg');
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>

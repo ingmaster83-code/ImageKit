@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 정보 확인 무료 — 해상도·크기·EXIF 정보 | 이미지킷</title>
+  <meta name="description" content="이미지 파일의 파일명, 파일크기, 이미지 해상도, 파일 형식, 수정일 등 상세 정보를 확인하세요. 브라우저에서 바로 처리, 서버 저장 없음.">
+  <meta name="keywords" content="이미지정보확인, 이미지해상도, 이미지크기, EXIF정보, 사진정보, 이미지메타데이터, 무료이미지정보">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/image-info.html">
+  <meta property="og:title" content="이미지 정보 확인 무료 | 이미지킷">
+  <meta property="og:description" content="이미지 파일명, 크기, 해상도, 형식 등 정보 확인. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/image-info.html">
+  <meta property="og:locale" content="ko_KR">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="이미지킷">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .info-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .info-table tr:last-child { border-bottom: none; }
+    .info-table th {
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--bg);
+      width: 40%;
+      white-space: nowrap;
+    }
+    .info-table td {
+      padding: 10px 12px;
+      color: var(--text-light);
+    }
+    .preview-thumb {
+      max-width: 100%;
+      max-height: 220px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      display: block;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">이미지킷 <span>| ImageKit</span></a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">Linker Services</span>
+  <div class="our-sites-links">
+    <a href="https://linker.wooahouse.com/" target="_blank" rel="noopener">🔗 Linker</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 PDFKit</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ ImageKit</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 MacTools</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ PCTools</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 VSKit</a>
+  </div>
+</div>
+
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>이미지 정보 확인</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🔍</span>
+    <h1>이미지 정보 확인</h1>
+    <p>이미지 파일의 상세 정보(파일명, 크기, 해상도, 형식, 수정일 등)를 확인합니다.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG, WebP, GIF 등 모든 이미지 형식 가능</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+  </div>
+
+  <div id="resultPanel" class="options-panel" style="display:none">
+    <div class="options-title">이미지 정보</div>
+
+    <img id="previewThumb" class="preview-thumb" alt="미리보기">
+
+    <table class="info-table" id="infoTable">
+      <tbody id="infoBody"></tbody>
+    </table>
+
+    <div style="margin-top:16px; display:flex; gap:8px;">
+      <button class="btn-action" onclick="clearFile()">✕ 초기화</button>
+    </div>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 이미지킷. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  function loadFile(file) {
+    if (!file.type.startsWith('image/')) {
+      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+    }
+    hideError();
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      const img = new Image();
+      img.onload = function() {
+        document.getElementById('previewThumb').src = dataUrl;
+
+        // Determine format
+        const typeMap = {
+          'image/jpeg': 'JPEG',
+          'image/png': 'PNG',
+          'image/webp': 'WebP',
+          'image/gif': 'GIF',
+          'image/bmp': 'BMP',
+          'image/svg+xml': 'SVG',
+          'image/tiff': 'TIFF'
+        };
+        const fmt = typeMap[file.type] || file.type || '알 수 없음';
+
+        // Aspect ratio
+        const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+        const d = gcd(img.naturalWidth, img.naturalHeight);
+        const ar = `${img.naturalWidth/d} : ${img.naturalHeight/d}`;
+
+        // File size
+        const sizeKB = (file.size / 1024).toFixed(1);
+        const sizeMB = (file.size / (1024*1024)).toFixed(2);
+        const sizeStr = file.size >= 1024*1024
+          ? `${sizeMB} MB (${Number(sizeKB).toLocaleString()} KB)`
+          : `${sizeKB} KB`;
+
+        // Last modified
+        let modStr = '—';
+        if (file.lastModified) {
+          const d = new Date(file.lastModified);
+          modStr = d.toLocaleString('ko-KR');
+        }
+
+        // Megapixels
+        const mp = ((img.naturalWidth * img.naturalHeight) / 1000000).toFixed(2);
+
+        const rows = [
+          ['📄 파일명', escHtml(file.name)],
+          ['📦 파일 크기', sizeStr],
+          ['📐 이미지 크기', `${img.naturalWidth} × ${img.naturalHeight} 픽셀`],
+          ['📊 메가픽셀', `${mp} MP`],
+          ['⬜ 가로세로 비율', ar],
+          ['🎨 파일 형식', fmt],
+          ['🏷️ MIME 타입', file.type || '—'],
+          ['📅 마지막 수정일', modStr],
+        ];
+
+        document.getElementById('infoBody').innerHTML = rows.map(([k, v]) =>
+          `<tr><th>${k}</th><td>${v}</td></tr>`
+        ).join('');
+
+        document.getElementById('resultPanel').style.display = 'block';
+      };
+      img.src = dataUrl;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearFile() {
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('previewThumb').src = '';
+    document.getElementById('infoBody').innerHTML = '';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 리사이즈 무료 — 이미지 크기 조정 온라인 | 이미지킷</title>
+  <meta name="description" content="이미지 크기를 픽셀 또는 비율로 자유롭게 조정하세요. 가로/세로 비율 잠금 기능, 완전 무료, 브라우저에서 바로 처리.">
+  <meta name="keywords" content="이미지리사이즈, 이미지크기조정, 사진크기변경, 이미지픽셀조정, 무료이미지리사이즈">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/resize-image.html">
+  <meta property="og:title" content="이미지 리사이즈 무료 — 크기 조정 | 이미지킷">
+  <meta property="og:description" content="이미지 크기를 픽셀 또는 비율로 조정. 비율 잠금 기능. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/resize-image.html">
+  <meta property="og:locale" content="ko_KR">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="이미지킷">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .resize-dims { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .dim-field label { display:block; font-size:0.82rem; color:var(--text-light); margin-bottom:4px; font-weight:500; }
+    .dim-field input { width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); font-size:0.95rem; font-family:inherit; outline:none; background:#F9FAFB; }
+    .dim-field input:focus { border-color:var(--primary); background:white; }
+    .lock-btn { background:white; border:1.5px solid var(--border); border-radius:8px; padding:8px; cursor:pointer; font-size:1.2rem; transition:border-color 0.15s; }
+    .lock-btn.locked { border-color:var(--primary); background:var(--primary-light); }
+    .mode-tabs { display:flex; gap:8px; margin-bottom:16px; }
+    .mode-tab { flex:1; padding:9px; border:1.5px solid var(--border); border-radius:var(--radius-sm); background:white; font-size:0.88rem; font-weight:600; cursor:pointer; font-family:inherit; transition:0.15s; }
+    .mode-tab.active { border-color:var(--primary); background:var(--primary-light); color:var(--primary-dark); }
+    .orig-info { font-size:0.82rem; color:var(--text-light); margin-bottom:12px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">이미지킷 <span>| ImageKit</span></a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">Linker Services</span>
+  <div class="our-sites-links">
+    <a href="https://linker.wooahouse.com/" target="_blank" rel="noopener">🔗 Linker</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 PDFKit</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ ImageKit</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 MacTools</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ PCTools</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 VSKit</a>
+  </div>
+</div>
+
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>이미지 리사이즈</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">📐</span>
+    <h1>이미지 리사이즈</h1>
+    <p>가로/세로 픽셀 또는 비율로 이미지 크기를 조정합니다.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG, WebP 파일을 업로드하세요</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">크기 조정 설정</div>
+
+    <div class="mode-tabs">
+      <button class="mode-tab active" id="tabPixel" onclick="setMode('pixel')">픽셀 (px)</button>
+      <button class="mode-tab" id="tabPercent" onclick="setMode('percent')">비율 (%)</button>
+    </div>
+
+    <p class="orig-info" id="origInfo">원본: — × —</p>
+
+    <div id="pixelMode">
+      <div class="resize-dims">
+        <div class="dim-field">
+          <label>가로 (px)</label>
+          <input type="number" id="newWidth" min="1" placeholder="너비">
+        </div>
+        <button class="lock-btn locked" id="lockBtn" title="비율 잠금" onclick="toggleLock()">🔒</button>
+        <div class="dim-field">
+          <label>세로 (px)</label>
+          <input type="number" id="newHeight" min="1" placeholder="높이">
+        </div>
+      </div>
+    </div>
+
+    <div id="percentMode" style="display:none">
+      <div class="option-row">
+        <span class="option-label">비율 (%)</span>
+        <div class="option-control">
+          <input type="number" id="scalePercent" min="1" max="500" value="50" placeholder="예: 50">
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">출력 형식</span>
+      <div class="option-control">
+        <select id="outputFormat">
+          <option value="image/jpeg">JPG</option>
+          <option value="image/png">PNG</option>
+          <option value="image/webp">WebP</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn-convert" id="resizeBtn">📐 크기 조정 시작</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">리사이즈 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div class="preview-image-wrap">
+      <img id="previewImg" src="" alt="리사이즈된 이미지 미리보기">
+    </div>
+    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 이미지 다운로드</button>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 이미지킷. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let selectedFile = null;
+  let origImg = null;
+  let resultBlob = null;
+  let isLocked = true;
+  let currentMode = 'pixel';
+
+  function setMode(mode) {
+    currentMode = mode;
+    document.getElementById('tabPixel').classList.toggle('active', mode === 'pixel');
+    document.getElementById('tabPercent').classList.toggle('active', mode === 'percent');
+    document.getElementById('pixelMode').style.display = mode === 'pixel' ? 'block' : 'none';
+    document.getElementById('percentMode').style.display = mode === 'percent' ? 'block' : 'none';
+  }
+
+  function toggleLock() {
+    isLocked = !isLocked;
+    const btn = document.getElementById('lockBtn');
+    btn.textContent = isLocked ? '🔒' : '🔓';
+    btn.classList.toggle('locked', isLocked);
+  }
+
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  async function loadFile(file) {
+    if (!file.type.startsWith('image/')) {
+      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+    }
+    hideError();
+    selectedFile = file;
+    resultBlob = null;
+
+    origImg = await loadImage(file);
+    document.getElementById('origInfo').textContent = `원본: ${origImg.naturalWidth} × ${origImg.naturalHeight} px`;
+    document.getElementById('newWidth').value = origImg.naturalWidth;
+    document.getElementById('newHeight').value = origImg.naturalHeight;
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)} · ${origImg.naturalWidth}×${origImg.naturalHeight}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+  }
+
+  document.getElementById('newWidth').addEventListener('input', function() {
+    if (!isLocked || !origImg) return;
+    const ratio = origImg.naturalHeight / origImg.naturalWidth;
+    document.getElementById('newHeight').value = Math.round(this.value * ratio);
+  });
+
+  document.getElementById('newHeight').addEventListener('input', function() {
+    if (!isLocked || !origImg) return;
+    const ratio = origImg.naturalWidth / origImg.naturalHeight;
+    document.getElementById('newWidth').value = Math.round(this.value * ratio);
+  });
+
+  function clearFile() {
+    selectedFile = null; origImg = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  document.getElementById('resizeBtn').addEventListener('click', async () => {
+    if (!selectedFile || !origImg) return;
+    hideError();
+    let targetW, targetH;
+
+    if (currentMode === 'pixel') {
+      targetW = parseInt(document.getElementById('newWidth').value);
+      targetH = parseInt(document.getElementById('newHeight').value);
+    } else {
+      const pct = parseFloat(document.getElementById('scalePercent').value) / 100;
+      targetW = Math.round(origImg.naturalWidth * pct);
+      targetH = Math.round(origImg.naturalHeight * pct);
+    }
+
+    if (!targetW || !targetH || targetW < 1 || targetH < 1) {
+      showError('올바른 크기를 입력하세요.'); return;
+    }
+
+    const format = document.getElementById('outputFormat').value;
+    const btn = document.getElementById('resizeBtn');
+    btn.disabled = true; btn.textContent = '⏳ 처리 중...';
+
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = targetW;
+      canvas.height = targetH;
+      const ctx = canvas.getContext('2d');
+      if (format === 'image/jpeg') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, targetW, targetH);
+      }
+      ctx.drawImage(origImg, 0, 0, targetW, targetH);
+
+      const quality = format === 'image/png' ? undefined : 0.9;
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, format, quality));
+      resultBlob = blob;
+
+      const url = URL.createObjectURL(blob);
+      document.getElementById('previewImg').src = url;
+      document.getElementById('resultSubtitle').textContent =
+        `${origImg.naturalWidth}×${origImg.naturalHeight} → ${targetW}×${targetH} px (${formatSize(blob.size)})`;
+
+      const panel = document.getElementById('resultPanel');
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth' });
+    } catch(err) {
+      showError('처리 중 오류가 발생했습니다: ' + err.message);
+    }
+    btn.disabled = false; btn.textContent = '📐 크기 조정 시작';
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    const format = document.getElementById('outputFormat').value;
+    const extMap = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp' };
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_resized' + (extMap[format] || '.jpg');
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>

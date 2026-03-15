@@ -1,0 +1,11 @@
+{
+  "name": "이미지킷 - 무료 온라인 이미지 도구",
+  "short_name": "ImageKit",
+  "description": "이미지 압축·리사이즈·변환·편집 무료 온라인 도구 모음",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7F8FA",
+  "theme_color": "#0EA5E9",
+  "lang": "ko",
+  "icons": [{"src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}]
+}

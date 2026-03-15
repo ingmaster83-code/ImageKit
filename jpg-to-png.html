@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JPG → PNG 변환 무료 — 온라인 이미지 변환 | 이미지킷</title>
+  <meta name="description" content="JPG 이미지를 투명 배경 지원 PNG 포맷으로 무료 변환. 회원가입 없이 브라우저에서 바로 처리, 서버 저장 없음.">
+  <meta name="keywords" content="JPG PNG변환, JPEG PNG, jpg to png, 이미지변환무료, 온라인JPG변환, png투명배경">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/jpg-to-png.html">
+  <meta property="og:title" content="JPG → PNG 변환 무료 | 이미지킷">
+  <meta property="og:description" content="JPG를 PNG로 변환. 투명 배경 지원. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/jpg-to-png.html">
+  <meta property="og:locale" content="ko_KR">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="이미지킷">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">이미지킷 <span>| ImageKit</span></a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">Linker Services</span>
+  <div class="our-sites-links">
+    <a href="https://linker.wooahouse.com/" target="_blank" rel="noopener">🔗 Linker</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 PDFKit</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ ImageKit</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 MacTools</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ PCTools</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 VSKit</a>
+  </div>
+</div>
+
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>JPG → PNG 변환</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🔄</span>
+    <h1>JPG → PNG 변환</h1>
+    <p>JPG 이미지를 투명 배경 지원 PNG 포맷으로 변환합니다.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>JPG 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, JPEG 파일을 업로드하세요</p>
+    <label for="fileInput" class="btn-select">JPG 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/jpeg,image/jpg,.jpg,.jpeg" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">변환 설정</div>
+    <div class="notice-box">
+      ℹ️ JPG는 투명도를 지원하지 않습니다. PNG로 변환하면 이후 편집에서 투명 영역을 활용할 수 있습니다.
+    </div>
+    <button class="btn-convert" id="convertBtn">🔄 PNG로 변환</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">변환 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div class="preview-image-wrap">
+      <img id="previewImg" src="" alt="변환된 PNG 이미지 미리보기">
+    </div>
+    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ PNG 다운로드</button>
+  </div>
+
+  <div class="cross-link-tip">
+    반대로 변환하고 싶으신가요? <a href="png-to-jpg.html">PNG → JPG 변환 →</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 이미지킷. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let selectedFile = null;
+  let resultBlob = null;
+
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  function loadFile(file) {
+    if (!file.type.match(/^image\/(jpeg|jpg)/) && !file.name.match(/\.(jpg|jpeg)$/i)) {
+      showError('JPG/JPEG 파일만 업로드할 수 있습니다.'); return;
+    }
+    hideError();
+    selectedFile = file;
+    resultBlob = null;
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+  }
+
+  function clearFile() {
+    selectedFile = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  document.getElementById('convertBtn').addEventListener('click', async () => {
+    if (!selectedFile) return;
+    const btn = document.getElementById('convertBtn');
+    btn.disabled = true; btn.textContent = '⏳ 변환 중...';
+    hideError();
+
+    try {
+      const img = await loadImage(selectedFile);
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+      resultBlob = blob;
+
+      const url = URL.createObjectURL(blob);
+      document.getElementById('previewImg').src = url;
+      document.getElementById('resultSubtitle').textContent =
+        `${img.naturalWidth}×${img.naturalHeight} px · ${formatSize(blob.size)}`;
+
+      const panel = document.getElementById('resultPanel');
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth' });
+    } catch(err) {
+      showError('처리 중 오류가 발생했습니다: ' + err.message);
+    }
+    btn.disabled = false; btn.textContent = '🔄 PNG로 변환';
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = selectedFile.name.replace(/\.(jpg|jpeg)$/i, '') + '.png';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>

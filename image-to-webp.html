@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지를 WebP로 변환 무료 — JPG/PNG to WebP | 이미지킷</title>
+  <meta name="description" content="JPG, PNG 이미지를 WebP 형식으로 무료 변환. 파일 용량 대폭 감소. 품질 슬라이더로 최적화. 브라우저에서 바로 처리, 서버 저장 없음.">
+  <meta name="keywords" content="WebP변환, JPG WebP, PNG WebP, 이미지WebP, 웹이미지최적화, 무료WebP변환, 온라인WebP">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/image-to-webp.html">
+  <meta property="og:title" content="이미지 → WebP 변환 무료 | 이미지킷">
+  <meta property="og:description" content="JPG/PNG를 WebP로 변환해 파일 용량을 줄이세요. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/image-to-webp.html">
+  <meta property="og:locale" content="ko_KR">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="이미지킷">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">이미지킷 <span>| ImageKit</span></a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">Linker Services</span>
+  <div class="our-sites-links">
+    <a href="https://linker.wooahouse.com/" target="_blank" rel="noopener">🔗 Linker</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 PDFKit</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ ImageKit</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 MacTools</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ PCTools</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 VSKit</a>
+  </div>
+</div>
+
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>이미지 → WebP 변환</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">⚡</span>
+    <h1>이미지 → WebP 변환</h1>
+    <p>JPG, PNG 등 이미지를 WebP 형식으로 변환해 파일 용량을 줄이세요.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG, WebP 파일을 업로드하세요</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">변환 설정</div>
+
+    <div class="option-row">
+      <span class="option-label">WebP 품질: <strong id="qualityVal">85</strong>%</span>
+      <div class="option-control" style="flex:1; max-width:320px;">
+        <input type="range" id="quality" min="10" max="100" value="85" style="width:100%;">
+      </div>
+    </div>
+
+    <div id="sizeCompare" style="display:none; background:var(--primary-light); border-radius:var(--radius-sm); padding:14px 18px; margin-bottom:16px; font-size:0.9rem;">
+      <div style="display:flex; gap:24px; flex-wrap:wrap;">
+        <div><span style="color:var(--text-light);">원본 크기:</span> <strong id="origSize">—</strong></div>
+        <div><span style="color:var(--text-light);">WebP 크기:</span> <strong id="webpSize">—</strong></div>
+        <div><span style="color:var(--text-light);">절감율:</span> <strong id="savePct" style="color:#0EA5E9;">—</strong></div>
+      </div>
+    </div>
+
+    <div class="canvas-preview-wrap" id="canvasWrap" style="display:none">
+      <canvas id="previewCanvas"></canvas>
+    </div>
+
+    <button class="btn-convert" id="downloadBtn">⬇️ WebP로 다운로드</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 이미지킷. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let selectedFile = null;
+  let origImg = null;
+  let lastWebpBlob = null;
+
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  document.getElementById('quality').addEventListener('input', function() {
+    document.getElementById('qualityVal').textContent = this.value;
+    renderPreview();
+  });
+
+  async function loadFile(file) {
+    if (!file.type.startsWith('image/')) {
+      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+    }
+    hideError();
+    selectedFile = file;
+
+    origImg = await loadImage(file);
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)} · ${origImg.naturalWidth}×${origImg.naturalHeight}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('canvasWrap').style.display = 'block';
+    await renderPreview();
+  }
+
+  async function renderPreview() {
+    if (!origImg) return;
+    const canvas = document.getElementById('previewCanvas');
+    canvas.width = origImg.naturalWidth;
+    canvas.height = origImg.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(origImg, 0, 0);
+
+    const quality = parseInt(document.getElementById('quality').value) / 100;
+    lastWebpBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', quality));
+
+    if (lastWebpBlob && selectedFile) {
+      const origBytes = selectedFile.size;
+      const webpBytes = lastWebpBlob.size;
+      const pct = origBytes > 0 ? Math.round((1 - webpBytes / origBytes) * 100) : 0;
+      document.getElementById('origSize').textContent = formatSize(origBytes);
+      document.getElementById('webpSize').textContent = formatSize(webpBytes);
+      document.getElementById('savePct').textContent = pct > 0 ? `${pct}% 절감` : `${Math.abs(pct)}% 증가`;
+      document.getElementById('sizeCompare').style.display = 'block';
+    }
+  }
+
+  function clearFile() {
+    selectedFile = null; origImg = null; lastWebpBlob = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('canvasWrap').style.display = 'none';
+    document.getElementById('sizeCompare').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', async () => {
+    if (!origImg) return;
+    await renderPreview();
+    if (!lastWebpBlob) return;
+    const url = URL.createObjectURL(lastWebpBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '.webp';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>

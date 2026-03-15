@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 자르기 무료 — 온라인 이미지 크롭 | 이미지킷</title>
+  <meta name="description" content="이미지를 원하는 영역으로 자르세요. X, Y 좌표와 너비, 높이 입력으로 정확한 크롭. 완전 무료, 브라우저에서 바로 처리.">
+  <meta name="keywords" content="이미지자르기, 이미지크롭, 사진자르기, 이미지잘라내기, 무료이미지자르기, 온라인크롭">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/crop-image.html">
+  <meta property="og:title" content="이미지 자르기 무료 | 이미지킷">
+  <meta property="og:description" content="이미지를 원하는 영역으로 자르기. X, Y, 너비, 높이 입력. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/crop-image.html">
+  <meta property="og:locale" content="ko_KR">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="이미지킷">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .crop-preview-wrap {
+      position: relative;
+      margin-top: 16px;
+      background: #F3F4F6;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .crop-overlay {
+      position: absolute;
+      border: 2px solid var(--primary);
+      background: rgba(14,165,233,0.15);
+      pointer-events: none;
+    }
+    #previewCanvas { display: block; max-width: 100%; }
+    .crop-info { font-size:0.82rem; color:var(--text-light); margin-top:8px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">이미지킷 <span>| ImageKit</span></a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">Linker Services</span>
+  <div class="our-sites-links">
+    <a href="https://linker.wooahouse.com/" target="_blank" rel="noopener">🔗 Linker</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 PDFKit</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ ImageKit</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 MacTools</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ PCTools</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 VSKit</a>
+  </div>
+</div>
+
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>이미지 자르기</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">✂️</span>
+    <h1>이미지 자르기</h1>
+    <p>원하는 영역의 좌표와 크기를 입력해 이미지를 자릅니다.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG, WebP 파일을 업로드하세요</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">크롭 설정</div>
+    <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:16px;">원본 이미지에서 자를 영역을 픽셀 좌표로 입력하세요.</p>
+
+    <div class="crop-controls">
+      <div class="crop-field">
+        <label>X 시작 (px)</label>
+        <input type="number" id="cropX" min="0" value="0">
+      </div>
+      <div class="crop-field">
+        <label>Y 시작 (px)</label>
+        <input type="number" id="cropY" min="0" value="0">
+      </div>
+      <div class="crop-field">
+        <label>너비 (px)</label>
+        <input type="number" id="cropW" min="1" value="100">
+      </div>
+      <div class="crop-field">
+        <label>높이 (px)</label>
+        <input type="number" id="cropH" min="1" value="100">
+      </div>
+    </div>
+
+    <p class="crop-info" id="cropInfo"></p>
+
+    <div style="text-align:center; margin-top:16px;">
+      <div class="crop-preview-wrap">
+        <canvas id="previewCanvas"></canvas>
+        <div class="crop-overlay" id="cropOverlay"></div>
+      </div>
+    </div>
+
+    <div class="option-row" style="margin-top:16px;">
+      <span class="option-label">출력 형식</span>
+      <div class="option-control">
+        <select id="outputFormat">
+          <option value="image/jpeg">JPG</option>
+          <option value="image/png">PNG</option>
+          <option value="image/webp">WebP</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn-convert" id="cropBtn">✂️ 자르기 실행</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">자르기 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div class="preview-image-wrap">
+      <img id="resultImg" src="" alt="잘라낸 이미지 미리보기">
+    </div>
+    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 이미지 다운로드</button>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 이미지킷. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let selectedFile = null;
+  let origImg = null;
+  let resultBlob = null;
+  let displayScale = 1;
+  const MAX_PREVIEW_W = 700;
+
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  async function loadFile(file) {
+    if (!file.type.startsWith('image/')) {
+      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+    }
+    hideError();
+    selectedFile = file;
+    resultBlob = null;
+    origImg = await loadImage(file);
+
+    const iw = origImg.naturalWidth, ih = origImg.naturalHeight;
+    displayScale = iw > MAX_PREVIEW_W ? MAX_PREVIEW_W / iw : 1;
+
+    const canvas = document.getElementById('previewCanvas');
+    canvas.width = Math.round(iw * displayScale);
+    canvas.height = Math.round(ih * displayScale);
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(origImg, 0, 0, canvas.width, canvas.height);
+
+    document.getElementById('cropX').value = 0;
+    document.getElementById('cropY').value = 0;
+    document.getElementById('cropW').value = iw;
+    document.getElementById('cropH').value = ih;
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)} · ${iw}×${ih}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+    updateOverlay();
+  }
+
+  ['cropX','cropY','cropW','cropH'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updateOverlay);
+  });
+
+  function updateOverlay() {
+    if (!origImg) return;
+    const iw = origImg.naturalWidth, ih = origImg.naturalHeight;
+    let x = Math.max(0, parseInt(document.getElementById('cropX').value) || 0);
+    let y = Math.max(0, parseInt(document.getElementById('cropY').value) || 0);
+    let w = Math.max(1, parseInt(document.getElementById('cropW').value) || 1);
+    let h = Math.max(1, parseInt(document.getElementById('cropH').value) || 1);
+    x = Math.min(x, iw - 1);
+    y = Math.min(y, ih - 1);
+    w = Math.min(w, iw - x);
+    h = Math.min(h, ih - y);
+
+    const ov = document.getElementById('cropOverlay');
+    ov.style.left = Math.round(x * displayScale) + 'px';
+    ov.style.top = Math.round(y * displayScale) + 'px';
+    ov.style.width = Math.round(w * displayScale) + 'px';
+    ov.style.height = Math.round(h * displayScale) + 'px';
+
+    document.getElementById('cropInfo').textContent = `크롭 영역: ${x}, ${y} ~ ${x+w}×${y+h} px`;
+  }
+
+  function clearFile() {
+    selectedFile = null; origImg = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  document.getElementById('cropBtn').addEventListener('click', async () => {
+    if (!origImg) return;
+    hideError();
+    const iw = origImg.naturalWidth, ih = origImg.naturalHeight;
+    let x = Math.max(0, parseInt(document.getElementById('cropX').value) || 0);
+    let y = Math.max(0, parseInt(document.getElementById('cropY').value) || 0);
+    let w = Math.max(1, parseInt(document.getElementById('cropW').value) || 1);
+    let h = Math.max(1, parseInt(document.getElementById('cropH').value) || 1);
+    x = Math.min(x, iw - 1);
+    y = Math.min(y, ih - 1);
+    w = Math.min(w, iw - x);
+    h = Math.min(h, ih - y);
+
+    if (w < 1 || h < 1) { showError('유효한 크롭 영역을 입력하세요.'); return; }
+
+    const format = document.getElementById('outputFormat').value;
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(origImg, x, y, w, h, 0, 0, w, h);
+
+    const quality = format === 'image/png' ? undefined : 0.92;
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, format, quality));
+    resultBlob = blob;
+
+    const url = URL.createObjectURL(blob);
+    document.getElementById('resultImg').src = url;
+    document.getElementById('resultSubtitle').textContent = `${w}×${h} px (${formatSize(blob.size)})`;
+
+    const panel = document.getElementById('resultPanel');
+    panel.style.display = 'block';
+    panel.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    const format = document.getElementById('outputFormat').value;
+    const extMap = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp' };
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_cropped' + (extMap[format] || '.jpg');
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>
