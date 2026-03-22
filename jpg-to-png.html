@@ -20,6 +20,42 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="이미지킷">
   <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JPG PNG 변환기",
+  "url": "https://imagekit.wooahouse.com/jpg-to-png.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "JPG를 PNG로 변환하면 품질이 좋아지나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "JPG 압축 손실은 되돌릴 수 없지만 PNG로 변환하면 이후 편집 시 추가 손실을 방지할 수 있습니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "파일 크기가 커지나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "PNG는 무손실 형식이므로 JPG보다 파일 크기가 커질 수 있습니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "투명 배경으로 변환되나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "JPG에는 투명도가 없으므로 흰색 배경으로 변환됩니다."}
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -49,6 +85,7 @@
     <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
     <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
     <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 CalcKit</a>
     <a href="https://steamkit.wooahouse.com/" target="_blank" rel="noopener">🎮 SteamKit</a>
     <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
     <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
@@ -112,6 +149,24 @@
   <div class="cross-link-tip">
     반대로 변환하고 싶으신가요? <a href="png-to-jpg.html">PNG → JPG 변환 →</a>
   </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. JPG를 PNG로 변환하면 품질이 좋아지나요?</h3>
+        <p style="color:#555;margin:0;">JPG 압축 손실은 되돌릴 수 없지만 PNG로 변환하면 이후 편집 시 추가 손실을 방지할 수 있습니다.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 파일 크기가 커지나요?</h3>
+        <p style="color:#555;margin:0;">PNG는 무손실 형식이므로 JPG보다 파일 크기가 커질 수 있습니다.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 투명 배경으로 변환되나요?</h3>
+        <p style="color:#555;margin:0;">JPG에는 투명도가 없으므로 흰색 배경으로 변환됩니다.</p>
+      </div>
+    </div>
+  </section>
 
 </main>
 

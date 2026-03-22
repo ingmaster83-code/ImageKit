@@ -20,6 +20,42 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="이미지킷">
   <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "이미지 자르기",
+  "url": "https://imagekit.wooahouse.com/crop-image.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "정확한 픽셀 단위로 자를 수 있나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "네, 좌표와 크기를 직접 입력하거나 드래그로 영역을 선택할 수 있습니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "특정 비율(16:9, 1:1 등)로 자를 수 있나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "비율 고정 옵션을 선택하면 원하는 비율로 자를 수 있습니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "자른 이미지의 형식은?",
+      "acceptedAnswer": {"@type": "Answer","text": "원본 형식을 유지하며 JPG 또는 PNG로 다운로드됩니다."}
+    }
+  ]
+}
+</script>
   <style>
     .crop-preview-wrap {
       position: relative;
@@ -68,6 +104,7 @@
     <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
     <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
     <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 CalcKit</a>
     <a href="https://steamkit.wooahouse.com/" target="_blank" rel="noopener">🎮 SteamKit</a>
     <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
     <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
@@ -165,6 +202,24 @@
     </div>
     <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 이미지 다운로드</button>
   </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 정확한 픽셀 단위로 자를 수 있나요?</h3>
+        <p style="color:#555;margin:0;">네, 좌표와 크기를 직접 입력하거나 드래그로 영역을 선택할 수 있습니다.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 특정 비율(16:9, 1:1 등)로 자를 수 있나요?</h3>
+        <p style="color:#555;margin:0;">비율 고정 옵션을 선택하면 원하는 비율로 자를 수 있습니다.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 자른 이미지의 형식은?</h3>
+        <p style="color:#555;margin:0;">원본 형식을 유지하며 JPG 또는 PNG로 다운로드됩니다.</p>
+      </div>
+    </div>
+  </section>
 
 </main>
 

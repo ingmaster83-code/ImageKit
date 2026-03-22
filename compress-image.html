@@ -20,6 +20,42 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="이미지킷">
   <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "이미지 압축기",
+  "url": "https://imagekit.wooahouse.com/compress-image.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "압축 후 이미지 품질이 떨어지나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "압축 수준을 조절할 수 있으며 적절한 수준에서는 육안으로 차이가 거의 없습니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "어떤 형식을 지원하나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "JPG, PNG, WebP 등 주요 이미지 형식을 지원합니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "압축된 이미지가 서버에 저장되나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -49,6 +85,7 @@
     <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
     <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
     <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 CalcKit</a>
     <a href="https://steamkit.wooahouse.com/" target="_blank" rel="noopener">🎮 SteamKit</a>
     <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
     <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
@@ -145,6 +182,24 @@
     <span>PDF 파일도 압축하고 싶으신가요?</span>
     <a href="https://pdfkit.wooahouse.com/compress-pdf.html" target="_blank" rel="noopener">PDFKit PDF 압축 →</a>
   </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 압축 후 이미지 품질이 떨어지나요?</h3>
+        <p style="color:#555;margin:0;">압축 수준을 조절할 수 있으며 적절한 수준에서는 육안으로 차이가 거의 없습니다.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 어떤 형식을 지원하나요?</h3>
+        <p style="color:#555;margin:0;">JPG, PNG, WebP 등 주요 이미지 형식을 지원합니다.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 압축된 이미지가 서버에 저장되나요?</h3>
+        <p style="color:#555;margin:0;">아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p>
+      </div>
+    </div>
+  </section>
 
 </main>
 

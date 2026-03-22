@@ -20,6 +20,42 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="이미지킷">
   <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PNG JPG 변환기",
+  "url": "https://imagekit.wooahouse.com/png-to-jpg.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "PNG를 JPG로 변환하면 투명도가 어떻게 되나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "투명한 영역은 흰색 배경으로 채워집니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "파일 크기가 줄어드나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "일반적으로 JPG가 PNG보다 용량이 작아 줄어들 수 있습니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "변환 품질을 조절할 수 있나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "네, JPG 품질(1-100)을 슬라이더로 조절할 수 있습니다."}
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -49,6 +85,7 @@
     <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
     <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
     <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 CalcKit</a>
     <a href="https://steamkit.wooahouse.com/" target="_blank" rel="noopener">🎮 SteamKit</a>
     <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
     <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
@@ -111,6 +148,24 @@
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. PNG를 JPG로 변환하면 투명도가 어떻게 되나요?</h3>
+        <p style="color:#555;margin:0;">투명한 영역은 흰색 배경으로 채워집니다.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 파일 크기가 줄어드나요?</h3>
+        <p style="color:#555;margin:0;">일반적으로 JPG가 PNG보다 용량이 작아 줄어들 수 있습니다.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 변환 품질을 조절할 수 있나요?</h3>
+        <p style="color:#555;margin:0;">네, JPG 품질(1-100)을 슬라이더로 조절할 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
 
 </main>
 

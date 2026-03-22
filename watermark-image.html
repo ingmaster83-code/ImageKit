@@ -20,6 +20,42 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="이미지킷">
   <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "이미지 워터마크 추가",
+  "url": "https://imagekit.wooahouse.com/watermark-image.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "텍스트와 이미지 워터마크 모두 지원하나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "텍스트 워터마크를 지원하며 폰트 크기, 색상, 투명도를 설정할 수 있습니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "여러 이미지에 일괄 적용할 수 있나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "현재는 이미지 1개씩 처리합니다. 일괄 처리는 향후 지원 예정입니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "워터마크 위치를 지정할 수 있나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "9가지 위치(중앙, 모서리, 중간) 중 선택할 수 있습니다."}
+    }
+  ]
+}
+</script>
   <style>
     .position-grid {
       display: grid;
@@ -71,6 +107,7 @@
     <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
     <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
     <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 CalcKit</a>
     <a href="https://steamkit.wooahouse.com/" target="_blank" rel="noopener">🎮 SteamKit</a>
     <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
     <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
@@ -175,6 +212,24 @@
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 텍스트와 이미지 워터마크 모두 지원하나요?</h3>
+        <p style="color:#555;margin:0;">텍스트 워터마크를 지원하며 폰트 크기, 색상, 투명도를 설정할 수 있습니다.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 여러 이미지에 일괄 적용할 수 있나요?</h3>
+        <p style="color:#555;margin:0;">현재는 이미지 1개씩 처리합니다. 일괄 처리는 향후 지원 예정입니다.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 워터마크 위치를 지정할 수 있나요?</h3>
+        <p style="color:#555;margin:0;">9가지 위치(중앙, 모서리, 중간) 중 선택할 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
 
 </main>
 

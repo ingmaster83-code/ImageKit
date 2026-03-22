@@ -20,6 +20,42 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="이미지킷">
   <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "이미지 회전 뒤집기",
+  "url": "https://imagekit.wooahouse.com/rotate-image.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "90° 외에 자유 각도 회전이 가능한가요?",
+      "acceptedAnswer": {"@type": "Answer","text": "90°/180°/270° 회전과 좌우/상하 뒤집기를 지원합니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "회전 후 빈 공간은 어떻게 처리되나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "흰색 또는 투명으로 채워집니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "원본 파일이 수정되나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "아니요, 원본은 유지되고 변환된 이미지를 새로 다운로드받습니다."}
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -49,6 +85,7 @@
     <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
     <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
     <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 CalcKit</a>
     <a href="https://steamkit.wooahouse.com/" target="_blank" rel="noopener">🎮 SteamKit</a>
     <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
     <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
@@ -115,6 +152,24 @@
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 90° 외에 자유 각도 회전이 가능한가요?</h3>
+        <p style="color:#555;margin:0;">90°/180°/270° 회전과 좌우/상하 뒤집기를 지원합니다.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 회전 후 빈 공간은 어떻게 처리되나요?</h3>
+        <p style="color:#555;margin:0;">흰색 또는 투명으로 채워집니다.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 원본 파일이 수정되나요?</h3>
+        <p style="color:#555;margin:0;">아니요, 원본은 유지되고 변환된 이미지를 새로 다운로드받습니다.</p>
+      </div>
+    </div>
+  </section>
 
 </main>
 
