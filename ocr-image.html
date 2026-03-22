@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 텍스트 추출 (OCR) 무료 — 한국어·영어 이미지 글자 인식 | 이미지킷</title>
+  <meta name="description" content="이미지에서 텍스트를 무료로 추출하는 OCR 도구. 한국어, 영어, 한영 혼용 지원. 사진·스크린샷·스캔 문서의 글자를 바로 복사할 수 있습니다. 브라우저에서 처리, 서버 저장 없음.">
+  <meta name="keywords" content="OCR,이미지텍스트추출,이미지글자인식,한국어OCR,영어OCR,사진텍스트변환,스캔텍스트추출,무료OCR,온라인OCR">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/ocr-image.html">
+  <meta property="og:title" content="이미지 텍스트 추출 (OCR) 무료 | 이미지킷">
+  <meta property="og:description" content="이미지에서 한국어·영어 텍스트를 무료로 추출. 브라우저에서 처리, 서버 저장 없음.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/ocr-image.html">
+  <meta property="og:locale" content="ko_KR">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "이미지 텍스트 추출 (OCR)",
+    "url": "https://imagekit.wooahouse.com/ocr-image.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+    "description": "이미지에서 한국어·영어 텍스트를 무료로 추출하는 온라인 OCR 도구"
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="이미지킷">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .lang-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .lang-btn {
+      padding: 8px 18px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      background: white;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      color: var(--text-light);
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+    }
+    .lang-btn.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+    .lang-btn:hover { border-color: var(--primary); }
+
+    .progress-wrap {
+      background: #F3F4F6;
+      border-radius: 8px;
+      height: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #38BDF8);
+      border-radius: 8px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .progress-status {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-top: 6px;
+    }
+
+    .ocr-result-area {
+      width: 100%;
+      min-height: 200px;
+      padding: 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      font-family: 'Noto Sans KR', sans-serif;
+      resize: vertical;
+      box-sizing: border-box;
+      color: var(--text);
+      background: #FAFAFA;
+    }
+    .ocr-result-area:focus { outline: none; border-color: var(--primary); background: white; }
+
+    .result-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .char-count { font-size: 0.8rem; color: var(--text-light); }
+
+    .ocr-warning {
+      background: #FEF9C3;
+      border: 1px solid #FDE047;
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 0.84rem;
+      color: #713F12;
+      line-height: 1.6;
+    }
+    .ocr-warning strong { color: #92400E; }
+
+    .img-preview-wrap {
+      text-align: center;
+      margin-top: 16px;
+    }
+    .img-preview-wrap img {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">이미지킷 <span>| ImageKit</span></a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="ocr-image.html">OCR</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">Linker Services</span>
+  <div class="our-sites-links">
+    <a href="https://linker.wooahouse.com/" target="_blank" rel="noopener">🔗 Linker</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 PDFKit</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ ImageKit</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://steamkit.wooahouse.com/" target="_blank" rel="noopener">🎮 SteamKit</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 MacTools</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ PCTools</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 VSKit</a>
+  </div>
+</div>
+
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>이미지 텍스트 추출 (OCR)</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🔤</span>
+    <h1>이미지 텍스트 추출 (OCR)</h1>
+    <p>사진, 스크린샷, 스캔 문서에서 텍스트를 인식하여 복사할 수 있게 추출합니다.<br>한국어, 영어, 한영 혼용을 지원합니다.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">언어 선택</div>
+    <div class="lang-btns">
+      <button class="lang-btn active" data-lang="kor">🇰🇷 한국어</button>
+      <button class="lang-btn" data-lang="eng">🇺🇸 영어</button>
+      <button class="lang-btn" data-lang="kor+eng">🌐 한국어 + 영어</button>
+    </div>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG, WebP, BMP, GIF 파일 지원</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+  </div>
+
+  <div id="previewPanel" style="display:none">
+    <div class="img-preview-wrap">
+      <img id="imgPreview" src="" alt="선택된 이미지">
+    </div>
+    <div id="fileInfoBar" style="margin-top:10px; font-size:0.85rem; color:var(--text-light); text-align:center;"></div>
+  </div>
+
+  <div id="progressPanel" style="display:none" class="panel">
+    <div class="panel-title">텍스트 인식 중…</div>
+    <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="progress-status" id="progressStatus">초기화 중...</div>
+  </div>
+
+  <div id="resultPanel" style="display:none" class="panel">
+    <div class="result-toolbar">
+      <div class="panel-title" style="margin-bottom:0;">인식 결과</div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <span class="char-count" id="charCount"></span>
+        <button class="btn-copy" id="copyBtn" onclick="copyResult()">📋 복사</button>
+        <button class="btn-copy" id="downloadTxtBtn" onclick="downloadTxt()" style="background:var(--primary-light); color:var(--primary);">⬇️ TXT 저장</button>
+      </div>
+    </div>
+    <textarea class="ocr-result-area" id="ocrResult" placeholder="인식된 텍스트가 여기에 표시됩니다."></textarea>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div id="startPanel" style="display:none">
+    <button class="btn-convert" id="startBtn">🔍 텍스트 인식 시작</button>
+  </div>
+
+  <div class="ocr-warning" style="margin-top: 24px;">
+    <strong>⚠️ OCR 정확도 안내</strong><br>
+    • 인쇄된 문자가 선명할수록 인식률이 높습니다<br>
+    • 손글씨, 기울어진 텍스트, 복잡한 배경은 인식률이 낮을 수 있습니다<br>
+    • 첫 실행 시 언어 데이터를 다운로드하므로 잠시 기다려주세요 (한국어 약 10MB)<br>
+    • 모든 처리는 브라우저에서 이루어지며 파일이 서버로 전송되지 않습니다
+  </div>
+
+  <div class="panel" style="margin-top:24px;">
+    <div class="panel-title">잘 되는 경우 vs 어려운 경우</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div>
+        <div style="font-size:0.85rem; font-weight:700; color:#059669; margin-bottom:8px;">✅ 잘 인식되는 경우</div>
+        <ul style="font-size:0.82rem; color:var(--text-light); line-height:2; padding-left:16px;">
+          <li>스크린샷 속 텍스트</li>
+          <li>선명하게 인쇄된 문서</li>
+          <li>흰 배경의 검은 글씨</li>
+          <li>명함, 영수증 (인쇄체)</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:0.85rem; font-weight:700; color:#DC2626; margin-bottom:8px;">❌ 어려운 경우</div>
+        <ul style="font-size:0.82rem; color:var(--text-light); line-height:2; padding-left:16px;">
+          <li>손글씨</li>
+          <li>배경이 복잡한 이미지</li>
+          <li>심하게 기울어진 텍스트</li>
+          <li>작은 글씨 (저해상도)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 이미지킷. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+        <a href="index.html">홈</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+<script>
+  let selectedFile = null;
+  let selectedLang = 'kor';
+
+  // 언어 버튼
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      selectedLang = this.dataset.lang;
+    });
+  });
+
+  // 드롭존
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  function loadFile(file) {
+    if (!file.type.startsWith('image/')) {
+      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+    }
+    hideError();
+    selectedFile = file;
+
+    const reader = new FileReader();
+    reader.onload = e => {
+      document.getElementById('imgPreview').src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+
+    document.getElementById('fileInfoBar').textContent = `${file.name} · ${formatSize(file.size)}`;
+    document.getElementById('previewPanel').style.display = 'block';
+    document.getElementById('startPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('progressPanel').style.display = 'none';
+  }
+
+  document.getElementById('startBtn').addEventListener('click', runOCR);
+
+  async function runOCR() {
+    if (!selectedFile) return;
+
+    document.getElementById('startPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('progressPanel').style.display = 'block';
+    hideError();
+
+    setProgress(0, '언어 데이터 로딩 중...');
+
+    try {
+      const worker = await Tesseract.createWorker(selectedLang, 1, {
+        logger: m => {
+          if (m.status === 'loading tesseract core') setProgress(5, '엔진 로딩 중...');
+          else if (m.status === 'initializing tesseract') setProgress(15, '엔진 초기화 중...');
+          else if (m.status === 'loading language traineddata') setProgress(30, `언어 데이터 다운로드 중... ${Math.round((m.progress||0)*100)}%`);
+          else if (m.status === 'initializing api') setProgress(60, 'API 초기화 중...');
+          else if (m.status === 'recognizing text') setProgress(60 + Math.round((m.progress||0)*35), `텍스트 인식 중... ${Math.round((m.progress||0)*100)}%`);
+        }
+      });
+
+      const { data: { text } } = await worker.recognize(selectedFile);
+      await worker.terminate();
+
+      setProgress(100, '완료!');
+
+      const cleaned = text.trim();
+      document.getElementById('ocrResult').value = cleaned;
+      document.getElementById('charCount').textContent = `${cleaned.length.toLocaleString('ko-KR')}자`;
+
+      setTimeout(() => {
+        document.getElementById('progressPanel').style.display = 'none';
+        document.getElementById('resultPanel').style.display = 'block';
+        document.getElementById('startPanel').style.display = 'block';
+        document.getElementById('startBtn').textContent = '🔍 다시 인식';
+      }, 500);
+
+    } catch (err) {
+      document.getElementById('progressPanel').style.display = 'none';
+      document.getElementById('startPanel').style.display = 'block';
+      showError('텍스트 인식 중 오류가 발생했습니다. 다른 이미지로 시도해보세요.');
+    }
+  }
+
+  function setProgress(pct, msg) {
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressStatus').textContent = msg;
+  }
+
+  function copyResult() {
+    const text = document.getElementById('ocrResult').value;
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✅ 복사됨';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '📋 복사'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function downloadTxt() {
+    const text = document.getElementById('ocrResult').value;
+    if (!text) return;
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const baseName = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') : 'ocr-result';
+    a.download = baseName + '_ocr.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024 * 1024) return (b / 1024).toFixed(1) + ' KB';
+    return (b / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>

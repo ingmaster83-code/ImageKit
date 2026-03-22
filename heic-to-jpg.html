@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HEIC JPG 변환 무료 — 아이폰 HEIC 파일을 JPG PNG로 | 이미지킷</title>
+  <meta name="description" content="아이폰 HEIC/HEIF 파일을 JPG 또는 PNG로 무료 변환. 여러 파일 동시 변환, 품질 조절 가능. 브라우저에서 바로 처리.">
+  <meta name="keywords" content="HEIC변환,HEIC JPG,아이폰사진변환,HEIF변환,HEIC PNG,무료HEIC변환">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/heic-to-jpg.html">
+  <meta property="og:title" content="HEIC JPG 변환 무료 — 아이폰 HEIC 파일을 JPG PNG로 | 이미지킷">
+  <meta property="og:description" content="HEIC/HEIF 파일을 JPG/PNG로 무료 변환. 다중 파일 지원. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/heic-to-jpg.html">
+  <meta property="og:locale" content="ko_KR">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HEIC JPG 변환 — 이미지킷",
+    "url": "https://imagekit.wooahouse.com/heic-to-jpg.html",
+    "description": "아이폰 HEIC/HEIF 파일을 JPG 또는 PNG로 무료 변환하는 온라인 도구",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+    "inLanguage": "ko"
+  }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="이미지킷">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .converted-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #F9FAFB;
+      border-radius: var(--radius-sm);
+      margin-bottom: 8px;
+    }
+    .converted-item:last-child { margin-bottom: 0; }
+    .converted-thumb {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #E5E7EB;
+    }
+    .converted-info { flex: 1; min-width: 0; }
+    .converted-name {
+      font-weight: 500;
+      font-size: 0.88rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .converted-size { font-size: 0.76rem; color: var(--text-light); }
+    .converted-status {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+    .status-done { background: #F0FDF4; color: #16A34A; }
+    .status-processing { background: #EFF6FF; color: #2563EB; }
+    .status-error { background: #FEF2F2; color: #DC2626; }
+    .btn-download-sm {
+      background: #22C55E;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      flex-shrink: 0;
+    }
+    .btn-download-sm:hover { background: #16A34A; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">이미지킷 <span>| ImageKit</span></a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">Linker Services</span>
+  <div class="our-sites-links">
+    <a href="https://linker.wooahouse.com/" target="_blank" rel="noopener">🔗 Linker</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 PDFKit</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ ImageKit</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 ColorKit</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ TextKit</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 QRKit</a>
+    <a href="https://steamkit.wooahouse.com/" target="_blank" rel="noopener">🎮 SteamKit</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 ChromeKit</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 FontKit</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 MacTools</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ PCTools</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 VSKit</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 CalcKit</a>
+  </div>
+</div>
+
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>HEIC → JPG 변환</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">📱</span>
+    <h1>HEIC → JPG 변환</h1>
+    <p>아이폰/iPad에서 촬영한 HEIC 파일을 JPG 또는 PNG로 변환합니다. 여러 파일을 한 번에 변환할 수 있습니다.</p>
+  </div>
+
+  <div class="notice-box">
+    📱 아이폰/iPad에서 촬영한 HEIC(HEIF) 파일을 지원합니다. 여러 파일을 동시에 선택하여 일괄 변환이 가능합니다.
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">📱</span>
+    <h3>HEIC 파일을 여기에 끌어다 놓으세요</h3>
+    <p>.heic, .heif 파일을 업로드하세요 (여러 파일 가능)</p>
+    <label for="fileInput" class="btn-select">HEIC 파일 선택</label>
+    <input type="file" id="fileInput" accept=".heic,.heif,image/*" multiple style="display:none">
+  </div>
+
+  <div id="fileListPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일 (<span id="fileCount">0</span>개)</div>
+    <div id="fileList"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">변환 설정</div>
+
+    <div class="option-row">
+      <span class="option-label">출력 형식</span>
+      <div class="option-control">
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="outputFmt" value="image/jpeg" checked> JPG</label>
+          <label class="radio-item"><input type="radio" name="outputFmt" value="image/png"> PNG</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row" id="qualityRow">
+      <span class="option-label">JPG 품질: <strong id="qualityVal">92</strong>%</span>
+      <div class="option-control" style="flex:1; max-width:320px;">
+        <input type="range" id="quality" min="10" max="100" value="92">
+      </div>
+    </div>
+
+    <button class="btn-convert" id="convertBtn">🔄 변환 시작</button>
+  </div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <span id="progressText">변환 중...</span>
+      <span id="progressPercent">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div id="resultPanel" class="result-panel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">변환 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div id="resultList"></div>
+    <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+      <button class="btn-download" id="downloadAllBtn" style="display:none;">⬇️ 모두 다운로드 (ZIP)</button>
+    </div>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="cross-link-banner">
+    <span>🗜️ 변환 후 이미지 용량을 줄이고 싶다면?</span>
+    <a href="compress-image.html">이미지 압축 도구 →</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 이미지킷. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script>
+  let selectedFiles = [];
+  let convertedResults = [];
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const files = Array.from(e.dataTransfer.files);
+    if (files.length) loadFiles(files);
+  });
+  dropZone.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', e => {
+    const files = Array.from(e.target.files);
+    if (files.length) loadFiles(files);
+  });
+
+  // Quality slider
+  document.getElementById('quality').addEventListener('input', function() {
+    document.getElementById('qualityVal').textContent = this.value;
+  });
+
+  // Toggle quality row for PNG
+  document.querySelectorAll('input[name="outputFmt"]').forEach(r => {
+    r.addEventListener('change', function() {
+      document.getElementById('qualityRow').style.display = this.value === 'image/png' ? 'none' : 'flex';
+    });
+  });
+
+  function loadFiles(files) {
+    selectedFiles = files;
+    convertedResults = [];
+    hideError();
+
+    document.getElementById('fileCount').textContent = files.length;
+    let html = '';
+    files.forEach((f, i) => {
+      html += `<div class="file-item">
+        <span class="file-item-icon">📱</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${f.name}</div>
+          <div class="file-item-size">${formatSize(f.size)}</div>
+        </div>
+        <button class="file-item-remove" onclick="removeFile(${i})">✕</button>
+      </div>`;
+    });
+    document.getElementById('fileList').innerHTML = html;
+    document.getElementById('fileListPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+  }
+
+  function removeFile(idx) {
+    selectedFiles = Array.from(selectedFiles);
+    selectedFiles.splice(idx, 1);
+    if (selectedFiles.length === 0) {
+      document.getElementById('fileListPanel').style.display = 'none';
+      document.getElementById('optionsPanel').style.display = 'none';
+      return;
+    }
+    loadFiles(selectedFiles);
+  }
+
+  document.getElementById('convertBtn').addEventListener('click', async () => {
+    if (selectedFiles.length === 0) return;
+
+    const btn = document.getElementById('convertBtn');
+    btn.disabled = true;
+    btn.textContent = '변환 중...';
+    convertedResults = [];
+
+    const outputFmt = document.querySelector('input[name="outputFmt"]:checked').value;
+    const quality = parseInt(document.getElementById('quality').value) / 100;
+    const ext = outputFmt === 'image/png' ? '.png' : '.jpg';
+    const toType = outputFmt === 'image/png' ? 'image/png' : 'image/jpeg';
+
+    const progressWrap = document.getElementById('progressWrap');
+    const progressFill = document.getElementById('progressFill');
+    const progressPercent = document.getElementById('progressPercent');
+    const progressText = document.getElementById('progressText');
+    progressWrap.style.display = 'block';
+
+    let resultHtml = '';
+    let successCount = 0;
+
+    for (let i = 0; i < selectedFiles.length; i++) {
+      const file = selectedFiles[i];
+      const pct = Math.round(((i) / selectedFiles.length) * 100);
+      progressFill.style.width = pct + '%';
+      progressPercent.textContent = pct + '%';
+      progressText.textContent = `${i+1}/${selectedFiles.length} 변환 중...`;
+
+      try {
+        let outputBlob;
+        const nameLower = file.name.toLowerCase();
+
+        if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
+          outputBlob = await heic2any({
+            blob: file,
+            toType: toType,
+            quality: toType === 'image/jpeg' ? quality : undefined
+          });
+        } else {
+          // Non-HEIC image: convert via canvas
+          const img = await loadImage(file);
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          outputBlob = await new Promise(resolve => canvas.toBlob(resolve, toType, toType === 'image/jpeg' ? quality : undefined));
+        }
+
+        // heic2any may return an array
+        if (Array.isArray(outputBlob)) outputBlob = outputBlob[0];
+
+        const url = URL.createObjectURL(outputBlob);
+        const outName = file.name.replace(/\.[^.]+$/, '') + ext;
+        convertedResults.push({ blob: outputBlob, name: outName, url: url });
+
+        resultHtml += `<div class="converted-item">
+          <img class="converted-thumb" src="${url}" alt="${outName}">
+          <div class="converted-info">
+            <div class="converted-name">${outName}</div>
+            <div class="converted-size">${formatSize(outputBlob.size)}</div>
+          </div>
+          <span class="converted-status status-done">완료</span>
+          <button class="btn-download-sm" onclick="downloadSingle(${convertedResults.length - 1})">다운로드</button>
+        </div>`;
+        successCount++;
+
+      } catch (err) {
+        resultHtml += `<div class="converted-item">
+          <div style="width:60px;height:60px;background:#FEE2E2;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">❌</div>
+          <div class="converted-info">
+            <div class="converted-name">${file.name}</div>
+            <div class="converted-size" style="color:#DC2626;">${err.message || '변환 실패'}</div>
+          </div>
+          <span class="converted-status status-error">실패</span>
+        </div>`;
+      }
+    }
+
+    progressFill.style.width = '100%';
+    progressPercent.textContent = '100%';
+    progressText.textContent = '완료!';
+
+    document.getElementById('resultList').innerHTML = resultHtml;
+    document.getElementById('resultSubtitle').textContent = `${successCount}/${selectedFiles.length}개 파일 변환 완료`;
+    document.getElementById('resultPanel').style.display = 'block';
+
+    if (convertedResults.length > 1) {
+      document.getElementById('downloadAllBtn').style.display = 'inline-flex';
+    }
+
+    btn.disabled = false;
+    btn.textContent = '🔄 변환 시작';
+    setTimeout(() => { progressWrap.style.display = 'none'; }, 1500);
+  });
+
+  function downloadSingle(idx) {
+    const r = convertedResults[idx];
+    const a = document.createElement('a');
+    a.href = r.url;
+    a.download = r.name;
+    a.click();
+  }
+
+  document.getElementById('downloadAllBtn').addEventListener('click', async () => {
+    if (convertedResults.length === 0) return;
+    const btn = document.getElementById('downloadAllBtn');
+    btn.disabled = true;
+    btn.textContent = 'ZIP 생성 중...';
+
+    const zip = new JSZip();
+    convertedResults.forEach(r => {
+      zip.file(r.name, r.blob);
+    });
+
+    const content = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(content);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'heic_converted.zip';
+    a.click();
+    URL.revokeObjectURL(url);
+
+    btn.disabled = false;
+    btn.textContent = '⬇️ 모두 다운로드 (ZIP)';
+  });
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>
