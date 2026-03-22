@@ -17,24 +17,24 @@
 브라우저에서 직접 이미지를 압축·변환·편집하는 무료 도구 모음.
 파일이 서버에 저장되지 않아 안전.
 
-## 파일 구조
-```
-ImageKit/
-├── index.html
-├── compress-image.html, resize-image.html, rotate-image.html, crop-image.html
-├── jpg-to-png.html, png-to-jpg.html, image-to-webp.html, webp-to-jpg.html
-├── image-to-base64.html, watermark-image.html, image-info.html
-├── about.html, privacy.html
-├── css/style.css
-├── js/pwa-install.js
-├── manifest.json, sw.js
-├── icons/icon.svg
-├── robots.txt, sitemap.xml
-└── CNAME
-```
+## 도구 목록 (17개)
+### 기본 변환
+- jpg-to-png.html, png-to-jpg.html, image-to-webp.html, webp-to-jpg.html
+### 편집
+- compress-image.html, resize-image.html, rotate-image.html, crop-image.html
+- watermark-image.html, image-to-base64.html, image-info.html
+### AI·변환 확장 (최근 추가)
+- **bg-remove.html** — AI 배경 제거 (@imgly/background-removal ESM)
+- **heic-to-jpg.html** — HEIC→JPG 변환 (heic2any + JSZip 일괄 다운로드)
+- **make-gif.html** — GIF 만들기 (gif.js)
+- **upscale-image.html** — 이미지 업스케일링 (Canvas 보간법)
+### OCR (최근 추가)
+- **ocr-image.html** — 이미지 텍스트 추출 (Tesseract.js v4, 한/영)
+- **ocr-pdf.html** — PDF 텍스트 OCR (PDF.js + Tesseract.js, 스캔 PDF용)
 
 ## 작업 규칙
 - 모든 이미지 처리는 Canvas API로 브라우저에서만 처리 (서버 전송 금지)
 - 새 도구 추가 시 index.html 카드, sitemap.xml 업데이트 필수
 - 다운로드 버튼은 id="downloadBtn" 사용
-- SEO 키워드: 이미지 압축, 이미지 변환, 이미지 리사이즈, 무료 이미지 편집
+- bg-remove.html은 `<script type="module">` 필수 (@imgly ESM)
+- SEO 키워드: 이미지 압축, 이미지 변환, 이미지 리사이즈, 배경 제거, 이미지 OCR
