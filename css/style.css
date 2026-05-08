@@ -980,3 +980,5 @@ input[type="range"] {
   margin-bottom: 16px;
   line-height: 1.6;
 }
+
+.coupang-notice { font-size: 0.72rem; color: #6B7280; text-align: center; padding-top: 12px; border-top: 1px solid #374151; margin-top: 12px; }
