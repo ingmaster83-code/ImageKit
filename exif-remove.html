@@ -1,16 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>이미지 압축 무료 — JPG/PNG 용량 줄이기 온라인 | WooaImage</title>
-  <meta name="description" content="JPG, PNG 이미지 파일 용량을 무료로 줄이세요. 품질 슬라이더로 압축률 조절, 원본 대비 크기 비교. 브라우저에서 바로 처리, 서버 저장 없음.">
-  <meta name="keywords" content="이미지압축, 사진압축, JPG압축, PNG압축, 이미지용량줄이기, 무료이미지압축, 온라인이미지압축">
-  <link rel="canonical" href="https://imagekit.wooahouse.com/compress-image.html">
-  <meta property="og:title" content="이미지 압축 무료 — 용량 줄이기 | WooaImage">
-  <meta property="og:description" content="JPG/PNG 이미지 용량 줄이기! 품질 슬라이더로 압축률 조절. 완전 무료.">
+  <title>EXIF 데이터 제거 무료 — 사진 위치정보·개인정보 삭제 온라인 | WooaImage</title>
+  <meta name="description" content="사진에 포함된 EXIF 정보(GPS 위치, 촬영일시, 카메라 기종 등)를 무료로 삭제하세요. 브라우저에서 처리, 서버 저장 없음. 개인정보 보호에 필수.">
+  <meta name="keywords" content="EXIF제거, EXIF삭제, 사진위치정보삭제, GPS정보제거, 사진개인정보, EXIF데이터, 메타데이터삭제, 무료EXIF제거">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/exif-remove.html">
+  <meta property="og:title" content="EXIF 데이터 제거 무료 — 사진 개인정보 삭제 | WooaImage">
+  <meta property="og:description" content="GPS 위치, 촬영일시 등 EXIF 정보를 무료로 삭제. 개인정보 보호 필수 도구.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://imagekit.wooahouse.com/compress-image.html">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/exif-remove.html">
   <meta property="og:locale" content="ko_KR">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
   <link rel="manifest" href="/manifest.json">
@@ -24,8 +24,8 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "이미지 압축기",
-  "url": "https://imagekit.wooahouse.com/compress-image.html",
+  "name": "EXIF 데이터 제거",
+  "url": "https://imagekit.wooahouse.com/exif-remove.html",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Web",
   "inLanguage": "ko",
@@ -40,22 +40,57 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "압축 후 이미지 품질이 떨어지나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "압축 수준을 조절할 수 있으며 적절한 수준에서는 육안으로 차이가 거의 없습니다."}
+      "name": "EXIF 데이터란 무엇인가요?",
+      "acceptedAnswer": {"@type": "Answer","text": "EXIF는 사진에 자동으로 저장되는 메타데이터로 GPS 위치, 촬영일시, 카메라 제조사·기종, 노출값 등 다양한 정보를 포함합니다. SNS에 사진을 올리기 전 삭제하면 개인정보를 보호할 수 있습니다."}
     },
     {
       "@type": "Question",
-      "name": "어떤 형식을 지원하나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "JPG, PNG, WebP 등 주요 이미지 형식을 지원합니다."}
+      "name": "EXIF 제거 후 이미지 품질이 변하나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "Canvas를 이용해 원본 해상도 그대로 재저장하므로 화질 변화가 거의 없습니다. JPEG의 경우 92% 품질로 저장됩니다."}
     },
     {
       "@type": "Question",
-      "name": "압축된 이미지가 서버에 저장되나요?",
+      "name": "이미지가 서버에 저장되나요?",
       "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
     }
   ]
 }
 </script>
+<style>
+  .exif-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-top: 12px;
+  }
+  .exif-table th {
+    background: #f1f5f9;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-light);
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .exif-table td {
+    padding: 7px 12px;
+    border-bottom: 1px solid #f1f5f9;
+    color: var(--text-main);
+    word-break: break-all;
+  }
+  .exif-table tr:last-child td { border-bottom: none; }
+  .exif-found { color: #EF4444; font-weight: 700; }
+  .exif-none  { color: #22C55E; font-weight: 700; }
+  .info-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    color: #1e40af;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+</style>
 </head>
 <body>
 
@@ -109,13 +144,17 @@
   <div class="breadcrumb">
     <a href="index.html">🏠 홈</a>
     <span>›</span>
-    <span>이미지 압축</span>
+    <span>EXIF 데이터 제거</span>
   </div>
 
   <div class="tool-header">
-    <span class="tool-header-icon">🗜️</span>
-    <h1>이미지 압축 무료 온라인 — 화질 유지하며 용량 줄이기</h1>
-    <p>JPG/PNG 이미지 용량을 줄여 저장 및 공유를 쉽게 합니다.</p>
+    <span class="tool-header-icon">🔒</span>
+    <h1>EXIF 데이터 제거 무료 온라인 — 사진 위치정보·개인정보 삭제</h1>
+    <p>사진에 숨겨진 GPS 위치, 촬영일시, 카메라 정보 등을 완전히 삭제하고 안전하게 공유하세요.</p>
+  </div>
+
+  <div class="info-box">
+    ℹ️ <strong>EXIF란?</strong> 스마트폰·카메라로 찍은 사진에 자동 저장되는 메타데이터입니다. GPS 위치, 촬영일시, 카메라 기종 등이 포함되어 있어 SNS 업로드 전 삭제를 권장합니다.
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -131,27 +170,17 @@
     <div id="fileInfo"></div>
   </div>
 
-  <div id="optionsPanel" class="options-panel" style="display:none">
-    <div class="options-title">압축 설정</div>
-    <div class="option-row">
-      <span class="option-label">압축 품질</span>
-      <div class="option-control">
-        <input type="range" id="qualitySlider" min="10" max="95" value="75" style="margin-bottom:6px;">
-        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-light);">
-          <span>낮음 (소용량)</span>
-          <span id="qualityVal" style="font-weight:700; color:var(--primary);">75%</span>
-          <span>높음 (고화질)</span>
-        </div>
-      </div>
-    </div>
-    <button class="btn-convert" id="compressBtn">🗜️ 압축 시작</button>
+  <div id="exifPanel" style="display:none; max-width:700px; margin:16px auto;">
+    <div style="font-weight:600; font-size:0.95rem; margin-bottom:8px;">📋 감지된 EXIF 정보</div>
+    <div id="exifTableWrap"></div>
+    <button class="btn-convert" id="removeBtn" style="margin-top:16px;">🔒 EXIF 제거 & 저장 준비</button>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
 
   <div class="progress-wrap" id="progressWrap">
     <div class="progress-label">
-      <span id="progressText">압축 중...</span>
+      <span id="progressText">처리 중...</span>
       <span id="progressPct">0%</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -161,30 +190,14 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">압축 완료!</div>
+        <div class="result-title">EXIF 제거 완료!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
-    <div class="size-compare" id="sizeCompare">
-      <div class="size-item">
-        <div class="size-label">원본</div>
-        <div class="size-value" id="originalSize">—</div>
-      </div>
-      <div class="size-arrow">→</div>
-      <div class="size-item">
-        <div class="size-label">압축 후</div>
-        <div class="size-value" id="compressedSize">—</div>
-      </div>
-      <div class="size-arrow">✦</div>
-      <div class="size-item">
-        <div class="size-label">감소율</div>
-        <div class="size-ratio" id="sizeRatio">—</div>
-      </div>
+    <div class="preview-image-wrap">
+      <img id="resultImg" src="" alt="EXIF 제거된 이미지" style="max-width:100%;border-radius:8px;">
     </div>
-    <div class="preview-image-wrap" id="previewWrap">
-      <img id="previewImg" src="" alt="압축된 이미지 미리보기">
-    </div>
-    
+
 <div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
 <ins class="adsbygoogle"
      style="display:block"
@@ -194,27 +207,27 @@
      data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
-<button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 압축된 이미지 다운로드</button>
+    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ EXIF 제거된 이미지 다운로드</button>
   </div>
 
   <div class="cross-link-banner">
-    <span>PDF 파일도 압축하고 싶으신가요?</span>
-    <a href="https://pdfkit.wooahouse.com/compress-pdf.html" target="_blank" rel="noopener">PDFKit PDF 압축 →</a>
+    <span>이미지 정보(해상도·파일크기)도 확인하고 싶으신가요?</span>
+    <a href="image-info.html">이미지 정보 확인 →</a>
   </div>
 
   <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
     <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
     <div class="faq-list">
       <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
-        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 압축 후 이미지 품질이 떨어지나요?</h3>
-        <p style="color:#555;margin:0;">압축 수준을 조절할 수 있으며 적절한 수준에서는 육안으로 차이가 거의 없습니다.</p>
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. EXIF 데이터란 무엇인가요?</h3>
+        <p style="color:#555;margin:0;">EXIF는 사진에 자동으로 저장되는 메타데이터로 GPS 위치, 촬영일시, 카메라 제조사·기종, 노출값 등 다양한 정보를 포함합니다. SNS에 사진을 올리기 전 삭제하면 개인정보를 보호할 수 있습니다.</p>
       </div>
       <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
-        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 어떤 형식을 지원하나요?</h3>
-        <p style="color:#555;margin:0;">JPG, PNG, WebP 등 주요 이미지 형식을 지원합니다.</p>
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. EXIF 제거 후 이미지 품질이 변하나요?</h3>
+        <p style="color:#555;margin:0;">Canvas를 이용해 원본 해상도 그대로 재저장하므로 화질 변화가 거의 없습니다. JPEG의 경우 92% 품질로 저장됩니다.</p>
       </div>
       <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
-        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 압축된 이미지가 서버에 저장되나요?</h3>
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 이미지가 서버에 저장되나요?</h3>
         <p style="color:#555;margin:0;">아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p>
       </div>
     </div>
@@ -252,19 +265,13 @@
 <script>
   let selectedFile = null;
   let resultBlob = null;
-  let resultMime = 'image/jpeg';
-
-  const qualitySlider = document.getElementById('qualitySlider');
-  const qualityVal = document.getElementById('qualityVal');
-  qualitySlider.addEventListener('input', () => { qualityVal.textContent = qualitySlider.value + '%'; });
 
   const dropZone = document.getElementById('dropZone');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
   dropZone.addEventListener('drop', e => {
     e.preventDefault(); dropZone.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file) loadFile(file);
+    if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
   });
   dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
   document.getElementById('fileInput').addEventListener('change', e => {
@@ -278,7 +285,6 @@
     hideError();
     selectedFile = file;
     resultBlob = null;
-    resultMime = file.type === 'image/png' ? 'image/jpeg' : file.type;
 
     document.getElementById('fileInfo').innerHTML = `
       <div class="file-item">
@@ -290,24 +296,133 @@
         <button class="file-item-remove" onclick="clearFile()">✕</button>
       </div>`;
     document.getElementById('fileInfoPanel').style.display = 'block';
-    document.getElementById('optionsPanel').style.display = 'block';
     document.getElementById('resultPanel').style.display = 'none';
+
+    // Read EXIF (only in JPEG)
+    if (file.type === 'image/jpeg') {
+      readExif(file);
+    } else {
+      renderExifTable({});
+    }
+    document.getElementById('exifPanel').style.display = 'block';
   }
 
   function clearFile() {
     selectedFile = null;
     document.getElementById('fileInfoPanel').style.display = 'none';
-    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('exifPanel').style.display = 'none';
     document.getElementById('resultPanel').style.display = 'none';
     document.getElementById('progressWrap').style.display = 'none';
     document.getElementById('fileInput').value = '';
     hideError();
   }
 
-  document.getElementById('compressBtn').addEventListener('click', async () => {
+  // Minimal EXIF reader (only reads common tags from APP1 segment)
+  function readExif(file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const data = new DataView(e.target.result);
+      const tags = parseExif(data);
+      renderExifTable(tags);
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  function parseExif(view) {
+    const tags = {};
+    if (view.getUint16(0) !== 0xFFD8) return tags; // not JPEG
+
+    let offset = 2;
+    while (offset < view.byteLength - 2) {
+      if (view.getUint8(offset) !== 0xFF) break;
+      const marker = view.getUint8(offset + 1);
+      const length = view.getUint16(offset + 2);
+      if (marker === 0xE1) {
+        // APP1 — check Exif header
+        try {
+          const exifStr = String.fromCharCode(
+            view.getUint8(offset+4), view.getUint8(offset+5),
+            view.getUint8(offset+6), view.getUint8(offset+7)
+          );
+          if (exifStr === 'Exif') {
+            const tiffStart = offset + 10;
+            const littleEndian = view.getUint16(tiffStart) === 0x4949;
+            const ifdOffset = view.getUint32(tiffStart + 4, littleEndian);
+            const entries = view.getUint16(tiffStart + ifdOffset, littleEndian);
+            const tagNames = {
+              0x010F: '카메라 제조사', 0x0110: '카메라 기종', 0x0112: '방향',
+              0x011A: 'X 해상도', 0x011B: 'Y 해상도', 0x0128: '해상도 단위',
+              0x0131: '소프트웨어', 0x0132: '수정일시', 0x013B: '작가',
+              0x8298: '저작권', 0x8769: 'EXIF IFD',
+              0x9003: '원본 촬영일시', 0x9004: '디지털 변환일시',
+              0x9286: '사용자 설명', 0x9c9b: '제목',
+              0x0213: 'YCbCr 위치', 0xA005: 'Interop IFD'
+            };
+            const gpsTagNames = {
+              0: 'GPS 버전', 1: 'GPS 위도 방향', 2: 'GPS 위도',
+              3: 'GPS 경도 방향', 4: 'GPS 경도', 5: 'GPS 고도 기준',
+              6: 'GPS 고도', 7: 'GPS 시간', 29: 'GPS 날짜'
+            };
+            for (let i = 0; i < entries; i++) {
+              const entryOffset = tiffStart + ifdOffset + 2 + i * 12;
+              const tag = view.getUint16(entryOffset, littleEndian);
+              const type = view.getUint16(entryOffset + 2, littleEndian);
+              const count = view.getUint32(entryOffset + 4, littleEndian);
+              if (tagNames[tag]) {
+                let val = '(포함됨)';
+                if (type === 2) { // ASCII
+                  const strOffset = count <= 4 ? entryOffset + 8
+                    : tiffStart + view.getUint32(entryOffset + 8, littleEndian);
+                  let str = '';
+                  for (let j = 0; j < Math.min(count - 1, 80); j++) {
+                    const ch = view.getUint8(strOffset + j);
+                    if (ch === 0) break;
+                    str += String.fromCharCode(ch);
+                  }
+                  if (str) val = str;
+                }
+                tags[tagNames[tag]] = val;
+              }
+              // GPS IFD pointer
+              if (tag === 0x8825) {
+                const gpsIfdOffset = tiffStart + view.getUint32(entryOffset + 8, littleEndian);
+                const gpsEntries = view.getUint16(gpsIfdOffset, littleEndian);
+                for (let g = 0; g < gpsEntries; g++) {
+                  const gOff = gpsIfdOffset + 2 + g * 12;
+                  const gTag = view.getUint16(gOff, littleEndian);
+                  if (gpsTagNames[gTag]) tags[gpsTagNames[gTag]] = '(포함됨)';
+                }
+              }
+            }
+          }
+        } catch(e) { /* skip parse error */ }
+      }
+      if (marker === 0xDA) break; // SOS — start of scan, stop
+      offset += 2 + length;
+    }
+    return tags;
+  }
+
+  function renderExifTable(tags) {
+    const keys = Object.keys(tags);
+    const wrap = document.getElementById('exifTableWrap');
+    if (keys.length === 0) {
+      wrap.innerHTML = `<p class="exif-none" style="margin:0;padding:8px 0;">✅ EXIF 정보가 감지되지 않았습니다. (PNG이거나 이미 제거된 파일)</p>`;
+    } else {
+      const hasGPS = keys.some(k => k.startsWith('GPS'));
+      let html = `<p class="exif-found" style="margin:0 0 8px;">⚠️ ${keys.length}개 EXIF 태그 감지${hasGPS ? ' (GPS 위치 포함!)' : ''}</p>`;
+      html += `<table class="exif-table"><thead><tr><th>항목</th><th>값</th></tr></thead><tbody>`;
+      keys.forEach(k => {
+        html += `<tr><td>${k}</td><td>${tags[k]}</td></tr>`;
+      });
+      html += `</tbody></table>`;
+      wrap.innerHTML = html;
+    }
+  }
+
+  document.getElementById('removeBtn').addEventListener('click', async () => {
     if (!selectedFile) return;
-    const quality = parseInt(qualitySlider.value) / 100;
-    const btn = document.getElementById('compressBtn');
+    const btn = document.getElementById('removeBtn');
     btn.disabled = true; btn.textContent = '⏳ 처리 중...';
     hideError();
     document.getElementById('progressWrap').style.display = 'block';
@@ -316,47 +431,33 @@
 
     try {
       const img = await loadImage(selectedFile);
-      document.getElementById('progressFill').style.width = '60%';
-      document.getElementById('progressText').textContent = '압축 중...';
+      document.getElementById('progressFill').style.width = '70%';
+      document.getElementById('progressText').textContent = 'EXIF 제거 중...';
 
       const canvas = document.createElement('canvas');
-      canvas.width = img.naturalWidth;
+      canvas.width  = img.naturalWidth;
       canvas.height = img.naturalHeight;
       const ctx = canvas.getContext('2d');
-      // White background for PNG→JPEG
+      // White bg for PNG safety
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0);
 
-      document.getElementById('progressFill').style.width = '85%';
+      document.getElementById('progressFill').style.width = '90%';
 
-      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+      const mimeType = selectedFile.type === 'image/png' ? 'image/png' : 'image/jpeg';
+      const quality  = mimeType === 'image/jpeg' ? 0.92 : undefined;
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, mimeType, quality));
       resultBlob = blob;
-      resultMime = 'image/jpeg';
 
       document.getElementById('progressFill').style.width = '100%';
       document.getElementById('progressText').textContent = '완료!';
       document.getElementById('progressWrap').style.display = 'none';
 
-      const origSize = selectedFile.size;
-      const compSize = blob.size;
-      const ratio = ((1 - compSize / origSize) * 100).toFixed(1);
-
-      document.getElementById('originalSize').textContent = formatSize(origSize);
-      document.getElementById('compressedSize').textContent = formatSize(compSize);
-      const ratioEl = document.getElementById('sizeRatio');
-      if (compSize < origSize) {
-        ratioEl.textContent = `-${ratio}%`;
-        ratioEl.style.color = '#22C55E';
-      } else {
-        ratioEl.textContent = `+${Math.abs(ratio)}%`;
-        ratioEl.style.color = '#EF4444';
-      }
-
       const url = URL.createObjectURL(blob);
-      document.getElementById('previewImg').src = url;
+      document.getElementById('resultImg').src = url;
       document.getElementById('resultSubtitle').textContent =
-        compSize < origSize ? `${formatSize(origSize)} → ${formatSize(compSize)} (${ratio}% 감소)` : '이미 최적화된 이미지입니다.';
+        `${img.naturalWidth} × ${img.naturalHeight}px · ${formatSize(blob.size)} · EXIF 완전 제거됨`;
 
       const panel = document.getElementById('resultPanel');
       panel.style.display = 'block';
@@ -366,7 +467,7 @@
       showError('처리 중 오류가 발생했습니다: ' + err.message);
       document.getElementById('progressWrap').style.display = 'none';
     }
-    btn.disabled = false; btn.textContent = '🗜️ 압축 시작';
+    btn.disabled = false; btn.textContent = '🔒 EXIF 제거 & 저장 준비';
   });
 
   document.getElementById('downloadBtn').addEventListener('click', () => {
@@ -374,8 +475,8 @@
     const url = URL.createObjectURL(resultBlob);
     const a = document.createElement('a');
     a.href = url;
-    const ext = resultMime === 'image/png' ? '.png' : '.jpg';
-    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_compressed' + ext;
+    const ext = resultBlob.type === 'image/png' ? '.png' : '.jpg';
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_noexif' + ext;
     a.click();
     URL.revokeObjectURL(url);
   });

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 텍스트 추가 무료 — 사진에 글자 넣기 온라인 | WooaImage</title>
+  <meta name="description" content="이미지에 텍스트를 무료로 추가하세요. 폰트·크기·색상·위치·투명도 자유롭게 설정. 실시간 미리보기. 브라우저에서 처리, 서버 저장 없음.">
+  <meta name="keywords" content="이미지텍스트추가, 사진글자넣기, 이미지글씨추가, 사진텍스트, 이미지문구추가, 온라인이미지편집, 무료사진편집">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/add-text-image.html">
+  <meta property="og:title" content="이미지 텍스트 추가 무료 — 사진에 글자 넣기 | WooaImage">
+  <meta property="og:description" content="사진에 텍스트 추가. 폰트·크기·색상·위치 설정, 실시간 미리보기. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/add-text-image.html">
+  <meta property="og:locale" content="ko_KR">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "이미지 텍스트 추가",
+  "url": "https://imagekit.wooahouse.com/add-text-image.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "한국어 텍스트도 추가할 수 있나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "네, 브라우저에 설치된 시스템 폰트를 사용하므로 한국어, 영어 등 모든 언어를 입력할 수 있습니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "텍스트 위치를 바꿀 수 있나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "수평·수직 위치 슬라이더로 텍스트의 위치를 자유롭게 조정할 수 있으며, 실시간으로 미리보기에 반영됩니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "이미지가 서버에 저장되나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
+    }
+  ]
+}
+</script>
+<style>
+  .text-preview-wrap {
+    margin-top: 12px;
+    text-align: center;
+  }
+  #previewCanvas {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+  .color-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .color-swatch {
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    border: 2px solid #e2e8f0;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .color-swatch input[type="color"] {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: none; padding: 0; cursor: pointer; opacity: 0;
+  }
+  .align-btns { display:flex; gap:8px; }
+  .align-btn {
+    padding: 6px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .align-btn.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">WooaHouse Services</span>
+  <div class="our-sites-links">
+    <a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ WooaImage</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 WooaChrome</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a>
+  </div>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+<div style="text-align:center;margin:8px auto 20px;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="7080296704"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>이미지 텍스트 추가</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">✍️</span>
+    <h1>이미지 텍스트 추가 무료 온라인 — 사진에 글자 넣기</h1>
+    <p>이미지에 원하는 텍스트를 자유롭게 추가하세요. 폰트·크기·색상·위치·투명도를 실시간으로 설정합니다.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG, WebP 파일을 업로드하세요</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">텍스트 설정</div>
+
+    <div class="option-row">
+      <span class="option-label">텍스트 내용</span>
+      <div class="option-control">
+        <textarea id="textInput" rows="3" placeholder="여기에 입력하세요" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:0.95rem;resize:vertical;"></textarea>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">폰트</span>
+      <div class="option-control">
+        <select id="fontFamily" style="width:100%;padding:8px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:0.9rem;">
+          <option value="Arial, sans-serif">Arial</option>
+          <option value="'Times New Roman', serif">Times New Roman</option>
+          <option value="Georgia, serif">Georgia</option>
+          <option value="Verdana, sans-serif">Verdana</option>
+          <option value="Impact, sans-serif">Impact (굵게)</option>
+          <option value="'Courier New', monospace">Courier New</option>
+          <option value="'Noto Sans KR', sans-serif">Noto Sans KR</option>
+          <option value="'Malgun Gothic', sans-serif">맑은 고딕</option>
+          <option value="'Dotum', sans-serif">돋움</option>
+          <option value="'Batang', serif">바탕</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">글자 크기</span>
+      <div class="option-control">
+        <input type="range" id="fontSize" min="10" max="200" value="48" style="margin-bottom:6px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-light);">
+          <span>작게</span>
+          <span id="fontSizeVal" style="font-weight:700;color:var(--primary);">48px</span>
+          <span>크게</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">글자 색상</span>
+      <div class="option-control">
+        <div class="color-row">
+          <div class="color-swatch" style="background:#ffffff;">
+            <input type="color" id="textColor" value="#ffffff">
+          </div>
+          <span id="textColorVal" style="font-size:0.88rem;color:var(--text-light);">#ffffff</span>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <button onclick="setColor('#ffffff')" style="background:#ffffff;border:1px solid #ccc;width:24px;height:24px;border-radius:4px;cursor:pointer;"></button>
+            <button onclick="setColor('#000000')" style="background:#000000;border:none;width:24px;height:24px;border-radius:4px;cursor:pointer;"></button>
+            <button onclick="setColor('#FF4444')" style="background:#FF4444;border:none;width:24px;height:24px;border-radius:4px;cursor:pointer;"></button>
+            <button onclick="setColor('#FFD700')" style="background:#FFD700;border:none;width:24px;height:24px;border-radius:4px;cursor:pointer;"></button>
+            <button onclick="setColor('#22C55E')" style="background:#22C55E;border:none;width:24px;height:24px;border-radius:4px;cursor:pointer;"></button>
+            <button onclick="setColor('#0EA5E9')" style="background:#0EA5E9;border:none;width:24px;height:24px;border-radius:4px;cursor:pointer;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">투명도</span>
+      <div class="option-control">
+        <input type="range" id="textOpacity" min="10" max="100" value="100" style="margin-bottom:6px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-light);">
+          <span>투명</span>
+          <span id="textOpacityVal" style="font-weight:700;color:var(--primary);">100%</span>
+          <span>불투명</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">정렬</span>
+      <div class="option-control">
+        <div class="align-btns">
+          <button class="align-btn active" id="alignLeft"   onclick="setAlign('left')">← 왼쪽</button>
+          <button class="align-btn"        id="alignCenter" onclick="setAlign('center')">가운데</button>
+          <button class="align-btn"        id="alignRight"  onclick="setAlign('right')">오른쪽 →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">수평 위치</span>
+      <div class="option-control">
+        <input type="range" id="posX" min="0" max="100" value="50" style="margin-bottom:6px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-light);">
+          <span>왼쪽</span>
+          <span id="posXVal" style="font-weight:700;color:var(--primary);">50%</span>
+          <span>오른쪽</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">수직 위치</span>
+      <div class="option-control">
+        <input type="range" id="posY" min="0" max="100" value="90" style="margin-bottom:6px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-light);">
+          <span>위</span>
+          <span id="posYVal" style="font-weight:700;color:var(--primary);">90%</span>
+          <span>아래</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">미리보기</span>
+      <div class="option-control">
+        <div class="text-preview-wrap">
+          <canvas id="previewCanvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-convert" id="applyBtn">✍️ 텍스트 적용 & 저장 준비</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">텍스트 추가 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+
+<div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="1419180025"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 이미지 다운로드</button>
+  </div>
+
+  <div class="cross-link-banner">
+    <span>워터마크(투명 텍스트)를 반복으로 넣고 싶으신가요?</span>
+    <a href="watermark-image.html">워터마크 추가 →</a>
+  </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 한국어 텍스트도 추가할 수 있나요?</h3>
+        <p style="color:#555;margin:0;">네, 브라우저에 설치된 시스템 폰트를 사용하므로 한국어, 영어 등 모든 언어를 입력할 수 있습니다.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 텍스트 위치를 바꿀 수 있나요?</h3>
+        <p style="color:#555;margin:0;">수평·수직 위치 슬라이더로 텍스트의 위치를 자유롭게 조정할 수 있으며, 실시간으로 미리보기에 반영됩니다.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 이미지가 서버에 저장되나요?</h3>
+        <p style="color:#555;margin:0;">아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <div class="ad-card-label">광고</div>
+    <div class="ad-card-placeholder">📢<br>광고가 표시됩니다</div>
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="1419180025"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let selectedFile = null;
+  let originalImg  = null;
+  let resultBlob   = null;
+  let textAlign    = 'left';
+
+  const previewCanvas = document.getElementById('previewCanvas');
+  const previewCtx    = previewCanvas.getContext('2d');
+  let displayScale = 1;
+
+  // Controls
+  const controls = ['textInput','fontFamily','fontSize','textColor','textOpacity','posX','posY'];
+  controls.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', () => {
+      if (id === 'fontSize')      document.getElementById('fontSizeVal').textContent     = el.value + 'px';
+      if (id === 'textOpacity')   document.getElementById('textOpacityVal').textContent  = el.value + '%';
+      if (id === 'posX')          document.getElementById('posXVal').textContent         = el.value + '%';
+      if (id === 'posY')          document.getElementById('posYVal').textContent         = el.value + '%';
+      if (id === 'textColor') {
+        document.getElementById('textColorVal').textContent = el.value;
+        document.querySelector('.color-swatch').style.background = el.value;
+      }
+      drawPreview();
+    });
+  });
+
+  function setColor(hex) {
+    document.getElementById('textColor').value = hex;
+    document.getElementById('textColorVal').textContent = hex;
+    document.querySelector('.color-swatch').style.background = hex;
+    drawPreview();
+  }
+
+  function setAlign(a) {
+    textAlign = a;
+    ['Left','Center','Right'].forEach(x =>
+      document.getElementById('align'+x).classList.toggle('active', a === x.toLowerCase())
+    );
+    drawPreview();
+  }
+
+  function drawPreview() {
+    if (!originalImg) return;
+    previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+    previewCtx.drawImage(originalImg, 0, 0, previewCanvas.width, previewCanvas.height);
+    renderText(previewCtx, previewCanvas.width, previewCanvas.height, displayScale);
+  }
+
+  function renderText(ctx, W, H, scale) {
+    const text    = document.getElementById('textInput').value;
+    if (!text.trim()) return;
+    const font    = document.getElementById('fontFamily').value;
+    const size    = parseInt(document.getElementById('fontSize').value) * scale;
+    const color   = document.getElementById('textColor').value;
+    const opacity = parseInt(document.getElementById('textOpacity').value) / 100;
+    const px      = parseInt(document.getElementById('posX').value) / 100 * W;
+    const py      = parseInt(document.getElementById('posY').value) / 100 * H;
+
+    ctx.save();
+    ctx.globalAlpha = opacity;
+    ctx.font = `${size}px ${font}`;
+    ctx.fillStyle = color;
+    ctx.textAlign = textAlign;
+    ctx.textBaseline = 'middle';
+
+    // Shadow for readability
+    ctx.shadowColor = 'rgba(0,0,0,0.5)';
+    ctx.shadowBlur  = size * 0.08;
+
+    const lines = text.split('\n');
+    const lineH = size * 1.3;
+    const totalH = lineH * lines.length;
+    let startY = py - totalH / 2 + lineH / 2;
+
+    lines.forEach(line => {
+      ctx.fillText(line, px, startY);
+      startY += lineH;
+    });
+    ctx.restore();
+  }
+
+  // Drop zone
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+  });
+  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  function loadFile(file) {
+    if (!file.type.match(/^image\//)) { showError('이미지 파일만 업로드할 수 있습니다.'); return; }
+    hideError();
+    selectedFile = file;
+    resultBlob = null;
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)} · ${file.type}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+
+    const img = new Image();
+    img.onload = () => {
+      originalImg = img;
+      const maxW = Math.min(680, window.innerWidth - 48);
+      displayScale = Math.min(1, maxW / img.naturalWidth);
+      previewCanvas.width  = Math.round(img.naturalWidth  * displayScale);
+      previewCanvas.height = Math.round(img.naturalHeight * displayScale);
+      document.getElementById('optionsPanel').style.display = 'block';
+      document.getElementById('resultPanel').style.display = 'none';
+      drawPreview();
+    };
+    img.src = URL.createObjectURL(file);
+  }
+
+  function clearFile() {
+    selectedFile = null; originalImg = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  document.getElementById('applyBtn').addEventListener('click', async () => {
+    if (!originalImg) return;
+    const btn = document.getElementById('applyBtn');
+    btn.disabled = true; btn.textContent = '⏳ 처리 중...';
+    hideError();
+
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width  = originalImg.naturalWidth;
+      canvas.height = originalImg.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(originalImg, 0, 0);
+      renderText(ctx, canvas.width, canvas.height, 1);
+
+      const mimeType = selectedFile.type === 'image/png' ? 'image/png' : 'image/jpeg';
+      const blob = await new Promise(r => canvas.toBlob(r, mimeType, 0.92));
+      resultBlob = blob;
+
+      document.getElementById('resultSubtitle').textContent =
+        `${canvas.width} × ${canvas.height}px · ${formatSize(blob.size)}`;
+      const panel = document.getElementById('resultPanel');
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth' });
+
+    } catch(err) {
+      showError('처리 중 오류가 발생했습니다: ' + err.message);
+    }
+    btn.disabled = false; btn.textContent = '✍️ 텍스트 적용 & 저장 준비';
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    const ext = resultBlob.type === 'image/png' ? '.png' : '.jpg';
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_text' + ext;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>

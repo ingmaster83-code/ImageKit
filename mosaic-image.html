@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 모자이크 무료 — 사진 블러·픽셀화 온라인 | WooaImage</title>
+  <meta name="description" content="이미지 전체 또는 특정 영역에 모자이크(픽셀화) 효과를 무료로 적용하세요. 블록 크기 조절, 실시간 미리보기. 브라우저에서 처리, 서버 저장 없음.">
+  <meta name="keywords" content="이미지모자이크, 사진모자이크, 얼굴모자이크, 픽셀화, 이미지블러, 사진흐리게, 모자이크효과, 개인정보보호">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/mosaic-image.html">
+  <meta property="og:title" content="이미지 모자이크 무료 — 사진 픽셀화·블러 | WooaImage">
+  <meta property="og:description" content="사진 전체 또는 특정 영역에 모자이크 효과 적용. 블록 크기 조절 가능. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/mosaic-image.html">
+  <meta property="og:locale" content="ko_KR">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "이미지 모자이크",
+  "url": "https://imagekit.wooahouse.com/mosaic-image.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "전체 모자이크와 영역 선택 모자이크의 차이는?",
+      "acceptedAnswer": {"@type": "Answer","text": "전체 모자이크는 이미지 전체에 픽셀화 효과를 적용합니다. 영역 선택 모자이크는 마우스로 드래그해 특정 부분(얼굴, 번호판 등)만 선택하여 적용합니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "블록 크기가 클수록 어떻게 되나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "블록 크기가 클수록 모자이크가 더 거칠고 강하게 적용되어 원본 내용을 더 잘 가립니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "이미지가 서버에 저장되나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
+    }
+  ]
+}
+</script>
+<style>
+  .mode-btns {
+    display: flex;
+    gap: 10px;
+  }
+  .mode-btn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .mode-btn.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); }
+
+  .canvas-wrap {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    margin-top: 12px;
+    cursor: crosshair;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    line-height: 0;
+  }
+  #mainCanvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  #selectionBox {
+    position: absolute;
+    border: 2px dashed #EF4444;
+    background: rgba(239,68,68,0.1);
+    pointer-events: none;
+    display: none;
+  }
+  .canvas-hint {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    margin-top: 6px;
+    text-align: center;
+  }
+  .apply-selection-btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    display: none;
+  }
+  .apply-selection-btn:hover { opacity: 0.9; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">WooaHouse Services</span>
+  <div class="our-sites-links">
+    <a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ WooaImage</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 WooaChrome</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a>
+  </div>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+<div style="text-align:center;margin:8px auto 20px;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="7080296704"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>이미지 모자이크</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🟫</span>
+    <h1>이미지 모자이크 무료 온라인 — 사진 픽셀화·블러 처리</h1>
+    <p>이미지 전체 또는 드래그로 선택한 영역에만 모자이크(픽셀화) 효과를 적용하세요.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG, WebP 파일을 업로드하세요</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">모자이크 설정</div>
+
+    <div class="option-row">
+      <span class="option-label">적용 모드</span>
+      <div class="option-control">
+        <div class="mode-btns">
+          <button class="mode-btn active" id="btnFull" onclick="setMode('full')">🟫 전체 모자이크</button>
+          <button class="mode-btn" id="btnRegion" onclick="setMode('region')">🖱️ 영역 선택 모자이크</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">블록 크기</span>
+      <div class="option-control">
+        <input type="range" id="blockSize" min="4" max="60" value="16" step="2" style="margin-bottom:6px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-light);">
+          <span>약함</span>
+          <span id="blockVal" style="font-weight:700; color:var(--primary);">16px</span>
+          <span>강함</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas for region selection -->
+    <div class="option-row" id="canvasRow" style="display:none">
+      <span class="option-label">영역 선택</span>
+      <div class="option-control">
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="mainCanvas"></canvas>
+          <div id="selectionBox"></div>
+        </div>
+        <p class="canvas-hint">드래그하여 모자이크를 적용할 영역을 선택하세요</p>
+        <button class="apply-selection-btn" id="applySelectionBtn">✅ 선택 영역 모자이크 적용</button>
+      </div>
+    </div>
+
+    <button class="btn-convert" id="applyBtn">🟫 전체 모자이크 적용</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <span id="progressText">처리 중...</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">모자이크 적용 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div class="preview-image-wrap">
+      <img id="resultImg" src="" alt="모자이크 적용 이미지" style="max-width:100%;border-radius:8px;">
+    </div>
+
+<div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="1419180025"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 모자이크 이미지 다운로드</button>
+  </div>
+
+  <div class="cross-link-banner">
+    <span>이미지 필터로 블러 효과를 줄 수도 있어요</span>
+    <a href="image-filter.html">이미지 필터 →</a>
+  </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 전체 모자이크와 영역 선택 모자이크의 차이는?</h3>
+        <p style="color:#555;margin:0;">전체 모자이크는 이미지 전체에 픽셀화 효과를 적용합니다. 영역 선택 모자이크는 마우스로 드래그해 특정 부분(얼굴, 번호판 등)만 선택하여 적용합니다.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 블록 크기가 클수록 어떻게 되나요?</h3>
+        <p style="color:#555;margin:0;">블록 크기가 클수록 모자이크가 더 거칠고 강하게 적용되어 원본 내용을 더 잘 가립니다.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 이미지가 서버에 저장되나요?</h3>
+        <p style="color:#555;margin:0;">아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <div class="ad-card-label">광고</div>
+    <div class="ad-card-placeholder">📢<br>광고가 표시됩니다</div>
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="1419180025"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let selectedFile = null;
+  let originalImg  = null;
+  let resultBlob   = null;
+  let mode = 'full';
+
+  // Working canvas (full resolution)
+  const workCanvas = document.createElement('canvas');
+  const workCtx    = workCanvas.getContext('2d');
+
+  const blockSlider = document.getElementById('blockSize');
+  const blockVal    = document.getElementById('blockVal');
+  blockSlider.addEventListener('input', () => { blockVal.textContent = blockSlider.value + 'px'; });
+
+  function setMode(m) {
+    mode = m;
+    document.getElementById('btnFull').classList.toggle('active', m === 'full');
+    document.getElementById('btnRegion').classList.toggle('active', m === 'region');
+    document.getElementById('canvasRow').style.display = m === 'region' ? 'flex' : 'none';
+    document.getElementById('applyBtn').textContent = m === 'full' ? '🟫 전체 모자이크 적용' : '🟫 모자이크 적용';
+    document.getElementById('applyBtn').style.display = m === 'full' ? 'block' : 'none';
+    if (m === 'region') drawDisplayCanvas();
+  }
+
+  // Drop zone
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+  });
+  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  function loadFile(file) {
+    if (!file.type.match(/^image\//)) { showError('이미지 파일만 업로드할 수 있습니다.'); return; }
+    hideError();
+    selectedFile = file;
+    resultBlob = null;
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)} · ${file.type}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+
+    const img = new Image();
+    img.onload = () => {
+      originalImg = img;
+      workCanvas.width  = img.naturalWidth;
+      workCanvas.height = img.naturalHeight;
+      workCtx.drawImage(img, 0, 0);
+      document.getElementById('optionsPanel').style.display = 'block';
+      document.getElementById('resultPanel').style.display = 'none';
+      if (mode === 'region') drawDisplayCanvas();
+    };
+    img.src = URL.createObjectURL(file);
+  }
+
+  function clearFile() {
+    selectedFile = null; originalImg = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  // ---------- Display canvas for region selection ----------
+  const mainCanvas = document.getElementById('mainCanvas');
+  const mainCtx    = mainCanvas.getContext('2d');
+  const selBox     = document.getElementById('selectionBox');
+  const canvasWrap = document.getElementById('canvasWrap');
+
+  let isDragging = false, startX = 0, startY = 0, selRect = null;
+  let displayScale = 1;
+
+  function drawDisplayCanvas() {
+    if (!originalImg) return;
+    const maxW = Math.min(700, canvasWrap.parentElement.clientWidth - 24);
+    displayScale = Math.min(1, maxW / originalImg.naturalWidth);
+    mainCanvas.width  = Math.round(originalImg.naturalWidth  * displayScale);
+    mainCanvas.height = Math.round(originalImg.naturalHeight * displayScale);
+    mainCtx.drawImage(workCanvas, 0, 0, mainCanvas.width, mainCanvas.height);
+    selBox.style.display = 'none';
+    selRect = null;
+    document.getElementById('applySelectionBtn').style.display = 'none';
+  }
+
+  mainCanvas.addEventListener('mousedown', e => {
+    const r = mainCanvas.getBoundingClientRect();
+    startX = e.clientX - r.left;
+    startY = e.clientY - r.top;
+    isDragging = true;
+    selBox.style.display = 'block';
+    selBox.style.left   = startX + 'px';
+    selBox.style.top    = startY + 'px';
+    selBox.style.width  = '0px';
+    selBox.style.height = '0px';
+    document.getElementById('applySelectionBtn').style.display = 'none';
+  });
+
+  mainCanvas.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const r = mainCanvas.getBoundingClientRect();
+    const cx = e.clientX - r.left;
+    const cy = e.clientY - r.top;
+    const x = Math.min(startX, cx), y = Math.min(startY, cy);
+    const w = Math.abs(cx - startX), h = Math.abs(cy - startY);
+    selBox.style.left   = x + 'px';
+    selBox.style.top    = y + 'px';
+    selBox.style.width  = w + 'px';
+    selBox.style.height = h + 'px';
+  });
+
+  mainCanvas.addEventListener('mouseup', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const r = mainCanvas.getBoundingClientRect();
+    const cx = e.clientX - r.left;
+    const cy = e.clientY - r.top;
+    const x = Math.min(startX, cx), y = Math.min(startY, cy);
+    const w = Math.abs(cx - startX), h = Math.abs(cy - startY);
+    if (w < 4 || h < 4) { selBox.style.display = 'none'; return; }
+    // Convert to original image coordinates
+    selRect = {
+      x: Math.round(x / displayScale),
+      y: Math.round(y / displayScale),
+      w: Math.round(w / displayScale),
+      h: Math.round(h / displayScale)
+    };
+    document.getElementById('applySelectionBtn').style.display = 'inline-block';
+  });
+
+  // Touch support for mobile
+  mainCanvas.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    const r = mainCanvas.getBoundingClientRect();
+    startX = t.clientX - r.left; startY = t.clientY - r.top;
+    isDragging = true;
+    selBox.style.display = 'block';
+    selBox.style.left = startX + 'px'; selBox.style.top = startY + 'px';
+    selBox.style.width = '0'; selBox.style.height = '0';
+    e.preventDefault();
+  }, { passive: false });
+  mainCanvas.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    const r = mainCanvas.getBoundingClientRect();
+    const cx = t.clientX - r.left, cy = t.clientY - r.top;
+    selBox.style.left   = Math.min(startX,cx) + 'px';
+    selBox.style.top    = Math.min(startY,cy) + 'px';
+    selBox.style.width  = Math.abs(cx-startX) + 'px';
+    selBox.style.height = Math.abs(cy-startY) + 'px';
+    e.preventDefault();
+  }, { passive: false });
+  mainCanvas.addEventListener('touchend', e => {
+    const t = e.changedTouches[0];
+    const r = mainCanvas.getBoundingClientRect();
+    const cx = t.clientX - r.left, cy = t.clientY - r.top;
+    isDragging = false;
+    const x = Math.min(startX,cx), y = Math.min(startY,cy);
+    const w = Math.abs(cx-startX), h = Math.abs(cy-startY);
+    if (w < 4 || h < 4) return;
+    selRect = { x: Math.round(x/displayScale), y: Math.round(y/displayScale), w: Math.round(w/displayScale), h: Math.round(h/displayScale) };
+    document.getElementById('applySelectionBtn').style.display = 'inline-block';
+  });
+
+  // Apply mosaic to selected region
+  document.getElementById('applySelectionBtn').addEventListener('click', () => {
+    if (!selRect) return;
+    const block = parseInt(blockSlider.value);
+    applyMosaicToRect(workCtx, selRect.x, selRect.y, selRect.w, selRect.h, block);
+    drawDisplayCanvas();
+    document.getElementById('applySelectionBtn').style.display = 'none';
+    // Show apply/download options
+    finalizeResult();
+  });
+
+  // Apply mosaic to entire image
+  document.getElementById('applyBtn').addEventListener('click', () => {
+    if (!originalImg) return;
+    // Reset workCanvas to original
+    workCtx.drawImage(originalImg, 0, 0);
+    const block = parseInt(blockSlider.value);
+    applyMosaicToRect(workCtx, 0, 0, workCanvas.width, workCanvas.height, block);
+    if (mode === 'region') drawDisplayCanvas();
+    finalizeResult();
+  });
+
+  function applyMosaicToRect(ctx, rx, ry, rw, rh, block) {
+    // Clamp to canvas bounds
+    rx = Math.max(0, rx); ry = Math.max(0, ry);
+    rw = Math.min(rw, ctx.canvas.width  - rx);
+    rh = Math.min(rh, ctx.canvas.height - ry);
+    for (let y = ry; y < ry + rh; y += block) {
+      for (let x = rx; x < rx + rw; x += block) {
+        const bw = Math.min(block, rx + rw - x);
+        const bh = Math.min(block, ry + rh - y);
+        const data = ctx.getImageData(x, y, bw, bh).data;
+        let r=0, g=0, b=0, cnt=0;
+        for (let i = 0; i < data.length; i += 4) { r+=data[i]; g+=data[i+1]; b+=data[i+2]; cnt++; }
+        r=Math.round(r/cnt); g=Math.round(g/cnt); b=Math.round(b/cnt);
+        ctx.fillStyle = `rgb(${r},${g},${b})`;
+        ctx.fillRect(x, y, bw, bh);
+      }
+    }
+  }
+
+  function finalizeResult() {
+    workCanvas.toBlob(blob => {
+      resultBlob = blob;
+      const url = URL.createObjectURL(blob);
+      document.getElementById('resultImg').src = url;
+      document.getElementById('resultSubtitle').textContent =
+        `${workCanvas.width} × ${workCanvas.height}px · ${formatSize(blob.size)}`;
+      const panel = document.getElementById('resultPanel');
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth' });
+    }, 'image/jpeg', 0.92);
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_mosaic.jpg';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>

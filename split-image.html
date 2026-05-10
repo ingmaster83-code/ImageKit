@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 분할 무료 — 사진 여러 조각으로 나누기 온라인 | WooaImage</title>
+  <meta name="description" content="이미지를 가로·세로로 나누어 여러 조각으로 분할하세요. 2x2, 3x3, 4x4 등 격자 분할. ZIP으로 일괄 다운로드. 브라우저에서 처리, 서버 저장 없음.">
+  <meta name="keywords" content="이미지분할, 사진자르기, 이미지나누기, 이미지격자분할, 인스타그램분할, 사진분할, 이미지슬라이스">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/split-image.html">
+  <meta property="og:title" content="이미지 분할 무료 — 사진 여러 조각으로 나누기 | WooaImage">
+  <meta property="og:description" content="이미지를 격자로 분할해 여러 조각으로 저장. 2x2~4x4 지원, ZIP 다운로드. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/split-image.html">
+  <meta property="og:locale" content="ko_KR">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- JSZip for bundled download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "이미지 분할",
+  "url": "https://imagekit.wooahouse.com/split-image.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "몇 x 몇으로 분할할 수 있나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "가로와 세로를 각각 1~6까지 설정할 수 있어 최대 6x6=36조각으로 분할할 수 있습니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "분할된 이미지를 한꺼번에 다운로드할 수 있나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "네, 모든 조각을 ZIP 파일로 묶어 한 번에 다운로드할 수 있습니다. 개별 다운로드도 가능합니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "이미지가 서버에 저장되나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
+    }
+  ]
+}
+</script>
+<style>
+  .grid-selector {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .grid-num {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .grid-num label { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
+  .grid-num select {
+    padding: 6px 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: #fff;
+    cursor: pointer;
+  }
+  .grid-preview {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 12px;
+  }
+  .grid-preview-row { display: flex; gap: 2px; }
+  .grid-cell {
+    background: #0EA5E9;
+    opacity: 0.4;
+    border-radius: 2px;
+    width: 28px;
+    height: 28px;
+  }
+  .split-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .split-tile {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    text-align: center;
+  }
+  .split-tile img {
+    width: 100%;
+    display: block;
+  }
+  .split-tile-label {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    padding: 4px;
+    background: #fff;
+  }
+  .split-tile-dl {
+    display: block;
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+  }
+  .split-tile-dl:hover { opacity: 0.85; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">WooaHouse Services</span>
+  <div class="our-sites-links">
+    <a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ WooaImage</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 WooaChrome</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a>
+  </div>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+<div style="text-align:center;margin:8px auto 20px;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="7080296704"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>이미지 분할</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">⊞</span>
+    <h1>이미지 분할 무료 온라인 — 사진 여러 조각으로 나누기</h1>
+    <p>이미지를 가로·세로 격자로 나누어 여러 조각으로 분할하고 ZIP으로 한꺼번에 다운로드하세요.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG, WebP 파일을 업로드하세요</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">분할 설정</div>
+
+    <div class="option-row">
+      <span class="option-label">분할 격자</span>
+      <div class="option-control">
+        <div class="grid-selector">
+          <div class="grid-num">
+            <label>가로</label>
+            <select id="colCount">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+          <span style="font-weight:700;color:var(--text-light);">×</span>
+          <div class="grid-num">
+            <label>세로</label>
+            <select id="rowCount">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+          <span id="gridInfo" style="font-size:0.88rem;color:var(--text-light);">= 4 조각</span>
+        </div>
+        <div id="gridPreview" class="grid-preview"></div>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">저장 형식</span>
+      <div class="option-control">
+        <select id="outputFormat" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:0.9rem;">
+          <option value="jpeg">JPEG (용량 작음)</option>
+          <option value="png">PNG (투명 지원)</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn-convert" id="splitBtn">⊞ 이미지 분할 시작</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <span id="progressText">분할 중...</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">이미지 분할 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div class="split-results" id="splitResults"></div>
+
+<div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="1419180025"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 전체 ZIP으로 다운로드</button>
+  </div>
+
+  <div class="cross-link-banner">
+    <span>이미지를 합치고 싶으신가요?</span>
+    <a href="merge-image.html">이미지 합치기 →</a>
+  </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 몇 x 몇으로 분할할 수 있나요?</h3>
+        <p style="color:#555;margin:0;">가로와 세로를 각각 1~6까지 설정할 수 있어 최대 6×6 = 36조각으로 분할할 수 있습니다.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 분할된 이미지를 한꺼번에 다운로드할 수 있나요?</h3>
+        <p style="color:#555;margin:0;">네, 모든 조각을 ZIP 파일로 묶어 한 번에 다운로드할 수 있습니다. 개별 다운로드도 가능합니다.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 이미지가 서버에 저장되나요?</h3>
+        <p style="color:#555;margin:0;">아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <div class="ad-card-label">광고</div>
+    <div class="ad-card-placeholder">📢<br>광고가 표시됩니다</div>
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="1419180025"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let selectedFile = null;
+  let originalImg  = null;
+  let tileBlobs    = [];
+
+  const colSel = document.getElementById('colCount');
+  const rowSel = document.getElementById('rowCount');
+
+  function updateGridInfo() {
+    const cols = parseInt(colSel.value);
+    const rows = parseInt(rowSel.value);
+    document.getElementById('gridInfo').textContent = `= ${cols * rows} 조각`;
+    // Draw grid preview
+    const preview = document.getElementById('gridPreview');
+    preview.innerHTML = '';
+    for (let r = 0; r < rows; r++) {
+      const row = document.createElement('div');
+      row.className = 'grid-preview-row';
+      for (let c = 0; c < cols; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'grid-cell';
+        row.appendChild(cell);
+      }
+      preview.appendChild(row);
+    }
+  }
+
+  colSel.addEventListener('change', updateGridInfo);
+  rowSel.addEventListener('change', updateGridInfo);
+  updateGridInfo();
+
+  // Drop zone
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+  });
+  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  function loadFile(file) {
+    if (!file.type.match(/^image\//)) { showError('이미지 파일만 업로드할 수 있습니다.'); return; }
+    hideError();
+    selectedFile = file;
+    tileBlobs = [];
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)} · ${file.type}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+
+    const img = new Image();
+    img.onload = () => {
+      originalImg = img;
+      document.getElementById('optionsPanel').style.display = 'block';
+      document.getElementById('resultPanel').style.display = 'none';
+    };
+    img.src = URL.createObjectURL(file);
+  }
+
+  function clearFile() {
+    selectedFile = null; originalImg = null; tileBlobs = [];
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  document.getElementById('splitBtn').addEventListener('click', async () => {
+    if (!originalImg) return;
+    const cols   = parseInt(colSel.value);
+    const rows   = parseInt(rowSel.value);
+    const fmt    = document.getElementById('outputFormat').value;
+    const mime   = fmt === 'png' ? 'image/png' : 'image/jpeg';
+    const ext    = fmt === 'png' ? 'png' : 'jpg';
+    const baseName = selectedFile.name.replace(/\.[^.]+$/, '');
+
+    const btn = document.getElementById('splitBtn');
+    btn.disabled = true; btn.textContent = '⏳ 분할 중...';
+    hideError();
+    document.getElementById('progressWrap').style.display = 'block';
+
+    try {
+      const W = originalImg.naturalWidth, H = originalImg.naturalHeight;
+      const tileW = Math.ceil(W / cols);
+      const tileH = Math.ceil(H / rows);
+      tileBlobs = [];
+      const resultsDiv = document.getElementById('splitResults');
+      resultsDiv.innerHTML = '';
+
+      let done = 0;
+      const total = cols * rows;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const sx = c * tileW, sy = r * tileH;
+          const sw = Math.min(tileW, W - sx), sh = Math.min(tileH, H - sy);
+          const canvas = document.createElement('canvas');
+          canvas.width = sw; canvas.height = sh;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(originalImg, sx, sy, sw, sh, 0, 0, sw, sh);
+
+          const blob = await new Promise(resolve => canvas.toBlob(resolve, mime, 0.92));
+          const fname = `${baseName}_r${r+1}c${c+1}.${ext}`;
+          tileBlobs.push({ blob, fname });
+
+          // Render thumbnail tile
+          const url = URL.createObjectURL(blob);
+          const tile = document.createElement('div');
+          tile.className = 'split-tile';
+          tile.innerHTML = `
+            <img src="${url}" alt="${fname}" loading="lazy">
+            <div class="split-tile-label">${r+1}행 ${c+1}열 · ${sw}×${sh}</div>
+            <a class="split-tile-dl" href="${url}" download="${fname}">⬇ 다운로드</a>`;
+          resultsDiv.appendChild(tile);
+
+          done++;
+          document.getElementById('progressFill').style.width = `${done/total*100}%`;
+          document.getElementById('progressText').textContent = `분할 중... ${done}/${total}`;
+          // yield to UI
+          await new Promise(r => setTimeout(r, 0));
+        }
+      }
+
+      document.getElementById('progressWrap').style.display = 'none';
+      document.getElementById('resultSubtitle').textContent =
+        `${cols}열 × ${rows}행 = ${total}조각 · 각 ${tileW}×${tileH}px`;
+
+      const panel = document.getElementById('resultPanel');
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth' });
+
+    } catch(err) {
+      showError('처리 중 오류가 발생했습니다: ' + err.message);
+      document.getElementById('progressWrap').style.display = 'none';
+    }
+    btn.disabled = false; btn.textContent = '⊞ 이미지 분할 시작';
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', async () => {
+    if (!tileBlobs.length) return;
+    const btn = document.getElementById('downloadBtn');
+    btn.disabled = true; btn.textContent = '⏳ ZIP 생성 중...';
+
+    const zip = new JSZip();
+    for (const { blob, fname } of tileBlobs) {
+      zip.file(fname, blob);
+    }
+    const zipBlob = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(zipBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    const base = selectedFile.name.replace(/\.[^.]+$/, '');
+    a.download = `${base}_split.zip`;
+    a.click();
+    URL.revokeObjectURL(url);
+
+    btn.disabled = false; btn.textContent = '⬇️ 전체 ZIP으로 다운로드';
+  });
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>

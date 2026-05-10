@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 합치기 무료 — 사진 가로·세로 이어붙이기 온라인 | WooaImage</title>
+  <meta name="description" content="여러 이미지를 가로 또는 세로로 합쳐서 하나의 사진으로 만드세요. 간격·배경색 설정 가능. 브라우저에서 처리, 서버 저장 없음.">
+  <meta name="keywords" content="이미지합치기, 사진합치기, 이미지이어붙이기, 이미지붙이기, 사진연결, 콜라주만들기, 온라인이미지합치기">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/merge-image.html">
+  <meta property="og:title" content="이미지 합치기 무료 — 가로·세로 이어붙이기 | WooaImage">
+  <meta property="og:description" content="여러 이미지를 가로 또는 세로로 합쳐 하나의 이미지로 저장. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/merge-image.html">
+  <meta property="og:locale" content="ko_KR">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "이미지 합치기",
+  "url": "https://imagekit.wooahouse.com/merge-image.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "몇 장까지 합칠 수 있나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "최대 10장까지 합칠 수 있습니다. 가로 또는 세로 방향을 선택해 이어붙일 수 있습니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "이미지 크기가 다르면 어떻게 되나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "가로 방향 합치기의 경우 높이를 기준으로, 세로 방향 합치기의 경우 너비를 기준으로 맞추어 합칩니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "이미지가 서버에 저장되나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
+    }
+  ]
+}
+</script>
+<style>
+  .merge-file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .merge-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.88rem;
+  }
+  .merge-item img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    flex-shrink: 0;
+  }
+  .merge-item-info { flex: 1; min-width: 0; }
+  .merge-item-name { font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .merge-item-size { font-size: 0.78rem; color: var(--text-light); margin-top: 2px; }
+  .merge-item-remove {
+    background: none; border: none; cursor: pointer;
+    color: #94a3b8; font-size: 1rem; padding: 4px;
+    flex-shrink: 0;
+  }
+  .merge-item-remove:hover { color: #EF4444; }
+  .drag-handle {
+    color: #94a3b8; cursor: grab; font-size: 1.1rem; flex-shrink: 0;
+    user-select: none;
+  }
+  .direction-btns {
+    display: flex;
+    gap: 10px;
+  }
+  .dir-btn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .dir-btn.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); }
+  .add-more-btn {
+    background: none;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    color: var(--text-light);
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.15s;
+    margin-top: 4px;
+  }
+  .add-more-btn:hover { border-color: var(--primary); color: var(--primary); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">WooaHouse Services</span>
+  <div class="our-sites-links">
+    <a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ WooaImage</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a>
+    <a href="https://chromekit.wooahouse.com/" target="_blank" rel="noopener">🧩 WooaChrome</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a>
+  </div>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+<div style="text-align:center;margin:8px auto 20px;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="7080296704"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>이미지 합치기</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🔗</span>
+    <h1>이미지 합치기 무료 온라인 — 사진 가로·세로 이어붙이기</h1>
+    <p>여러 장의 이미지를 가로 또는 세로로 이어붙여 하나의 이미지로 저장하세요.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG, WebP — 최대 10장</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg" multiple style="display:none">
+  </div>
+
+  <div id="fileListPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title" style="display:flex;justify-content:space-between;align-items:center;">
+      <span>이미지 목록 <span id="fileCount" style="font-weight:400;color:var(--text-light);"></span></span>
+      <button class="add-more-btn" id="addMoreBtn" style="width:auto;padding:4px 12px;margin:0;border-style:solid;">+ 추가</button>
+      <input type="file" id="fileInputMore" accept="image/jpeg,image/png,image/webp,image/jpg" multiple style="display:none">
+    </div>
+    <div class="merge-file-list" id="mergeFileList"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">합치기 설정</div>
+    <div class="option-row">
+      <span class="option-label">방향</span>
+      <div class="option-control">
+        <div class="direction-btns">
+          <button class="dir-btn active" id="btnHorizontal" onclick="setDirection('horizontal')">↔️ 가로로 이어붙이기</button>
+          <button class="dir-btn" id="btnVertical" onclick="setDirection('vertical')">↕️ 세로로 이어붙이기</button>
+        </div>
+      </div>
+    </div>
+    <div class="option-row">
+      <span class="option-label">이미지 간격</span>
+      <div class="option-control">
+        <input type="range" id="gapSlider" min="0" max="60" value="0" style="margin-bottom:6px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-light);">
+          <span>없음</span>
+          <span id="gapVal" style="font-weight:700; color:var(--primary);">0px</span>
+          <span>넓게</span>
+        </div>
+      </div>
+    </div>
+    <div class="option-row">
+      <span class="option-label">배경색</span>
+      <div class="option-control" style="display:flex;align-items:center;gap:10px;">
+        <input type="color" id="bgColor" value="#ffffff" style="width:44px;height:36px;border:1px solid #e2e8f0;border-radius:6px;cursor:pointer;padding:2px;">
+        <span style="font-size:0.88rem;color:var(--text-light);">간격 및 여백에 채울 배경색</span>
+      </div>
+    </div>
+    <button class="btn-convert" id="mergeBtn">🔗 이미지 합치기</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <span id="progressText">합치는 중...</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">이미지 합치기 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div class="preview-image-wrap">
+      <img id="resultImg" src="" alt="합쳐진 이미지 미리보기" style="max-width:100%;border-radius:8px;">
+    </div>
+
+<div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="1419180025"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 합쳐진 이미지 다운로드</button>
+  </div>
+
+  <div class="cross-link-banner">
+    <span>이미지 크기를 먼저 맞추고 싶으신가요?</span>
+    <a href="resize-image.html">이미지 리사이즈 →</a>
+  </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 몇 장까지 합칠 수 있나요?</h3>
+        <p style="color:#555;margin:0;">최대 10장까지 합칠 수 있습니다. 가로 또는 세로 방향을 선택해 이어붙일 수 있습니다.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 이미지 크기가 다르면 어떻게 되나요?</h3>
+        <p style="color:#555;margin:0;">가로 방향 합치기의 경우 높이를 기준으로, 세로 방향 합치기의 경우 너비를 기준으로 맞추어 합칩니다.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 이미지가 서버에 저장되나요?</h3>
+        <p style="color:#555;margin:0;">아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <div class="ad-card-label">광고</div>
+    <div class="ad-card-placeholder">📢<br>광고가 표시됩니다</div>
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="1419180025"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let files = [];   // {file, img, url}
+  let direction = 'horizontal';
+  let resultBlob = null;
+
+  const gapSlider = document.getElementById('gapSlider');
+  const gapVal    = document.getElementById('gapVal');
+  gapSlider.addEventListener('input', () => { gapVal.textContent = gapSlider.value + 'px'; });
+
+  function setDirection(d) {
+    direction = d;
+    document.getElementById('btnHorizontal').classList.toggle('active', d === 'horizontal');
+    document.getElementById('btnVertical').classList.toggle('active', d === 'vertical');
+  }
+
+  // Drop zone
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    addFiles(Array.from(e.dataTransfer.files));
+  });
+  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  document.getElementById('fileInput').addEventListener('change', e => { addFiles(Array.from(e.target.files)); });
+  document.getElementById('addMoreBtn').addEventListener('click', () => document.getElementById('fileInputMore').click());
+  document.getElementById('fileInputMore').addEventListener('change', e => { addFiles(Array.from(e.target.files)); });
+
+  async function addFiles(newFiles) {
+    hideError();
+    const remaining = 10 - files.length;
+    const toAdd = newFiles.filter(f => f.type.match(/^image\//)).slice(0, remaining);
+    if (toAdd.length === 0) {
+      if (files.length >= 10) showError('최대 10장까지만 추가할 수 있습니다.');
+      return;
+    }
+    for (const f of toAdd) {
+      const url = URL.createObjectURL(f);
+      const img = await loadImage(url);
+      files.push({ file: f, img, url });
+    }
+    renderFileList();
+    document.getElementById('fileListPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+  }
+
+  function renderFileList() {
+    const list = document.getElementById('mergeFileList');
+    list.innerHTML = '';
+    files.forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = 'merge-item';
+      div.innerHTML = `
+        <span class="drag-handle">☰</span>
+        <img src="${item.url}" alt="${item.file.name}">
+        <div class="merge-item-info">
+          <div class="merge-item-name">${item.file.name}</div>
+          <div class="merge-item-size">${item.img.naturalWidth}×${item.img.naturalHeight} · ${formatSize(item.file.size)}</div>
+        </div>
+        <button class="merge-item-remove" onclick="removeFile(${i})">✕</button>`;
+      list.appendChild(div);
+    });
+    document.getElementById('fileCount').textContent = `(${files.length}/10)`;
+  }
+
+  function removeFile(i) {
+    URL.revokeObjectURL(files[i].url);
+    files.splice(i, 1);
+    if (files.length === 0) {
+      document.getElementById('fileListPanel').style.display = 'none';
+      document.getElementById('optionsPanel').style.display = 'none';
+    }
+    renderFileList();
+  }
+
+  document.getElementById('mergeBtn').addEventListener('click', async () => {
+    if (files.length < 2) { showError('이미지를 2장 이상 추가해 주세요.'); return; }
+    const btn = document.getElementById('mergeBtn');
+    btn.disabled = true; btn.textContent = '⏳ 처리 중...';
+    hideError();
+
+    document.getElementById('progressWrap').style.display = 'block';
+    document.getElementById('progressFill').style.width = '30%';
+    document.getElementById('progressText').textContent = '이미지 준비 중...';
+
+    try {
+      const gap = parseInt(gapSlider.value);
+      const bg  = document.getElementById('bgColor').value;
+      const imgs = files.map(f => f.img);
+
+      let canvasW, canvasH;
+
+      if (direction === 'horizontal') {
+        // Scale all to same height (use first image's height)
+        const baseH = imgs[0].naturalHeight;
+        const scaledWidths = imgs.map(img => Math.round(img.naturalWidth * (baseH / img.naturalHeight)));
+        canvasW = scaledWidths.reduce((s, w) => s + w, 0) + gap * (imgs.length - 1);
+        canvasH = baseH;
+
+        const canvas = document.createElement('canvas');
+        canvas.width = canvasW; canvas.height = canvasH;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, canvasW, canvasH);
+
+        document.getElementById('progressFill').style.width = '70%';
+        document.getElementById('progressText').textContent = '이미지 합치는 중...';
+
+        let x = 0;
+        imgs.forEach((img, i) => {
+          const w = scaledWidths[i];
+          ctx.drawImage(img, x, 0, w, canvasH);
+          x += w + gap;
+        });
+
+        document.getElementById('progressFill').style.width = '90%';
+        const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.92));
+        resultBlob = blob;
+        const url = URL.createObjectURL(blob);
+        document.getElementById('resultImg').src = url;
+        document.getElementById('resultSubtitle').textContent =
+          `${canvasW} × ${canvasH}px · ${formatSize(blob.size)}`;
+
+      } else {
+        // Vertical: scale all to same width (first image's width)
+        const baseW = imgs[0].naturalWidth;
+        const scaledHeights = imgs.map(img => Math.round(img.naturalHeight * (baseW / img.naturalWidth)));
+        canvasW = baseW;
+        canvasH = scaledHeights.reduce((s, h) => s + h, 0) + gap * (imgs.length - 1);
+
+        const canvas = document.createElement('canvas');
+        canvas.width = canvasW; canvas.height = canvasH;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, canvasW, canvasH);
+
+        document.getElementById('progressFill').style.width = '70%';
+        document.getElementById('progressText').textContent = '이미지 합치는 중...';
+
+        let y = 0;
+        imgs.forEach((img, i) => {
+          const h = scaledHeights[i];
+          ctx.drawImage(img, 0, y, canvasW, h);
+          y += h + gap;
+        });
+
+        document.getElementById('progressFill').style.width = '90%';
+        const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.92));
+        resultBlob = blob;
+        const url = URL.createObjectURL(blob);
+        document.getElementById('resultImg').src = url;
+        document.getElementById('resultSubtitle').textContent =
+          `${canvasW} × ${canvasH}px · ${formatSize(blob.size)}`;
+      }
+
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('progressText').textContent = '완료!';
+      document.getElementById('progressWrap').style.display = 'none';
+
+      const panel = document.getElementById('resultPanel');
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth' });
+
+    } catch(err) {
+      showError('처리 중 오류가 발생했습니다: ' + err.message);
+      document.getElementById('progressWrap').style.display = 'none';
+    }
+    btn.disabled = false; btn.textContent = '🔗 이미지 합치기';
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'merged_image.jpg';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function loadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="js/pwa-install.js"></script>
+</body>
+</html>
