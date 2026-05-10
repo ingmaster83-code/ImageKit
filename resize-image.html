@@ -213,7 +213,10 @@
      data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
-<button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 이미지 다운로드</button>
+<div class="download-share-group" style="margin-top:16px;">
+  <button class="btn-download" id="downloadBtn">⬇️ 이미지 다운로드</button>
+  <button class="btn-share" id="shareBtn" style="display:none;">📤 공유하기</button>
+</div>
   </div>
 
   <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
@@ -424,6 +427,24 @@
     if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
+
+  (function() {
+    const shareBtn = document.getElementById('shareBtn');
+    if (navigator.share && navigator.canShare) {
+      const testFile = new File(['test'], 'test.png', { type: 'image/png' });
+      if (navigator.canShare({ files: [testFile] })) shareBtn.style.display = 'inline-flex';
+    }
+    shareBtn.addEventListener('click', async () => {
+      if (!resultBlob) return;
+      const mime = resultBlob.type || 'image/jpeg';
+      const extMap = {'image/jpeg':'.jpg','image/png':'.png','image/webp':'.webp'};
+      const ext = extMap[mime] || '.jpg';
+      const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_resized' + ext : 'resized' + ext;
+      const file = new File([resultBlob], fname, { type: mime });
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/resize-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+    });
+  })();
 </script>
 
 <script src="js/pwa-install.js"></script>

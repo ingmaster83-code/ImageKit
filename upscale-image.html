@@ -314,7 +314,10 @@
      data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
-<button class="btn-download" id="downloadBtn">⬇️ 업스케일 이미지 다운로드</button>
+<div class="download-share-group">
+  <button class="btn-download" id="downloadBtn">⬇️ 업스케일 이미지 다운로드</button>
+  <button class="btn-share" id="shareBtn" style="display:none;">📤 공유하기</button>
+</div>
     </div>
   </div>
 
@@ -376,6 +379,7 @@
   let selectedFile = null;
   let origImg = null;
   let resultCanvas = null;
+  let lastUpscaleBlob = null;
 
   const dropZone = document.getElementById('dropZone');
   const fileInput = document.getElementById('fileInput');
@@ -616,6 +620,7 @@
     const fmt = document.querySelector('input[name="outputFmt"]:checked').value;
     const quality = fmt === 'image/png' ? undefined : parseInt(document.getElementById('quality').value) / 100;
     resultCanvas.toBlob(blob => {
+      lastUpscaleBlob = blob;
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -654,6 +659,26 @@
     if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
+
+  // 공유하기
+  (function() {
+    const shareBtn = document.getElementById('shareBtn');
+    if (navigator.share && navigator.canShare) {
+      const testFile = new File(['test'], 'test.png', { type: 'image/png' });
+      if (navigator.canShare({ files: [testFile] })) {
+        shareBtn.style.display = 'inline-flex';
+      }
+    }
+    shareBtn.addEventListener('click', async () => {
+      if (!lastUpscaleBlob) return;
+      const fmt = lastUpscaleBlob.type || 'image/png';
+      const ext = fmt === 'image/png' ? '.png' : '.jpg';
+      const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_upscaled' + ext : 'upscaled' + ext;
+      const file = new File([lastUpscaleBlob], fname, { type: fmt });
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/upscale-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+    });
+  })();
 </script>
 
 <script src="js/pwa-install.js"></script>

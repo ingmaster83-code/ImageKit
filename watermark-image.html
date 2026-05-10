@@ -217,7 +217,10 @@
       <canvas id="previewCanvas"></canvas>
     </div>
 
-    <button class="btn-convert" id="downloadBtn">⬇️ 워터마크 이미지 다운로드</button>
+    <div class="download-share-group">
+      <button class="btn-convert" id="downloadBtn">⬇️ 워터마크 이미지 다운로드</button>
+      <button class="btn-share" id="shareBtn" style="display:none;">📤 공유하기</button>
+    </div>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
@@ -417,6 +420,27 @@
     if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
+
+  (function() {
+    const shareBtn = document.getElementById('shareBtn');
+    if (navigator.share && navigator.canShare) {
+      const testFile = new File(['test'], 'test.png', { type: 'image/png' });
+      if (navigator.canShare({ files: [testFile] })) shareBtn.style.display = 'inline-flex';
+    }
+    shareBtn.addEventListener('click', async () => {
+      if (!origImg) return;
+      const canvas = document.getElementById('previewCanvas');
+      const format = document.getElementById('outputFormat').value;
+      const quality = format === 'image/jpeg' ? parseInt(document.getElementById('opacity').value) / 100 : undefined;
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, format, 0.92));
+      const extMap = {'image/jpeg':'.jpg','image/png':'.png','image/webp':'.webp'};
+      const ext = extMap[format] || '.jpg';
+      const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_watermarked' + ext : 'watermarked' + ext;
+      const file = new File([blob], fname, { type: format });
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/watermark-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+    });
+  })();
 </script>
 
 <script src="js/pwa-install.js"></script>

@@ -153,7 +153,10 @@
       <canvas id="previewCanvas"></canvas>
     </div>
 
-    <button class="btn-convert" id="downloadBtn">⬇️ JPG로 다운로드</button>
+    <div class="download-share-group">
+      <button class="btn-convert" id="downloadBtn">⬇️ JPG로 다운로드</button>
+      <button class="btn-share" id="shareBtn" style="display:none;">📤 공유하기</button>
+    </div>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
@@ -208,6 +211,7 @@
 <script>
   let selectedFile = null;
   let origImg = null;
+  let lastBlob = null;
 
   const dropZone = document.getElementById('dropZone');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
@@ -282,6 +286,7 @@
     const canvas = document.getElementById('previewCanvas');
     const quality = parseInt(document.getElementById('quality').value) / 100;
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+    lastBlob = blob;
 
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -306,6 +311,24 @@
     if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
+
+  // 공유하기
+  (function() {
+    const shareBtn = document.getElementById('shareBtn');
+    if (navigator.share && navigator.canShare) {
+      const testFile = new File(['test'], 'test.png', { type: 'image/png' });
+      if (navigator.canShare({ files: [testFile] })) {
+        shareBtn.style.display = 'inline-flex';
+      }
+    }
+    shareBtn.addEventListener('click', async () => {
+      if (!lastBlob) return;
+      const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '.jpg' : 'converted.jpg';
+      const file = new File([lastBlob], fname, { type: 'image/jpeg' });
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/png-to-jpg.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+    });
+  })();
 </script>
 
 <script src="js/pwa-install.js"></script>
