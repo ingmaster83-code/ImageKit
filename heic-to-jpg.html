@@ -297,7 +297,7 @@
   dropZone.addEventListener('drop', e => {
     e.preventDefault(); dropZone.classList.remove('drag-over');
     const files = Array.from(e.dataTransfer.files);
-    if (files.length) loadFiles(files);
+    if (files.length) addFiles(files);
   });
   // label 클릭 시 이미 fileInput이 열리므로 dropZone 클릭 시 label/input 제외
   dropZone.addEventListener('click', e => {
@@ -306,7 +306,7 @@
   });
   fileInput.addEventListener('change', e => {
     const files = Array.from(e.target.files);
-    if (files.length) loadFiles(files);
+    if (files.length) addFiles(files);
     fileInput.value = ''; // 같은 파일 재선택 가능하게 초기화
   });
 
@@ -322,14 +322,21 @@
     });
   });
 
-  function loadFiles(files) {
-    selectedFiles = files;
+  function addFiles(newFiles) {
+    // 중복 제거 (이름+크기 기준)
+    newFiles.forEach(f => {
+      const isDup = selectedFiles.some(s => s.name === f.name && s.size === f.size);
+      if (!isDup) selectedFiles.push(f);
+    });
+    renderFileList();
+  }
+
+  function renderFileList() {
     convertedResults = [];
     hideError();
-
-    document.getElementById('fileCount').textContent = files.length;
+    document.getElementById('fileCount').textContent = selectedFiles.length;
     let html = '';
-    files.forEach((f, i) => {
+    selectedFiles.forEach((f, i) => {
       html += `<div class="file-item">
         <span class="file-item-icon">📱</span>
         <div class="file-item-info">
@@ -346,14 +353,13 @@
   }
 
   function removeFile(idx) {
-    selectedFiles = Array.from(selectedFiles);
     selectedFiles.splice(idx, 1);
     if (selectedFiles.length === 0) {
       document.getElementById('fileListPanel').style.display = 'none';
       document.getElementById('optionsPanel').style.display = 'none';
       return;
     }
-    loadFiles(selectedFiles);
+    renderFileList();
   }
 
   document.getElementById('convertBtn').addEventListener('click', async () => {
