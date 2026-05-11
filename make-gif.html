@@ -373,7 +373,10 @@
     e.preventDefault(); dropZone.classList.remove('drag-over');
     addFiles(Array.from(e.dataTransfer.files));
   });
-  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('click', e => {
+    if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
+    fileInput.click();
+  });
   fileInput.addEventListener('change', e => {
     addFiles(Array.from(e.target.files));
     fileInput.value = '';
