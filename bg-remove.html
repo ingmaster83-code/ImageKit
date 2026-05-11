@@ -299,9 +299,8 @@
   </div>
 </footer>
 
-<script type="module">
-  import { removeBackground } from 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/index.browser.mjs';
-
+<script>
+  // AI 라이브러리와 분리 — 파일 UI는 즉시 동작
   let selectedFile = null;
   let resultBlob = null;
 
@@ -366,14 +365,17 @@
     const progressStatus = document.getElementById('progressStatus');
     progressWrap.style.display = 'block';
     progressFill.style.width = '0%';
+    progressStatus.textContent = 'AI 모델 로딩 중...';
 
     try {
+      // 버튼 클릭 시점에 동적으로 import
+      const { removeBackground } = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/index.browser.mjs');
+
       const blob = await removeBackground(selectedFile, {
         progress: (key, current, total) => {
           const pct = total > 0 ? Math.round((current / total) * 100) : 0;
           progressFill.style.width = pct + '%';
           progressPercent.textContent = pct + '%';
-
           if (key.includes('download')) {
             progressStatus.textContent = 'AI 모델 다운로드 중...';
           } else if (key.includes('compute') || key.includes('inference')) {
@@ -436,9 +438,7 @@
     const shareBtn = document.getElementById('shareBtn');
     if (navigator.share && navigator.canShare) {
       const testFile = new File(['test'], 'test.png', { type: 'image/png' });
-      if (navigator.canShare({ files: [testFile] })) {
-        shareBtn.style.display = 'inline-flex';
-      }
+      if (navigator.canShare({ files: [testFile] })) shareBtn.style.display = 'inline-flex';
     }
     shareBtn.addEventListener('click', async () => {
       if (!resultBlob) return;

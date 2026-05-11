@@ -290,7 +290,10 @@
     const file = e.dataTransfer.files[0];
     if (file) loadFile(file);
   });
-  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+  dropZone.addEventListener('click', e => {
+    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
+    document.getElementById('fileInput').click();
+  });
   document.getElementById('fileInput').addEventListener('change', e => {
     if (e.target.files[0]) loadFile(e.target.files[0]);
   });

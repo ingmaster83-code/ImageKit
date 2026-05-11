@@ -355,10 +355,13 @@
     e.preventDefault(); dropZone.classList.remove('drag-over');
     addFiles(Array.from(e.dataTransfer.files));
   });
-  dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
-  document.getElementById('fileInput').addEventListener('change', e => { addFiles(Array.from(e.target.files)); });
+  dropZone.addEventListener('click', e => {
+    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
+    document.getElementById('fileInput').click();
+  });
+  document.getElementById('fileInput').addEventListener('change', e => { addFiles(Array.from(e.target.files)); e.target.value = ''; });
   document.getElementById('addMoreBtn').addEventListener('click', () => document.getElementById('fileInputMore').click());
-  document.getElementById('fileInputMore').addEventListener('change', e => { addFiles(Array.from(e.target.files)); });
+  document.getElementById('fileInputMore').addEventListener('change', e => { addFiles(Array.from(e.target.files)); e.target.value = ''; });
 
   async function addFiles(newFiles) {
     hideError();
