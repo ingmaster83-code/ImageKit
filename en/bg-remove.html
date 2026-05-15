@@ -1,0 +1,481 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KC8RNNKS79"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KC8RNNKS79');
+</script>
+  <meta charset="UTF-8">
+  <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
+  <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remove Image Background Free Online – AI Background Remover | WooaImage</title>
+  <meta name="description" content="Remove image backgrounds for free using AI. Accurately detects people and objects and saves as transparent PNG. Browser-based, no signup.">
+  <meta name="keywords" content="remove background, background remover, remove image background free, transparent PNG, AI background remove online">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/en/bg-remove.html">
+  <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/bg-remove.html">
+  <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/bg-remove.html">
+  <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/bg-remove.html">
+  <meta property="og:title" content="Remove Image Background Free – AI Online Tool | WooaImage">
+  <meta property="og:description" content="AI-powered background removal. Saves as transparent PNG. Free, no signup, no server upload.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/en/bg-remove.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://imagekit.wooahouse.com/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AI Background Remover",
+    "url": "https://imagekit.wooahouse.com/en/bg-remove.html",
+    "description": "Remove image backgrounds for free using AI. Accurately detects people and objects and saves as transparent PNG. Browser-based, no signup.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "inLanguage": "en"
+  }
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What types of images work best for background removal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Images with clear subjects (people, products) against simple backgrounds give the best results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What format is the output after background removal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The result is saved as a transparent PNG file."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is it slow on the first use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The first use downloads the AI model (~50MB). Subsequent uses are much faster as the model is cached."
+      }
+    }
+  ]
+}
+</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .transparency-bg {
+      background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+        linear-gradient(-45deg, #ccc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ccc 75%),
+        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
+    .compare-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .compare-box {
+      text-align: center;
+    }
+    .compare-box h4 {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .compare-box img {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      object-fit: contain;
+    }
+    .model-warning {
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.82rem;
+      color: #92400E;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .progress-status {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-top: 6px;
+      text-align: center;
+    }
+    @media (max-width: 520px) {
+      .compare-wrap { grid-template-columns: 1fr; }
+    }
+    .lang-switcher { display:flex; align-items:center; gap:4px; }
+    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
+    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
+    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
+    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">Compress</a>
+      <a href="resize-image.html">Resize</a>
+      <a href="rotate-image.html">Rotate/Flip</a>
+      <a href="crop-image.html">Crop</a>
+      <a href="../index.html">All Tools ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <a href="../bg-remove.html">KO</a>
+        <span>|</span>
+        <a href="bg-remove.html" class="active">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">WooaHouse Services</span>
+  <div class="our-sites-links">
+    <a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ WooaImage</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a>
+    <a href="https://wooaaudio.wooahouse.com/" target="_blank" rel="noopener">🎵 WooaAudio</a>
+    <a href="https://wooaviewer.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaViewer</a>
+    <a href="https://wooadev.wooahouse.com/" target="_blank" rel="noopener">🛠️ WooaDev</a>
+  </div>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="../index.html">🏠 Home</a>
+    <span>›</span>
+    <span>배경 제거</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🤖</span>
+    <h1>Remove Image Background – Free Online AI Tool</h1>
+    <p>AI 기술로 이미지 배경을 자동 제거하고 투명 PNG로 저장합니다.</p>
+  </div>
+
+  <div class="model-warning">
+    ⚠️ <strong>첫 실행 시 AI 모델 다운로드에 약 30초가 소요됩니다.</strong> 이후에는 캐시되어 빠르게 처리됩니다. 모든 처리는 브라우저에서 이루어지며 서버로 파일이 전송되지 않습니다.
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>Drop your image file here</h3>
+    <p>Upload JPG, PNG, or WebP files</p>
+    <label for="fileInput" class="btn-select">Select Image File</label>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">Selected File</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">배경 제거</div>
+    <button class="btn-convert" id="processBtn">🤖 배경 제거 시작</button>
+  </div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <span id="progressText">Processing...</span>
+      <span id="progressPercent">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-status" id="progressStatus">Loading AI model...</div>
+  </div>
+
+  <div id="resultPanel" class="result-panel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">배경 제거 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div class="compare-wrap">
+      <div class="compare-box">
+        <h4>원본</h4>
+        <img id="originalPreview" alt="원본 이미지">
+      </div>
+      <div class="compare-box">
+        <h4>결과 (투명 배경)</h4>
+        <div class="transparency-bg" style="display:inline-block; border-radius:var(--radius-sm);">
+          <img id="resultPreview" alt="배경 제거 결과" style="display:block;">
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:20px; text-align:center;">
+      
+<div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="1419180025"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<div class="download-share-group">
+  <button class="btn-download" id="downloadBtn">⬇️ 투명 PNG 다운로드</button>
+  <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
+</div>
+    </div>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+    <div class="cross-link-banner">
+    <span>Need to add a watermark after removing the background?</span>
+    <a href="../watermark-image.html">💧 Add Watermark →</a>
+  </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. What types of images work best for background removal?</h3>
+        <p style="color:#555;margin:0;">Images with clear subjects (people, products) against simple backgrounds give the best results.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. What format is the output after background removal?</h3>
+        <p style="color:#555;margin:0;">The result is saved as a transparent PNG file.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Why is it slow on the first use?</h3>
+        <p style="color:#555;margin:0;">The first use downloads the AI model (~50MB). Subsequent uses are much faster as the model is cached.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="1419180025"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="ad-card" style="margin-top:16px;overflow:hidden;">    
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../about.html">About</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // AI 라이브러리와 분리 — 파일 UI는 즉시 동작
+  let selectedFile = null;
+  let resultBlob = null;
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  dropZone.addEventListener('click', e => {
+    if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
+    fileInput.click();
+  });
+  fileInput.addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+    fileInput.value = '';
+  });
+
+  function loadFile(file) {
+    if (!file.type.startsWith('image/')) {
+      showError('이미지 파일만 업로드할 수 있습니다.');
+      return;
+    }
+    hideError();
+    selectedFile = file;
+    resultBlob = null;
+
+    const img = new Image();
+    img.onload = () => {
+      document.getElementById('fileInfo').innerHTML = `
+        <div class="file-item">
+          <span class="file-item-icon">🖼️</span>
+          <div class="file-item-info">
+            <div class="file-item-name">${file.name}</div>
+            <div class="file-item-size">${formatSize(file.size)} · ${img.naturalWidth}×${img.naturalHeight}</div>
+          </div>
+          <button class="file-item-remove" id="clearBtn">✕</button>
+        </div>`;
+      document.getElementById('clearBtn').addEventListener('click', clearFile);
+      document.getElementById('fileInfoPanel').style.display = 'block';
+      document.getElementById('optionsPanel').style.display = 'block';
+      document.getElementById('resultPanel').style.display = 'none';
+      document.getElementById('originalPreview').src = img.src;
+    };
+    img.src = URL.createObjectURL(file);
+  }
+
+  document.getElementById('processBtn').addEventListener('click', async () => {
+    if (!selectedFile) return;
+
+    const btn = document.getElementById('processBtn');
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+
+    const progressWrap = document.getElementById('progressWrap');
+    const progressFill = document.getElementById('progressFill');
+    const progressPercent = document.getElementById('progressPercent');
+    const progressStatus = document.getElementById('progressStatus');
+    progressWrap.style.display = 'block';
+    progressFill.style.width = '0%';
+    progressStatus.textContent = 'Loading AI model...';
+
+    try {
+      // 버튼 클릭 시점에 동적으로 import
+      const { removeBackground } = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/index.browser.mjs');
+
+      const blob = await removeBackground(selectedFile, {
+        progress: (key, current, total) => {
+          const pct = total > 0 ? Math.round((current / total) * 100) : 0;
+          progressFill.style.width = pct + '%';
+          progressPercent.textContent = pct + '%';
+          if (key.includes('download')) {
+            progressStatus.textContent = 'AI 모델 다운로드 중...';
+          } else if (key.includes('compute') || key.includes('inference')) {
+            progressStatus.textContent = '배경 제거 처리 중...';
+          } else {
+            progressStatus.textContent = key + '...';
+          }
+        }
+      });
+
+      resultBlob = blob;
+      const resultUrl = URL.createObjectURL(blob);
+      document.getElementById('resultPreview').src = resultUrl;
+      document.getElementById('resultSubtitle').textContent = `결과 크기: ${formatSize(blob.size)}`;
+      document.getElementById('resultPanel').style.display = 'block';
+      progressFill.style.width = '100%';
+      progressPercent.textContent = '100%';
+      progressStatus.textContent = '완료!';
+
+    } catch (err) {
+      showError('배경 제거 중 오류가 발생했습니다: ' + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '🤖 배경 제거 시작';
+      setTimeout(() => { progressWrap.style.display = 'none'; }, 2000);
+    }
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_nobg.png';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function clearFile() {
+    selectedFile = null;
+    resultBlob = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'none';
+    fileInput.value = '';
+    hideError();
+  }
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+
+  // 공유하기
+  (function() {
+    const shareBtn = document.getElementById('shareBtn');
+    if (navigator.share && navigator.canShare) {
+      const testFile = new File(['test'], 'test.png', { type: 'image/png' });
+      if (navigator.canShare({ files: [testFile] })) shareBtn.style.display = 'inline-flex';
+    }
+    shareBtn.addEventListener('click', async () => {
+      if (!resultBlob) return;
+      const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_nobg.png' : 'nobg.png';
+      const file = new File([resultBlob], fname, { type: 'image/png' });
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/bg-remove.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+    });
+  })();
+</script>
+
+<script src="../js/pwa-install.js"></script>
+</body>
+</html>

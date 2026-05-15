@@ -1,0 +1,685 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KC8RNNKS79"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KC8RNNKS79');
+</script>
+  <meta charset="UTF-8">
+  <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
+  <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Filter Free Online – Apply Photo Filters & Effects | WooaImage</title>
+  <meta name="description" content="Apply filters and effects to images for free. Grayscale, sepia, brightness, contrast, blur and more. 100% browser-based — no server upload.">
+  <meta name="keywords" content="image filter online, photo filter free, apply image effects, grayscale image, sepia filter, brightness contrast tool">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/en/image-filter.html">
+  <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/image-filter.html">
+  <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/image-filter.html">
+  <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/image-filter.html">
+  <meta property="og:title" content="Image Filter Free – Apply Photo Effects Online | WooaImage">
+  <meta property="og:description" content="Apply grayscale, sepia, brightness, contrast, and blur filters to images. Free, no signup.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/en/image-filter.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://imagekit.wooahouse.com/og-image.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="../css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Image Filter Tool",
+  "url": "https://imagekit.wooahouse.com/en/image-filter.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What filters are available?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Grayscale, sepia, invert, brightness, contrast, saturation, blur, and more are available."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I adjust the intensity of the filters?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Most filters have a slider to control the strength of the effect."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are files sent to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All filter processing runs locally in your browser."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  .filter-preview-wrap {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .filter-preview-box {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+  }
+  .filter-preview-box span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .filter-preview-box img {
+    max-width: 100%;
+    max-height: 320px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+  .filter-sliders {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+    margin-top: 4px;
+  }
+  @media (max-width: 600px) {
+    .filter-sliders { grid-template-columns: 1fr; }
+  }
+  .filter-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .filter-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .filter-label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+  .filter-val {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 38px;
+    text-align: right;
+  }
+  .filter-row input[type="range"] {
+    width: 100%;
+    margin: 0;
+  }
+  .reset-btn {
+    background: none;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.82rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .reset-btn:hover { border-color: var(--primary); color: var(--primary); }
+</style>
+  <style>
+    .lang-switcher { display:flex; align-items:center; gap:4px; }
+    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
+    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
+    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
+    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">Compress</a>
+      <a href="resize-image.html">Resize</a>
+      <a href="rotate-image.html">Rotate/Flip</a>
+      <a href="crop-image.html">Crop</a>
+      <a href="../index.html">All Tools ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <a href="../image-filter.html">KO</a>
+        <span>|</span>
+        <a href="image-filter.html" class="active">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">WooaHouse Services</span>
+  <div class="our-sites-links">
+    <a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ WooaImage</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a>
+    <a href="https://wooaaudio.wooahouse.com/" target="_blank" rel="noopener">🎵 WooaAudio</a>
+    <a href="https://wooaviewer.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaViewer</a>
+    <a href="https://wooadev.wooahouse.com/" target="_blank" rel="noopener">🛠️ WooaDev</a>
+  </div>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="../index.html">🏠 Home</a>
+    <span>›</span>
+    <span>이미지 필터</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🎨</span>
+    <h1>Image Filter – Apply Photo Effects Free Online</h1>
+    <p>슬라이더로 필터를 조정하면 실시간으로 미리보기됩니다. 완성되면 바로 다운로드하세요.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>Drop your image file here</h3>
+    <p>Upload JPG, PNG, or WebP files</p>
+    <label for="fileInput" class="btn-select">Select Image File</label>
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">Selected File</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title" style="display:flex;justify-content:space-between;align-items:center;">
+      <span>필터 설정</span>
+      <button class="reset-btn" id="resetBtn">↺ 초기화</button>
+    </div>
+    <div class="filter-sliders">
+      <div class="filter-row">
+        <div class="filter-row-header">
+          <span class="filter-label">☀️ 밝기</span>
+          <span class="filter-val" id="brightnessVal">100%</span>
+        </div>
+        <input type="range" id="brightness" min="0" max="200" value="100">
+      </div>
+      <div class="filter-row">
+        <div class="filter-row-header">
+          <span class="filter-label">🌓 대비</span>
+          <span class="filter-val" id="contrastVal">100%</span>
+        </div>
+        <input type="range" id="contrast" min="0" max="200" value="100">
+      </div>
+      <div class="filter-row">
+        <div class="filter-row-header">
+          <span class="filter-label">🌈 채도</span>
+          <span class="filter-val" id="saturateVal">100%</span>
+        </div>
+        <input type="range" id="saturate" min="0" max="300" value="100">
+      </div>
+      <div class="filter-row">
+        <div class="filter-row-header">
+          <span class="filter-label">🎨 색조</span>
+          <span class="filter-val" id="hueVal">0°</span>
+        </div>
+        <input type="range" id="hue" min="0" max="360" value="0">
+      </div>
+      <div class="filter-row">
+        <div class="filter-row-header">
+          <span class="filter-label">⬛ 흑백</span>
+          <span class="filter-val" id="grayscaleVal">0%</span>
+        </div>
+        <input type="range" id="grayscale" min="0" max="100" value="0">
+      </div>
+      <div class="filter-row">
+        <div class="filter-row-header">
+          <span class="filter-label">🟫 세피아</span>
+          <span class="filter-val" id="sepiaVal">0%</span>
+        </div>
+        <input type="range" id="sepia" min="0" max="100" value="0">
+      </div>
+      <div class="filter-row">
+        <div class="filter-row-header">
+          <span class="filter-label">💨 블러</span>
+          <span class="filter-val" id="blurVal">0px</span>
+        </div>
+        <input type="range" id="blur" min="0" max="20" value="0" step="0.5">
+      </div>
+      <div class="filter-row">
+        <div class="filter-row-header">
+          <span class="filter-label">✨ 선명도</span>
+          <span class="filter-val" id="sharpnessVal">0%</span>
+        </div>
+        <input type="range" id="sharpness" min="0" max="100" value="0">
+      </div>
+    </div>
+
+    <div class="filter-preview-wrap" id="previewWrap" style="display:none">
+      <div class="filter-preview-box">
+        <span>원본</span>
+        <img id="originalImg" src="" alt="원본 이미지">
+      </div>
+      <div class="filter-preview-box">
+        <span>미리보기</span>
+        <img id="previewImg" src="" alt="필터 적용 미리보기">
+      </div>
+    </div>
+
+    <button class="btn-convert" id="applyBtn" style="margin-top:20px;">🎨 필터 적용 & 저장 준비</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <span id="progressText">Processing...</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">필터 적용 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div class="preview-image-wrap">
+      <img id="resultImg" src="" alt="필터 적용된 이미지 미리보기" style="max-width:100%;border-radius:8px;">
+    </div>
+
+<div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="1419180025"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+    <div class="download-share-group">
+      <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 필터 이미지 다운로드</button>
+      <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
+    </div>
+  </div>
+
+    <div class="cross-link-banner">
+    <span>Need to compress the image after applying filters?</span>
+    <a href="../compress-image.html">🗜️ Compress Image →</a>
+  </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. What filters are available?</h3>
+        <p style="color:#555;margin:0;">Grayscale, sepia, invert, brightness, contrast, saturation, blur, and more are available.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Can I adjust the intensity of the filters?</h3>
+        <p style="color:#555;margin:0;">Yes. Most filters have a slider to control the strength of the effect.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Are files sent to a server?</h3>
+        <p style="color:#555;margin:0;">No. All filter processing runs locally in your browser.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="1419180025"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="ad-card" style="margin-top:16px;overflow:hidden;">    
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../about.html">About</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let selectedFile = null;
+  let originalImg = null;
+  let resultBlob = null;
+
+  // Filter defaults
+  const defaults = { brightness:100, contrast:100, saturate:100, hue:0, grayscale:0, sepia:0, blur:0, sharpness:0 };
+
+  const sliders = ['brightness','contrast','saturate','hue','grayscale','sepia','blur','sharpness'];
+
+  function getFilterCSS() {
+    const b  = document.getElementById('brightness').value;
+    const c  = document.getElementById('contrast').value;
+    const s  = document.getElementById('saturate').value;
+    const h  = document.getElementById('hue').value;
+    const g  = document.getElementById('grayscale').value;
+    const se = document.getElementById('sepia').value;
+    const bl = document.getElementById('blur').value;
+    return `brightness(${b}%) contrast(${c}%) saturate(${s}%) hue-rotate(${h}deg) grayscale(${g}%) sepia(${se}%) blur(${bl}px)`;
+  }
+
+  function updateLabel(id) {
+    const val = document.getElementById(id).value;
+    const labelMap = {
+      brightness: v => `${v}%`,
+      contrast:   v => `${v}%`,
+      saturate:   v => `${v}%`,
+      hue:        v => `${v}°`,
+      grayscale:  v => `${v}%`,
+      sepia:      v => `${v}%`,
+      blur:       v => `${v}px`,
+      sharpness:  v => `${v}%`
+    };
+    document.getElementById(id + 'Val').textContent = labelMap[id](val);
+  }
+
+  function updatePreview() {
+    if (!originalImg) return;
+    const filterStr = getFilterCSS();
+    // Apply sharpness via canvas convolution if > 0
+    const sharpness = parseFloat(document.getElementById('sharpness').value);
+
+    const canvas = document.createElement('canvas');
+    canvas.width  = originalImg.naturalWidth;
+    canvas.height = originalImg.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.filter = filterStr;
+    ctx.drawImage(originalImg, 0, 0);
+    ctx.filter = 'none';
+
+    // Simple sharpen convolution
+    if (sharpness > 0) {
+      const strength = sharpness / 100 * 2;
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const src = new Uint8ClampedArray(imgData.data);
+      const w = canvas.width, h = canvas.height;
+      const k = [-strength/4, -strength/4, -strength/4, -strength/4,
+                  1 + strength, -strength/4, -strength/4, -strength/4, -strength/4];
+      for (let y = 1; y < h-1; y++) {
+        for (let x = 1; x < w-1; x++) {
+          const i = (y * w + x) * 4;
+          for (let c = 0; c < 3; c++) {
+            let v = 0;
+            v += src[((y-1)*w+(x-1))*4+c] * k[0];
+            v += src[((y-1)*w+x)*4+c]     * k[1];
+            v += src[((y-1)*w+(x+1))*4+c] * k[2];
+            v += src[(y*w+(x-1))*4+c]     * k[3];
+            v += src[i+c]                  * k[4];
+            v += src[(y*w+(x+1))*4+c]     * k[5];
+            v += src[((y+1)*w+(x-1))*4+c] * k[6];
+            v += src[((y+1)*w+x)*4+c]     * k[7];
+            v += src[((y+1)*w+(x+1))*4+c] * k[8];
+            imgData.data[i+c] = Math.max(0, Math.min(255, v));
+          }
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+    }
+
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      document.getElementById('previewImg').src = url;
+    }, 'image/jpeg', 0.92);
+  }
+
+  sliders.forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => {
+      updateLabel(id);
+      updatePreview();
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    sliders.forEach(id => {
+      document.getElementById(id).value = defaults[id];
+      updateLabel(id);
+    });
+    updatePreview();
+  });
+
+  // Drag & drop
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  dropZone.addEventListener('click', e => {
+    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
+    document.getElementById('fileInput').click();
+  });
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  function loadFile(file) {
+    if (!file.type.match(/^image\/(jpeg|png|webp)/)) {
+      showError('JPG, PNG, WebP 파일만 업로드할 수 있습니다.'); return;
+    }
+    hideError();
+    selectedFile = file;
+    resultBlob = null;
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)} · ${file.type}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+
+    const img = new Image();
+    img.onload = () => {
+      originalImg = img;
+      document.getElementById('originalImg').src = img.src;
+      document.getElementById('previewImg').src = img.src;
+      document.getElementById('previewWrap').style.display = 'flex';
+      updatePreview();
+    };
+    img.src = URL.createObjectURL(file);
+  }
+
+  function clearFile() {
+    selectedFile = null;
+    originalImg = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    document.getElementById('previewWrap').style.display = 'none';
+    hideError();
+  }
+
+  document.getElementById('applyBtn').addEventListener('click', async () => {
+    if (!originalImg) return;
+    const btn = document.getElementById('applyBtn');
+    btn.disabled = true; btn.textContent = '⏳ Processing...';
+    hideError();
+    document.getElementById('progressWrap').style.display = 'block';
+    document.getElementById('progressFill').style.width = '40%';
+    document.getElementById('progressText').textContent = '필터 적용 중...';
+
+    try {
+      const filterStr = getFilterCSS();
+      const sharpness = parseFloat(document.getElementById('sharpness').value);
+
+      const canvas = document.createElement('canvas');
+      canvas.width  = originalImg.naturalWidth;
+      canvas.height = originalImg.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.filter = filterStr;
+      ctx.drawImage(originalImg, 0, 0);
+      ctx.filter = 'none';
+
+      if (sharpness > 0) {
+        const strength = sharpness / 100 * 2;
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const src = new Uint8ClampedArray(imgData.data);
+        const w = canvas.width, h = canvas.height;
+        const k = [-strength/4, -strength/4, -strength/4, -strength/4,
+                    1 + strength, -strength/4, -strength/4, -strength/4, -strength/4];
+        for (let y = 1; y < h-1; y++) {
+          for (let x = 1; x < w-1; x++) {
+            const i = (y * w + x) * 4;
+            for (let c = 0; c < 3; c++) {
+              let v = 0;
+              v += src[((y-1)*w+(x-1))*4+c] * k[0];
+              v += src[((y-1)*w+x)*4+c]     * k[1];
+              v += src[((y-1)*w+(x+1))*4+c] * k[2];
+              v += src[(y*w+(x-1))*4+c]     * k[3];
+              v += src[i+c]                  * k[4];
+              v += src[(y*w+(x+1))*4+c]     * k[5];
+              v += src[((y+1)*w+(x-1))*4+c] * k[6];
+              v += src[((y+1)*w+x)*4+c]     * k[7];
+              v += src[((y+1)*w+(x+1))*4+c] * k[8];
+              imgData.data[i+c] = Math.max(0, Math.min(255, v));
+            }
+          }
+        }
+        ctx.putImageData(imgData, 0, 0);
+      }
+
+      document.getElementById('progressFill').style.width = '80%';
+
+      const mimeType = selectedFile.type === 'image/png' ? 'image/png' : 'image/jpeg';
+      const quality  = mimeType === 'image/jpeg' ? 0.92 : undefined;
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, mimeType, quality));
+      resultBlob = blob;
+
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('progressText').textContent = '완료!';
+      document.getElementById('progressWrap').style.display = 'none';
+
+      const url = URL.createObjectURL(blob);
+      document.getElementById('resultImg').src = url;
+      document.getElementById('resultSubtitle').textContent =
+        `${originalImg.naturalWidth} × ${originalImg.naturalHeight}px · ${formatSize(blob.size)}`;
+
+      const panel = document.getElementById('resultPanel');
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth' });
+
+    } catch(err) {
+      showError('Processing failed: ' + err.message);
+      document.getElementById('progressWrap').style.display = 'none';
+    }
+    btn.disabled = false; btn.textContent = '🎨 필터 적용 & 저장 준비';
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    const ext = resultBlob.type === 'image/png' ? '.png' : '.jpg';
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_filtered' + ext;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+
+  // 공유하기
+  (function() {
+    const shareBtn = document.getElementById('shareBtn');
+    if (navigator.share && navigator.canShare) {
+      const testFile = new File(['test'], 'test.png', { type: 'image/png' });
+      if (navigator.canShare({ files: [testFile] })) {
+        shareBtn.style.display = 'inline-flex';
+      }
+    }
+    shareBtn.addEventListener('click', async () => {
+      if (!resultBlob) return;
+      const ext = resultBlob.type === 'image/png' ? '.png' : '.jpg';
+      const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_filtered' + ext : 'filtered' + ext;
+      const file = new File([resultBlob], fname, { type: resultBlob.type });
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/image-filter.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+    });
+  })();
+</script>
+
+<script src="../js/pwa-install.js"></script>
+</body>
+</html>

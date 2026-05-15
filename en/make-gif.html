@@ -1,0 +1,645 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KC8RNNKS79"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KC8RNNKS79');
+</script>
+  <meta charset="UTF-8">
+  <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
+  <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make GIF Free Online – Create Animated GIF from Images | WooaImage</title>
+  <meta name="description" content="Create animated GIFs from multiple images for free. Set frame rate and loop count. Browser-based GIF maker — no signup, no server upload.">
+  <meta name="keywords" content="make GIF, create animated GIF, GIF maker online free, images to GIF, animated GIF creator">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/en/make-gif.html">
+  <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/make-gif.html">
+  <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/make-gif.html">
+  <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/make-gif.html">
+  <meta property="og:title" content="Make Animated GIF Free Online | WooaImage">
+  <meta property="og:description" content="Create animated GIFs from multiple images. Set frame rate and loops. Free, no signup, no server.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/en/make-gif.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://imagekit.wooahouse.com/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "GIF Maker",
+    "url": "https://imagekit.wooahouse.com/en/make-gif.html",
+    "description": "Create animated GIFs from multiple images for free. Set frame rate and loop count. Browser-based GIF maker — no signup, no server upload.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "inLanguage": "en"
+  }
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What image formats can I use to make a GIF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JPG, PNG, and WebP images are all supported for creating GIFs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I control the animation speed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can set the frame interval (delay between frames) to control the speed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a limit on the number of frames?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No strict limit, but too many frames may result in a large GIF file size."
+      }
+    }
+  ]
+}
+</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .frames-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .frame-card {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px;
+      text-align: center;
+      position: relative;
+      cursor: grab;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .frame-card:active { cursor: grabbing; }
+    .frame-card.drag-over-card {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(14,165,233,0.3);
+    }
+    .frame-card img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      background: #F3F4F6;
+    }
+    .frame-num {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+    .frame-remove {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 0.7rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .frame-remove:hover { background: #DC2626; }
+    .gif-preview-wrap {
+      margin-top: 16px;
+      text-align: center;
+    }
+    .gif-preview-wrap img {
+      max-width: 100%;
+      max-height: 400px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+    }
+    .add-more-btn {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      min-height: 96px;
+      background: transparent;
+      font-family: inherit;
+      color: var(--text-light);
+      font-size: 0.78rem;
+      transition: border-color 0.15s;
+    }
+    .add-more-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .add-more-btn span { font-size: 1.5rem; }
+    .lang-switcher { display:flex; align-items:center; gap:4px; }
+    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
+    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
+    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
+    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">Compress</a>
+      <a href="resize-image.html">Resize</a>
+      <a href="rotate-image.html">Rotate/Flip</a>
+      <a href="crop-image.html">Crop</a>
+      <a href="../index.html">All Tools ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <a href="../make-gif.html">KO</a>
+        <span>|</span>
+        <a href="make-gif.html" class="active">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">WooaHouse Services</span>
+  <div class="our-sites-links">
+    <a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ WooaImage</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a>
+    <a href="https://wooaaudio.wooahouse.com/" target="_blank" rel="noopener">🎵 WooaAudio</a>
+    <a href="https://wooaviewer.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaViewer</a>
+    <a href="https://wooadev.wooahouse.com/" target="_blank" rel="noopener">🛠️ WooaDev</a>
+  </div>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="../index.html">🏠 Home</a>
+    <span>›</span>
+    <span>GIF 만들기</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🎬</span>
+    <h1>GIF Maker – Create Animated GIF Free Online</h1>
+    <p>여러 이미지를 업로드하여 움직이는 GIF 애니메이션을 만듭니다. 드래그로 순서 변경 가능.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🎬</span>
+    <h3>Drop your image file here</h3>
+    <p>JPG, PNG, WebP 파일 여러 장을 업로드하세요</p>
+    <label for="fileInput" class="btn-select">Select Image File</label>
+    <input type="file" id="fileInput" accept="image/*" multiple style="display:none">
+  </div>
+
+  <div id="framesPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">프레임 (<span id="frameCount">0</span>개) — 드래그하여 순서 변경</div>
+    <div class="frames-grid" id="framesGrid"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">GIF Settings</div>
+
+    <div class="option-row">
+      <span class="option-label">프레임 딜레이: <strong id="delayVal">500</strong>ms</span>
+      <div class="option-control" style="flex:1; max-width:320px;">
+        <input type="range" id="frameDelay" min="50" max="2000" value="500" step="50">
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">Loop</span>
+      <div class="option-control">
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="repeat" value="0" checked> 무한 Loop</label>
+          <label class="radio-item"><input type="radio" name="repeat" value="1"> 1회</label>
+          <label class="radio-item"><input type="radio" name="repeat" value="custom"> 지정</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row" id="customRepeatRow" style="display:none">
+      <span class="option-label">Loop Count</span>
+      <div class="option-control" style="max-width:120px;">
+        <input type="number" id="customRepeat" value="3" min="1" max="100">
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">크기</span>
+      <div class="option-control">
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="sizeMode" value="original" checked> 원본 크기</label>
+          <label class="radio-item"><input type="radio" name="sizeMode" value="custom"> 너비 지정</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row" id="customSizeRow" style="display:none">
+      <span class="option-label">너비 (px)</span>
+      <div class="option-control" style="max-width:150px;">
+        <input type="number" id="customWidth" value="480" min="50" max="2000">
+      </div>
+    </div>
+
+    <button class="btn-convert" id="generateBtn" disabled>🎬 GIF 생성</button>
+  </div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <span id="progressText">GIF 생성 중...</span>
+      <span id="progressPercent">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div id="resultPanel" class="result-panel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">GIF 생성 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div class="gif-preview-wrap">
+      <img id="gifPreview" alt="생성된 GIF">
+    </div>
+    <div style="margin-top:20px; text-align:center;">
+      
+<div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="1419180025"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<div class="download-share-group">
+  <button class="btn-download" id="downloadBtn">⬇️ Download GIF</button>
+  <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
+</div>
+    </div>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+    <div class="cross-link-banner">
+    <span>Need to resize images before making a GIF?</span>
+    <a href="../resize-image.html">📐 Resize Image →</a>
+  </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. What image formats can I use to make a GIF?</h3>
+        <p style="color:#555;margin:0;">JPG, PNG, and WebP images are all supported for creating GIFs.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Can I control the animation speed?</h3>
+        <p style="color:#555;margin:0;">Yes. You can set the frame interval (delay between frames) to control the speed.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Is there a limit on the number of frames?</h3>
+        <p style="color:#555;margin:0;">No strict limit, but too many frames may result in a large GIF file size.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="1419180025"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="ad-card" style="margin-top:16px;overflow:hidden;">    
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../about.html">About</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.min.js"></script>
+<script>
+  let frames = []; // { file, img, url }
+  let resultBlob = null;
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    addFiles(Array.from(e.dataTransfer.files));
+  });
+  dropZone.addEventListener('click', e => {
+    if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
+    fileInput.click();
+  });
+  fileInput.addEventListener('change', e => {
+    addFiles(Array.from(e.target.files));
+    fileInput.value = '';
+  });
+
+  // Delay slider
+  document.getElementById('frameDelay').addEventListener('input', function() {
+    document.getElementById('delayVal').textContent = this.value;
+  });
+
+  // Repeat radio
+  document.querySelectorAll('input[name="repeat"]').forEach(r => {
+    r.addEventListener('change', function() {
+      document.getElementById('customRepeatRow').style.display = this.value === 'custom' ? 'flex' : 'none';
+    });
+  });
+
+  // Size radio
+  document.querySelectorAll('input[name="sizeMode"]').forEach(r => {
+    r.addEventListener('change', function() {
+      document.getElementById('customSizeRow').style.display = this.value === 'custom' ? 'flex' : 'none';
+    });
+  });
+
+  async function addFiles(files) {
+    const imageFiles = files.filter(f => f.type.startsWith('image/'));
+    if (imageFiles.length === 0) { showError('이미지 파일만 업로드할 수 있습니다.'); return; }
+    hideError();
+
+    for (const file of imageFiles) {
+      const img = await loadImage(file);
+      const url = URL.createObjectURL(file);
+      frames.push({ file, img, url });
+    }
+    renderFrames();
+  }
+
+  function renderFrames() {
+    document.getElementById('frameCount').textContent = frames.length;
+    const grid = document.getElementById('framesGrid');
+    let html = '';
+    frames.forEach((f, i) => {
+      html += `<div class="frame-card" draggable="true" data-idx="${i}">
+        <button class="frame-remove" onclick="removeFrame(${i})" title="삭제">✕</button>
+        <img src="${f.url}" alt="프레임 ${i+1}">
+        <div class="frame-num">#${i+1}</div>
+      </div>`;
+    });
+    html += `<button class="add-more-btn" onclick="document.getElementById('fileInput').click()">
+      <span>+</span>
+      이미지 추가
+    </button>`;
+    grid.innerHTML = html;
+
+    document.getElementById('framesPanel').style.display = frames.length > 0 ? 'block' : 'none';
+    document.getElementById('optionsPanel').style.display = frames.length > 0 ? 'block' : 'none';
+    document.getElementById('generateBtn').disabled = frames.length < 2;
+
+    // Setup drag and drop for reordering
+    setupDragReorder();
+  }
+
+  function setupDragReorder() {
+    const cards = document.querySelectorAll('.frame-card[draggable]');
+    let dragIdx = null;
+
+    cards.forEach(card => {
+      card.addEventListener('dragstart', e => {
+        dragIdx = parseInt(card.dataset.idx);
+        card.style.opacity = '0.4';
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      card.addEventListener('dragend', () => {
+        card.style.opacity = '1';
+        document.querySelectorAll('.frame-card').forEach(c => c.classList.remove('drag-over-card'));
+      });
+      card.addEventListener('dragover', e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        card.classList.add('drag-over-card');
+      });
+      card.addEventListener('dragleave', () => {
+        card.classList.remove('drag-over-card');
+      });
+      card.addEventListener('drop', e => {
+        e.preventDefault();
+        card.classList.remove('drag-over-card');
+        const dropIdx = parseInt(card.dataset.idx);
+        if (dragIdx !== null && dragIdx !== dropIdx) {
+          const moved = frames.splice(dragIdx, 1)[0];
+          frames.splice(dropIdx, 0, moved);
+          renderFrames();
+        }
+      });
+    });
+  }
+
+  function removeFrame(idx) {
+    URL.revokeObjectURL(frames[idx].url);
+    frames.splice(idx, 1);
+    renderFrames();
+  }
+
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    if (frames.length < 2) return;
+
+    const btn = document.getElementById('generateBtn');
+    btn.disabled = true;
+    btn.textContent = 'GIF 생성 중...';
+
+    const delay = parseInt(document.getElementById('frameDelay').value);
+    const repeatRadio = document.querySelector('input[name="repeat"]:checked').value;
+    let repeat;
+    if (repeatRadio === '0') repeat = 0; // infinite
+    else if (repeatRadio === '1') repeat = -1; // no repeat
+    else repeat = parseInt(document.getElementById('customRepeat').value) || 3;
+
+    const sizeMode = document.querySelector('input[name="sizeMode"]:checked').value;
+
+    // Determine output dimensions
+    let outW, outH;
+    if (sizeMode === 'custom') {
+      outW = parseInt(document.getElementById('customWidth').value) || 480;
+      // Calculate height from first frame aspect ratio
+      const firstImg = frames[0].img;
+      outH = Math.round(outW * (firstImg.naturalHeight / firstImg.naturalWidth));
+    } else {
+      // Use first frame dimensions
+      outW = frames[0].img.naturalWidth;
+      outH = frames[0].img.naturalHeight;
+    }
+
+    const gif = new GIF({
+      workers: 2,
+      quality: 10,
+      width: outW,
+      height: outH,
+      workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js',
+      repeat: repeat
+    });
+
+    const progressWrap = document.getElementById('progressWrap');
+    const progressFill = document.getElementById('progressFill');
+    const progressPercent = document.getElementById('progressPercent');
+    const progressText = document.getElementById('progressText');
+    progressWrap.style.display = 'block';
+    progressFill.style.width = '0%';
+
+    // Add frames
+    frames.forEach(f => {
+      const canvas = document.createElement('canvas');
+      canvas.width = outW;
+      canvas.height = outH;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, outW, outH);
+      // Fit image maintaining aspect ratio
+      const scale = Math.min(outW / f.img.naturalWidth, outH / f.img.naturalHeight);
+      const sw = f.img.naturalWidth * scale;
+      const sh = f.img.naturalHeight * scale;
+      const sx = (outW - sw) / 2;
+      const sy = (outH - sh) / 2;
+      ctx.drawImage(f.img, sx, sy, sw, sh);
+      gif.addFrame(canvas, { delay: delay, copy: true });
+    });
+
+    gif.on('progress', p => {
+      const pct = Math.round(p * 100);
+      progressFill.style.width = pct + '%';
+      progressPercent.textContent = pct + '%';
+      progressText.textContent = 'GIF 인코딩 중...';
+    });
+
+    gif.on('finished', blob => {
+      resultBlob = blob;
+      const url = URL.createObjectURL(blob);
+      document.getElementById('gifPreview').src = url;
+      document.getElementById('resultSubtitle').textContent = `${frames.length}프레임 · ${outW}×${outH} · ${formatSize(blob.size)}`;
+      document.getElementById('resultPanel').style.display = 'block';
+
+      progressFill.style.width = '100%';
+      progressPercent.textContent = '100%';
+      progressText.textContent = '완료!';
+
+      btn.disabled = false;
+      btn.textContent = '🎬 GIF 생성';
+      setTimeout(() => { progressWrap.style.display = 'none'; }, 1500);
+    });
+
+    gif.render();
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'animated.gif';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+
+  // 공유하기
+  (function() {
+    const shareBtn = document.getElementById('shareBtn');
+    if (navigator.share && navigator.canShare) {
+      const testFile = new File(['test'], 'test.png', { type: 'image/png' });
+      if (navigator.canShare({ files: [testFile] })) {
+        shareBtn.style.display = 'inline-flex';
+      }
+    }
+    shareBtn.addEventListener('click', async () => {
+      if (!resultBlob) return;
+      const file = new File([resultBlob], 'animated.gif', { type: 'image/gif' });
+      try { await navigator.share({ files: [file], title: 'animated.gif — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/make-gif.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+    });
+  })();
+</script>
+
+<script src="../js/pwa-install.js"></script>
+</body>
+</html>

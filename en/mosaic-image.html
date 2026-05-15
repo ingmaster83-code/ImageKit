@@ -1,0 +1,633 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KC8RNNKS79"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KC8RNNKS79');
+</script>
+  <meta charset="UTF-8">
+  <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
+  <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mosaic Image Free Online – Pixelate & Blur Part of Photo | WooaImage</title>
+  <meta name="description" content="Apply mosaic or pixelation effect to part of an image for free. Great for hiding faces or sensitive info. Browser-based — no server upload.">
+  <meta name="keywords" content="mosaic image, pixelate image, blur part of photo, image mosaic online free, censor image, hide face in photo">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/en/mosaic-image.html">
+  <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/mosaic-image.html">
+  <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/mosaic-image.html">
+  <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/mosaic-image.html">
+  <meta property="og:title" content="Mosaic & Pixelate Image Free Online | WooaImage">
+  <meta property="og:description" content="Apply mosaic effect to hide faces or sensitive areas in images. Free, no signup, no server.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/en/mosaic-image.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://imagekit.wooahouse.com/og-image.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="../css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Image Mosaic Tool",
+  "url": "https://imagekit.wooahouse.com/en/mosaic-image.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I apply mosaic to only a specific area?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Draw a selection box over the area you want to mosaic and apply the effect."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I adjust the mosaic block size?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can control the pixel block size to make the mosaic more or less obvious."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are images uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All processing happens locally in your browser."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  .mode-btns {
+    display: flex;
+    gap: 10px;
+  }
+  .mode-btn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .mode-btn.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); }
+
+  .canvas-wrap {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    margin-top: 12px;
+    cursor: crosshair;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    line-height: 0;
+  }
+  #mainCanvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  #selectionBox {
+    position: absolute;
+    border: 2px dashed #EF4444;
+    background: rgba(239,68,68,0.1);
+    pointer-events: none;
+    display: none;
+  }
+  .canvas-hint {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    margin-top: 6px;
+    text-align: center;
+  }
+  .apply-selection-btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    display: none;
+  }
+  .apply-selection-btn:hover { opacity: 0.9; }
+</style>
+  <style>
+    .lang-switcher { display:flex; align-items:center; gap:4px; }
+    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
+    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
+    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
+    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">Compress</a>
+      <a href="resize-image.html">Resize</a>
+      <a href="rotate-image.html">Rotate/Flip</a>
+      <a href="crop-image.html">Crop</a>
+      <a href="../index.html">All Tools ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <a href="../mosaic-image.html">KO</a>
+        <span>|</span>
+        <a href="mosaic-image.html" class="active">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">WooaHouse Services</span>
+  <div class="our-sites-links">
+    <a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ WooaImage</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a>
+    <a href="https://wooaaudio.wooahouse.com/" target="_blank" rel="noopener">🎵 WooaAudio</a>
+    <a href="https://wooaviewer.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaViewer</a>
+    <a href="https://wooadev.wooahouse.com/" target="_blank" rel="noopener">🛠️ WooaDev</a>
+  </div>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="../index.html">🏠 Home</a>
+    <span>›</span>
+    <span>이미지 모자이크</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🟫</span>
+    <h1>Mosaic & Pixelate Image – Free Online</h1>
+    <p>이미지 전체 또는 드래그로 선택한 영역에만 모자이크(Pixels화) 효과를 적용하세요.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>Drop your image file here</h3>
+    <p>Upload JPG, PNG, or WebP files</p>
+    <label for="fileInput" class="btn-select">Select Image File</label>
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">Selected File</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">모자이크 설정</div>
+
+    <div class="option-row">
+      <span class="option-label">적용 모드</span>
+      <div class="option-control">
+        <div class="mode-btns">
+          <button class="mode-btn active" id="btnFull" onclick="setMode('full')">🟫 전체 모자이크</button>
+          <button class="mode-btn" id="btnRegion" onclick="setMode('region')">🖱️ 영역 선택 모자이크</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">Block Size</span>
+      <div class="option-control">
+        <input type="range" id="blockSize" min="4" max="60" value="16" step="2" style="margin-bottom:6px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-light);">
+          <span>약함</span>
+          <span id="blockVal" style="font-weight:700; color:var(--primary);">16px</span>
+          <span>강함</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas for region selection -->
+    <div class="option-row" id="canvasRow" style="display:none">
+      <span class="option-label">영역 선택</span>
+      <div class="option-control">
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="mainCanvas"></canvas>
+          <div id="selectionBox"></div>
+        </div>
+        <p class="canvas-hint">드래그하여 모자이크를 적용할 영역을 선택하세요</p>
+        <button class="apply-selection-btn" id="applySelectionBtn">✅ 선택 영역 Apply Mosaic</button>
+      </div>
+    </div>
+
+    <button class="btn-convert" id="applyBtn">🟫 전체 Apply Mosaic</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <span id="progressText">Processing...</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">Apply Mosaic 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div class="preview-image-wrap">
+      <img id="resultImg" src="" alt="Apply Mosaic 이미지" style="max-width:100%;border-radius:8px;">
+    </div>
+
+<div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="1419180025"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+    <div class="download-share-group" style="margin-top:16px;">
+      <button class="btn-download" id="downloadBtn">⬇️ 모자이크 이미지 다운로드</button>
+      <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
+    </div>
+  </div>
+
+    <div class="cross-link-banner">
+    <span>Need to blur the entire image instead?</span>
+    <a href="../image-filter.html">🎨 Image Filter →</a>
+  </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Can I apply mosaic to only a specific area?</h3>
+        <p style="color:#555;margin:0;">Yes. Draw a selection box over the area you want to mosaic and apply the effect.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Can I adjust the mosaic block size?</h3>
+        <p style="color:#555;margin:0;">Yes. You can control the pixel block size to make the mosaic more or less obvious.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Are images uploaded to a server?</h3>
+        <p style="color:#555;margin:0;">No. All processing happens locally in your browser.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="1419180025"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="ad-card" style="margin-top:16px;overflow:hidden;">    
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../about.html">About</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let selectedFile = null;
+  let originalImg  = null;
+  let resultBlob   = null;
+  let mode = 'full';
+
+  // Working canvas (full resolution)
+  const workCanvas = document.createElement('canvas');
+  const workCtx    = workCanvas.getContext('2d');
+
+  const blockSlider = document.getElementById('blockSize');
+  const blockVal    = document.getElementById('blockVal');
+  blockSlider.addEventListener('input', () => { blockVal.textContent = blockSlider.value + 'px'; });
+
+  function setMode(m) {
+    mode = m;
+    document.getElementById('btnFull').classList.toggle('active', m === 'full');
+    document.getElementById('btnRegion').classList.toggle('active', m === 'region');
+    document.getElementById('canvasRow').style.display = m === 'region' ? 'flex' : 'none';
+    document.getElementById('applyBtn').textContent = m === 'full' ? '🟫 전체 Apply Mosaic' : '🟫 Apply Mosaic';
+    document.getElementById('applyBtn').style.display = m === 'full' ? 'block' : 'none';
+    if (m === 'region') drawDisplayCanvas();
+  }
+
+  // Drop zone
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+  });
+  dropZone.addEventListener('click', e => {
+    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
+    document.getElementById('fileInput').click();
+  });
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  function loadFile(file) {
+    if (!file.type.match(/^image\//)) { showError('이미지 파일만 업로드할 수 있습니다.'); return; }
+    hideError();
+    selectedFile = file;
+    resultBlob = null;
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)} · ${file.type}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+
+    const img = new Image();
+    img.onload = () => {
+      originalImg = img;
+      workCanvas.width  = img.naturalWidth;
+      workCanvas.height = img.naturalHeight;
+      workCtx.drawImage(img, 0, 0);
+      document.getElementById('optionsPanel').style.display = 'block';
+      document.getElementById('resultPanel').style.display = 'none';
+      if (mode === 'region') drawDisplayCanvas();
+    };
+    img.src = URL.createObjectURL(file);
+  }
+
+  function clearFile() {
+    selectedFile = null; originalImg = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  // ---------- Display canvas for region selection ----------
+  const mainCanvas = document.getElementById('mainCanvas');
+  const mainCtx    = mainCanvas.getContext('2d');
+  const selBox     = document.getElementById('selectionBox');
+  const canvasWrap = document.getElementById('canvasWrap');
+
+  let isDragging = false, startX = 0, startY = 0, selRect = null;
+  let displayScale = 1;
+
+  function drawDisplayCanvas() {
+    if (!originalImg) return;
+    const maxW = Math.min(700, canvasWrap.parentElement.clientWidth - 24);
+    displayScale = Math.min(1, maxW / originalImg.naturalWidth);
+    mainCanvas.width  = Math.round(originalImg.naturalWidth  * displayScale);
+    mainCanvas.height = Math.round(originalImg.naturalHeight * displayScale);
+    mainCtx.drawImage(workCanvas, 0, 0, mainCanvas.width, mainCanvas.height);
+    selBox.style.display = 'none';
+    selRect = null;
+    document.getElementById('applySelectionBtn').style.display = 'none';
+  }
+
+  mainCanvas.addEventListener('mousedown', e => {
+    const r = mainCanvas.getBoundingClientRect();
+    startX = e.clientX - r.left;
+    startY = e.clientY - r.top;
+    isDragging = true;
+    selBox.style.display = 'block';
+    selBox.style.left   = startX + 'px';
+    selBox.style.top    = startY + 'px';
+    selBox.style.width  = '0px';
+    selBox.style.height = '0px';
+    document.getElementById('applySelectionBtn').style.display = 'none';
+  });
+
+  mainCanvas.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const r = mainCanvas.getBoundingClientRect();
+    const cx = e.clientX - r.left;
+    const cy = e.clientY - r.top;
+    const x = Math.min(startX, cx), y = Math.min(startY, cy);
+    const w = Math.abs(cx - startX), h = Math.abs(cy - startY);
+    selBox.style.left   = x + 'px';
+    selBox.style.top    = y + 'px';
+    selBox.style.width  = w + 'px';
+    selBox.style.height = h + 'px';
+  });
+
+  mainCanvas.addEventListener('mouseup', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const r = mainCanvas.getBoundingClientRect();
+    const cx = e.clientX - r.left;
+    const cy = e.clientY - r.top;
+    const x = Math.min(startX, cx), y = Math.min(startY, cy);
+    const w = Math.abs(cx - startX), h = Math.abs(cy - startY);
+    if (w < 4 || h < 4) { selBox.style.display = 'none'; return; }
+    // Convert to original image coordinates
+    selRect = {
+      x: Math.round(x / displayScale),
+      y: Math.round(y / displayScale),
+      w: Math.round(w / displayScale),
+      h: Math.round(h / displayScale)
+    };
+    document.getElementById('applySelectionBtn').style.display = 'inline-block';
+  });
+
+  // Touch support for mobile
+  mainCanvas.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    const r = mainCanvas.getBoundingClientRect();
+    startX = t.clientX - r.left; startY = t.clientY - r.top;
+    isDragging = true;
+    selBox.style.display = 'block';
+    selBox.style.left = startX + 'px'; selBox.style.top = startY + 'px';
+    selBox.style.width = '0'; selBox.style.height = '0';
+    e.preventDefault();
+  }, { passive: false });
+  mainCanvas.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    const r = mainCanvas.getBoundingClientRect();
+    const cx = t.clientX - r.left, cy = t.clientY - r.top;
+    selBox.style.left   = Math.min(startX,cx) + 'px';
+    selBox.style.top    = Math.min(startY,cy) + 'px';
+    selBox.style.width  = Math.abs(cx-startX) + 'px';
+    selBox.style.height = Math.abs(cy-startY) + 'px';
+    e.preventDefault();
+  }, { passive: false });
+  mainCanvas.addEventListener('touchend', e => {
+    const t = e.changedTouches[0];
+    const r = mainCanvas.getBoundingClientRect();
+    const cx = t.clientX - r.left, cy = t.clientY - r.top;
+    isDragging = false;
+    const x = Math.min(startX,cx), y = Math.min(startY,cy);
+    const w = Math.abs(cx-startX), h = Math.abs(cy-startY);
+    if (w < 4 || h < 4) return;
+    selRect = { x: Math.round(x/displayScale), y: Math.round(y/displayScale), w: Math.round(w/displayScale), h: Math.round(h/displayScale) };
+    document.getElementById('applySelectionBtn').style.display = 'inline-block';
+  });
+
+  // Apply mosaic to selected region
+  document.getElementById('applySelectionBtn').addEventListener('click', () => {
+    if (!selRect) return;
+    const block = parseInt(blockSlider.value);
+    applyMosaicToRect(workCtx, selRect.x, selRect.y, selRect.w, selRect.h, block);
+    drawDisplayCanvas();
+    document.getElementById('applySelectionBtn').style.display = 'none';
+    // Show apply/download options
+    finalizeResult();
+  });
+
+  // Apply mosaic to entire image
+  document.getElementById('applyBtn').addEventListener('click', () => {
+    if (!originalImg) return;
+    // Reset workCanvas to original
+    workCtx.drawImage(originalImg, 0, 0);
+    const block = parseInt(blockSlider.value);
+    applyMosaicToRect(workCtx, 0, 0, workCanvas.width, workCanvas.height, block);
+    if (mode === 'region') drawDisplayCanvas();
+    finalizeResult();
+  });
+
+  function applyMosaicToRect(ctx, rx, ry, rw, rh, block) {
+    // Clamp to canvas bounds
+    rx = Math.max(0, rx); ry = Math.max(0, ry);
+    rw = Math.min(rw, ctx.canvas.width  - rx);
+    rh = Math.min(rh, ctx.canvas.height - ry);
+    for (let y = ry; y < ry + rh; y += block) {
+      for (let x = rx; x < rx + rw; x += block) {
+        const bw = Math.min(block, rx + rw - x);
+        const bh = Math.min(block, ry + rh - y);
+        const data = ctx.getImageData(x, y, bw, bh).data;
+        let r=0, g=0, b=0, cnt=0;
+        for (let i = 0; i < data.length; i += 4) { r+=data[i]; g+=data[i+1]; b+=data[i+2]; cnt++; }
+        r=Math.round(r/cnt); g=Math.round(g/cnt); b=Math.round(b/cnt);
+        ctx.fillStyle = `rgb(${r},${g},${b})`;
+        ctx.fillRect(x, y, bw, bh);
+      }
+    }
+  }
+
+  function finalizeResult() {
+    workCanvas.toBlob(blob => {
+      resultBlob = blob;
+      const url = URL.createObjectURL(blob);
+      document.getElementById('resultImg').src = url;
+      document.getElementById('resultSubtitle').textContent =
+        `${workCanvas.width} × ${workCanvas.height}px · ${formatSize(blob.size)}`;
+      const panel = document.getElementById('resultPanel');
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth' });
+    }, 'image/jpeg', 0.92);
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_mosaic.jpg';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+
+  (function() {
+    const shareBtn = document.getElementById('shareBtn');
+    if (navigator.share && navigator.canShare) {
+      const testFile = new File(['test'], 'test.png', { type: 'image/png' });
+      if (navigator.canShare({ files: [testFile] })) shareBtn.style.display = 'inline-flex';
+    }
+    shareBtn.addEventListener('click', async () => {
+      if (!resultBlob) return;
+      const mime = resultBlob.type || 'image/jpeg';
+      const extMap = {'image/jpeg':'.jpg','image/png':'.png','image/webp':'.webp'};
+      const ext = extMap[mime] || '.jpg';
+      const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_mosaic' + ext : 'mosaic' + ext;
+      const file = new File([resultBlob], fname, { type: mime });
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/mosaic-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+    });
+  })();
+</script>
+
+<script src="../js/pwa-install.js"></script>
+</body>
+</html>

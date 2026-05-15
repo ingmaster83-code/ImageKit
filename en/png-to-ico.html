@@ -1,0 +1,552 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KC8RNNKS79"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KC8RNNKS79');
+</script>
+  <meta charset="UTF-8">
+  <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
+  <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PNG to ICO Converter Free Online – Create Favicon from PNG | WooaImage</title>
+  <meta name="description" content="Convert PNG images to ICO format for free. Create favicons and app icons in multiple sizes (16x16 to 256x256). Browser-based, no upload.">
+  <meta name="keywords" content="PNG to ICO, create favicon, favicon generator, PNG to icon, ICO converter online free">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/en/png-to-ico.html">
+  <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/png-to-ico.html">
+  <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/png-to-ico.html">
+  <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/png-to-ico.html">
+  <meta property="og:title" content="PNG to ICO Converter Free – Create Favicon Online | WooaImage">
+  <meta property="og:description" content="Convert PNG to ICO favicon. Multiple icon sizes supported. Free, no signup, no server upload.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/en/png-to-ico.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://imagekit.wooahouse.com/og-image.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="../css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PNG to ICO Converter",
+  "url": "https://imagekit.wooahouse.com/en/png-to-ico.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What ICO sizes are generated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common sizes like 16x16, 32x32, 48x48, and 256x256 are generated for maximum compatibility."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use the resulting ICO as a website favicon?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The generated ICO file can be used directly as a website favicon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are files uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All conversion runs locally in your browser."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  .size-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .size-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .size-option:hover { border-color: var(--primary); }
+  .size-option input[type="checkbox"] { accent-color: var(--primary); width:16px; height:16px; }
+  .size-option.checked { border-color: var(--primary); background: #eff6ff; color: var(--primary); }
+  .preview-thumbs {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    align-items: flex-end;
+  }
+  .preview-thumb {
+    text-align: center;
+  }
+  .preview-thumb span {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .preview-thumb canvas {
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    image-rendering: pixelated;
+  }
+  .info-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    color: #1e40af;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+</style>
+  <style>
+    .lang-switcher { display:flex; align-items:center; gap:4px; }
+    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
+    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
+    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
+    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">Compress</a>
+      <a href="resize-image.html">Resize</a>
+      <a href="rotate-image.html">Rotate/Flip</a>
+      <a href="crop-image.html">Crop</a>
+      <a href="../index.html">All Tools ›</a>
+    </nav>
+    <div class="header-right">
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <a href="../png-to-ico.html">KO</a>
+        <span>|</span>
+        <a href="png-to-ico.html" class="active">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar">
+  <span class="our-sites-label">WooaHouse Services</span>
+  <div class="our-sites-links">
+    <a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a>
+    <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a>
+    <a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener">🖼️ WooaImage</a>
+    <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a>
+    <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a>
+    <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a>
+    <a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a>
+    <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a>
+    <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a>
+    <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a>
+    <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a>
+    <a href="https://wooaaudio.wooahouse.com/" target="_blank" rel="noopener">🎵 WooaAudio</a>
+    <a href="https://wooaviewer.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaViewer</a>
+    <a href="https://wooadev.wooahouse.com/" target="_blank" rel="noopener">🛠️ WooaDev</a>
+  </div>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="../index.html">🏠 Home</a>
+    <span>›</span>
+    <span>PNG → ICO 변환</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🏷️</span>
+    <h1>PNG to ICO Converter – Create Favicon Free Online</h1>
+    <p>PNG 이미지를 ICO 파일로 변환해 웹사이트 파비콘이나 앱 아이콘으로 사용하세요.</p>
+  </div>
+
+  <div class="info-box">
+    ℹ️ <strong>파비콘 팁:</strong> 웹사이트 파비콘은 <strong>16×16, 32×32</strong>를 기본으로 포함하는 것을 권장합니다. 정사각형 이미지일수록 최상의 결과를 얻을 수 있습니다.
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>Drop your image file here</h3>
+    <p>PNG, JPG 파일을 업로드하세요 (정사각형 권장)</p>
+    <label for="fileInput" class="btn-select">Select Image File</label>
+    <input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg,image/webp" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">Selected File</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">ICO 크기 설정</div>
+    <div class="option-row">
+      <span class="option-label">포함할 크기 선택</span>
+      <div class="option-control">
+        <div class="size-options">
+          <label class="size-option checked" id="lbl16">
+            <input type="checkbox" value="16" checked> 16×16
+          </label>
+          <label class="size-option checked" id="lbl32">
+            <input type="checkbox" value="32" checked> 32×32
+          </label>
+          <label class="size-option" id="lbl48">
+            <input type="checkbox" value="48"> 48×48
+          </label>
+          <label class="size-option" id="lbl64">
+            <input type="checkbox" value="64"> 64×64
+          </label>
+          <label class="size-option" id="lbl128">
+            <input type="checkbox" value="128"> 128×128
+          </label>
+          <label class="size-option" id="lbl256">
+            <input type="checkbox" value="256"> 256×256
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="option-row" style="margin-top:16px;">
+      <span class="option-label">미리보기</span>
+      <div class="option-control">
+        <div class="preview-thumbs" id="previewThumbs"></div>
+      </div>
+    </div>
+    <button class="btn-convert" id="convertBtn">🏷️ ICO 변환 시작</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <span id="progressText">Processing...</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">ICO 변환 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+
+<div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6464921081676309"
+     data-ad-slot="1419180025"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ ICO 파일 다운로드</button>
+  </div>
+
+    <div class="cross-link-banner">
+    <span>Need to convert ICO back to PNG?</span>
+    <a href="../jpg-to-png.html">🖼️ Back to PNG →</a>
+  </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. What ICO sizes are generated?</h3>
+        <p style="color:#555;margin:0;">Common sizes like 16x16, 32x32, 48x48, and 256x256 are generated for maximum compatibility.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Can I use the resulting ICO as a website favicon?</h3>
+        <p style="color:#555;margin:0;">Yes. The generated ICO file can be used directly as a website favicon.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Are files uploaded to a server?</h3>
+        <p style="color:#555;margin:0;">No. All conversion runs locally in your browser.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="1419180025"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="ad-card" style="margin-top:16px;overflow:hidden;">    
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../about.html">About</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let selectedFile = null;
+  let loadedImg   = null;
+  let resultBlob  = null;
+
+  const SIZES = [16, 32, 48, 64, 128, 256];
+
+  // Checkbox styling
+  document.querySelectorAll('.size-option input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      cb.closest('.size-option').classList.toggle('checked', cb.checked);
+      updatePreviews();
+    });
+  });
+
+  function getSelectedSizes() {
+    return SIZES.filter(s => {
+      const cb = document.querySelector(`.size-option input[value="${s}"]`);
+      return cb && cb.checked;
+    });
+  }
+
+  function updatePreviews() {
+    if (!loadedImg) return;
+    const sizes = getSelectedSizes();
+    const wrap = document.getElementById('previewThumbs');
+    wrap.innerHTML = '';
+    sizes.forEach(sz => {
+      const canvas = document.createElement('canvas');
+      canvas.width = sz; canvas.height = sz;
+      canvas.style.width  = Math.min(sz, 64) + 'px';
+      canvas.style.height = Math.min(sz, 64) + 'px';
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(loadedImg, 0, 0, sz, sz);
+      const div = document.createElement('div');
+      div.className = 'preview-thumb';
+      div.appendChild(canvas);
+      const label = document.createElement('span');
+      label.textContent = `${sz}×${sz}`;
+      div.appendChild(label);
+      wrap.appendChild(div);
+    });
+  }
+
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+  });
+  dropZone.addEventListener('click', e => {
+    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
+    document.getElementById('fileInput').click();
+  });
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  function loadFile(file) {
+    if (!file.type.match(/^image\//)) {
+      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+    }
+    hideError();
+    selectedFile = file;
+    resultBlob = null;
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)} · ${file.type}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+
+    const img = new Image();
+    img.onload = () => {
+      loadedImg = img;
+      document.getElementById('optionsPanel').style.display = 'block';
+      updatePreviews();
+    };
+    img.src = URL.createObjectURL(file);
+  }
+
+  function clearFile() {
+    selectedFile = null; loadedImg = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  document.getElementById('convertBtn').addEventListener('click', async () => {
+    if (!loadedImg) return;
+    const sizes = getSelectedSizes();
+    if (sizes.length === 0) { showError('크기를 하나 이상 선택해 주세요.'); return; }
+
+    const btn = document.getElementById('convertBtn');
+    btn.disabled = true; btn.textContent = '⏳ Converting...';
+    hideError();
+    document.getElementById('progressWrap').style.display = 'block';
+    document.getElementById('progressFill').style.width = '20%';
+    document.getElementById('progressText').textContent = '이미지 준비 중...';
+
+    try {
+      // Render each size as PNG into memory
+      const pngDataList = [];
+      for (let i = 0; i < sizes.length; i++) {
+        const sz = sizes[i];
+        const canvas = document.createElement('canvas');
+        canvas.width = sz; canvas.height = sz;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(loadedImg, 0, 0, sz, sz);
+        const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+        const buf = await blob.arrayBuffer();
+        pngDataList.push({ size: sz, data: new Uint8Array(buf) });
+        document.getElementById('progressFill').style.width = `${20 + (i+1)/sizes.length * 60}%`;
+      }
+
+      document.getElementById('progressText').textContent = 'ICO 파일 생성 중...';
+      document.getElementById('progressFill').style.width = '90%';
+
+      const icoBlob = buildIco(pngDataList);
+      resultBlob = icoBlob;
+
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('progressText').textContent = '완료!';
+      document.getElementById('progressWrap').style.display = 'none';
+
+      document.getElementById('resultSubtitle').textContent =
+        `${sizes.join(', ')}px 크기 포함 · ${formatSize(icoBlob.size)}`;
+
+      const panel = document.getElementById('resultPanel');
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth' });
+
+    } catch(err) {
+      showError('변환 중 오류가 발생했습니다: ' + err.message);
+      document.getElementById('progressWrap').style.display = 'none';
+    }
+    btn.disabled = false; btn.textContent = '🏷️ ICO 변환 시작';
+  });
+
+  // Build ICO binary with embedded PNG images
+  function buildIco(images) {
+    const count = images.length;
+    // ICO header: 6 bytes, each entry: 16 bytes
+    const headerSize = 6 + count * 16;
+    let totalSize = headerSize;
+    images.forEach(img => { totalSize += img.data.length; });
+
+    const buf = new ArrayBuffer(totalSize);
+    const view = new DataView(buf);
+    const bytes = new Uint8Array(buf);
+
+    // ICONDIR
+    view.setUint16(0, 0, true);  // reserved
+    view.setUint16(2, 1, true);  // type: ICO
+    view.setUint16(4, count, true);
+
+    let offset = headerSize;
+    images.forEach((img, i) => {
+      const sz = img.size;
+      const entryOffset = 6 + i * 16;
+      view.setUint8(entryOffset,     sz >= 256 ? 0 : sz); // width  (0=256)
+      view.setUint8(entryOffset + 1, sz >= 256 ? 0 : sz); // height
+      view.setUint8(entryOffset + 2, 0);   // color count
+      view.setUint8(entryOffset + 3, 0);   // reserved
+      view.setUint16(entryOffset + 4, 1, true);  // color planes
+      view.setUint16(entryOffset + 6, 32, true); // bits per pixel
+      view.setUint32(entryOffset + 8,  img.data.length, true); // size
+      view.setUint32(entryOffset + 12, offset, true);           // file offset
+      bytes.set(img.data, offset);
+      offset += img.data.length;
+    });
+
+    return new Blob([buf], { type: 'image/x-icon' });
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '.ico';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+</script>
+
+<script src="../js/pwa-install.js"></script>
+</body>
+</html>
