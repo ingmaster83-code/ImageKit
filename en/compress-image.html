@@ -102,7 +102,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="compress-image.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/compress-image.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -141,13 +146,13 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>Compress</span>
+    <span>Compress Image</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🗜️</span>
     <h1>Compress Image – Free Online</h1>
-    <p>JPG/PNG 이미지 용량을 줄여 저장 및 공유를 쉽게 합니다.</p>
+    <p>Upload a JPG or PNG to reduce file size. Adjust quality with the slider and compare before/after size. Everything runs in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -214,7 +219,7 @@
       </div>
     </div>
     <div class="preview-image-wrap" id="previewWrap">
-      <img id="previewImg" src="" alt="압축된 이미지 미리보기">
+      <img id="previewImg" src="" alt="Compressed Image Preview">
     </div>
     
 <div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
@@ -312,7 +317,7 @@
 
   function loadFile(file) {
     if (!file.type.match(/^image\/(jpeg|png)/)) {
-      showError('JPG 또는 PNG 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select a JPG or PNG file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -351,7 +356,7 @@
     hideError();
     document.getElementById('progressWrap').style.display = 'block';
     document.getElementById('progressFill').style.width = '30%';
-    document.getElementById('progressText').textContent = '이미지 로딩 중...';
+    document.getElementById('progressText').textContent = 'Loading image...';
 
     try {
       const img = await loadImage(selectedFile);
@@ -374,7 +379,7 @@
       resultMime = 'image/jpeg';
 
       document.getElementById('progressFill').style.width = '100%';
-      document.getElementById('progressText').textContent = '완료!';
+      document.getElementById('progressText').textContent = 'Done!';
       document.getElementById('progressWrap').style.display = 'none';
 
       const origSize = selectedFile.size;
@@ -395,7 +400,7 @@
       const url = URL.createObjectURL(blob);
       document.getElementById('previewImg').src = url;
       document.getElementById('resultSubtitle').textContent =
-        compSize < origSize ? `${formatSize(origSize)} → ${formatSize(compSize)} (${ratio}% 감소)` : '이미 최적화된 이미지입니다.';
+        compSize < origSize ? `${formatSize(origSize)} → ${formatSize(compSize)} (${ratio}% smaller)` : 'Image is already optimized.';
 
       const panel = document.getElementById('resultPanel');
       panel.style.display = 'block';
@@ -436,7 +441,7 @@
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
 
-  // 공유하기
+  // share
   (function() {
     const shareBtn = document.getElementById('shareBtn');
     if (navigator.share && navigator.canShare) {
@@ -451,8 +456,8 @@
       const mime = resultBlob.type || 'image/jpeg';
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_compressed' + ext : 'compressed' + ext;
       const file = new File([resultBlob], fname, { type: mime });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/compress-image.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/compress-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

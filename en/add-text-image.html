@@ -122,8 +122,7 @@
     transition: all 0.15s;
   }
   .align-btn.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); }
-</style>
-  <style>
+
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -145,7 +144,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="add-text-image.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/add-text-image.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -184,13 +188,13 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 텍스트 추가</span>
+    <span>Add Text to Image</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">✍️</span>
     <h1>Add Text to Image – Free Online</h1>
-    <p>이미지에 원하는 텍스트를 자유롭게 추가하세요. 폰트·크기·색상·위치·투명도를 실시간으로 설정합니다.</p>
+    <p>Upload an image and overlay custom text. Adjust font, size, color, and position. All processing runs in your browser — no server upload.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -207,29 +211,29 @@
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
-    <div class="options-title">텍스트 설정</div>
+    <div class="options-title">Text Settings</div>
 
     <div class="option-row">
-      <span class="option-label">텍스트 내용</span>
+      <span class="option-label">Text Content</span>
       <div class="option-control">
-        <textarea id="textInput" rows="3" placeholder="여기에 입력하세요" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:0.95rem;resize:vertical;"></textarea>
+        <textarea id="textInput" rows="3" placeholder="Enter text here" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:0.95rem;resize:vertical;"></textarea>
       </div>
     </div>
 
     <div class="option-row">
-      <span class="option-label">폰트</span>
+      <span class="option-label">Font</span>
       <div class="option-control">
         <select id="fontFamily" style="width:100%;padding:8px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:0.9rem;">
           <option value="Arial, sans-serif">Arial</option>
           <option value="'Times New Roman', serif">Times New Roman</option>
           <option value="Georgia, serif">Georgia</option>
           <option value="Verdana, sans-serif">Verdana</option>
-          <option value="Impact, sans-serif">Impact (굵게)</option>
+          <option value="Impact, sans-serif">Impact (Bold)</option>
           <option value="'Courier New', monospace">Courier New</option>
           <option value="'Noto Sans KR', sans-serif">Noto Sans KR</option>
-          <option value="'Malgun Gothic', sans-serif">맑은 고딕</option>
-          <option value="'Dotum', sans-serif">돋움</option>
-          <option value="'Batang', serif">바탕</option>
+          <option value="'Malgun Gothic', sans-serif">Malgun Gothic</option>
+          <option value="'Dotum', sans-serif">Dotum</option>
+          <option value="'Batang', serif">Batang</option>
         </select>
       </div>
     </div>
@@ -239,15 +243,15 @@
       <div class="option-control">
         <input type="range" id="fontSize" min="10" max="200" value="48" style="margin-bottom:6px;">
         <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-light);">
-          <span>작게</span>
+          <span>Small</span>
           <span id="fontSizeVal" style="font-weight:700;color:var(--primary);">48px</span>
-          <span>크게</span>
+          <span>Large</span>
         </div>
       </div>
     </div>
 
     <div class="option-row">
-      <span class="option-label">글자 색상</span>
+      <span class="option-label">Text Color</span>
       <div class="option-control">
         <div class="color-row">
           <div class="color-swatch" style="background:#ffffff;">
@@ -271,50 +275,50 @@
       <div class="option-control">
         <input type="range" id="textOpacity" min="10" max="100" value="100" style="margin-bottom:6px;">
         <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-light);">
-          <span>투명</span>
+          <span>Transparent</span>
           <span id="textOpacityVal" style="font-weight:700;color:var(--primary);">100%</span>
-          <span>불투명</span>
+          <span>Opaque</span>
         </div>
       </div>
     </div>
 
     <div class="option-row">
-      <span class="option-label">정렬</span>
+      <span class="option-label">Alignment</span>
       <div class="option-control">
         <div class="align-btns">
-          <button class="align-btn active" id="alignLeft"   onclick="setAlign('left')">← 왼쪽</button>
-          <button class="align-btn"        id="alignCenter" onclick="setAlign('center')">가운데</button>
-          <button class="align-btn"        id="alignRight"  onclick="setAlign('right')">오른쪽 →</button>
+          <button class="align-btn active" id="alignLeft"   onclick="setAlign('left')">← Left</button>
+          <button class="align-btn"        id="alignCenter" onclick="setAlign('center')">Center</button>
+          <button class="align-btn"        id="alignRight"  onclick="setAlign('right')">Right →</button>
         </div>
       </div>
     </div>
 
     <div class="option-row">
-      <span class="option-label">수평 위치</span>
+      <span class="option-label">Horizontal Position</span>
       <div class="option-control">
         <input type="range" id="posX" min="0" max="100" value="50" style="margin-bottom:6px;">
         <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-light);">
-          <span>왼쪽</span>
+          <span>Left</span>
           <span id="posXVal" style="font-weight:700;color:var(--primary);">50%</span>
-          <span>오른쪽</span>
+          <span>Right</span>
         </div>
       </div>
     </div>
 
     <div class="option-row">
-      <span class="option-label">수직 위치</span>
+      <span class="option-label">Vertical Position</span>
       <div class="option-control">
         <input type="range" id="posY" min="0" max="100" value="90" style="margin-bottom:6px;">
         <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-light);">
-          <span>위</span>
+          <span>Top</span>
           <span id="posYVal" style="font-weight:700;color:var(--primary);">90%</span>
-          <span>아래</span>
+          <span>Bottom</span>
         </div>
       </div>
     </div>
 
     <div class="option-row">
-      <span class="option-label">미리보기</span>
+      <span class="option-label">Preview</span>
       <div class="option-control">
         <div class="text-preview-wrap">
           <canvas id="previewCanvas"></canvas>
@@ -322,7 +326,7 @@
       </div>
     </div>
 
-    <button class="btn-convert" id="applyBtn">✍️ 텍스트 적용 & 저장 준비</button>
+    <button class="btn-convert" id="applyBtn">✍️ Apply Text & Prepare Download</button>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
@@ -331,7 +335,7 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">텍스트 추가 완료!</div>
+        <div class="result-title">Text Added!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
@@ -504,7 +508,7 @@
   });
 
   function loadFile(file) {
-    if (!file.type.match(/^image\//)) { showError('이미지 파일만 업로드할 수 있습니다.'); return; }
+    if (!file.type.match(/^image\//)) { showError('Please select an image file.'); return; }
     hideError();
     selectedFile = file;
     resultBlob = null;
@@ -570,7 +574,7 @@
     } catch(err) {
       showError('Processing failed: ' + err.message);
     }
-    btn.disabled = false; btn.textContent = '✍️ 텍스트 적용 & 저장 준비';
+    btn.disabled = false; btn.textContent = '✍️ Apply Text & Prepare Download';
   });
 
   document.getElementById('downloadBtn').addEventListener('click', () => {
@@ -604,8 +608,8 @@
       const ext = mime === 'image/png' ? '.png' : '.jpg';
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_text' + ext : 'text_image' + ext;
       const file = new File([resultBlob], fname, { type: mime });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/add-text-image.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/add-text-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

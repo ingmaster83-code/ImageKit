@@ -101,6 +101,7 @@
       background: var(--primary-light);
     }
     .pos-btn:hover { border-color: var(--primary); }
+  
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -122,7 +123,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="watermark-image.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/watermark-image.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -161,13 +167,13 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>워터마크 추가</span>
+    <span>Watermark Image</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">💧</span>
     <h1>Add Watermark to Image – Free Online</h1>
-    <p>이미지에 텍스트 워터마크를 삽입합니다. 위치, 크기, 투명도, 색상을 자유롭게 설정하세요.</p>
+    <p>Upload an image and add a custom text watermark. Set font, size, color, opacity, and position. Everything runs in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -194,7 +200,7 @@
     </div>
 
     <div class="option-row">
-      <span class="option-label">글자 색상</span>
+      <span class="option-label">Text Color</span>
       <div class="option-control" style="display:flex; align-items:center; gap:10px;">
         <input type="color" id="wmColor" value="#ffffff" style="width:48px; height:36px; border:1px solid var(--border); border-radius:6px; cursor:pointer;">
         <span id="wmColorHex" style="font-size:0.9rem; color:var(--text-light);">#ffffff</span>
@@ -202,32 +208,32 @@
     </div>
 
     <div class="option-row">
-      <span class="option-label">글자 크기: <strong id="fontSizeVal">40</strong>px</span>
+      <span class="option-label">Font Size: <strong id="fontSizeVal">40</strong>px</span>
       <div class="option-control" style="flex:1; max-width:320px;">
         <input type="range" id="fontSize" min="10" max="200" value="40" style="width:100%;">
       </div>
     </div>
 
     <div class="option-row">
-      <span class="option-label">투명도: <strong id="opacityVal">70</strong>%</span>
+      <span class="option-label">Opacity: <strong id="opacityVal">70</strong>%</span>
       <div class="option-control" style="flex:1; max-width:320px;">
         <input type="range" id="opacity" min="5" max="100" value="70" style="width:100%;">
       </div>
     </div>
 
     <div class="option-row" style="align-items:flex-start;">
-      <span class="option-label" style="padding-top:4px;">위치</span>
+      <span class="option-label" style="padding-top:4px;">Position</span>
       <div class="option-control">
         <div class="position-grid" id="positionGrid">
-          <button class="pos-btn" data-pos="top-left" title="좌상">↖</button>
-          <button class="pos-btn" data-pos="top-center" title="중상">↑</button>
-          <button class="pos-btn" data-pos="top-right" title="우상">↗</button>
-          <button class="pos-btn" data-pos="middle-left" title="좌중">←</button>
-          <button class="pos-btn" data-pos="center" title="중앙">✛</button>
-          <button class="pos-btn" data-pos="middle-right" title="우중">→</button>
-          <button class="pos-btn" data-pos="bottom-left" title="좌하">↙</button>
-          <button class="pos-btn" data-pos="bottom-center" title="중하">↓</button>
-          <button class="pos-btn active" data-pos="bottom-right" title="우하">↘</button>
+          <button class="pos-btn" data-pos="top-left" title="Top Left">↖</button>
+          <button class="pos-btn" data-pos="top-center" title="Top Center">↑</button>
+          <button class="pos-btn" data-pos="top-right" title="Top Right">↗</button>
+          <button class="pos-btn" data-pos="middle-left" title="Middle Left">←</button>
+          <button class="pos-btn" data-pos="center" title="Center">✛</button>
+          <button class="pos-btn" data-pos="middle-right" title="Middle Right">→</button>
+          <button class="pos-btn" data-pos="bottom-left" title="Bottom Left">↙</button>
+          <button class="pos-btn" data-pos="bottom-center" title="Bottom Center">↓</button>
+          <button class="pos-btn active" data-pos="bottom-right" title="Bottom Right">↘</button>
         </div>
       </div>
     </div>
@@ -248,7 +254,7 @@
     </div>
 
     <div class="download-share-group">
-      <button class="btn-convert" id="downloadBtn">⬇️ 워터마크 이미지 다운로드</button>
+      <button class="btn-convert" id="downloadBtn">⬇️ Download Watermarked Image</button>
       <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
     </div>
   </div>
@@ -345,7 +351,7 @@
 
   async function loadFile(file) {
     if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select an image file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -471,8 +477,8 @@
       const ext = extMap[format] || '.jpg';
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_watermarked' + ext : 'watermarked' + ext;
       const file = new File([blob], fname, { type: format });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/watermark-image.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/watermark-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

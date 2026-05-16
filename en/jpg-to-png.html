@@ -102,7 +102,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="jpg-to-png.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/jpg-to-png.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -141,19 +146,19 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>JPG → PNG 변환</span>
+    <span>JPG → PNG</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🔄</span>
     <h1>JPG to PNG Converter – Free Online</h1>
-    <p>JPG 이미지를 투명 배경 지원 PNG 포맷으로 변환합니다.</p>
+    <p>Upload a JPG or JPEG image and convert it to PNG format. Transparent background is supported. All processing happens in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>JPG Drop your file here</h3>
-    <p>JPG, JPEG 파일을 업로드하세요</p>
+    <p>Upload a JPG or JPEG file</p>
     <label for="fileInput" class="btn-select">JPG Select File</label>
     <input type="file" id="fileInput" accept="image/jpeg,image/jpg,.jpg,.jpeg" style="display:none">
   </div>
@@ -166,9 +171,9 @@
   <div id="optionsPanel" class="options-panel" style="display:none">
     <div class="options-title">Conversion Settings</div>
     <div class="notice-box">
-      ℹ️ JPG는 투명도를 지원하지 않습니다. PNG로 변환하면 이후 편집에서 투명 영역을 활용할 수 있습니다.
+      ℹ️ JPG does not support transparency. Converting to PNG lets you use transparent areas in future edits.
     </div>
-    <button class="btn-convert" id="convertBtn">🔄 PNG로 변환</button>
+    <button class="btn-convert" id="convertBtn">🔄 Convert to PNG</button>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
@@ -182,7 +187,7 @@
       </div>
     </div>
     <div class="preview-image-wrap">
-      <img id="previewImg" src="" alt="변환된 PNG 이미지 미리보기">
+      <img id="previewImg" src="" alt="Converted PNG Preview">
     </div>
     
 <div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
@@ -195,13 +200,13 @@
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 <div class="download-share-group">
-  <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ PNG 다운로드</button>
+  <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ Download PNG</button>
   <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
 </div>
   </div>
 
   <div class="cross-link-tip">
-    반대로 변환하고 싶으신가요? <a href="png-to-jpg.html">PNG → JPG 변환 →</a>
+    Want to convert the other way? <a href="../png-to-jpg.html">PNG → JPG →</a>
   </div>
 
   <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
@@ -274,7 +279,7 @@
 
   function loadFile(file) {
     if (!file.type.match(/^image\/(jpeg|jpg)/) && !file.name.match(/\.(jpg|jpeg)$/i)) {
-      showError('JPG/JPEG 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select a JPG or JPEG file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -331,7 +336,7 @@
     } catch(err) {
       showError('Processing failed: ' + err.message);
     }
-    btn.disabled = false; btn.textContent = '🔄 PNG로 변환';
+    btn.disabled = false; btn.textContent = '🔄 Convert to PNG';
   });
 
   document.getElementById('downloadBtn').addEventListener('click', () => {
@@ -360,7 +365,7 @@
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
 
-  // 공유하기
+  // share
   (function() {
     const shareBtn = document.getElementById('shareBtn');
     if (navigator.share && navigator.canShare) {
@@ -373,8 +378,8 @@
       if (!resultBlob) return;
       const fname = selectedFile ? selectedFile.name.replace(/\.(jpg|jpeg)$/i, '') + '.png' : 'converted.png';
       const file = new File([resultBlob], fname, { type: 'image/png' });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/jpg-to-png.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/jpg-to-png.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

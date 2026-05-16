@@ -218,6 +218,7 @@
     .tab-btn:hover { color: var(--primary); }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
+  
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -233,12 +234,17 @@
     <nav>
       <a href="jpg-to-png.html">JPG→PNG</a>
       <a href="compress-image.html">Compress</a>
-      <a href="ocr-image.html">이미지 OCR</a>
+      <a href="../ocr-image.html">Image OCR</a>
       <a href="ocr-pdf.html">PDF OCR</a>
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="ocr-pdf.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/ocr-pdf.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -277,34 +283,34 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>PDF 텍스트 추출 (OCR)</span>
+    <span>PDF OCR</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">📄</span>
     <h1>PDF OCR – Extract Text from Scanned PDF Free</h1>
-    <p>스캔된 PDF나 이미지로 된 PDF에서 텍스트를 인식하여 추출합니다.<br>한국어, 영어, 한영 혼용을 지원합니다.</p>
+    <p>Extract text from scanned PDFs or image-based PDFs.<br>Supports Korean, English, and mixed text.</p>
   </div>
 
   <div class="ocr-warning" style="margin-bottom:20px;">
-    <strong>💡 일반 PDF vs 스캔 PDF</strong><br>
-    • <strong>일반 PDF(텍스트 선택 가능)</strong> → <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener" style="color:#92400E;">PDFKit의 PDF→텍스트 변환</a>이 더 빠르고 정확합니다<br>
-    • <strong>스캔 PDF(이미지로 구성된 PDF)</strong> → 이 도구가 OCR로 텍스트를 인식합니다
+    <strong>💡 Regular PDF vs Scanned PDF</strong><br>
+    • <strong>Regular PDF (text selectable)</strong> → <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener" style="color:#92400E;">PDFKit PDF→Text</a> for faster, more accurate results<br>
+    • <strong>Scanned PDF (image-based)</strong> → This tool uses OCR to recognize text
   </div>
 
   <div class="panel">
-    <div class="panel-title">언어 선택</div>
+    <div class="panel-title">Language</div>
     <div class="lang-btns">
-      <button class="lang-btn active" data-lang="kor">🇰🇷 한국어</button>
-      <button class="lang-btn" data-lang="eng">🇺🇸 영어</button>
-      <button class="lang-btn" data-lang="kor+eng">🌐 한국어 + 영어</button>
+      <button class="lang-btn active" data-lang="kor">🇰🇷 Korean</button>
+      <button class="lang-btn" data-lang="eng">🇺🇸 English</button>
+      <button class="lang-btn" data-lang="kor+eng">🌐 Korean + English</button>
     </div>
   </div>
 
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">📄</span>
     <h3>PDF Drop your file here</h3>
-    <p>스캔 PDF 또는 이미지로 구성된 PDF 파일</p>
+    <p>Scanned PDF or image-based PDF file</p>
     <label for="fileInput" class="btn-select">PDF Select File</label>
     <input type="file" id="fileInput" accept=".pdf,application/pdf" style="display:none">
   </div>
@@ -313,38 +319,38 @@
     <span class="pdf-info-icon">📄</span>
     <div class="pdf-info-text">
       <strong id="pdfFileName">File Name</strong>
-      <span id="pdfFileMeta">크기 · 페이지 수 로딩 중...</span>
+      <span id="pdfFileMeta">Loading size & page count...</span>
     </div>
-    <button class="btn-copy" onclick="clearFile()" style="margin-left:auto;">✕ 변경</button>
+    <button class="btn-copy" onclick="clearFile()" style="margin-left:auto;">✕ Change</button>
   </div>
 
   <div id="progressPanel" style="display:none" class="panel">
-    <div class="panel-title" id="progressTitle">PDF 분석 중…</div>
+    <div class="panel-title" id="progressTitle">Analyzing PDF…</div>
     <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
-    <div class="progress-status" id="progressStatus">초기화 중...</div>
+    <div class="progress-status" id="progressStatus">Initializing...</div>
   </div>
 
   <div id="startPanel" style="display:none">
-    <button class="btn-convert" id="startBtn">🔍 텍스트 인식 시작</button>
+    <button class="btn-convert" id="startBtn">🔍 Start OCR</button>
   </div>
 
   <div id="resultPanel" style="display:none">
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('combined')">전체 결과</button>
-      <button class="tab-btn" onclick="switchTab('bypage')" id="bypageTabBtn">페이지별 결과</button>
+      <button class="tab-btn active" onclick="switchTab('combined')">Full Result</button>
+      <button class="tab-btn" onclick="switchTab('bypage')" id="bypageTabBtn">By Page</button>
     </div>
 
     <div class="tab-content active" id="tab-combined">
       <div class="panel">
         <div class="result-toolbar">
-          <div class="panel-title" style="margin-bottom:0;">전체 텍스트</div>
+          <div class="panel-title" style="margin-bottom:0;">Full Text</div>
           <div style="display:flex; gap:8px; align-items:center;">
             <span class="char-count" id="charCount"></span>
             <button class="btn-copy" id="copyBtn" onclick="copyResult()">📋 Copy</button>
-            <button class="btn-copy" onclick="downloadTxt()">⬇️ TXT 저장</button>
+            <button class="btn-copy" onclick="downloadTxt()">⬇️ Save as TXT</button>
           </div>
         </div>
-        <textarea class="combined-result-area" id="combinedResult" placeholder="인식된 전체 텍스트가 여기에 표시됩니다."></textarea>
+        <textarea class="combined-result-area" id="combinedResult" placeholder="Full recognized text will appear here."></textarea>
       </div>
     </div>
 
@@ -356,11 +362,11 @@
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
 
   <div class="ocr-warning" style="margin-top:24px;">
-    <strong>⚠️ 안내</strong><br>
-    • 페이지가 많을수록 처리 시간이 길어집니다 (1페이지당 약 5~30초)<br>
-    • 첫 실행 시 언어 데이터를 다운로드합니다 (한국어 약 10MB)<br>
-    • 모든 처리는 브라우저에서 이루어지며 PDF가 서버로 전송되지 않습니다<br>
-    • 텍스트 선택이 가능한 일반 PDF는 <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">PDFKit</a>을 이용하세요
+    <strong>⚠️ Notes</strong><br>
+    • More pages means longer processing time (~5–30 sec per page)<br>
+    • The first run downloads language data (~10MB for Korean)<br>
+    • All processing happens in your browser — PDFs are never sent to a server<br>
+    • For regular PDFs where text is selectable, use <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">PDFKit</a> instead.
   </div>
 
   <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
@@ -406,7 +412,7 @@
       <div class="footer-bottom-links">
         <a href="../privacy.html">Privacy Policy</a>
         <a href="../about.html">About</a>
-        <a href="../index.html">홈</a>
+        <a href="../index.html">Home</a>
       </div>
     </div>
   </div>
@@ -422,7 +428,7 @@
   let selectedLang = 'kor';
   let pageTexts = [];
 
-  // 언어 버튼
+  // language buttons
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -431,7 +437,7 @@
     });
   });
 
-  // 드롭존
+  // dropzone
   const dropZone = document.getElementById('dropZone');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
@@ -450,14 +456,14 @@
 
   async function loadFile(file) {
     if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
-      showError('PDF 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select a PDF file.'); return;
     }
     hideError();
     selectedFile = file;
     pageTexts = [];
 
     document.getElementById('pdfFileName').textContent = file.name;
-    document.getElementById('pdfFileMeta').textContent = formatSize(file.size) + ' · 페이지 수 로딩 중...';
+    document.getElementById('pdfFileMeta').textContent = formatSize(file.size) + ' · loading page count...';
     document.getElementById('pdfInfoCard').style.display = 'flex';
     document.getElementById('startPanel').style.display = 'none';
     document.getElementById('resultPanel').style.display = 'none';
@@ -465,10 +471,10 @@
     try {
       const arrayBuffer = await file.arrayBuffer();
       pdfDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-      document.getElementById('pdfFileMeta').textContent = `${formatSize(file.size)} · ${pdfDoc.numPages}페이지`;
+      document.getElementById('pdfFileMeta').textContent = `${formatSize(file.size)} · ${pdfDoc.numPages} pages`;
       document.getElementById('startPanel').style.display = 'block';
     } catch (err) {
-      showError('PDF 파일을 읽을 수 없습니다. 파일이 손상되었거나 암호화되어 있을 수 있습니다.');
+      showError('Cannot read this PDF. It may be corrupted or password-protected.');
     }
   }
 
@@ -496,22 +502,22 @@
     const totalPages = pdfDoc.numPages;
 
     try {
-      // Tesseract worker 초기화
-      setProgress(2, '언어 데이터 로딩 중...');
+      // Initialize Tesseract worker
+      setProgress(2, 'Loading language data...');
       const worker = await Tesseract.createWorker(selectedLang, 1, {
         logger: m => {
           if (m.status === 'loading language traineddata') {
-            setProgress(2 + Math.round((m.progress||0) * 10), `언어 데이터 다운로드 중... ${Math.round((m.progress||0)*100)}%`);
+            setProgress(2 + Math.round((m.progress||0) * 10), `Downloading language data... ${Math.round((m.progress||0)*100)}%`);
           }
         }
       });
-      setProgress(12, `총 ${totalPages}페이지 인식 시작...`);
+      setProgress(12, `Starting OCR for ${totalPages} pages...`);
 
-      // 페이지별 렌더링 + OCR
+      // render + OCR per page
       for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
         const pctBase = 12 + Math.round(((pageNum - 1) / totalPages) * 85);
-        document.getElementById('progressTitle').textContent = `${pageNum} / ${totalPages} 페이지 인식 중…`;
-        setProgress(pctBase, `${pageNum}페이지 렌더링 중...`);
+        document.getElementById('progressTitle').textContent = `Recognizing page ${pageNum} / ${totalPages}…`;
+        setProgress(pctBase, `Rendering page ${pageNum}...`);
 
         const page = await pdfDoc.getPage(pageNum);
         const viewport = page.getViewport({ scale: 2.5 });
@@ -521,27 +527,27 @@
         const ctx = canvas.getContext('2d');
         await page.render({ canvasContext: ctx, viewport }).promise;
 
-        setProgress(pctBase + Math.round(10 / totalPages), `${pageNum}페이지 텍스트 인식 중...`);
+        setProgress(pctBase + Math.round(10 / totalPages), `Recognizing text on page ${pageNum}...`);
         const { data: { text } } = await worker.recognize(canvas);
         pageTexts.push(text.trim());
       }
 
       await worker.terminate();
-      setProgress(100, '완료!');
+      setProgress(100, 'Done!');
 
-      // 결과 표시
-      const combined = pageTexts.map((t, i) => `[${i + 1}페이지]\n${t}`).join('\n\n');
+      // display results
+      const combined = pageTexts.map((t, i) => `[Page ${i + 1}]\n${t}`).join('\n\n');
       document.getElementById('combinedResult').value = combined;
-      document.getElementById('charCount').textContent = `${combined.length.toLocaleString('ko-KR')}자`;
+      document.getElementById('charCount').textContent = `${combined.length.toLocaleString('en-US')} chars`;
 
-      // 페이지별 결과
+      // results by page
       const pageResultsEl = document.getElementById('pageResults');
       pageResultsEl.innerHTML = '';
       pageTexts.forEach((text, i) => {
         pageResultsEl.innerHTML += `
           <div class="page-result">
             <div class="page-result-header">
-              <span>📄 ${i + 1}페이지</span>
+              <span>📄 Page ${i + 1}</span>
               <button class="btn-copy" onclick="copyPageText(${i})">📋 Copy</button>
             </div>
             <div class="page-result-body">
@@ -554,14 +560,14 @@
         document.getElementById('progressPanel').style.display = 'none';
         document.getElementById('resultPanel').style.display = 'block';
         document.getElementById('startPanel').style.display = 'block';
-        document.getElementById('startBtn').textContent = '🔍 다시 인식';
-        document.getElementById('progressTitle').textContent = 'PDF 분석 중…';
+        document.getElementById('startBtn').textContent = '🔍 Re-run OCR';
+        document.getElementById('progressTitle').textContent = 'Analyzing PDF…';
       }, 500);
 
     } catch (err) {
       document.getElementById('progressPanel').style.display = 'none';
       document.getElementById('startPanel').style.display = 'block';
-      showError('텍스트 인식 중 오류가 발생했습니다. 다시 시도해보세요.');
+      showError('OCR failed. Please try again.');
     }
   }
 
@@ -582,9 +588,9 @@
     if (!text) return;
     navigator.clipboard.writeText(text).then(() => {
       const btn = document.getElementById('copyBtn');
-      btn.textContent = '✅ 복사됨';
+      btn.textContent = '✅ Copied!';
       btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = '📋 복사'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(() => { btn.textContent = '📋 Copy'; btn.classList.remove('copied'); }, 2000);
     });
   }
 

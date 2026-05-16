@@ -130,6 +130,7 @@
     @media (max-width: 520px) {
       .compare-wrap { grid-template-columns: 1fr; }
     }
+  
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -151,7 +152,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="bg-remove.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/bg-remove.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -190,17 +196,17 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>배경 제거</span>
+    <span>Background Remover</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🤖</span>
     <h1>Remove Image Background – Free Online AI Tool</h1>
-    <p>AI 기술로 이미지 배경을 자동 제거하고 투명 PNG로 저장합니다.</p>
+    <p>Upload an image and the AI will automatically remove the background. Save as transparent PNG. The AI model runs in your browser — no server upload.</p>
   </div>
 
   <div class="model-warning">
-    ⚠️ <strong>첫 실행 시 AI 모델 다운로드에 약 30초가 소요됩니다.</strong> 이후에는 캐시되어 빠르게 처리됩니다. 모든 처리는 브라우저에서 이루어지며 서버로 파일이 전송되지 않습니다.
+    ⚠️ <strong>The first run downloads the AI model (~30 seconds).</strong> After that it's cached for fast processing. All processing happens in your browser — files are never sent to a server.
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -217,8 +223,8 @@
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
-    <div class="options-title">배경 제거</div>
-    <button class="btn-convert" id="processBtn">🤖 배경 제거 시작</button>
+    <div class="options-title">Background Removal</div>
+    <button class="btn-convert" id="processBtn">🤖 Remove Background</button>
   </div>
 
   <div class="progress-wrap" id="progressWrap">
@@ -236,19 +242,19 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">배경 제거 완료!</div>
+        <div class="result-title">Background Removed!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
     <div class="compare-wrap">
       <div class="compare-box">
-        <h4>원본</h4>
-        <img id="originalPreview" alt="원본 이미지">
+        <h4>Original</h4>
+        <img id="originalPreview" alt="Original Image">
       </div>
       <div class="compare-box">
-        <h4>결과 (투명 배경)</h4>
+        <h4>Result (Transparent)</h4>
         <div class="transparency-bg" style="display:inline-block; border-radius:var(--radius-sm);">
-          <img id="resultPreview" alt="배경 제거 결과" style="display:block;">
+          <img id="resultPreview" alt="Background Removed" style="display:block;">
         </div>
       </div>
     </div>
@@ -264,7 +270,7 @@
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 <div class="download-share-group">
-  <button class="btn-download" id="downloadBtn">⬇️ 투명 PNG 다운로드</button>
+  <button class="btn-download" id="downloadBtn">⬇️ Download Transparent PNG</button>
   <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
 </div>
     </div>
@@ -326,7 +332,7 @@
 </footer>
 
 <script>
-  // AI 라이브러리와 분리 — 파일 UI는 즉시 동작
+  // AI lib is loaded separately — file UI works immediately
   let selectedFile = null;
   let resultBlob = null;
 
@@ -351,7 +357,7 @@
 
   function loadFile(file) {
     if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.');
+      showError('Please select an image file.');
       return;
     }
     hideError();
@@ -394,7 +400,7 @@
     progressStatus.textContent = 'Loading AI model...';
 
     try {
-      // 버튼 클릭 시점에 동적으로 import
+      // dynamically import on button click
       const { removeBackground } = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/index.browser.mjs');
 
       const blob = await removeBackground(selectedFile, {
@@ -403,9 +409,9 @@
           progressFill.style.width = pct + '%';
           progressPercent.textContent = pct + '%';
           if (key.includes('download')) {
-            progressStatus.textContent = 'AI 모델 다운로드 중...';
+            progressStatus.textContent = 'Downloading AI model...';
           } else if (key.includes('compute') || key.includes('inference')) {
-            progressStatus.textContent = '배경 제거 처리 중...';
+            progressStatus.textContent = 'Removing background...';
           } else {
             progressStatus.textContent = key + '...';
           }
@@ -415,17 +421,17 @@
       resultBlob = blob;
       const resultUrl = URL.createObjectURL(blob);
       document.getElementById('resultPreview').src = resultUrl;
-      document.getElementById('resultSubtitle').textContent = `결과 크기: ${formatSize(blob.size)}`;
+      document.getElementById('resultSubtitle').textContent = `Result Size: ${formatSize(blob.size)}`;
       document.getElementById('resultPanel').style.display = 'block';
       progressFill.style.width = '100%';
       progressPercent.textContent = '100%';
-      progressStatus.textContent = '완료!';
+      progressStatus.textContent = 'Done!';
 
     } catch (err) {
-      showError('배경 제거 중 오류가 발생했습니다: ' + err.message);
+      showError('Background removal failed: ' + err.message);
     } finally {
       btn.disabled = false;
-      btn.textContent = '🤖 배경 제거 시작';
+      btn.textContent = '🤖 Remove Background';
       setTimeout(() => { progressWrap.style.display = 'none'; }, 2000);
     }
   });
@@ -459,7 +465,7 @@
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
 
-  // 공유하기
+  // share
   (function() {
     const shareBtn = document.getElementById('shareBtn');
     if (navigator.share && navigator.canShare) {
@@ -470,8 +476,8 @@
       if (!resultBlob) return;
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_nobg.png' : 'nobg.png';
       const file = new File([resultBlob], fname, { type: 'image/png' });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/bg-remove.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/bg-remove.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

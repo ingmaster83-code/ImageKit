@@ -166,6 +166,7 @@
       font-weight: 700;
       color: var(--text);
     }
+  
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -187,7 +188,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="upscale-image.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/upscale-image.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -226,17 +232,17 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 업스케일링</span>
+    <span>Upscale Image</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🔍</span>
     <h1>Upscale Image – Free Online</h1>
-    <p>저화질 이미지를 최대 4배까지 고화질로 확대합니다. 고품질 보간법과 샤프닝 필터를 적용합니다.</p>
+    <p>Upload an image and enlarge it to 2x or 4x resolution. Uses bicubic interpolation for smooth results. All processing done in your browser.</p>
   </div>
 
   <div class="notice-box">
-    ℹ️ AI 업스케일링이 아닌 고품질 보간법(Bicubic)과 언샤프 마스크를 사용합니다. 최대 4배 확대를 지원합니다.
+    ℹ️ Uses high-quality Bicubic interpolation and unsharp masking (not AI). Supports up to 4× upscaling.
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -253,10 +259,10 @@
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
-    <div class="options-title">업스케일링 설정</div>
+    <div class="options-title">Upscale Settings</div>
 
     <div class="option-row">
-      <span class="option-label">확대 배율</span>
+      <span class="option-label">Upscale Factor</span>
       <div class="option-control">
         <div class="radio-group">
           <label class="radio-item"><input type="radio" name="scale" value="2" checked> 2x</label>
@@ -267,7 +273,7 @@
     </div>
 
     <div class="option-row">
-      <span class="option-label">샤프닝 강도: <strong id="sharpVal">50</strong>%</span>
+      <span class="option-label">Sharpening: <strong id="sharpVal">50</strong>%</span>
       <div class="option-control" style="flex:1; max-width:320px;">
         <input type="range" id="sharpness" min="0" max="100" value="50">
       </div>
@@ -284,7 +290,7 @@
     </div>
 
     <div class="option-row" id="qualityRow">
-      <span class="option-label">JPG 품질: <strong id="qualityVal">92</strong>%</span>
+      <span class="option-label">JPG Quality: <strong id="qualityVal">92</strong>%</span>
       <div class="option-control" style="flex:1; max-width:320px;">
         <input type="range" id="quality" min="10" max="100" value="92">
       </div>
@@ -292,16 +298,16 @@
 
     <div id="dimInfo" class="dim-compare" style="display:none">
       <div class="dim-item">
-        <div class="dim-label">원본 크기</div>
+        <div class="dim-label">Original Size</div>
         <div class="dim-value" id="origDim">-</div>
       </div>
       <div class="dim-item">
-        <div class="dim-label">결과 크기</div>
+        <div class="dim-label">Result Size</div>
         <div class="dim-value" id="resultDim" style="color:var(--primary);">-</div>
       </div>
     </div>
 
-    <button class="btn-convert" id="processBtn">🔍 업스케일링 시작</button>
+    <button class="btn-convert" id="processBtn">🔍 Start Upscale</button>
   </div>
 
   <div class="progress-wrap" id="progressWrap">
@@ -318,7 +324,7 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">업스케일링 완료!</div>
+        <div class="result-title">Upscaled!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
@@ -329,8 +335,8 @@
         <div class="split-line" id="splitLine"></div>
         <div class="split-handle" id="splitHandle">◀▶</div>
       </div>
-      <span class="split-label split-label-left">원본</span>
-      <span class="split-label split-label-right">결과</span>
+      <span class="split-label split-label-left">Before</span>
+      <span class="split-label split-label-right">After</span>
     </div>
 
     <div style="margin-top:20px; text-align:center;">
@@ -345,7 +351,7 @@
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 <div class="download-share-group">
-  <button class="btn-download" id="downloadBtn">⬇️ 업스케일 이미지 다운로드</button>
+  <button class="btn-download" id="downloadBtn">⬇️ Download Upscaled Image</button>
   <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
 </div>
     </div>
@@ -461,7 +467,7 @@
 
   async function loadFile(file) {
     if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.');
+      showError('Please select an image file.');
       return;
     }
     hideError();
@@ -552,14 +558,14 @@
     // Render split comparison
     renderComparison(nw, nh);
 
-    document.getElementById('resultSubtitle').textContent = `${ow}×${oh} → ${nw}×${nh} (${scale}x 확대)`;
+    document.getElementById('resultSubtitle').textContent = `${ow}×${oh} → ${nw}×${nh} (${scale}× upscaled)`;
     document.getElementById('resultPanel').style.display = 'block';
 
     progressFill.style.width = '100%';
     progressPercent.textContent = '100%';
 
     btn.disabled = false;
-    btn.textContent = '🔍 업스케일링 시작';
+    btn.textContent = '🔍 Start Upscale';
     setTimeout(() => { progressWrap.style.display = 'none'; }, 1000);
   });
 
@@ -694,7 +700,7 @@
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
 
-  // 공유하기
+  // share
   (function() {
     const shareBtn = document.getElementById('shareBtn');
     if (navigator.share && navigator.canShare) {
@@ -709,8 +715,8 @@
       const ext = fmt === 'image/png' ? '.png' : '.jpg';
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_upscaled' + ext : 'upscaled' + ext;
       const file = new File([lastUpscaleBlob], fname, { type: fmt });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/upscale-image.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/upscale-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

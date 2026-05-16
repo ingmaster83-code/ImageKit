@@ -102,7 +102,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="rotate-image.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/rotate-image.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -141,13 +146,13 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 회전/뒤집기</span>
+    <span>Rotate / Flip</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🔃</span>
     <h1>Rotate & Flip Image – Free Online</h1>
-    <p>이미지를 회전하거나 좌우/상하로 뒤집습니다.</p>
+    <p>Upload an image and rotate it 90°, 180°, or 270°, or flip it horizontally/vertically. All processing happens in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -167,11 +172,11 @@
     <div class="options-title">Conversion Settings</div>
 
     <div class="action-btns" style="margin-bottom:16px;">
-      <button class="btn-action" onclick="applyTransform('rotate90')">↩️ 왼쪽 90°</button>
-      <button class="btn-action" onclick="applyTransform('rotate90r')">↪️ 오른쪽 90°</button>
+      <button class="btn-action" onclick="applyTransform('rotate90')">↩️ 90° Left</button>
+      <button class="btn-action" onclick="applyTransform('rotate90r')">↪️ 90° Right</button>
       <button class="btn-action" onclick="applyTransform('rotate180')">🔄 180°</button>
-      <button class="btn-action" onclick="applyTransform('flipH')">↔️ 좌우 뒤집기</button>
-      <button class="btn-action" onclick="applyTransform('flipV')">↕️ 상하 뒤집기</button>
+      <button class="btn-action" onclick="applyTransform('flipH')">↔️ Flip Horizontal</button>
+      <button class="btn-action" onclick="applyTransform('flipV')">↕️ Flip Vertical</button>
     </div>
 
     <div class="canvas-preview-wrap" id="canvasWrap" style="display:none">
@@ -270,7 +275,7 @@
 
   async function loadFile(file) {
     if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select an image file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -383,8 +388,8 @@
       const ext = extMap[format] || '.jpg';
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_rotated' + ext : 'rotated' + ext;
       const file = new File([blob], fname, { type: format });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/rotate-image.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/rotate-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

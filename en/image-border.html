@@ -101,7 +101,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="image-border.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/image-border.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -140,13 +145,13 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 테두리 추가</span>
+    <span>Image Border</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🖼️</span>
     <h1>Add Border to Image – Free Online</h1>
-    <p>이미지에 테두리(액자 효과)를 추가합니다. 색상, 두께, 모서리 둥글기, 그림자를 자유롭게 설정하세요.</p>
+    <p>Upload an image and add a custom border. Choose color, width, and style. The image is processed entirely in your browser — no server upload.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -163,15 +168,15 @@
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
-    <div class="options-title">테두리 설정</div>
+    <div class="options-title">Border Settings</div>
 
     <div class="option-row">
       <span class="option-label">Border Color</span>
       <div class="option-control" style="display:flex; gap:8px; align-items:center;">
         <input type="color" id="borderColor" value="#000000" style="width:48px; height:36px; border:1px solid #d1d5db; border-radius:6px; cursor:pointer; padding:2px;">
-        <button onclick="setBorderColor('#ffffff')" style="padding:4px 10px; border:1px solid #d1d5db; border-radius:6px; background:#fff; cursor:pointer;">흰색</button>
-        <button onclick="setBorderColor('#000000')" style="padding:4px 10px; border:1px solid #d1d5db; border-radius:6px; background:#000; color:#fff; cursor:pointer;">검정</button>
-        <button onclick="setBorderColor('#e5e7eb')" style="padding:4px 10px; border:1px solid #d1d5db; border-radius:6px; background:#e5e7eb; cursor:pointer;">회색</button>
+        <button onclick="setBorderColor('#ffffff')" style="padding:4px 10px; border:1px solid #d1d5db; border-radius:6px; background:#fff; cursor:pointer;">White</button>
+        <button onclick="setBorderColor('#000000')" style="padding:4px 10px; border:1px solid #d1d5db; border-radius:6px; background:#000; color:#fff; cursor:pointer;">Black</button>
+        <button onclick="setBorderColor('#e5e7eb')" style="padding:4px 10px; border:1px solid #d1d5db; border-radius:6px; background:#e5e7eb; cursor:pointer;">Gray</button>
       </div>
     </div>
 
@@ -184,7 +189,7 @@
     </div>
 
     <div class="option-row">
-      <span class="option-label">모서리 둥글기</span>
+      <span class="option-label">Corner Radius</span>
       <div class="option-control" style="display:flex; gap:10px; align-items:center;">
         <input type="range" id="borderRadius" min="0" max="80" value="0" style="flex:1; max-width:200px;">
         <span id="borderRadiusVal" style="font-weight:600; min-width:40px;">0px</span>
@@ -192,24 +197,24 @@
     </div>
 
     <div class="option-row">
-      <span class="option-label">그림자 효과</span>
+      <span class="option-label">Shadow Effect</span>
       <div class="option-control">
         <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
           <input type="checkbox" id="shadowEnabled" style="width:16px; height:16px;">
-          <span>그림자 추가</span>
+          <span>Add Shadow</span>
         </label>
       </div>
     </div>
 
     <div id="shadowOptions" style="display:none;">
       <div class="option-row">
-        <span class="option-label">그림자 색상</span>
+        <span class="option-label">Shadow Color</span>
         <div class="option-control">
           <input type="color" id="shadowColor" value="#888888" style="width:48px; height:36px; border:1px solid #d1d5db; border-radius:6px; cursor:pointer; padding:2px;">
         </div>
       </div>
       <div class="option-row">
-        <span class="option-label">그림자 강도</span>
+        <span class="option-label">Shadow Intensity</span>
         <div class="option-control" style="display:flex; gap:10px; align-items:center;">
           <input type="range" id="shadowBlur" min="0" max="60" value="20" style="flex:1; max-width:200px;">
           <span id="shadowBlurVal" style="font-weight:600; min-width:40px;">20</span>
@@ -222,14 +227,14 @@
       <div class="option-control">
         <select id="outputFormat">
           <option value="image/jpeg" selected>JPG</option>
-          <option value="image/png">PNG (투명 지원)</option>
+          <option value="image/png">PNG (supports transparency)</option>
           <option value="image/webp">WebP</option>
         </select>
       </div>
     </div>
 
     <div style="margin-top:16px;">
-      <button class="btn-convert" onclick="renderBorder()" style="margin-right:8px;">🎨 미리보기</button>
+      <button class="btn-convert" onclick="renderBorder()" style="margin-right:8px;">🎨 Preview</button>
     </div>
 
     <div class="canvas-preview-wrap" id="canvasWrap" style="display:none; margin-top:16px;">
@@ -330,7 +335,7 @@
 
   async function loadFile(file) {
     if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select an image file.'); return;
     }
     hideError();
     selectedFile = file;

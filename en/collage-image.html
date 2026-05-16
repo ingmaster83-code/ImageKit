@@ -89,7 +89,13 @@
   }
   .canvas-preview-wrap { margin-top: 16px; overflow: auto; }
   .canvas-preview-wrap canvas { max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; display: block; }
-</style>
+
+    .lang-switcher { display:flex; align-items:center; gap:4px; }
+    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
+    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
+    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
+    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+  </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -103,13 +109,6 @@
   "offers": {"@type": "Offer","price": "0","priceCurrency": "USD"}
 }
 </script>
-  <style>
-    .lang-switcher { display:flex; align-items:center; gap:4px; }
-    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
-    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
-    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
-    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
-  </style>
 </head>
 <body>
 
@@ -125,7 +124,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="collage-image.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/collage-image.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -164,43 +168,43 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>콜라주 만들기</span>
+    <span>Photo Collage</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🖼️</span>
     <h1>Photo Collage Maker – Free Online</h1>
-    <p>여러 사진을 하나의 이미지로 합칩니다. 레이아웃, 간격, 배경색을 자유롭게 설정하세요.</p>
+    <p>Upload multiple images and arrange them into a collage. Choose from various layouts and download as a single image. All done in your browser.</p>
   </div>
 
   <div class="options-panel">
     <div class="options-title">Select Layout</div>
     <div class="collage-layout-grid">
       <button class="layout-btn active" data-layout="1x2" onclick="selectLayout(this)">
-        <span class="layout-icon">⬜⬜</span><span>좌우 2장</span>
+        <span class="layout-icon">⬜⬜</span><span>2 Side by Side</span>
       </button>
       <button class="layout-btn" data-layout="2x1" onclick="selectLayout(this)">
-        <span class="layout-icon">🔲<br>🔲</span><span>상하 2장</span>
+        <span class="layout-icon">🔲<br>🔲</span><span>2 Top/Bottom</span>
       </button>
       <button class="layout-btn" data-layout="1x3" onclick="selectLayout(this)">
-        <span class="layout-icon">⬜⬜⬜</span><span>좌우 3장</span>
+        <span class="layout-icon">⬜⬜⬜</span><span>3 Side by Side</span>
       </button>
       <button class="layout-btn" data-layout="3x1" onclick="selectLayout(this)">
-        <span class="layout-icon">🔲🔲🔲</span><span>상하 3장</span>
+        <span class="layout-icon">🔲🔲🔲</span><span>3 Top/Bottom</span>
       </button>
       <button class="layout-btn" data-layout="2x2" onclick="selectLayout(this)">
-        <span class="layout-icon">⊞</span><span>2×2 격자</span>
+        <span class="layout-icon">⊞</span><span>2×2 Grid</span>
       </button>
       <button class="layout-btn" data-layout="1x4" onclick="selectLayout(this)">
-        <span class="layout-icon">⬜⬜⬜⬜</span><span>좌우 4장</span>
+        <span class="layout-icon">⬜⬜⬜⬜</span><span>4 Side by Side</span>
       </button>
     </div>
 
-    <div class="options-title" style="margin-top:16px;">이미지 슬롯</div>
+    <div class="options-title" style="margin-top:16px;">Image Slots</div>
     <div class="slot-grid" id="slotGrid"></div>
 
     <div class="option-row" style="margin-top:16px;">
-      <span class="option-label">캔버스 너비</span>
+      <span class="option-label">Canvas Width</span>
       <div class="option-control">
         <select id="canvasWidth">
           <option value="800">800px</option>
@@ -211,13 +215,13 @@
       </div>
     </div>
     <div class="option-row">
-      <span class="option-label">간격 (px)</span>
+      <span class="option-label">Spacing (px)</span>
       <div class="option-control">
         <input type="number" id="gapSize" value="8" min="0" max="100" style="width:80px; padding:6px; border:1px solid #d1d5db; border-radius:6px;">
       </div>
     </div>
     <div class="option-row">
-      <span class="option-label">배경색</span>
+      <span class="option-label">Background Color</span>
       <div class="option-control">
         <input type="color" id="bgColor" value="#ffffff" style="width:48px; height:36px; border:1px solid #d1d5db; border-radius:6px; cursor:pointer; padding:2px;">
       </div>
@@ -234,7 +238,7 @@
     </div>
 
     <div style="margin-top:16px;">
-      <button class="btn-convert" onclick="renderCollage()" style="margin-right:8px;">🎨 미리보기 생성</button>
+      <button class="btn-convert" onclick="renderCollage()" style="margin-right:8px;">🎨 Generate Preview</button>
     </div>
 
     <div class="canvas-preview-wrap" id="canvasWrap" style="display:none;">
@@ -242,7 +246,7 @@
     </div>
 
     <div class="download-share-group" id="downloadGroup" style="display:none; margin-top:16px;">
-      <button class="btn-convert" id="downloadBtn">⬇️ 콜라주 다운로드</button>
+      <button class="btn-convert" id="downloadBtn">⬇️ Download Collage</button>
     </div>
   </div>
 
@@ -332,7 +336,7 @@
       const img = document.createElement('img');
       const placeholder = document.createElement('div');
       placeholder.className = 'slot-placeholder';
-      placeholder.innerHTML = `<div>➕</div><div>클릭하여<br>이미지 추가</div>`;
+      placeholder.innerHTML = `<div>➕</div><div>Click to<br>add image</div>`;
       const removeBtn = document.createElement('button');
       removeBtn.className = 'slot-remove';
       removeBtn.textContent = '✕';
@@ -400,7 +404,7 @@
     const {cols, rows} = LAYOUTS[currentLayout];
     const count = cols * rows;
     const filledSlots = Object.keys(slotImages).length;
-    if (filledSlots === 0) { showError('최소 한 장 이상의 이미지를 추가해주세요.'); return; }
+    if (filledSlots === 0) { showError('Please add at least one image.'); return; }
 
     const totalW = parseInt(document.getElementById('canvasWidth').value);
     const gap = parseInt(document.getElementById('gapSize').value) || 0;
@@ -432,7 +436,7 @@
         ctx.font = `${Math.floor(cellW * 0.1)}px sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('이미지 없음', x + cellW/2, y + cellH/2);
+        ctx.fillText('No Image', x + cellW/2, y + cellH/2);
         continue;
       }
 

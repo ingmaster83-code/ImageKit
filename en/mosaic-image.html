@@ -142,8 +142,7 @@
     display: none;
   }
   .apply-selection-btn:hover { opacity: 0.9; }
-</style>
-  <style>
+
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -165,7 +164,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="mosaic-image.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/mosaic-image.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -204,13 +208,13 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 모자이크</span>
+    <span>Mosaic Image</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🟫</span>
     <h1>Mosaic & Pixelate Image – Free Online</h1>
-    <p>이미지 전체 또는 드래그로 선택한 영역에만 모자이크(Pixels화) 효과를 적용하세요.</p>
+    <p>Upload an image and apply a mosaic/pixelation effect to any area. Select the region and adjust block size. All done in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -227,14 +231,14 @@
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
-    <div class="options-title">모자이크 설정</div>
+    <div class="options-title">Mosaic Settings</div>
 
     <div class="option-row">
-      <span class="option-label">적용 모드</span>
+      <span class="option-label">Mode</span>
       <div class="option-control">
         <div class="mode-btns">
-          <button class="mode-btn active" id="btnFull" onclick="setMode('full')">🟫 전체 모자이크</button>
-          <button class="mode-btn" id="btnRegion" onclick="setMode('region')">🖱️ 영역 선택 모자이크</button>
+          <button class="mode-btn active" id="btnFull" onclick="setMode('full')">🟫 Full Image Mosaic</button>
+          <button class="mode-btn" id="btnRegion" onclick="setMode('region')">🖱️ Region Mosaic</button>
         </div>
       </div>
     </div>
@@ -244,27 +248,27 @@
       <div class="option-control">
         <input type="range" id="blockSize" min="4" max="60" value="16" step="2" style="margin-bottom:6px;">
         <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-light);">
-          <span>약함</span>
+          <span>Light</span>
           <span id="blockVal" style="font-weight:700; color:var(--primary);">16px</span>
-          <span>강함</span>
+          <span>Strong</span>
         </div>
       </div>
     </div>
 
     <!-- Canvas for region selection -->
     <div class="option-row" id="canvasRow" style="display:none">
-      <span class="option-label">영역 선택</span>
+      <span class="option-label">Select Region</span>
       <div class="option-control">
         <div class="canvas-wrap" id="canvasWrap">
           <canvas id="mainCanvas"></canvas>
           <div id="selectionBox"></div>
         </div>
-        <p class="canvas-hint">드래그하여 모자이크를 적용할 영역을 선택하세요</p>
-        <button class="apply-selection-btn" id="applySelectionBtn">✅ 선택 영역 Apply Mosaic</button>
+        <p class="canvas-hint">Drag to select the region to apply mosaic</p>
+        <button class="apply-selection-btn" id="applySelectionBtn">✅ Apply Mosaic to Selection</button>
       </div>
     </div>
 
-    <button class="btn-convert" id="applyBtn">🟫 전체 Apply Mosaic</button>
+    <button class="btn-convert" id="applyBtn">🟫 Apply Mosaic to Entire Image</button>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
@@ -281,12 +285,12 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">Apply Mosaic 완료!</div>
+        <div class="result-title">Mosaic Applied!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
     <div class="preview-image-wrap">
-      <img id="resultImg" src="" alt="Apply Mosaic 이미지" style="max-width:100%;border-radius:8px;">
+      <img id="resultImg" src="" alt="Mosaic Applied Image" style="max-width:100%;border-radius:8px;">
     </div>
 
 <div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
@@ -299,7 +303,7 @@
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
     <div class="download-share-group" style="margin-top:16px;">
-      <button class="btn-download" id="downloadBtn">⬇️ 모자이크 이미지 다운로드</button>
+      <button class="btn-download" id="downloadBtn">⬇️ Download Mosaic Image</button>
       <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
     </div>
   </div>
@@ -376,7 +380,7 @@
     document.getElementById('btnFull').classList.toggle('active', m === 'full');
     document.getElementById('btnRegion').classList.toggle('active', m === 'region');
     document.getElementById('canvasRow').style.display = m === 'region' ? 'flex' : 'none';
-    document.getElementById('applyBtn').textContent = m === 'full' ? '🟫 전체 Apply Mosaic' : '🟫 Apply Mosaic';
+    document.getElementById('applyBtn').textContent = m === 'full' ? '🟫 Apply Full Mosaic' : '🟫 Apply Mosaic';
     document.getElementById('applyBtn').style.display = m === 'full' ? 'block' : 'none';
     if (m === 'region') drawDisplayCanvas();
   }
@@ -398,7 +402,7 @@
   });
 
   function loadFile(file) {
-    if (!file.type.match(/^image\//)) { showError('이미지 파일만 업로드할 수 있습니다.'); return; }
+    if (!file.type.match(/^image\//)) { showError('Please select an image file.'); return; }
     hideError();
     selectedFile = file;
     resultBlob = null;
@@ -622,8 +626,8 @@
       const ext = extMap[mime] || '.jpg';
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_mosaic' + ext : 'mosaic' + ext;
       const file = new File([resultBlob], fname, { type: mime });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/mosaic-image.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/mosaic-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

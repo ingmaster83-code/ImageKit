@@ -114,6 +114,7 @@
       display: block;
       margin-bottom: 12px;
     }
+  
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -135,7 +136,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="image-to-base64.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/image-to-base64.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -174,27 +180,27 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 → Base64</span>
+    <span>Image → Base64</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">💻</span>
     <h1>Image to Base64 Converter – Free Online</h1>
-    <p>이미지를 Base64 인코딩 문자열(Data URL)로 변환합니다. HTML, CSS에 직접 임베딩할 수 있습니다.</p>
+    <p>Upload an image to convert it to a Base64 encoded string. Copy to clipboard or download as a text file. All processing done in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>Drop your image file here</h3>
-    <p>JPG, PNG, WebP, GIF 등 모든 이미지 형식 가능</p>
+    <p>Supports JPG, PNG, WebP, GIF and more</p>
     <label for="fileInput" class="btn-select">Select Image File</label>
     <input type="file" id="fileInput" accept="image/*" style="display:none">
   </div>
 
   <div id="resultPanel" class="options-panel" style="display:none">
-    <div class="options-title">변환 결과</div>
+    <div class="options-title">Conversion Result</div>
 
-    <img id="previewImg" class="preview-img" alt="미리보기">
+    <img id="previewImg" class="preview-img" alt="Preview">
 
     <div class="base64-meta" id="base64Meta"></div>
 
@@ -202,8 +208,8 @@
 
     <div style="display:flex; align-items:center; margin-top:12px; flex-wrap:wrap; gap:8px;">
       <button class="btn-action" id="copyBtn">📋 Copy</button>
-      <span class="copy-success" id="copySuccess">✅ 복사됨!</span>
-      <button class="btn-action" onclick="clearFile()" style="margin-left:auto;">✕ 초기화</button>
+      <span class="copy-success" id="copySuccess">✅ Copied!</span>
+      <button class="btn-action" onclick="clearFile()" style="margin-left:auto;">✕ Clear</button>
     </div>
   </div>
 
@@ -276,7 +282,7 @@
 
   function loadFile(file) {
     if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select an image file.'); return;
     }
     hideError();
     const reader = new FileReader();
@@ -286,8 +292,8 @@
       document.getElementById('base64Output').value = dataUrl;
       document.getElementById('base64Meta').innerHTML =
         `<strong>File Name:</strong> ${file.name} &nbsp;|&nbsp; ` +
-        `<strong>원본 크기:</strong> ${formatSize(file.size)} &nbsp;|&nbsp; ` +
-        `<strong>Data URL 길이:</strong> ${dataUrl.length.toLocaleString()} 자`;
+        `<strong>Original Size:</strong> ${formatSize(file.size)} &nbsp;|&nbsp; ` +
+        `<strong>Data URL Length:</strong> ${dataUrl.length.toLocaleString()} chars`;
       document.getElementById('resultPanel').style.display = 'block';
       document.getElementById('copySuccess').style.display = 'none';
     };

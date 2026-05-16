@@ -102,7 +102,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="image-to-webp.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/image-to-webp.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -141,13 +146,13 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 → WebP 변환</span>
+    <span>Image → WebP</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">⚡</span>
     <h1>Image to WebP Converter – Free Online</h1>
-    <p>JPG, PNG 등 이미지를 WebP 형식으로 변환해 파일 용량을 줄이세요.</p>
+    <p>Upload a JPG or PNG image and convert it to WebP format. Significantly smaller file size for web use. Quality slider included. All browser-based.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -167,7 +172,7 @@
     <div class="options-title">Conversion Settings</div>
 
     <div class="option-row">
-      <span class="option-label">WebP 품질: <strong id="qualityVal">85</strong>%</span>
+      <span class="option-label">WebP Quality: <strong id="qualityVal">85</strong>%</span>
       <div class="option-control" style="flex:1; max-width:320px;">
         <input type="range" id="quality" min="10" max="100" value="85" style="width:100%;">
       </div>
@@ -175,9 +180,9 @@
 
     <div id="sizeCompare" style="display:none; background:var(--primary-light); border-radius:var(--radius-sm); padding:14px 18px; margin-bottom:16px; font-size:0.9rem;">
       <div style="display:flex; gap:24px; flex-wrap:wrap;">
-        <div><span style="color:var(--text-light);">원본 크기:</span> <strong id="origSize">—</strong></div>
-        <div><span style="color:var(--text-light);">WebP 크기:</span> <strong id="webpSize">—</strong></div>
-        <div><span style="color:var(--text-light);">절감율:</span> <strong id="savePct" style="color:#0EA5E9;">—</strong></div>
+        <div><span style="color:var(--text-light);">Original Size:</span> <strong id="origSize">—</strong></div>
+        <div><span style="color:var(--text-light);">WebP Size:</span> <strong id="webpSize">—</strong></div>
+        <div><span style="color:var(--text-light);">Reduction:</span> <strong id="savePct" style="color:#0EA5E9;">—</strong></div>
       </div>
     </div>
 
@@ -186,7 +191,7 @@
     </div>
 
     <div class="download-share-group">
-      <button class="btn-convert" id="downloadBtn">⬇️ WebP로 다운로드</button>
+      <button class="btn-convert" id="downloadBtn">⬇️ Download as WebP</button>
       <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
     </div>
   </div>
@@ -269,7 +274,7 @@
 
   async function loadFile(file) {
     if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select an image file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -309,7 +314,7 @@
       const pct = origBytes > 0 ? Math.round((1 - webpBytes / origBytes) * 100) : 0;
       document.getElementById('origSize').textContent = formatSize(origBytes);
       document.getElementById('webpSize').textContent = formatSize(webpBytes);
-      document.getElementById('savePct').textContent = pct > 0 ? `${pct}% 절감` : `${Math.abs(pct)}% 증가`;
+      document.getElementById('savePct').textContent = pct > 0 ? `${pct}% smaller` : `${Math.abs(pct)}% larger`;
       document.getElementById('sizeCompare').style.display = 'block';
     }
   }
@@ -352,7 +357,7 @@
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
 
-  // 공유하기
+  // share
   (function() {
     const shareBtn = document.getElementById('shareBtn');
     if (navigator.share && navigator.canShare) {
@@ -365,8 +370,8 @@
       if (!lastWebpBlob) return;
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '.webp' : 'converted.webp';
       const file = new File([lastWebpBlob], fname, { type: 'image/webp' });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/image-to-webp.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/image-to-webp.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

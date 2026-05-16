@@ -150,8 +150,7 @@
     margin-top: 4px;
   }
   .add-more-btn:hover { border-color: var(--primary); color: var(--primary); }
-</style>
-  <style>
+
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -173,7 +172,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="merge-image.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/merge-image.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -212,69 +216,69 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 합치기</span>
+    <span>Merge Images</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🔗</span>
     <h1>Merge Images – Combine Photos Free Online</h1>
-    <p>여러 장의 이미지를 가로 또는 세로로 이어붙여 하나의 이미지로 저장하세요.</p>
+    <p>Upload multiple images and merge them into one. Choose vertical, horizontal, or grid layout. All processing happens in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>Drop your image file here</h3>
-    <p>JPG, PNG, WebP — 최대 10장</p>
+    <p>JPG, PNG, WebP — up to 10 images</p>
     <label for="fileInput" class="btn-select">Select Image File</label>
     <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg" multiple style="display:none">
   </div>
 
   <div id="fileListPanel" class="file-list-panel" style="display:none">
     <div class="file-list-title" style="display:flex;justify-content:space-between;align-items:center;">
-      <span>이미지 목록 <span id="fileCount" style="font-weight:400;color:var(--text-light);"></span></span>
-      <button class="add-more-btn" id="addMoreBtn" style="width:auto;padding:4px 12px;margin:0;border-style:solid;">+ 추가</button>
+      <span>Images <span id="fileCount" style="font-weight:400;color:var(--text-light);"></span></span>
+      <button class="add-more-btn" id="addMoreBtn" style="width:auto;padding:4px 12px;margin:0;border-style:solid;">+ Add</button>
       <input type="file" id="fileInputMore" accept="image/jpeg,image/png,image/webp,image/jpg" multiple style="display:none">
     </div>
     <div class="merge-file-list" id="mergeFileList"></div>
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
-    <div class="options-title">합치기 설정</div>
+    <div class="options-title">Merge Settings</div>
     <div class="option-row">
-      <span class="option-label">방향</span>
+      <span class="option-label">Direction</span>
       <div class="option-control">
         <div class="direction-btns">
-          <button class="dir-btn active" id="btnHorizontal" onclick="setDirection('horizontal')">↔️ 가로로 이어붙이기</button>
-          <button class="dir-btn" id="btnVertical" onclick="setDirection('vertical')">↕️ 세로로 이어붙이기</button>
+          <button class="dir-btn active" id="btnHorizontal" onclick="setDirection('horizontal')">↔️ Horizontal</button>
+          <button class="dir-btn" id="btnVertical" onclick="setDirection('vertical')">↕️ Vertical</button>
         </div>
       </div>
     </div>
     <div class="option-row">
-      <span class="option-label">이미지 간격</span>
+      <span class="option-label">Image Spacing</span>
       <div class="option-control">
         <input type="range" id="gapSlider" min="0" max="60" value="0" style="margin-bottom:6px;">
         <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-light);">
-          <span>없음</span>
+          <span>None</span>
           <span id="gapVal" style="font-weight:700; color:var(--primary);">0px</span>
-          <span>넓게</span>
+          <span>Wide</span>
         </div>
       </div>
     </div>
     <div class="option-row">
-      <span class="option-label">배경색</span>
+      <span class="option-label">Background Color</span>
       <div class="option-control" style="display:flex;align-items:center;gap:10px;">
         <input type="color" id="bgColor" value="#ffffff" style="width:44px;height:36px;border:1px solid #e2e8f0;border-radius:6px;cursor:pointer;padding:2px;">
-        <span style="font-size:0.88rem;color:var(--text-light);">간격 및 여백에 채울 배경색</span>
+        <span style="font-size:0.88rem;color:var(--text-light);">Background color for spacing and margins</span>
       </div>
     </div>
-    <button class="btn-convert" id="mergeBtn">🔗 이미지 합치기</button>
+    <button class="btn-convert" id="mergeBtn">🔗 Merge Images</button>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
 
   <div class="progress-wrap" id="progressWrap">
     <div class="progress-label">
-      <span id="progressText">합치는 중...</span>
+      <span id="progressText">Merging...</span>
       <span id="progressPct">0%</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -284,12 +288,12 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">이미지 합치기 완료!</div>
+        <div class="result-title">Merged!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
     <div class="preview-image-wrap">
-      <img id="resultImg" src="" alt="합쳐진 이미지 미리보기" style="max-width:100%;border-radius:8px;">
+      <img id="resultImg" src="" alt="Merged Image Preview" style="max-width:100%;border-radius:8px;">
     </div>
 
 <div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
@@ -302,7 +306,7 @@
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
     <div class="download-share-group" style="margin-top:16px;">
-      <button class="btn-download" id="downloadBtn">⬇️ 합쳐진 이미지 다운로드</button>
+      <button class="btn-download" id="downloadBtn">⬇️ Download Merged Image</button>
       <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
     </div>
   </div>
@@ -396,7 +400,7 @@
     const remaining = 10 - files.length;
     const toAdd = newFiles.filter(f => f.type.match(/^image\//)).slice(0, remaining);
     if (toAdd.length === 0) {
-      if (files.length >= 10) showError('최대 10장까지만 추가할 수 있습니다.');
+      if (files.length >= 10) showError('You can add up to 10 images.');
       return;
     }
     for (const f of toAdd) {
@@ -440,14 +444,14 @@
   }
 
   document.getElementById('mergeBtn').addEventListener('click', async () => {
-    if (files.length < 2) { showError('이미지를 2장 이상 추가해 주세요.'); return; }
+    if (files.length < 2) { showError('Please add at least 2 images.'); return; }
     const btn = document.getElementById('mergeBtn');
     btn.disabled = true; btn.textContent = '⏳ Processing...';
     hideError();
 
     document.getElementById('progressWrap').style.display = 'block';
     document.getElementById('progressFill').style.width = '30%';
-    document.getElementById('progressText').textContent = '이미지 준비 중...';
+    document.getElementById('progressText').textContent = 'Preparing image...';
 
     try {
       const gap = parseInt(gapSlider.value);
@@ -470,7 +474,7 @@
         ctx.fillRect(0, 0, canvasW, canvasH);
 
         document.getElementById('progressFill').style.width = '70%';
-        document.getElementById('progressText').textContent = '이미지 합치는 중...';
+        document.getElementById('progressText').textContent = 'Merging images...';
 
         let x = 0;
         imgs.forEach((img, i) => {
@@ -501,7 +505,7 @@
         ctx.fillRect(0, 0, canvasW, canvasH);
 
         document.getElementById('progressFill').style.width = '70%';
-        document.getElementById('progressText').textContent = '이미지 합치는 중...';
+        document.getElementById('progressText').textContent = 'Merging images...';
 
         let y = 0;
         imgs.forEach((img, i) => {
@@ -520,7 +524,7 @@
       }
 
       document.getElementById('progressFill').style.width = '100%';
-      document.getElementById('progressText').textContent = '완료!';
+      document.getElementById('progressText').textContent = 'Done!';
       document.getElementById('progressWrap').style.display = 'none';
 
       const panel = document.getElementById('resultPanel');
@@ -531,7 +535,7 @@
       showError('Processing failed: ' + err.message);
       document.getElementById('progressWrap').style.display = 'none';
     }
-    btn.disabled = false; btn.textContent = '🔗 이미지 합치기';
+    btn.disabled = false; btn.textContent = '🔗 Merge Images';
   });
 
   document.getElementById('downloadBtn').addEventListener('click', () => {
@@ -574,8 +578,8 @@
       const ext = extMap[mime] || '.jpg';
       const fname = 'merged_image' + ext;
       const file = new File([resultBlob], fname, { type: mime });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/merge-image.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/merge-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

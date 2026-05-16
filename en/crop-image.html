@@ -98,6 +98,7 @@
     }
     #previewCanvas { display: block; max-width: 100%; }
     .crop-info { font-size:0.82rem; color:var(--text-light); margin-top:8px; }
+  
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -119,7 +120,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="crop-image.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/crop-image.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -164,7 +170,7 @@
   <div class="tool-header">
     <span class="tool-header-icon">✂️</span>
     <h1>Crop Image – Free Online</h1>
-    <p>원하는 영역의 좌표와 크기를 입력해 이미지를 자릅니다.</p>
+    <p>Upload an image and crop it by specifying coordinates or dragging to select an area. Supports fixed aspect ratios. All done in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -181,24 +187,24 @@
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
-    <div class="options-title">크롭 설정</div>
-    <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:16px;">원본 이미지에서 자를 영역을 Pixels 좌표로 입력하세요.</p>
+    <div class="options-title">Crop Settings</div>
+    <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:16px;">Enter the area to crop from the original image in pixel coordinates.</p>
 
     <div class="crop-controls">
       <div class="crop-field">
-        <label>X 시작 (px)</label>
+        <label>X Start (px)</label>
         <input type="number" id="cropX" min="0" value="0">
       </div>
       <div class="crop-field">
-        <label>Y 시작 (px)</label>
+        <label>Y Start (px)</label>
         <input type="number" id="cropY" min="0" value="0">
       </div>
       <div class="crop-field">
-        <label>너비 (px)</label>
+        <label>Width (px)</label>
         <input type="number" id="cropW" min="1" value="100">
       </div>
       <div class="crop-field">
-        <label>높이 (px)</label>
+        <label>Height (px)</label>
         <input type="number" id="cropH" min="1" value="100">
       </div>
     </div>
@@ -223,7 +229,7 @@
       </div>
     </div>
 
-    <button class="btn-convert" id="cropBtn">✂️ 자르기 실행</button>
+    <button class="btn-convert" id="cropBtn">✂️ Apply Crop</button>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
@@ -232,12 +238,12 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">자르기 완료!</div>
+        <div class="result-title">Cropped!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
     <div class="preview-image-wrap">
-      <img id="resultImg" src="" alt="잘라낸 이미지 미리보기">
+      <img id="resultImg" src="" alt="Cropped Image Preview">
     </div>
     
 <div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
@@ -328,7 +334,7 @@
 
   async function loadFile(file) {
     if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select an image file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -386,7 +392,7 @@
     ov.style.width = Math.round(w * displayScale) + 'px';
     ov.style.height = Math.round(h * displayScale) + 'px';
 
-    document.getElementById('cropInfo').textContent = `크롭 영역: ${x}, ${y} ~ ${x+w}×${y+h} px`;
+    document.getElementById('cropInfo').textContent = `Crop Area: ${x}, ${y} ~ ${x+w}×${y+h} px`;
   }
 
   function clearFile() {
@@ -411,7 +417,7 @@
     w = Math.min(w, iw - x);
     h = Math.min(h, ih - y);
 
-    if (w < 1 || h < 1) { showError('유효한 크롭 영역을 입력하세요.'); return; }
+    if (w < 1 || h < 1) { showError('Please enter a valid crop area.'); return; }
 
     const format = document.getElementById('outputFormat').value;
     const canvas = document.createElement('canvas');
@@ -474,8 +480,8 @@
       const ext = extMap[mime] || '.jpg';
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_cropped' + ext : 'cropped' + ext;
       const file = new File([resultBlob], fname, { type: mime });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/crop-image.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/crop-image.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

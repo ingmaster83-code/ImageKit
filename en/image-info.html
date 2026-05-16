@@ -111,6 +111,7 @@
       display: block;
       margin-bottom: 16px;
     }
+  
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -132,7 +133,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="image-info.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/image-info.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -171,34 +177,34 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 정보 확인</span>
+    <span>Image Info</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🔍</span>
     <h1>Image Info Viewer – Free Online</h1>
-    <p>이미지 파일의 상세 정보(File Name, 크기, Resolution, 형식, 수정일 등)를 확인합니다.</p>
+    <p>Upload an image to instantly check its resolution, file size, format, and metadata. No server upload — all analysis runs in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>Drop your image file here</h3>
-    <p>JPG, PNG, WebP, GIF 등 모든 이미지 형식 가능</p>
+    <p>Supports JPG, PNG, WebP, GIF and more</p>
     <label for="fileInput" class="btn-select">Select Image File</label>
     <input type="file" id="fileInput" accept="image/*" style="display:none">
   </div>
 
   <div id="resultPanel" class="options-panel" style="display:none">
-    <div class="options-title">이미지 정보</div>
+    <div class="options-title">Image Information</div>
 
-    <img id="previewThumb" class="preview-thumb" alt="미리보기">
+    <img id="previewThumb" class="preview-thumb" alt="Preview">
 
     <table class="info-table" id="infoTable">
       <tbody id="infoBody"></tbody>
     </table>
 
     <div style="margin-top:16px; display:flex; gap:8px;">
-      <button class="btn-action" onclick="clearFile()">✕ 초기화</button>
+      <button class="btn-action" onclick="clearFile()">✕ Clear</button>
     </div>
   </div>
 
@@ -271,7 +277,7 @@
 
   function loadFile(file) {
     if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select an image file.'); return;
     }
     hideError();
 
@@ -292,7 +298,7 @@
           'image/svg+xml': 'SVG',
           'image/tiff': 'TIFF'
         };
-        const fmt = typeMap[file.type] || file.type || '알 수 없음';
+        const fmt = typeMap[file.type] || file.type || 'Unknown';
 
         // Aspect ratio
         const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
@@ -310,7 +316,7 @@
         let modStr = '—';
         if (file.lastModified) {
           const d = new Date(file.lastModified);
-          modStr = d.toLocaleString('ko-KR');
+          modStr = d.toLocaleString('en-US');
         }
 
         // Megapixels
@@ -319,12 +325,12 @@
         const rows = [
           ['📄 File Name', escHtml(file.name)],
           ['📦 File Size', sizeStr],
-          ['📐 이미지 크기', `${img.naturalWidth} × ${img.naturalHeight} Pixels`],
-          ['📊 메가Pixels', `${mp} MP`],
-          ['⬜ 가로세로 비율', ar],
+          ['📐 Image Size', `${img.naturalWidth} × ${img.naturalHeight} Pixels`],
+          ['📊 Megapixels', `${mp} MP`],
+          ['⬜ Aspect Ratio', ar],
           ['🎨 Format', fmt],
-          ['🏷️ MIME 타입', file.type || '—'],
-          ['📅 마지막 수정일', modStr],
+          ['🏷️ MIME Type', file.type || '—'],
+          ['📅 Last Modified', modStr],
         ];
 
         document.getElementById('infoBody').innerHTML = rows.map(([k, v]) =>

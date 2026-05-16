@@ -135,8 +135,7 @@
     margin-bottom: 16px;
     line-height: 1.6;
   }
-</style>
-  <style>
+
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -158,7 +157,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="png-to-ico.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/png-to-ico.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -197,23 +201,23 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>PNG → ICO 변환</span>
+    <span>PNG → ICO</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🏷️</span>
     <h1>PNG to ICO Converter – Create Favicon Free Online</h1>
-    <p>PNG 이미지를 ICO 파일로 변환해 웹사이트 파비콘이나 앱 아이콘으로 사용하세요.</p>
+    <p>Upload a PNG image and convert it to ICO format for use as a favicon or app icon. Multiple sizes included. All processing done in your browser.</p>
   </div>
 
   <div class="info-box">
-    ℹ️ <strong>파비콘 팁:</strong> 웹사이트 파비콘은 <strong>16×16, 32×32</strong>를 기본으로 포함하는 것을 권장합니다. 정사각형 이미지일수록 최상의 결과를 얻을 수 있습니다.
+    ℹ️ <strong>Favicon Tip:</strong> For website favicons, it is recommended to include <strong>16×16 and 32×32</strong> sizes. Square images give the best results.
   </div>
 
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>Drop your image file here</h3>
-    <p>PNG, JPG 파일을 업로드하세요 (정사각형 권장)</p>
+    <p>Upload a PNG or JPG file (square recommended)</p>
     <label for="fileInput" class="btn-select">Select Image File</label>
     <input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg,image/webp" style="display:none">
   </div>
@@ -224,9 +228,9 @@
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
-    <div class="options-title">ICO 크기 설정</div>
+    <div class="options-title">ICO Size Settings</div>
     <div class="option-row">
-      <span class="option-label">포함할 크기 선택</span>
+      <span class="option-label">Select Sizes to Include</span>
       <div class="option-control">
         <div class="size-options">
           <label class="size-option checked" id="lbl16">
@@ -251,12 +255,12 @@
       </div>
     </div>
     <div class="option-row" style="margin-top:16px;">
-      <span class="option-label">미리보기</span>
+      <span class="option-label">Preview</span>
       <div class="option-control">
         <div class="preview-thumbs" id="previewThumbs"></div>
       </div>
     </div>
-    <button class="btn-convert" id="convertBtn">🏷️ ICO 변환 시작</button>
+    <button class="btn-convert" id="convertBtn">🏷️ Convert to ICO</button>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
@@ -273,7 +277,7 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">ICO 변환 완료!</div>
+        <div class="result-title">ICO Created!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
@@ -287,7 +291,7 @@
      data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
-    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ ICO 파일 다운로드</button>
+    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ Download ICO File</button>
   </div>
 
     <div class="cross-link-banner">
@@ -404,7 +408,7 @@
 
   function loadFile(file) {
     if (!file.type.match(/^image\//)) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select an image file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -444,14 +448,14 @@
   document.getElementById('convertBtn').addEventListener('click', async () => {
     if (!loadedImg) return;
     const sizes = getSelectedSizes();
-    if (sizes.length === 0) { showError('크기를 하나 이상 선택해 주세요.'); return; }
+    if (sizes.length === 0) { showError('Please select at least one size.'); return; }
 
     const btn = document.getElementById('convertBtn');
     btn.disabled = true; btn.textContent = '⏳ Converting...';
     hideError();
     document.getElementById('progressWrap').style.display = 'block';
     document.getElementById('progressFill').style.width = '20%';
-    document.getElementById('progressText').textContent = '이미지 준비 중...';
+    document.getElementById('progressText').textContent = 'Preparing image...';
 
     try {
       // Render each size as PNG into memory
@@ -468,28 +472,28 @@
         document.getElementById('progressFill').style.width = `${20 + (i+1)/sizes.length * 60}%`;
       }
 
-      document.getElementById('progressText').textContent = 'ICO 파일 생성 중...';
+      document.getElementById('progressText').textContent = 'Creating ICO file...';
       document.getElementById('progressFill').style.width = '90%';
 
       const icoBlob = buildIco(pngDataList);
       resultBlob = icoBlob;
 
       document.getElementById('progressFill').style.width = '100%';
-      document.getElementById('progressText').textContent = '완료!';
+      document.getElementById('progressText').textContent = 'Done!';
       document.getElementById('progressWrap').style.display = 'none';
 
       document.getElementById('resultSubtitle').textContent =
-        `${sizes.join(', ')}px 크기 포함 · ${formatSize(icoBlob.size)}`;
+        `${sizes.join(', ')}px sizes included · ${formatSize(icoBlob.size)}`;
 
       const panel = document.getElementById('resultPanel');
       panel.style.display = 'block';
       panel.scrollIntoView({ behavior: 'smooth' });
 
     } catch(err) {
-      showError('변환 중 오류가 발생했습니다: ' + err.message);
+      showError('Conversion error: ' + err.message);
       document.getElementById('progressWrap').style.display = 'none';
     }
-    btn.disabled = false; btn.textContent = '🏷️ ICO 변환 시작';
+    btn.disabled = false; btn.textContent = '🏷️ Convert to ICO';
   });
 
   // Build ICO binary with embedded PNG images

@@ -102,7 +102,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="webp-to-jpg.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/webp-to-jpg.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -141,19 +146,19 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>WebP → JPG/PNG 변환</span>
+    <span>WebP → JPG</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">📷</span>
     <h1>WebP to JPG Converter – Free Online</h1>
-    <p>WebP 이미지를 JPG 또는 PNG 형식으로 변환합니다.</p>
+    <p>Upload a WebP image and convert it to JPG or PNG format. Useful for apps that do not support WebP. All processing happens in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>WebP Drop your file here</h3>
-    <p>WebP 파일을 업로드하세요 (다른 이미지 형식도 가능)</p>
+    <p>Upload a WebP file (other image formats also accepted)</p>
     <label for="fileInput" class="btn-select">Select Image File</label>
     <input type="file" id="fileInput" accept="image/*" style="display:none">
   </div>
@@ -179,7 +184,7 @@
     </div>
 
     <div class="option-row" id="qualityRow">
-      <span class="option-label">JPG 품질: <strong id="qualityVal">92</strong>%</span>
+      <span class="option-label">JPG Quality: <strong id="qualityVal">92</strong>%</span>
       <div class="option-control" style="flex:1; max-width:320px;">
         <input type="range" id="quality" min="10" max="100" value="92" style="width:100%;">
       </div>
@@ -273,13 +278,13 @@
     r.addEventListener('change', function() {
       document.getElementById('qualityRow').style.display = this.value === 'image/jpeg' ? 'flex' : 'none';
       const btn = document.getElementById('downloadBtn');
-      btn.textContent = this.value === 'image/jpeg' ? '⬇️ JPG로 다운로드' : '⬇️ PNG로 다운로드';
+      btn.textContent = this.value === 'image/jpeg' ? '⬇️ Download as JPG' : '⬇️ Download as PNG';
     });
   });
 
   async function loadFile(file) {
     if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select an image file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -368,8 +373,8 @@
       const ext = fmt === 'image/jpeg' ? '.jpg' : '.png';
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + ext : 'converted' + ext;
       const file = new File([blob], fname, { type: fmt });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/webp-to-jpg.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/webp-to-jpg.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

@@ -129,6 +129,7 @@
       flex-shrink: 0;
     }
     .btn-download-sm:hover { background: #16A34A; }
+  
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -150,7 +151,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="heic-to-jpg.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/heic-to-jpg.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -189,29 +195,29 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>HEIC → JPG 변환</span>
+    <span>HEIC → JPG</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">📱</span>
     <h1>HEIC to JPG Converter – Free Online</h1>
-    <p>아이폰/iPad에서 촬영한 HEIC 파일을 JPG 또는 PNG로 변환합니다. 여러 파일을 한 번에 변환할 수 있습니다.</p>
+    <p>Upload iPhone HEIC photos and convert them to JPG format. Batch conversion supported — download all as ZIP. Everything runs in your browser.</p>
   </div>
 
   <div class="notice-box">
-    📱 아이폰/iPad에서 촬영한 HEIC(HEIF) 파일을 지원합니다. 여러 파일을 동시에 선택하여 일괄 변환이 가능합니다.
+    📱 Supports HEIC/HEIF files from iPhone/iPad. Select multiple files for batch conversion.
   </div>
 
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">📱</span>
     <h3>HEIC Drop your file here</h3>
-    <p>.heic, .heif 파일을 업로드하세요 (여러 파일 가능)</p>
+    <p>Upload .heic or .heif files (multiple files supported)</p>
     <label for="fileInput" class="btn-select">HEIC Select File</label>
     <input type="file" id="fileInput" accept=".heic,.heif,image/heic,image/heif,image/heic-sequence,image/heif-sequence" multiple style="display:none">
   </div>
 
   <div id="fileListPanel" class="file-list-panel" style="display:none">
-    <div class="file-list-title">Selected File (<span id="fileCount">0</span>개)</div>
+    <div class="file-list-title">Selected Files (<span id="fileCount">0</span>)</div>
     <div id="fileList"></div>
   </div>
 
@@ -229,7 +235,7 @@
     </div>
 
     <div class="option-row" id="qualityRow">
-      <span class="option-label">JPG 품질: <strong id="qualityVal">92</strong>%</span>
+      <span class="option-label">JPG Quality: <strong id="qualityVal">92</strong>%</span>
       <div class="option-control" style="flex:1; max-width:320px;">
         <input type="range" id="quality" min="10" max="100" value="92">
       </div>
@@ -258,7 +264,7 @@
     </div>
     <div id="resultList"></div>
     <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
-      <button class="btn-download" id="downloadAllBtn" style="display:none;">⬇️ 모두 다운로드 (ZIP)</button>
+      <button class="btn-download" id="downloadAllBtn" style="display:none;">⬇️ Download All (ZIP)</button>
       <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
     </div>
   </div>
@@ -334,7 +340,7 @@
     const files = Array.from(e.dataTransfer.files);
     if (files.length) addFiles(files);
   });
-  // label 클릭 시 이미 fileInput이 열리므로 dropZone 클릭 시 label/input 제외
+  // label click already opens fileInput; exclude label/input from dropZone click
   dropZone.addEventListener('click', e => {
     if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
     fileInput.click();
@@ -342,7 +348,7 @@
   fileInput.addEventListener('change', e => {
     const files = Array.from(e.target.files);
     if (files.length) addFiles(files);
-    fileInput.value = ''; // 같은 파일 재선택 가능하게 초기화
+    fileInput.value = ''; // reset to allow re-selecting the same file
   });
 
   // Quality slider
@@ -358,7 +364,7 @@
   });
 
   function addFiles(newFiles) {
-    // 중복 제거 (이름+크기 기준)
+    // de-duplicate by name+size
     newFiles.forEach(f => {
       const isDup = selectedFiles.some(s => s.name === f.name && s.size === f.size);
       if (!isDup) selectedFiles.push(f);
@@ -424,7 +430,7 @@
       const pct = Math.round(((i) / selectedFiles.length) * 100);
       progressFill.style.width = pct + '%';
       progressPercent.textContent = pct + '%';
-      progressText.textContent = `${i+1}/${selectedFiles.length} 변환 중...`;
+      progressText.textContent = `${i+1}/${selectedFiles.length} converting...`;
 
       try {
         let outputBlob;
@@ -460,8 +466,8 @@
             <div class="converted-name">${outName}</div>
             <div class="converted-size">${formatSize(outputBlob.size)}</div>
           </div>
-          <span class="converted-status status-done">완료</span>
-          <button class="btn-download-sm" onclick="downloadSingle(${convertedResults.length - 1})">다운로드</button>
+          <span class="converted-status status-done">Done</span>
+          <button class="btn-download-sm" onclick="downloadSingle(${convertedResults.length - 1})">Download</button>
         </div>`;
         successCount++;
 
@@ -470,19 +476,19 @@
           <div style="width:60px;height:60px;background:#FEE2E2;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">❌</div>
           <div class="converted-info">
             <div class="converted-name">${file.name}</div>
-            <div class="converted-size" style="color:#DC2626;">${err.message || '변환 실패'}</div>
+            <div class="converted-size" style="color:#DC2626;">${err.message || 'Conversion failed'}</div>
           </div>
-          <span class="converted-status status-error">실패</span>
+          <span class="converted-status status-error">Failed</span>
         </div>`;
       }
     }
 
     progressFill.style.width = '100%';
     progressPercent.textContent = '100%';
-    progressText.textContent = '완료!';
+    progressText.textContent = 'Done!';
 
     document.getElementById('resultList').innerHTML = resultHtml;
-    document.getElementById('resultSubtitle').textContent = `${successCount}/${selectedFiles.length}개 파일 변환 완료`;
+    document.getElementById('resultSubtitle').textContent = `${successCount}/${selectedFiles.length} files converted`;
     document.getElementById('resultPanel').style.display = 'block';
 
     if (convertedResults.length > 1) {
@@ -506,7 +512,7 @@
     if (convertedResults.length === 0) return;
     const btn = document.getElementById('downloadAllBtn');
     btn.disabled = true;
-    btn.textContent = 'ZIP 생성 중...';
+    btn.textContent = 'Creating ZIP...';
 
     const zip = new JSZip();
     convertedResults.forEach(r => {
@@ -522,7 +528,7 @@
     URL.revokeObjectURL(url);
 
     btn.disabled = false;
-    btn.textContent = '⬇️ 모두 다운로드 (ZIP)';
+    btn.textContent = '⬇️ Download All (ZIP)';
   });
 
   function loadImage(file) {
@@ -552,8 +558,8 @@
       if (!convertedResults || !convertedResults.length) return;
       const first = convertedResults[0];
       const file = new File([first.blob], first.name, { type: first.blob.type || 'image/jpeg' });
-      try { await navigator.share({ files: [file], title: first.name + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/heic-to-jpg.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: first.name + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/heic-to-jpg.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

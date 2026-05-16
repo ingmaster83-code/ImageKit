@@ -151,8 +151,7 @@
     transition: all 0.15s;
   }
   .reset-btn:hover { border-color: var(--primary); color: var(--primary); }
-</style>
-  <style>
+
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -174,7 +173,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="image-filter.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/image-filter.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -213,13 +217,13 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 필터</span>
+    <span>Image Filter</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🎨</span>
     <h1>Image Filter – Apply Photo Effects Free Online</h1>
-    <p>슬라이더로 필터를 조정하면 실시간으로 미리보기됩니다. 완성되면 바로 다운로드하세요.</p>
+    <p>Upload an image and apply filters like grayscale, sepia, brightness, contrast, and blur. Adjust intensity with sliders. Everything runs in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -237,62 +241,62 @@
 
   <div id="optionsPanel" class="options-panel" style="display:none">
     <div class="options-title" style="display:flex;justify-content:space-between;align-items:center;">
-      <span>필터 설정</span>
-      <button class="reset-btn" id="resetBtn">↺ 초기화</button>
+      <span>Filter Settings</span>
+      <button class="reset-btn" id="resetBtn">↺ Reset</button>
     </div>
     <div class="filter-sliders">
       <div class="filter-row">
         <div class="filter-row-header">
-          <span class="filter-label">☀️ 밝기</span>
+          <span class="filter-label">☀️ Brightness</span>
           <span class="filter-val" id="brightnessVal">100%</span>
         </div>
         <input type="range" id="brightness" min="0" max="200" value="100">
       </div>
       <div class="filter-row">
         <div class="filter-row-header">
-          <span class="filter-label">🌓 대비</span>
+          <span class="filter-label">🌓 Contrast</span>
           <span class="filter-val" id="contrastVal">100%</span>
         </div>
         <input type="range" id="contrast" min="0" max="200" value="100">
       </div>
       <div class="filter-row">
         <div class="filter-row-header">
-          <span class="filter-label">🌈 채도</span>
+          <span class="filter-label">🌈 Saturation</span>
           <span class="filter-val" id="saturateVal">100%</span>
         </div>
         <input type="range" id="saturate" min="0" max="300" value="100">
       </div>
       <div class="filter-row">
         <div class="filter-row-header">
-          <span class="filter-label">🎨 색조</span>
+          <span class="filter-label">🎨 Hue</span>
           <span class="filter-val" id="hueVal">0°</span>
         </div>
         <input type="range" id="hue" min="0" max="360" value="0">
       </div>
       <div class="filter-row">
         <div class="filter-row-header">
-          <span class="filter-label">⬛ 흑백</span>
+          <span class="filter-label">⬛ Grayscale</span>
           <span class="filter-val" id="grayscaleVal">0%</span>
         </div>
         <input type="range" id="grayscale" min="0" max="100" value="0">
       </div>
       <div class="filter-row">
         <div class="filter-row-header">
-          <span class="filter-label">🟫 세피아</span>
+          <span class="filter-label">🟫 Sepia</span>
           <span class="filter-val" id="sepiaVal">0%</span>
         </div>
         <input type="range" id="sepia" min="0" max="100" value="0">
       </div>
       <div class="filter-row">
         <div class="filter-row-header">
-          <span class="filter-label">💨 블러</span>
+          <span class="filter-label">💨 Blur</span>
           <span class="filter-val" id="blurVal">0px</span>
         </div>
         <input type="range" id="blur" min="0" max="20" value="0" step="0.5">
       </div>
       <div class="filter-row">
         <div class="filter-row-header">
-          <span class="filter-label">✨ 선명도</span>
+          <span class="filter-label">✨ Sharpness</span>
           <span class="filter-val" id="sharpnessVal">0%</span>
         </div>
         <input type="range" id="sharpness" min="0" max="100" value="0">
@@ -301,16 +305,16 @@
 
     <div class="filter-preview-wrap" id="previewWrap" style="display:none">
       <div class="filter-preview-box">
-        <span>원본</span>
-        <img id="originalImg" src="" alt="원본 이미지">
+        <span>Original</span>
+        <img id="originalImg" src="" alt="Original Image">
       </div>
       <div class="filter-preview-box">
-        <span>미리보기</span>
-        <img id="previewImg" src="" alt="필터 적용 미리보기">
+        <span>Preview</span>
+        <img id="previewImg" src="" alt="Filtered Preview">
       </div>
     </div>
 
-    <button class="btn-convert" id="applyBtn" style="margin-top:20px;">🎨 필터 적용 & 저장 준비</button>
+    <button class="btn-convert" id="applyBtn" style="margin-top:20px;">🎨 Apply Filter & Prepare Download</button>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
@@ -327,12 +331,12 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">필터 적용 완료!</div>
+        <div class="result-title">Filter Applied!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
     <div class="preview-image-wrap">
-      <img id="resultImg" src="" alt="필터 적용된 이미지 미리보기" style="max-width:100%;border-radius:8px;">
+      <img id="resultImg" src="" alt="Filtered Image Preview" style="max-width:100%;border-radius:8px;">
     </div>
 
 <div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
@@ -345,7 +349,7 @@
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
     <div class="download-share-group">
-      <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 필터 이미지 다운로드</button>
+      <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ Download Filtered Image</button>
       <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
     </div>
   </div>
@@ -523,7 +527,7 @@
 
   function loadFile(file) {
     if (!file.type.match(/^image\/(jpeg|png|webp)/)) {
-      showError('JPG, PNG, WebP 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select a JPG, PNG, or WebP file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -572,7 +576,7 @@
     hideError();
     document.getElementById('progressWrap').style.display = 'block';
     document.getElementById('progressFill').style.width = '40%';
-    document.getElementById('progressText').textContent = '필터 적용 중...';
+    document.getElementById('progressText').textContent = 'Applying filter...';
 
     try {
       const filterStr = getFilterCSS();
@@ -622,7 +626,7 @@
       resultBlob = blob;
 
       document.getElementById('progressFill').style.width = '100%';
-      document.getElementById('progressText').textContent = '완료!';
+      document.getElementById('progressText').textContent = 'Done!';
       document.getElementById('progressWrap').style.display = 'none';
 
       const url = URL.createObjectURL(blob);
@@ -638,7 +642,7 @@
       showError('Processing failed: ' + err.message);
       document.getElementById('progressWrap').style.display = 'none';
     }
-    btn.disabled = false; btn.textContent = '🎨 필터 적용 & 저장 준비';
+    btn.disabled = false; btn.textContent = '🎨 Apply Filter & Prepare Download';
   });
 
   document.getElementById('downloadBtn').addEventListener('click', () => {
@@ -660,7 +664,7 @@
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
 
-  // 공유하기
+  // share
   (function() {
     const shareBtn = document.getElementById('shareBtn');
     if (navigator.share && navigator.canShare) {
@@ -674,8 +678,8 @@
       const ext = resultBlob.type === 'image/png' ? '.png' : '.jpg';
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_filtered' + ext : 'filtered' + ext;
       const file = new File([resultBlob], fname, { type: resultBlob.type });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/image-filter.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/image-filter.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

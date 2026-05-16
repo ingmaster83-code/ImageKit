@@ -161,6 +161,7 @@
     }
     .add-more-btn:hover { border-color: var(--primary); color: var(--primary); }
     .add-more-btn span { font-size: 1.5rem; }
+  
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -182,7 +183,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="make-gif.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/make-gif.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -221,25 +227,25 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>GIF 만들기</span>
+    <span>Make GIF</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🎬</span>
     <h1>GIF Maker – Create Animated GIF Free Online</h1>
-    <p>여러 이미지를 업로드하여 움직이는 GIF 애니메이션을 만듭니다. 드래그로 순서 변경 가능.</p>
+    <p>Upload multiple images and combine them into an animated GIF. Set frame rate and loop count. All processing happens in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🎬</span>
     <h3>Drop your image file here</h3>
-    <p>JPG, PNG, WebP 파일 여러 장을 업로드하세요</p>
+    <p>Upload multiple JPG, PNG, or WebP files</p>
     <label for="fileInput" class="btn-select">Select Image File</label>
     <input type="file" id="fileInput" accept="image/*" multiple style="display:none">
   </div>
 
   <div id="framesPanel" class="file-list-panel" style="display:none">
-    <div class="file-list-title">프레임 (<span id="frameCount">0</span>개) — 드래그하여 순서 변경</div>
+    <div class="file-list-title">Frames (<span id="frameCount">0</span>) — drag to reorder</div>
     <div class="frames-grid" id="framesGrid"></div>
   </div>
 
@@ -247,7 +253,7 @@
     <div class="options-title">GIF Settings</div>
 
     <div class="option-row">
-      <span class="option-label">프레임 딜레이: <strong id="delayVal">500</strong>ms</span>
+      <span class="option-label">Frame Delay: <strong id="delayVal">500</strong>ms</span>
       <div class="option-control" style="flex:1; max-width:320px;">
         <input type="range" id="frameDelay" min="50" max="2000" value="500" step="50">
       </div>
@@ -257,9 +263,9 @@
       <span class="option-label">Loop</span>
       <div class="option-control">
         <div class="radio-group">
-          <label class="radio-item"><input type="radio" name="repeat" value="0" checked> 무한 Loop</label>
-          <label class="radio-item"><input type="radio" name="repeat" value="1"> 1회</label>
-          <label class="radio-item"><input type="radio" name="repeat" value="custom"> 지정</label>
+          <label class="radio-item"><input type="radio" name="repeat" value="0" checked> Infinite Loop</label>
+          <label class="radio-item"><input type="radio" name="repeat" value="1"> Once</label>
+          <label class="radio-item"><input type="radio" name="repeat" value="custom"> Custom</label>
         </div>
       </div>
     </div>
@@ -272,28 +278,28 @@
     </div>
 
     <div class="option-row">
-      <span class="option-label">크기</span>
+      <span class="option-label">Size</span>
       <div class="option-control">
         <div class="radio-group">
-          <label class="radio-item"><input type="radio" name="sizeMode" value="original" checked> 원본 크기</label>
-          <label class="radio-item"><input type="radio" name="sizeMode" value="custom"> 너비 지정</label>
+          <label class="radio-item"><input type="radio" name="sizeMode" value="original" checked> Original Size</label>
+          <label class="radio-item"><input type="radio" name="sizeMode" value="custom"> Custom Width</label>
         </div>
       </div>
     </div>
 
     <div class="option-row" id="customSizeRow" style="display:none">
-      <span class="option-label">너비 (px)</span>
+      <span class="option-label">Width (px)</span>
       <div class="option-control" style="max-width:150px;">
         <input type="number" id="customWidth" value="480" min="50" max="2000">
       </div>
     </div>
 
-    <button class="btn-convert" id="generateBtn" disabled>🎬 GIF 생성</button>
+    <button class="btn-convert" id="generateBtn" disabled>🎬 Generate GIF</button>
   </div>
 
   <div class="progress-wrap" id="progressWrap">
     <div class="progress-label">
-      <span id="progressText">GIF 생성 중...</span>
+      <span id="progressText">Generating GIF...</span>
       <span id="progressPercent">0%</span>
     </div>
     <div class="progress-bar">
@@ -305,12 +311,12 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">GIF 생성 완료!</div>
+        <div class="result-title">GIF Created!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
     <div class="gif-preview-wrap">
-      <img id="gifPreview" alt="생성된 GIF">
+      <img id="gifPreview" alt="Generated GIF">
     </div>
     <div style="margin-top:20px; text-align:center;">
       
@@ -429,7 +435,7 @@
 
   async function addFiles(files) {
     const imageFiles = files.filter(f => f.type.startsWith('image/'));
-    if (imageFiles.length === 0) { showError('이미지 파일만 업로드할 수 있습니다.'); return; }
+    if (imageFiles.length === 0) { showError('Please select an image file.'); return; }
     hideError();
 
     for (const file of imageFiles) {
@@ -446,14 +452,14 @@
     let html = '';
     frames.forEach((f, i) => {
       html += `<div class="frame-card" draggable="true" data-idx="${i}">
-        <button class="frame-remove" onclick="removeFrame(${i})" title="삭제">✕</button>
-        <img src="${f.url}" alt="프레임 ${i+1}">
+        <button class="frame-remove" onclick="removeFrame(${i})" title="Remove">✕</button>
+        <img src="${f.url}" alt="Frame ${i+1}">
         <div class="frame-num">#${i+1}</div>
       </div>`;
     });
     html += `<button class="add-more-btn" onclick="document.getElementById('fileInput').click()">
       <span>+</span>
-      이미지 추가
+      Add Image
     </button>`;
     grid.innerHTML = html;
 
@@ -511,7 +517,7 @@
 
     const btn = document.getElementById('generateBtn');
     btn.disabled = true;
-    btn.textContent = 'GIF 생성 중...';
+    btn.textContent = 'Generating GIF...';
 
     const delay = parseInt(document.getElementById('frameDelay').value);
     const repeatRadio = document.querySelector('input[name="repeat"]:checked').value;
@@ -573,22 +579,22 @@
       const pct = Math.round(p * 100);
       progressFill.style.width = pct + '%';
       progressPercent.textContent = pct + '%';
-      progressText.textContent = 'GIF 인코딩 중...';
+      progressText.textContent = 'Encoding GIF...';
     });
 
     gif.on('finished', blob => {
       resultBlob = blob;
       const url = URL.createObjectURL(blob);
       document.getElementById('gifPreview').src = url;
-      document.getElementById('resultSubtitle').textContent = `${frames.length}프레임 · ${outW}×${outH} · ${formatSize(blob.size)}`;
+      document.getElementById('resultSubtitle').textContent = `${frames.length} frames · ${outW}×${outH} · ${formatSize(blob.size)}`;
       document.getElementById('resultPanel').style.display = 'block';
 
       progressFill.style.width = '100%';
       progressPercent.textContent = '100%';
-      progressText.textContent = '완료!';
+      progressText.textContent = 'Done!';
 
       btn.disabled = false;
-      btn.textContent = '🎬 GIF 생성';
+      btn.textContent = '🎬 Generate GIF';
       setTimeout(() => { progressWrap.style.display = 'none'; }, 1500);
     });
 
@@ -622,7 +628,7 @@
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
 
-  // 공유하기
+  // share
   (function() {
     const shareBtn = document.getElementById('shareBtn');
     if (navigator.share && navigator.canShare) {
@@ -634,8 +640,8 @@
     shareBtn.addEventListener('click', async () => {
       if (!resultBlob) return;
       const file = new File([resultBlob], 'animated.gif', { type: 'image/gif' });
-      try { await navigator.share({ files: [file], title: 'animated.gif — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/make-gif.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: 'animated.gif — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/make-gif.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

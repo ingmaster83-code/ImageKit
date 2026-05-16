@@ -101,7 +101,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="svg-to-png.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/svg-to-png.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -140,19 +145,19 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>SVG → PNG 변환</span>
+    <span>SVG → PNG</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🔷</span>
     <h1>SVG to PNG Converter – Free Online</h1>
-    <p>SVG 벡터 파일을 PNG, WebP, JPG 이미지로 변환합니다. 배율을 지정해 고화질로 내보낼 수 있습니다.</p>
+    <p>Upload an SVG file and convert it to PNG. Set the output dimensions and download the result. All processing happens in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🔷</span>
     <h3>SVG Drop your file here</h3>
-    <p>.svg 파일을 업로드하세요</p>
+    <p>Upload an .svg file</p>
     <label for="fileInput" class="btn-select">SVG Select File</label>
     <input type="file" id="fileInput" accept=".svg,image/svg+xml" style="display:none">
   </div>
@@ -166,13 +171,13 @@
     <div class="options-title">Conversion Settings</div>
 
     <div class="option-row">
-      <span class="option-label">출력 배율</span>
+      <span class="option-label">Output Scale</span>
       <div class="option-control">
         <select id="scaleSelect">
-          <option value="1">1× (원본 크기)</option>
-          <option value="2" selected>2× (권장)</option>
-          <option value="3">3× (고화질)</option>
-          <option value="4">4× (초고화질)</option>
+          <option value="1">1× (original size)</option>
+          <option value="2" selected>2× (recommended)</option>
+          <option value="3">3× (high quality)</option>
+          <option value="4">4× (ultra quality)</option>
         </select>
       </div>
     </div>
@@ -181,9 +186,9 @@
       <span class="option-label">Output Format</span>
       <div class="option-control">
         <select id="outputFormat">
-          <option value="image/png" selected>PNG (투명 배경 유지)</option>
+          <option value="image/png" selected>PNG (preserves transparency)</option>
           <option value="image/webp">WebP</option>
-          <option value="image/jpeg">JPG (배경 흰색)</option>
+          <option value="image/jpeg">JPG (white background)</option>
         </select>
       </div>
     </div>
@@ -195,7 +200,7 @@
     <div id="sizeInfo" style="margin-top:8px; font-size:0.85rem; color:#666; display:none;"></div>
 
     <div class="download-share-group" style="margin-top:20px;">
-      <button class="btn-convert" id="downloadBtn">⬇️ PNG 다운로드</button>
+      <button class="btn-convert" id="downloadBtn">⬇️ Download PNG</button>
     </div>
   </div>
 
@@ -273,13 +278,13 @@
   document.getElementById('outputFormat').addEventListener('change', () => {
     const fmt = document.getElementById('outputFormat').value;
     const extMap = {'image/png':'PNG','image/webp':'WebP','image/jpeg':'JPG'};
-    document.getElementById('downloadBtn').textContent = `⬇️ ${extMap[fmt]} 다운로드`;
+    document.getElementById('downloadBtn').textContent = `⬇️ Download ${extMap[fmt]}`;
     renderPreview();
   });
 
   async function loadFile(file) {
     if (!file.name.toLowerCase().endsWith('.svg') && file.type !== 'image/svg+xml') {
-      showError('SVG 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select an SVG file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -345,7 +350,7 @@
     ctx.drawImage(svgImg, 0, 0, cw, ch);
     const sizeEl = document.getElementById('sizeInfo');
     sizeEl.style.display = 'block';
-    sizeEl.textContent = `출력 Resolution: ${cw} × ${ch} px`;
+    sizeEl.textContent = `Output Resolution: ${cw} × ${ch} px`;
   }
 
   function clearFile() {

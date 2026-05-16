@@ -181,6 +181,7 @@
       border: 1px solid var(--border);
       object-fit: contain;
     }
+  
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -201,7 +202,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="ocr-image.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/ocr-image.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -240,90 +246,90 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 텍스트 추출 (OCR)</span>
+    <span>Image OCR</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🔤</span>
     <h1>Image OCR – Extract Text Free Online</h1>
-    <p>사진, 스크린샷, 스캔 문서에서 텍스트를 인식하여 복사할 수 있게 추출합니다.<br>한국어, 영어, 한영 혼용을 지원합니다.</p>
+    <p>Extract text from photos, screenshots, and scanned documents.<br>Supports Korean, English, and mixed text.</p>
   </div>
 
   <div class="panel">
-    <div class="panel-title">언어 선택</div>
+    <div class="panel-title">Language</div>
     <div class="lang-btns">
-      <button class="lang-btn active" data-lang="kor">🇰🇷 한국어</button>
-      <button class="lang-btn" data-lang="eng">🇺🇸 영어</button>
-      <button class="lang-btn" data-lang="kor+eng">🌐 한국어 + 영어</button>
+      <button class="lang-btn active" data-lang="kor">🇰🇷 Korean</button>
+      <button class="lang-btn" data-lang="eng">🇺🇸 English</button>
+      <button class="lang-btn" data-lang="kor+eng">🌐 Korean + English</button>
     </div>
   </div>
 
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>Drop your image file here</h3>
-    <p>JPG, PNG, WebP, BMP, GIF 파일 지원</p>
+    <p>Supports JPG, PNG, WebP, BMP, GIF files</p>
     <label for="fileInput" class="btn-select">Select Image File</label>
     <input type="file" id="fileInput" accept="image/*" style="display:none">
   </div>
 
   <div id="previewPanel" style="display:none">
     <div class="img-preview-wrap">
-      <img id="imgPreview" src="" alt="선택된 이미지">
+      <img id="imgPreview" src="" alt="Selected Image">
     </div>
     <div id="fileInfoBar" style="margin-top:10px; font-size:0.85rem; color:var(--text-light); text-align:center;"></div>
   </div>
 
   <div id="progressPanel" style="display:none" class="panel">
-    <div class="panel-title">텍스트 인식 중…</div>
+    <div class="panel-title">Recognizing text…</div>
     <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
-    <div class="progress-status" id="progressStatus">초기화 중...</div>
+    <div class="progress-status" id="progressStatus">Initializing...</div>
   </div>
 
   <div id="resultPanel" style="display:none" class="panel">
     <div class="result-toolbar">
-      <div class="panel-title" style="margin-bottom:0;">인식 결과</div>
+      <div class="panel-title" style="margin-bottom:0;">Recognition Result</div>
       <div style="display:flex; gap:8px; align-items:center;">
         <span class="char-count" id="charCount"></span>
         <button class="btn-copy" id="copyBtn" onclick="copyResult()">📋 Copy</button>
-        <button class="btn-copy" id="downloadTxtBtn" onclick="downloadTxt()" style="background:var(--primary-light); color:var(--primary);">⬇️ TXT 저장</button>
+        <button class="btn-copy" id="downloadTxtBtn" onclick="downloadTxt()" style="background:var(--primary-light); color:var(--primary);">⬇️ Save as TXT</button>
       </div>
     </div>
-    <textarea class="ocr-result-area" id="ocrResult" placeholder="인식된 텍스트가 여기에 표시됩니다."></textarea>
+    <textarea class="ocr-result-area" id="ocrResult" placeholder="Recognized text will appear here."></textarea>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
 
   <div id="startPanel" style="display:none">
-    <button class="btn-convert" id="startBtn">🔍 텍스트 인식 시작</button>
+    <button class="btn-convert" id="startBtn">🔍 Start OCR</button>
   </div>
 
   <div class="ocr-warning" style="margin-top: 24px;">
-    <strong>⚠️ OCR 정확도 안내</strong><br>
-    • 인쇄된 문자가 선명할수록 인식률이 높습니다<br>
-    • 손글씨, 기울어진 텍스트, 복잡한 배경은 인식률이 낮을 수 있습니다<br>
-    • 첫 실행 시 언어 데이터를 다운로드하므로 잠시 기다려주세요 (한국어 약 10MB)<br>
-    • 모든 처리는 브라우저에서 이루어지며 Files never sent to server
+    <strong>⚠️ OCR Accuracy Notes</strong><br>
+    • Cleaner printed text yields higher accuracy<br>
+    • Handwriting, skewed text, and complex backgrounds may reduce accuracy<br>
+    • The first run downloads language data — please wait (~10MB for Korean)<br>
+    • All processing happens in your browser — files are never sent to a server
   </div>
 
   <div class="panel" style="margin-top:24px;">
-    <div class="panel-title">잘 되는 경우 vs 어려운 경우</div>
+    <div class="panel-title">Works Well vs. Difficult Cases</div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
       <div>
-        <div style="font-size:0.85rem; font-weight:700; color:#059669; margin-bottom:8px;">✅ 잘 인식되는 경우</div>
+        <div style="font-size:0.85rem; font-weight:700; color:#059669; margin-bottom:8px;">✅ Works Well</div>
         <ul style="font-size:0.82rem; color:var(--text-light); line-height:2; padding-left:16px;">
-          <li>스크린샷 속 텍스트</li>
-          <li>선명하게 인쇄된 문서</li>
-          <li>흰 배경의 검은 글씨</li>
-          <li>명함, 영수증 (인쇄체)</li>
+          <li>Text in screenshots</li>
+          <li>Clearly printed documents</li>
+          <li>Black text on white background</li>
+          <li>Business cards, receipts (printed)</li>
         </ul>
       </div>
       <div>
-        <div style="font-size:0.85rem; font-weight:700; color:#DC2626; margin-bottom:8px;">❌ 어려운 경우</div>
+        <div style="font-size:0.85rem; font-weight:700; color:#DC2626; margin-bottom:8px;">❌ Difficult Cases</div>
         <ul style="font-size:0.82rem; color:var(--text-light); line-height:2; padding-left:16px;">
-          <li>손글씨</li>
-          <li>배경이 복잡한 이미지</li>
-          <li>심하게 기울어진 텍스트</li>
-          <li>작은 글씨 (저Resolution)</li>
+          <li>Handwriting</li>
+          <li>Images with complex backgrounds</li>
+          <li>Heavily skewed text</li>
+          <li>Small text (low resolution)</li>
         </ul>
       </div>
     </div>
@@ -372,7 +378,7 @@
       <div class="footer-bottom-links">
         <a href="../privacy.html">Privacy Policy</a>
         <a href="../about.html">About</a>
-        <a href="../index.html">홈</a>
+        <a href="../index.html">Home</a>
       </div>
     </div>
   </div>
@@ -383,7 +389,7 @@
   let selectedFile = null;
   let selectedLang = 'kor';
 
-  // 언어 버튼
+  // language buttons
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -392,7 +398,7 @@
     });
   });
 
-  // 드롭존
+  // dropzone
   const dropZone = document.getElementById('dropZone');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
@@ -412,7 +418,7 @@
 
   function loadFile(file) {
     if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select an image file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -440,39 +446,39 @@
     document.getElementById('progressPanel').style.display = 'block';
     hideError();
 
-    setProgress(0, '언어 데이터 로딩 중...');
+    setProgress(0, 'Loading language data...');
 
     try {
       const worker = await Tesseract.createWorker(selectedLang, 1, {
         logger: m => {
-          if (m.status === 'loading tesseract core') setProgress(5, '엔진 로딩 중...');
-          else if (m.status === 'initializing tesseract') setProgress(15, '엔진 초기화 중...');
-          else if (m.status === 'loading language traineddata') setProgress(30, `언어 데이터 다운로드 중... ${Math.round((m.progress||0)*100)}%`);
-          else if (m.status === 'initializing api') setProgress(60, 'API 초기화 중...');
-          else if (m.status === 'recognizing text') setProgress(60 + Math.round((m.progress||0)*35), `텍스트 인식 중... ${Math.round((m.progress||0)*100)}%`);
+          if (m.status === 'loading tesseract core') setProgress(5, 'Loading engine...');
+          else if (m.status === 'initializing tesseract') setProgress(15, 'Initializing engine...');
+          else if (m.status === 'loading language traineddata') setProgress(30, `Downloading language data... ${Math.round((m.progress||0)*100)}%`);
+          else if (m.status === 'initializing api') setProgress(60, 'Initializing API...');
+          else if (m.status === 'recognizing text') setProgress(60 + Math.round((m.progress||0)*35), `Recognizing text... ${Math.round((m.progress||0)*100)}%`);
         }
       });
 
       const { data: { text } } = await worker.recognize(selectedFile);
       await worker.terminate();
 
-      setProgress(100, '완료!');
+      setProgress(100, 'Done!');
 
       const cleaned = text.trim();
       document.getElementById('ocrResult').value = cleaned;
-      document.getElementById('charCount').textContent = `${cleaned.length.toLocaleString('ko-KR')}자`;
+      document.getElementById('charCount').textContent = `${cleaned.length.toLocaleString('en-US')} chars`;
 
       setTimeout(() => {
         document.getElementById('progressPanel').style.display = 'none';
         document.getElementById('resultPanel').style.display = 'block';
         document.getElementById('startPanel').style.display = 'block';
-        document.getElementById('startBtn').textContent = '🔍 다시 인식';
+        document.getElementById('startBtn').textContent = '🔍 Re-run OCR';
       }, 500);
 
     } catch (err) {
       document.getElementById('progressPanel').style.display = 'none';
       document.getElementById('startPanel').style.display = 'block';
-      showError('텍스트 인식 중 오류가 발생했습니다. 다른 이미지로 시도해보세요.');
+      showError('OCR failed. Please try a different image.');
     }
   }
 
@@ -486,9 +492,9 @@
     if (!text) return;
     navigator.clipboard.writeText(text).then(() => {
       const btn = document.getElementById('copyBtn');
-      btn.textContent = '✅ 복사됨';
+      btn.textContent = '✅ Copied!';
       btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = '📋 복사'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(() => { btn.textContent = '📋 Copy'; btn.classList.remove('copied'); }, 2000);
     });
   }
 

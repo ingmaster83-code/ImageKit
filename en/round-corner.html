@@ -117,8 +117,7 @@
     padding: 8px;
     display: inline-block;
   }
-</style>
-  <style>
+
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -140,7 +139,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="round-corner.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/round-corner.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -179,13 +183,13 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>이미지 둥근 모서리</span>
+    <span>Round Corners</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">⬛</span>
     <h1>Round Image Corners – Free Online</h1>
-    <p>이미지 모서리를 둥글게 처리해 투명 PNG로 저장합니다. 슬라이더로 둥글기 정도를 조절하세요.</p>
+    <p>Upload an image and add rounded corners with customizable radius. Transparent corners are saved as PNG. All done in your browser.</p>
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -202,45 +206,45 @@
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
-    <div class="options-title">모서리 설정</div>
+    <div class="options-title">Corner Settings</div>
 
     <div class="option-row">
-      <span class="option-label">둥글기</span>
+      <span class="option-label">Roundness</span>
       <div class="option-control">
         <input type="range" id="radiusSlider" min="0" max="50" value="20" style="margin-bottom:6px;">
         <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-light);">
-          <span>각지게</span>
+          <span>Sharp</span>
           <span id="radiusVal" style="font-weight:700;color:var(--primary);">20%</span>
-          <span>원형</span>
+          <span>Circle</span>
         </div>
       </div>
     </div>
 
     <div class="option-row">
-      <span class="option-label">배경</span>
+      <span class="option-label">Background</span>
       <div class="option-control" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
         <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
           <input type="radio" name="bgType" value="transparent" checked id="bgTransparent">
-          <span style="font-size:0.9rem;">투명 (PNG)</span>
+          <span style="font-size:0.9rem;">Transparent (PNG)</span>
         </label>
         <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
           <input type="radio" name="bgType" value="color" id="bgColor">
-          <span style="font-size:0.9rem;">단색 배경</span>
+          <span style="font-size:0.9rem;">Solid Color</span>
         </label>
         <input type="color" id="bgColorPicker" value="#ffffff" style="width:36px;height:32px;border:1px solid #e2e8f0;border-radius:6px;cursor:pointer;padding:2px;display:none;">
       </div>
     </div>
 
     <div class="option-row">
-      <span class="option-label">실시간 미리보기</span>
+      <span class="option-label">Live Preview</span>
       <div class="option-control">
         <div class="preview-compare">
           <div class="preview-box">
-            <span>원본</span>
+            <span>Original</span>
             <canvas id="origCanvas"></canvas>
           </div>
           <div class="preview-box">
-            <span>결과</span>
+            <span>Result</span>
             <div class="checkerboard" style="display:inline-block;">
               <canvas id="previewCanvas"></canvas>
             </div>
@@ -249,7 +253,7 @@
       </div>
     </div>
 
-    <button class="btn-convert" id="applyBtn">⬛ 모서리 둥글게 적용</button>
+    <button class="btn-convert" id="applyBtn">⬛ Apply Rounded Corners</button>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
@@ -258,12 +262,12 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">둥근 모서리 적용 완료!</div>
+        <div class="result-title">Rounded Corners Applied!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
     <div class="preview-image-wrap" style="background:repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%) 0/16px 16px; border-radius:8px; padding:12px;">
-      <img id="resultImg" src="" alt="둥근 모서리 이미지" style="max-width:100%;display:block;margin:0 auto;">
+      <img id="resultImg" src="" alt="Rounded Corners Image" style="max-width:100%;display:block;margin:0 auto;">
     </div>
 
 <div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
@@ -276,7 +280,7 @@
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
     <div class="download-share-group">
-      <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ PNG 이미지 다운로드</button>
+      <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ Download PNG</button>
       <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
     </div>
   </div>
@@ -412,7 +416,7 @@
   });
 
   function loadFile(file) {
-    if (!file.type.match(/^image\//)) { showError('이미지 파일만 업로드할 수 있습니다.'); return; }
+    if (!file.type.match(/^image\//)) { showError('Please select an image file.'); return; }
     hideError();
     selectedFile = file;
     resultBlob = null;
@@ -487,7 +491,7 @@
     } catch(err) {
       showError('Processing failed: ' + err.message);
     }
-    btn.disabled = false; btn.textContent = '⬛ 모서리 둥글게 적용';
+    btn.disabled = false; btn.textContent = '⬛ Apply Rounded Corners';
   });
 
   document.getElementById('downloadBtn').addEventListener('click', () => {
@@ -508,7 +512,7 @@
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
 
-  // 공유하기
+  // share
   (function() {
     const shareBtn = document.getElementById('shareBtn');
     if (navigator.share && navigator.canShare) {
@@ -521,8 +525,8 @@
       if (!resultBlob) return;
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_rounded.png' : 'rounded.png';
       const file = new File([resultBlob], fname, { type: 'image/png' });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/round-corner.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/round-corner.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>

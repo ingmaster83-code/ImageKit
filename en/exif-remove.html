@@ -114,8 +114,7 @@
     margin-bottom: 16px;
     line-height: 1.6;
   }
-</style>
-  <style>
+
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
@@ -137,7 +136,12 @@
       <a href="../index.html">All Tools ›</a>
     </nav>
     <div class="header-right">
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none;">About</a>
+      <div class="lang-switcher">
+        <a href="exif-remove.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/exif-remove.html">EN</a>
+      </div>
+      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
     </div>
     <div class="header-right">
       <div class="lang-switcher">
@@ -176,17 +180,17 @@
   <div class="breadcrumb">
     <a href="../index.html">🏠 Home</a>
     <span>›</span>
-    <span>EXIF 데이터 제거</span>
+    <span>Remove EXIF</span>
   </div>
 
   <div class="tool-header">
     <span class="tool-header-icon">🔒</span>
     <h1>Remove EXIF Data – Strip Image Metadata Free Online</h1>
-    <p>사진에 숨겨진 GPS 위치, 촬영일시, 카메라 정보 등을 완전히 삭제하고 안전하게 공유하세요.</p>
+    <p>Upload an image to remove all EXIF metadata including GPS location and camera info. Protect your privacy before sharing. All done in your browser.</p>
   </div>
 
   <div class="info-box">
-    ℹ️ <strong>EXIF란?</strong> 스마트폰·카메라로 찍은 사진에 자동 저장되는 메타데이터입니다. GPS 위치, 촬영일시, 카메라 기종 등이 포함되어 있어 SNS 업로드 전 삭제를 권장합니다.
+    ℹ️ <strong>What is EXIF?</strong> Metadata automatically saved in photos taken by smartphones and cameras. It includes GPS location, date/time, and camera model — recommended to remove before sharing on social media.
   </div>
 
   <div class="drop-zone" id="dropZone">
@@ -203,9 +207,9 @@
   </div>
 
   <div id="exifPanel" style="display:none; max-width:700px; margin:16px auto;">
-    <div style="font-weight:600; font-size:0.95rem; margin-bottom:8px;">📋 감지된 EXIF 정보</div>
+    <div style="font-weight:600; font-size:0.95rem; margin-bottom:8px;">📋 Detected EXIF Data</div>
     <div id="exifTableWrap"></div>
-    <button class="btn-convert" id="removeBtn" style="margin-top:16px;">🔒 EXIF 제거 & 저장 준비</button>
+    <button class="btn-convert" id="removeBtn" style="margin-top:16px;">🔒 Remove EXIF & Prepare Download</button>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
@@ -222,12 +226,12 @@
     <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
-        <div class="result-title">EXIF 제거 완료!</div>
+        <div class="result-title">EXIF Removed!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
     <div class="preview-image-wrap">
-      <img id="resultImg" src="" alt="EXIF 제거된 이미지" style="max-width:100%;border-radius:8px;">
+      <img id="resultImg" src="" alt="Image with EXIF Removed" style="max-width:100%;border-radius:8px;">
     </div>
 
 <div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
@@ -240,7 +244,7 @@
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
     <div class="download-share-group">
-      <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ EXIF 제거된 이미지 다운로드</button>
+      <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ Download Image (EXIF Removed)</button>
       <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
     </div>
   </div>
@@ -319,7 +323,7 @@
 
   function loadFile(file) {
     if (!file.type.match(/^image\/(jpeg|png)/)) {
-      showError('JPG 또는 PNG 파일만 업로드할 수 있습니다.'); return;
+      showError('Please select a JPG or PNG file.'); return;
     }
     hideError();
     selectedFile = file;
@@ -389,18 +393,18 @@
             const ifdOffset = view.getUint32(tiffStart + 4, littleEndian);
             const entries = view.getUint16(tiffStart + ifdOffset, littleEndian);
             const tagNames = {
-              0x010F: '카메라 제조사', 0x0110: '카메라 기종', 0x0112: '방향',
-              0x011A: 'X Resolution', 0x011B: 'Y Resolution', 0x0128: 'Resolution 단위',
-              0x0131: '소프트웨어', 0x0132: '수정일시', 0x013B: '작가',
-              0x8298: '저작권', 0x8769: 'EXIF IFD',
-              0x9003: '원본 촬영일시', 0x9004: '디지털 변환일시',
-              0x9286: '사용자 설명', 0x9c9b: '제목',
-              0x0213: 'YCbCr 위치', 0xA005: 'Interop IFD'
+              0x010F: 'Camera Make', 0x0110: 'Camera Model', 0x0112: 'Orientation',
+              0x011A: 'X Resolution', 0x011B: 'Y Resolution', 0x0128: 'Resolution Unit',
+              0x0131: 'Software', 0x0132: 'Date Modified', 0x013B: 'Artist',
+              0x8298: 'Copyright', 0x8769: 'EXIF IFD',
+              0x9003: 'Original Date', 0x9004: 'Digitized Date',
+              0x9286: 'User Comment', 0x9c9b: 'Title',
+              0x0213: 'YCbCr Positioning', 0xA005: 'Interop IFD'
             };
             const gpsTagNames = {
-              0: 'GPS 버전', 1: 'GPS 위도 방향', 2: 'GPS 위도',
-              3: 'GPS 경도 방향', 4: 'GPS 경도', 5: 'GPS 고도 기준',
-              6: 'GPS 고도', 7: 'GPS 시간', 29: 'GPS 날짜'
+              0: 'GPS Version', 1: 'GPS Latitude Ref', 2: 'GPS Latitude',
+              3: 'GPS Longitude Ref', 4: 'GPS Longitude', 5: 'GPS Altitude Ref',
+              6: 'GPS Altitude', 7: 'GPS Time', 29: 'GPS Date'
             };
             for (let i = 0; i < entries; i++) {
               const entryOffset = tiffStart + ifdOffset + 2 + i * 12;
@@ -408,7 +412,7 @@
               const type = view.getUint16(entryOffset + 2, littleEndian);
               const count = view.getUint32(entryOffset + 4, littleEndian);
               if (tagNames[tag]) {
-                let val = '(포함됨)';
+                let val = '(included)';
                 if (type === 2) { // ASCII
                   const strOffset = count <= 4 ? entryOffset + 8
                     : tiffStart + view.getUint32(entryOffset + 8, littleEndian);
@@ -429,7 +433,7 @@
                 for (let g = 0; g < gpsEntries; g++) {
                   const gOff = gpsIfdOffset + 2 + g * 12;
                   const gTag = view.getUint16(gOff, littleEndian);
-                  if (gpsTagNames[gTag]) tags[gpsTagNames[gTag]] = '(포함됨)';
+                  if (gpsTagNames[gTag]) tags[gpsTagNames[gTag]] = '(included)';
                 }
               }
             }
@@ -446,11 +450,11 @@
     const keys = Object.keys(tags);
     const wrap = document.getElementById('exifTableWrap');
     if (keys.length === 0) {
-      wrap.innerHTML = `<p class="exif-none" style="margin:0;padding:8px 0;">✅ EXIF 정보가 감지되지 않았습니다. (PNG이거나 이미 제거된 파일)</p>`;
+      wrap.innerHTML = `<p class="exif-none" style="margin:0;padding:8px 0;">✅ No EXIF data detected. (PNG or already cleaned file)</p>`;
     } else {
       const hasGPS = keys.some(k => k.startsWith('GPS'));
-      let html = `<p class="exif-found" style="margin:0 0 8px;">⚠️ ${keys.length}개 EXIF 태그 감지${hasGPS ? ' (GPS 위치 포함!)' : ''}</p>`;
-      html += `<table class="exif-table"><thead><tr><th>항목</th><th>값</th></tr></thead><tbody>`;
+      let html = `<p class="exif-found" style="margin:0 0 8px;">⚠️ ${keys.length} EXIF tags detected${hasGPS ? ' (GPS location included!)' : ''}</p>`;
+      html += `<table class="exif-table"><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>`;
       keys.forEach(k => {
         html += `<tr><td>${k}</td><td>${tags[k]}</td></tr>`;
       });
@@ -466,12 +470,12 @@
     hideError();
     document.getElementById('progressWrap').style.display = 'block';
     document.getElementById('progressFill').style.width = '30%';
-    document.getElementById('progressText').textContent = '이미지 로딩 중...';
+    document.getElementById('progressText').textContent = 'Loading image...';
 
     try {
       const img = await loadImage(selectedFile);
       document.getElementById('progressFill').style.width = '70%';
-      document.getElementById('progressText').textContent = 'EXIF 제거 중...';
+      document.getElementById('progressText').textContent = 'Removing EXIF...';
 
       const canvas = document.createElement('canvas');
       canvas.width  = img.naturalWidth;
@@ -490,13 +494,13 @@
       resultBlob = blob;
 
       document.getElementById('progressFill').style.width = '100%';
-      document.getElementById('progressText').textContent = '완료!';
+      document.getElementById('progressText').textContent = 'Done!';
       document.getElementById('progressWrap').style.display = 'none';
 
       const url = URL.createObjectURL(blob);
       document.getElementById('resultImg').src = url;
       document.getElementById('resultSubtitle').textContent =
-        `${img.naturalWidth} × ${img.naturalHeight}px · ${formatSize(blob.size)} · EXIF 완전 제거됨`;
+        `${img.naturalWidth} × ${img.naturalHeight}px · ${formatSize(blob.size)} · EXIF fully removed`;
 
       const panel = document.getElementById('resultPanel');
       panel.style.display = 'block';
@@ -506,7 +510,7 @@
       showError('Processing failed: ' + err.message);
       document.getElementById('progressWrap').style.display = 'none';
     }
-    btn.disabled = false; btn.textContent = '🔒 EXIF 제거 & 저장 준비';
+    btn.disabled = false; btn.textContent = '🔒 Remove EXIF & Prepare Download';
   });
 
   document.getElementById('downloadBtn').addEventListener('click', () => {
@@ -537,7 +541,7 @@
     return (b/(1024*1024)).toFixed(1) + ' MB';
   }
 
-  // 공유하기
+  // share
   (function() {
     const shareBtn = document.getElementById('shareBtn');
     if (navigator.share && navigator.canShare) {
@@ -551,8 +555,8 @@
       const ext = resultBlob.type === 'image/png' ? '.png' : '.jpg';
       const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_noexif' + ext : 'noexif' + ext;
       const file = new File([resultBlob], fname, { type: resultBlob.type });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/exif-remove.html' }); }
-      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Converted with WooaImage\nhttps://imagekit.wooahouse.com/exif-remove.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
     });
   })();
 </script>
