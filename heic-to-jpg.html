@@ -325,7 +325,6 @@
     const files = Array.from(e.dataTransfer.files);
     if (files.length) addFiles(files);
   });
-  // label 클릭 시 이미 fileInput이 열리므로 dropZone 클릭 시 label/input 제외
   dropZone.addEventListener('click', e => {
     if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
     fileInput.click();
@@ -333,15 +332,13 @@
   fileInput.addEventListener('change', e => {
     const files = Array.from(e.target.files);
     if (files.length) addFiles(files);
-    fileInput.value = ''; // 같은 파일 재선택 가능하게 초기화
+    fileInput.value = '';
   });
 
-  // Quality slider
   document.getElementById('quality').addEventListener('input', function() {
     document.getElementById('qualityVal').textContent = this.value;
   });
 
-  // Toggle quality row for PNG
   document.querySelectorAll('input[name="outputFmt"]').forEach(r => {
     r.addEventListener('change', function() {
       document.getElementById('qualityRow').style.display = this.value === 'image/png' ? 'none' : 'flex';
@@ -349,7 +346,6 @@
   });
 
   function addFiles(newFiles) {
-    // 중복 제거 (이름+크기 기준)
     newFiles.forEach(f => {
       const isDup = selectedFiles.some(s => s.name === f.name && s.size === f.size);
       if (!isDup) selectedFiles.push(f);
@@ -388,6 +384,45 @@
     renderFileList();
   }
 
+  // HEIC 변환 함수 — 3단계 폴백
+  async function convertHeic(file, toType, quality) {
+    // 1단계: heic2any (대부분의 HEIC 파일)
+    try {
+      let blob = await heic2any({ blob: file, toType, quality: toType === 'image/jpeg' ? quality : undefined });
+      if (Array.isArray(blob)) blob = blob[0];
+      return blob;
+    } catch (e1) {
+      // 2단계: createImageBitmap (Safari/Chrome HEIC 네이티브 지원)
+      try {
+        const bitmap = await createImageBitmap(file);
+        const canvas = document.createElement('canvas');
+        canvas.width = bitmap.width;
+        canvas.height = bitmap.height;
+        canvas.getContext('2d').drawImage(bitmap, 0, 0);
+        bitmap.close();
+        return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(), toType, quality));
+      } catch (e2) {
+        // 3단계: ObjectURL로 img 로드 (Safari HEIC 네이티브)
+        try {
+          const img = await new Promise((res, rej) => {
+            const im = new Image();
+            im.onload = () => res(im);
+            im.onerror = rej;
+            im.src = URL.createObjectURL(file);
+          });
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          canvas.getContext('2d').drawImage(img, 0, 0);
+          URL.revokeObjectURL(img.src);
+          return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(), toType, quality));
+        } catch (e3) {
+          throw new Error('이 HEIC 파일 형식을 지원하지 않습니다. iPhone 설정 → 카메라 → 포맷을 "가장 호환성 높은 항목"으로 변경하거나 Mac 미리보기에서 JPEG로 내보내기 해주세요.');
+        }
+      }
+    }
+  }
+
   document.getElementById('convertBtn').addEventListener('click', async () => {
     if (selectedFiles.length === 0) return;
 
@@ -412,7 +447,7 @@
 
     for (let i = 0; i < selectedFiles.length; i++) {
       const file = selectedFiles[i];
-      const pct = Math.round(((i) / selectedFiles.length) * 100);
+      const pct = Math.round((i / selectedFiles.length) * 100);
       progressFill.style.width = pct + '%';
       progressPercent.textContent = pct + '%';
       progressText.textContent = `${i+1}/${selectedFiles.length} 변환 중...`;
@@ -421,29 +456,21 @@
         let outputBlob;
         const nameLower = file.name.toLowerCase();
 
-        if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
-          outputBlob = await heic2any({
-            blob: file,
-            toType: toType,
-            quality: toType === 'image/jpeg' ? quality : undefined
-          });
+        if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif') ||
+            file.type === 'image/heic' || file.type === 'image/heif') {
+          outputBlob = await convertHeic(file, toType, quality);
         } else {
-          // Non-HEIC image: convert via canvas
           const img = await loadImage(file);
           const canvas = document.createElement('canvas');
           canvas.width = img.naturalWidth;
           canvas.height = img.naturalHeight;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0);
+          canvas.getContext('2d').drawImage(img, 0, 0);
           outputBlob = await new Promise(resolve => canvas.toBlob(resolve, toType, toType === 'image/jpeg' ? quality : undefined));
         }
 
-        // heic2any may return an array
-        if (Array.isArray(outputBlob)) outputBlob = outputBlob[0];
-
         const url = URL.createObjectURL(outputBlob);
         const outName = file.name.replace(/\.[^.]+$/, '') + ext;
-        convertedResults.push({ blob: outputBlob, name: outName, url: url });
+        convertedResults.push({ blob: outputBlob, name: outName, url });
 
         resultHtml += `<div class="converted-item">
           <img class="converted-thumb" src="${url}" alt="${outName}">
@@ -500,9 +527,7 @@
     btn.textContent = 'ZIP 생성 중...';
 
     const zip = new JSZip();
-    convertedResults.forEach(r => {
-      zip.file(r.name, r.blob);
-    });
+    convertedResults.forEach(r => zip.file(r.name, r.blob));
 
     const content = await zip.generateAsync({ type: 'blob' });
     const url = URL.createObjectURL(content);

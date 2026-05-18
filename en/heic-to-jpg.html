@@ -404,6 +404,38 @@
     renderFileList();
   }
 
+  // HEIC conversion with 3-stage fallback
+  async function convertHeic(file, toType, quality) {
+    try {
+      let blob = await heic2any({ blob: file, toType, quality: toType === 'image/jpeg' ? quality : undefined });
+      if (Array.isArray(blob)) blob = blob[0];
+      return blob;
+    } catch (e1) {
+      try {
+        const bitmap = await createImageBitmap(file);
+        const canvas = document.createElement('canvas');
+        canvas.width = bitmap.width; canvas.height = bitmap.height;
+        canvas.getContext('2d').drawImage(bitmap, 0, 0);
+        bitmap.close();
+        return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(), toType, quality));
+      } catch (e2) {
+        try {
+          const img = await new Promise((res, rej) => {
+            const im = new Image(); im.onload = () => res(im); im.onerror = rej;
+            im.src = URL.createObjectURL(file);
+          });
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+          canvas.getContext('2d').drawImage(img, 0, 0);
+          URL.revokeObjectURL(img.src);
+          return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(), toType, quality));
+        } catch (e3) {
+          throw new Error('This HEIC format is not supported by your browser. Try setting iPhone Camera → Format → "Most Compatible", or export as JPEG from Mac Preview.');
+        }
+      }
+    }
+  }
+
   document.getElementById('convertBtn').addEventListener('click', async () => {
     if (selectedFiles.length === 0) return;
 
@@ -437,25 +469,18 @@
         let outputBlob;
         const nameLower = file.name.toLowerCase();
 
-        if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
-          outputBlob = await heic2any({
-            blob: file,
-            toType: toType,
-            quality: toType === 'image/jpeg' ? quality : undefined
-          });
+        if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif') ||
+            file.type === 'image/heic' || file.type === 'image/heif') {
+          outputBlob = await convertHeic(file, toType, quality);
         } else {
           // Non-HEIC image: convert via canvas
           const img = await loadImage(file);
           const canvas = document.createElement('canvas');
           canvas.width = img.naturalWidth;
           canvas.height = img.naturalHeight;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0);
+          canvas.getContext('2d').drawImage(img, 0, 0);
           outputBlob = await new Promise(resolve => canvas.toBlob(resolve, toType, toType === 'image/jpeg' ? quality : undefined));
         }
-
-        // heic2any may return an array
-        if (Array.isArray(outputBlob)) outputBlob = outputBlob[0];
 
         const url = URL.createObjectURL(outputBlob);
         const outName = file.name.replace(/\.[^.]+$/, '') + ext;
