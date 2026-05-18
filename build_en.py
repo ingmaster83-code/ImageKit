@@ -1889,7 +1889,13 @@ def build_page(filename, meta):
             # </head> 바로 앞에 스타일 블록 삽입
             html = html.replace('</head>', f'  <style>\n{LANG_SWITCHER_CSS}  </style>\n</head>', 1)
 
-    # ── 헤더에 언어 선택기 삽입 ──
+    # ── 헤더에 언어 선택기 삽입 (기존 header-right 먼저 제거) ──
+    # Remove any existing header-right (greedy .* finds the last </div> before </div></header>)
+    html = re.sub(
+        r'\s*<div class="header-right">.*</div>(?=\s*\n?\s*</div>\s*\n?</header>)',
+        '',
+        html, count=1, flags=re.DOTALL
+    )
     html = re.sub(
         r'(\s*</div>\s*</header>)',
         f'\n    <div class="header-right">\n'
@@ -2034,17 +2040,26 @@ if __name__ == '__main__':
                     html = html.replace('  </style>', LANG_SWITCHER_CSS + '  </style>', 1)
                 else:
                     html = html.replace('</head>', f'  <style>\n{LANG_SWITCHER_CSS}  </style>\n</head>', 1)
-            # lang switcher HTML
-            if 'lang-switcher' not in html:
-                sw_html = (
-                    f'    <div class="header-right">\n'
-                    f'      <div class="lang-switcher">\n'
-                    f'        <a href="../{f}">KO</a>\n'
-                    f'        <span>|</span>\n'
-                    f'        <a href="{f}" class="active">EN</a>\n'
-                    f'      </div>\n'
-                )
-                html = html.replace('    <div class="header-right">', sw_html, 1)
+            # lang switcher HTML: remove existing header-right then insert EN version
+            html = re.sub(
+                r'\s*<div class="header-right">.*</div>(?=\s*\n?\s*</div>\s*\n?</header>)',
+                '',
+                html, count=1, flags=re.DOTALL
+            )
+            html = re.sub(
+                r'(\s*</div>\s*</header>)',
+                f'\n    <div class="header-right">\n'
+                f'      <div class="lang-switcher">\n'
+                f'        <a href="../{f}">KO</a>\n'
+                f'        <span>|</span>\n'
+                f'        <a href="{f}" class="active">EN</a>\n'
+                f'      </div>\n'
+                f'      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>\n'
+                f'    </div>\n'
+                f'  </div>\n'
+                f'</header>',
+                html, count=1
+            )
             # 쿠팡 제거
             html = re.sub(r'\s*<script src="https://ads-partners\.coupang\.com/g\.js"></script>\n?', '', html)
             html = re.sub(r'<!-- Coupang Partners -->\s*<div[^>]*>.*?</div>', '', html, flags=re.DOTALL)

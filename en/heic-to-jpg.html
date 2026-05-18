@@ -152,14 +152,6 @@
     </nav>
     <div class="header-right">
       <div class="lang-switcher">
-        <a href="heic-to-jpg.html" class="active">KO</a>
-        <span>|</span>
-        <a href="en/heic-to-jpg.html">EN</a>
-      </div>
-      <a href="../about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
-    </div>
-    <div class="header-right">
-      <div class="lang-switcher">
         <a href="../heic-to-jpg.html">KO</a>
         <span>|</span>
         <a href="heic-to-jpg.html" class="active">EN</a>
@@ -169,7 +161,7 @@
   </div>
 </header>
 
-<div class="our-sites-bar"><span class="our-sites-label">WooaHouse Services</span><div class="our-sites-links"><a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a><a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a><a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener" class="active">🖼️ WooaImage</a><a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a><a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a><a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a><a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a><a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a><a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a><a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a><a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a><a href="https://wooaaudio.wooahouse.com/" target="_blank" rel="noopener">🎵 WooaAudio</a><a href="https://wooaviewer.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaViewer</a><a href="https://wooadev.wooahouse.com/" target="_blank" rel="noopener">🛠️ WooaDev</a><a href="https://wooaocr.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaOCR</a><a href="https://wooasheet.wooahouse.com/" target="_blank" rel="noopener">📊 WooaSheet</a></div></div>
+<div class="our-sites-bar"><span class="our-sites-label">WooaHouse Services</span><div class="our-sites-links"><a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a><a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a><a href="https://imagekit.wooahouse.com/en/" target="_blank" rel="noopener" class="active">🖼️ WooaImage</a><a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a><a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a><a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a><a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a><a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a><a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a><a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a><a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a><a href="https://wooaaudio.wooahouse.com/" target="_blank" rel="noopener">🎵 WooaAudio</a><a href="https://wooaviewer.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaViewer</a><a href="https://wooadev.wooahouse.com/" target="_blank" rel="noopener">🛠️ WooaDev</a><a href="https://wooaocr.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaOCR</a><a href="https://wooasheet.wooahouse.com/" target="_blank" rel="noopener">📊 WooaSheet</a></div></div>
 </div>
 
 <div class="page-with-sidebar">
@@ -324,7 +316,6 @@
     const files = Array.from(e.dataTransfer.files);
     if (files.length) addFiles(files);
   });
-  // label click already opens fileInput; exclude label/input from dropZone click
   dropZone.addEventListener('click', e => {
     if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
     fileInput.click();
@@ -332,15 +323,13 @@
   fileInput.addEventListener('change', e => {
     const files = Array.from(e.target.files);
     if (files.length) addFiles(files);
-    fileInput.value = ''; // reset to allow re-selecting the same file
+    fileInput.value = '';
   });
 
-  // Quality slider
   document.getElementById('quality').addEventListener('input', function() {
     document.getElementById('qualityVal').textContent = this.value;
   });
 
-  // Toggle quality row for PNG
   document.querySelectorAll('input[name="outputFmt"]').forEach(r => {
     r.addEventListener('change', function() {
       document.getElementById('qualityRow').style.display = this.value === 'image/png' ? 'none' : 'flex';
@@ -348,7 +337,6 @@
   });
 
   function addFiles(newFiles) {
-    // de-duplicate by name+size
     newFiles.forEach(f => {
       const isDup = selectedFiles.some(s => s.name === f.name && s.size === f.size);
       if (!isDup) selectedFiles.push(f);
@@ -387,9 +375,9 @@
     renderFileList();
   }
 
-  // HEIC conversion with 4-stage fallback
+  // HEIC 변환 함수 — 4단계 폴백
   async function convertHeic(file, toType, quality) {
-    // Stage 1: libheif-js latest WASM (broadest compatibility)
+    // 1단계: libheif-js 최신 WASM (가장 넓은 호환성)
     try {
       const lib = await libheif({
         locateFile: p => `https://cdn.jsdelivr.net/npm/libheif-js@1.19.8/libheif/${p}`
@@ -409,13 +397,13 @@
       canvas.getContext('2d').putImageData(new ImageData(pixelData.data, w, h), 0, 0);
       return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(), toType, quality));
     } catch (e0) {
-      // Stage 2: heic2any legacy
+      // 2단계: heic2any (구버전 HEIC 호환)
       try {
         let blob = await heic2any({ blob: file, toType, quality: toType === 'image/jpeg' ? quality : undefined });
         if (Array.isArray(blob)) blob = blob[0];
         return blob;
       } catch (e1) {
-        // Stage 3: createImageBitmap (Safari / Chrome native)
+        // 3단계: createImageBitmap (Safari/최신 Chrome 네이티브)
         try {
           const bitmap = await createImageBitmap(file);
           const canvas = document.createElement('canvas');
@@ -424,7 +412,7 @@
           bitmap.close();
           return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(), toType, quality));
         } catch (e2) {
-          // Stage 4: img element (Safari native HEIC)
+          // 4단계: img 태그 (Safari HEIC 네이티브)
           try {
             const img = await new Promise((res, rej) => {
               const im = new Image(); im.onload = () => res(im); im.onerror = rej;
@@ -436,7 +424,7 @@
             URL.revokeObjectURL(img.src);
             return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(), toType, quality));
           } catch (e3) {
-            throw new Error('This HEIC format is not supported. Try setting iPhone Camera → Format → "Most Compatible", or export as JPEG from Mac Preview.');
+            throw new Error('이 HEIC Format을 지원하지 않습니다. iPhone 설정 → 카메라 → 포맷을 "가장 호환성 높은 항목"으로 변경하거나 Mac 미리보기에서 JPEG로 내보내기 해주세요.');
           }
         }
       }
@@ -467,7 +455,7 @@
 
     for (let i = 0; i < selectedFiles.length; i++) {
       const file = selectedFiles[i];
-      const pct = Math.round(((i) / selectedFiles.length) * 100);
+      const pct = Math.round((i / selectedFiles.length) * 100);
       progressFill.style.width = pct + '%';
       progressPercent.textContent = pct + '%';
       progressText.textContent = `${i+1}/${selectedFiles.length} converting...`;
@@ -480,7 +468,6 @@
             file.type === 'image/heic' || file.type === 'image/heif') {
           outputBlob = await convertHeic(file, toType, quality);
         } else {
-          // Non-HEIC image: convert via canvas
           const img = await loadImage(file);
           const canvas = document.createElement('canvas');
           canvas.width = img.naturalWidth;
@@ -491,7 +478,7 @@
 
         const url = URL.createObjectURL(outputBlob);
         const outName = file.name.replace(/\.[^.]+$/, '') + ext;
-        convertedResults.push({ blob: outputBlob, name: outName, url: url });
+        convertedResults.push({ blob: outputBlob, name: outName, url });
 
         resultHtml += `<div class="converted-item">
           <img class="converted-thumb" src="${url}" alt="${outName}">
@@ -548,9 +535,7 @@
     btn.textContent = 'Creating ZIP...';
 
     const zip = new JSZip();
-    convertedResults.forEach(r => {
-      zip.file(r.name, r.blob);
-    });
+    convertedResults.forEach(r => zip.file(r.name, r.blob));
 
     const content = await zip.generateAsync({ type: 'blob' });
     const url = URL.createObjectURL(content);
