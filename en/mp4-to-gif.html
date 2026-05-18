@@ -134,7 +134,7 @@
             <input type="number" id="endTime" value="0" min="0" step="0.1">
           </div>
         </div>
-        <button class="btn-primary" id="convertBtn" onclick="startConvert()">🎞️ Convert to GIF</button>
+        <button class="btn-convert" id="convertBtn" onclick="startConvert()">🎞️ Convert to GIF</button>
       </div>
 
       <div class="progress-wrap" id="progressWrap">
@@ -145,8 +145,8 @@
       <div class="result-wrap" id="resultWrap">
         <img id="resultGif" src="" alt="Converted GIF">
         <p class="result-meta" id="resultMeta"></p>
-        <a id="downloadBtn" class="btn-primary" download="converted.gif">⬇ Download GIF</a>
-        <button class="btn-secondary" onclick="resetAll()" style="margin-left:.75rem;">Convert Again</button>
+        <a id="downloadBtn" class="btn-download" download="converted.gif">⬇ Download GIF</a>
+        <button class="btn-share" onclick="resetAll()" style="margin-left:.75rem;">Convert Again</button>
       </div>
     </div>
 
