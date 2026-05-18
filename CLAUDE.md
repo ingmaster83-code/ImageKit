@@ -17,7 +17,7 @@
 브라우저에서 직접 이미지를 압축·변환·편집하는 무료 도구 모음.
 파일이 서버에 저장되지 않아 안전.
 
-## 도구 목록 (17개)
+## 도구 목록 (18개)
 ### 기본 변환
 - jpg-to-png.html, png-to-jpg.html, image-to-webp.html, webp-to-jpg.html
 ### 편집
@@ -27,6 +27,7 @@
 - **bg-remove.html** — AI 배경 제거 (@imgly/background-removal ESM)
 - **heic-to-jpg.html** — HEIC→JPG 변환 (heic2any + JSZip 일괄 다운로드)
 - **make-gif.html** — GIF 만들기 (gif.js)
+- **mp4-to-gif.html** — MP4→GIF 변환 (gif.js, 최대 50MB)
 - **upscale-image.html** — 이미지 업스케일링 (Canvas 보간법)
 ### OCR (최근 추가)
 - **ocr-image.html** — 이미지 텍스트 추출 (Tesseract.js v4, 한/영)
@@ -38,3 +39,20 @@
 - 다운로드 버튼은 id="downloadBtn" 사용
 - bg-remove.html은 `<script type="module">` 필수 (@imgly ESM)
 - SEO 키워드: 이미지 압축, 이미지 변환, 이미지 리사이즈, 배경 제거, 이미지 OCR
+
+## 버튼 클래스 (ImageKit css/style.css 기준)
+
+| 클래스 | 용도 |
+|--------|------|
+| `btn-convert` | 주요 변환/실행 버튼 (primary 색) |
+| `btn-download` | 다운로드 링크/버튼 (초록) |
+| `btn-share` | 공유·리셋 보조 버튼 (파랑) |
+| `btn-select` | 파일 선택 label (회색) |
+
+- ⚠️ `btn-primary`, `btn-secondary`는 ImageKit CSS에 **정의되지 않음** — 사용 금지
+- `btn-convert:disabled` = 회색 배경 (변환 중일 때만 disabled 처리할 것)
+
+## EN 페이지 규칙
+- KO 원본과 **동일한 HTML 구조·클래스·JS** 사용 (텍스트만 번역)
+- CSS/manifest/pwa-install.js 경로: 루트 기준 그대로 (`css/style.css`, `js/pwa-install.js`)
+- lang-switcher: KO 링크 = `파일명.html`, EN 링크 = `en/파일명.html`
