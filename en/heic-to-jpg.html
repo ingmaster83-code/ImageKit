@@ -325,6 +325,7 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/libheif-js@1.19.8/libheif/libheif.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script>
@@ -404,33 +405,57 @@
     renderFileList();
   }
 
-  // HEIC conversion with 3-stage fallback
+  // HEIC conversion with 4-stage fallback
   async function convertHeic(file, toType, quality) {
+    // Stage 1: libheif-js latest WASM (broadest compatibility)
     try {
-      let blob = await heic2any({ blob: file, toType, quality: toType === 'image/jpeg' ? quality : undefined });
-      if (Array.isArray(blob)) blob = blob[0];
-      return blob;
-    } catch (e1) {
+      const lib = await libheif({
+        locateFile: p => `https://cdn.jsdelivr.net/npm/libheif-js@1.19.8/libheif/${p}`
+      });
+      const buf = await file.arrayBuffer();
+      const decoder = new lib.HeifDecoder();
+      const data = decoder.decode(new Uint8Array(buf));
+      if (!data || !data.length) throw new Error('no images');
+      const image = data[0];
+      const w = image.get_width(), h = image.get_height();
+      const pixelData = await new Promise((res, rej) => {
+        image.display({ data: new Uint8ClampedArray(w * h * 4), width: w, height: h },
+          r => r ? res(r) : rej(new Error('render failed')));
+      });
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').putImageData(new ImageData(pixelData.data, w, h), 0, 0);
+      return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(), toType, quality));
+    } catch (e0) {
+      // Stage 2: heic2any legacy
       try {
-        const bitmap = await createImageBitmap(file);
-        const canvas = document.createElement('canvas');
-        canvas.width = bitmap.width; canvas.height = bitmap.height;
-        canvas.getContext('2d').drawImage(bitmap, 0, 0);
-        bitmap.close();
-        return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(), toType, quality));
-      } catch (e2) {
+        let blob = await heic2any({ blob: file, toType, quality: toType === 'image/jpeg' ? quality : undefined });
+        if (Array.isArray(blob)) blob = blob[0];
+        return blob;
+      } catch (e1) {
+        // Stage 3: createImageBitmap (Safari / Chrome native)
         try {
-          const img = await new Promise((res, rej) => {
-            const im = new Image(); im.onload = () => res(im); im.onerror = rej;
-            im.src = URL.createObjectURL(file);
-          });
+          const bitmap = await createImageBitmap(file);
           const canvas = document.createElement('canvas');
-          canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
-          canvas.getContext('2d').drawImage(img, 0, 0);
-          URL.revokeObjectURL(img.src);
+          canvas.width = bitmap.width; canvas.height = bitmap.height;
+          canvas.getContext('2d').drawImage(bitmap, 0, 0);
+          bitmap.close();
           return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(), toType, quality));
-        } catch (e3) {
-          throw new Error('This HEIC format is not supported by your browser. Try setting iPhone Camera → Format → "Most Compatible", or export as JPEG from Mac Preview.');
+        } catch (e2) {
+          // Stage 4: img element (Safari native HEIC)
+          try {
+            const img = await new Promise((res, rej) => {
+              const im = new Image(); im.onload = () => res(im); im.onerror = rej;
+              im.src = URL.createObjectURL(file);
+            });
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+            canvas.getContext('2d').drawImage(img, 0, 0);
+            URL.revokeObjectURL(img.src);
+            return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(), toType, quality));
+          } catch (e3) {
+            throw new Error('This HEIC format is not supported. Try setting iPhone Camera → Format → "Most Compatible", or export as JPEG from Mac Preview.');
+          }
         }
       }
     }
