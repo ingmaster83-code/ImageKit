@@ -212,7 +212,7 @@
           </div>
         </div>
 
-        <button class="btn-primary" id="convertBtn" onclick="startConvert()">🎞️ GIF로 변환하기</button>
+        <button class="btn-convert" id="convertBtn" onclick="startConvert()">🎞️ GIF로 변환하기</button>
       </div>
 
       <div class="progress-wrap" id="progressWrap">
@@ -223,8 +223,8 @@
       <div class="result-wrap" id="resultWrap">
         <img id="resultGif" src="" alt="변환된 GIF">
         <p class="result-meta" id="resultMeta"></p>
-        <a id="downloadBtn" class="btn-primary" download="converted.gif">⬇ GIF 다운로드</a>
-        <button class="btn-secondary" onclick="resetAll()" style="margin-left:.75rem;">다시 변환</button>
+        <a id="downloadBtn" class="btn-download" download="converted.gif">⬇ GIF 다운로드</a>
+        <button class="btn-share" onclick="resetAll()" style="margin-left:.75rem;">다시 변환</button>
       </div>
     </div>
 
@@ -394,12 +394,25 @@ async function startConvert() {
 
   progressLabel.textContent = `프레임 캡처 중... (0 / ${totalFrames})`;
 
+  // cross-origin Web Worker 차단 우회: CDN 스크립트를 Blob URL로 변환
+  let workerURL;
+  try {
+    const workerText = await fetch('https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js')
+      .then(r => r.text());
+    workerURL = URL.createObjectURL(new Blob([workerText], { type: 'application/javascript' }));
+  } catch(e) {
+    alert('GIF 변환 준비 실패: 네트워크를 확인해주세요.');
+    document.getElementById('convertBtn').disabled = false;
+    progressWrap.style.display = 'none';
+    return;
+  }
+
   const gif = new GIF({
     workers: 2,
     quality: 8,
     width: outW,
     height: outH,
-    workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js',
+    workerScript: workerURL,
     repeat: 0
   });
 
@@ -426,6 +439,7 @@ async function startConvert() {
     progressFill.style.width = '100%';
     progressWrap.style.display = 'none';
     document.getElementById('convertBtn').disabled = false;
+    URL.revokeObjectURL(workerURL); // Blob URL 메모리 해제
 
     const url = URL.createObjectURL(blob);
     const img = document.getElementById('resultGif');
