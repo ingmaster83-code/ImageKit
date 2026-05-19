@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZGENFSXWC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9ZGENFSXWC');
+</script>
+  <meta charset="UTF-8">
+  <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
+  <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Thumbnail Downloader Free — Save YouTube Thumbnails Online | WooaImage</title>
+  <meta name="description" content="Download YouTube thumbnails for free. Paste any YouTube video URL and save thumbnails in 4 resolutions — up to 1280×720 (maxresdefault). No install needed, works in your browser.">
+  <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail, save youtube thumbnail, youtube thumbnail grabber, free thumbnail download">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/en/youtube-thumbnail.html">
+  <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/youtube-thumbnail.html">
+  <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/youtube-thumbnail.html">
+  <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/youtube-thumbnail.html">
+  <meta property="og:title" content="YouTube Thumbnail Downloader Free | WooaImage">
+  <meta property="og:description" content="Paste a YouTube URL and download thumbnails in 4 quality levels. Completely free, no sign-up.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/en/youtube-thumbnail.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://imagekit.wooahouse.com/og-image.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="../css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "YouTube Thumbnail Downloader",
+  "url": "https://imagekit.wooahouse.com/en/youtube-thumbnail.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What URL formats are supported?",
+      "acceptedAnswer": {"@type": "Answer","text": "Any YouTube video URL works: youtube.com/watch?v=, youtu.be/, and youtube.com/shorts/ are all supported."}
+    },
+    {
+      "@type": "Question",
+      "name": "The max resolution thumbnail is not showing?",
+      "acceptedAnswer": {"@type": "Answer","text": "Not all videos have a maxresdefault (1280×720) thumbnail. For older or lower-quality videos, use the HQ (480×360) or MQ (320×180) option instead."}
+    },
+    {
+      "@type": "Question",
+      "name": "How do I save the thumbnail?",
+      "acceptedAnswer": {"@type": "Answer","text": "Click 'Open in New Tab' for the quality you want, then right-click the image and select 'Save Image As' to download it as a JPG file."}
+    }
+  ]
+}
+</script>
+  <style>
+    .lang-switcher { display:flex; align-items:center; gap:4px; }
+    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
+    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
+    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
+    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+
+    .url-input-wrap { display:flex; gap:10px; margin-bottom:16px; }
+    .url-input-wrap input {
+      flex:1; padding:12px 16px; border:2px solid #E5E7EB; border-radius:10px;
+      font-size:1rem; outline:none; transition:border 0.2s;
+    }
+    .url-input-wrap input:focus { border-color:#0EA5E9; }
+    .url-input-wrap input::placeholder { color:#9CA3AF; }
+
+    .thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .thumb-card {
+      background: #F9FAFB;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .thumb-card img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: #E5E7EB;
+      display: block;
+    }
+    .thumb-card-body {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .thumb-quality {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #111827;
+    }
+    .thumb-size {
+      font-size: 0.82rem;
+      color: #6B7280;
+    }
+    .thumb-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .btn-open {
+      flex:1; padding:8px 0; text-align:center; background:#0EA5E9; color:#fff;
+      border-radius:8px; font-size:0.88rem; font-weight:600; text-decoration:none;
+      border:none; cursor:pointer; transition:background 0.15s;
+    }
+    .btn-open:hover { background:#0284C7; }
+    .btn-copy-url {
+      padding:8px 12px; background:#F3F4F6; color:#374151;
+      border-radius:8px; font-size:0.88rem; font-weight:600;
+      border:none; cursor:pointer; transition:background 0.15s;
+    }
+    .btn-copy-url:hover { background:#E5E7EB; }
+    #resultSection { display:none; margin-top:8px; }
+    #errorMsg { color:#EF4444; font-size:0.9rem; margin-top:8px; display:none; }
+    .save-hint {
+      background: #EFF6FF;
+      border-left: 3px solid #3B82F6;
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.88rem;
+      color: #1D4ED8;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">Compress</a>
+      <a href="resize-image.html">Resize</a>
+      <a href="rotate-image.html">Rotate</a>
+      <a href="crop-image.html">Crop</a>
+      <a href="index.html">All Tools ›</a>
+    </nav>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <a href="../youtube-thumbnail.html">KO</a>
+        <span>|</span>
+        <a href="youtube-thumbnail.html" class="active">EN</a>
+      </div>
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar"><span class="our-sites-label">WooaHouse Services</span><div class="our-sites-links"><a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a><a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a><a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener" class="active">🖼️ WooaImage</a><a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a><a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a><a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a><a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a><a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a><a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a><a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a><a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a><a href="https://wooaaudio.wooahouse.com/" target="_blank" rel="noopener">🎵 WooaAudio</a><a href="https://wooaviewer.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaViewer</a><a href="https://wooadev.wooahouse.com/" target="_blank" rel="noopener">🛠️ WooaDev</a><a href="https://wooaocr.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaOCR</a><a href="https://wooasheet.wooahouse.com/" target="_blank" rel="noopener">📊 WooaSheet</a></div></div>
+</div>
+
+<div class="mobile-top-ad">
+  <ins class="adsbygoogle" style="display:block;width:100%;height:80px" data-ad-client="ca-pub-6464921081676309" data-ad-slot="7080296704" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="page-with-sidebar">
+<div class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 Home</a>
+    <span>›</span>
+    <span>YouTube Thumbnail Downloader</span>
+  </div>
+
+  <div class="tool-header">
+    <div class="tool-icon-lg">▶️</div>
+    <div>
+      <h1>YouTube Thumbnail Downloader — Free Online</h1>
+      <p>Paste a YouTube video URL and preview thumbnails in 4 different resolutions. Save the one you need.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="url-input-wrap">
+      <input type="text" id="urlInput" placeholder="Paste YouTube URL (e.g. https://www.youtube.com/watch?v=...)" autocomplete="off" />
+      <button class="btn-convert" id="fetchBtn" onclick="fetchThumbnails()">Get Thumbnails</button>
+    </div>
+    <div id="errorMsg">Please enter a valid YouTube URL.</div>
+
+    <div id="resultSection">
+      <div class="save-hint">💡 Click <strong>Open in New Tab</strong> for the quality you want, then <strong>right-click the image → Save Image As</strong> to download.</div>
+      <div class="thumb-grid" id="thumbGrid"></div>
+    </div>
+  </div>
+
+  <div class="tips-panel">
+    <h3>💡 How to Use</h3>
+    <ul>
+      <li>Copy the URL from your browser's address bar while watching a YouTube video.</li>
+      <li>Supports <code>youtube.com/watch?v=</code>, <code>youtu.be/</code>, and <code>youtube.com/shorts/</code> formats.</li>
+      <li>Max resolution (1280×720) may not be available for older or low-quality videos.</li>
+      <li>Click <strong>Open in New Tab</strong>, then right-click the image → <strong>Save Image As</strong> to download.</li>
+    </ul>
+  </div>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">What URL formats are supported?</div>
+      <div class="faq-a">Any standard YouTube URL works — youtube.com/watch?v=VIDEO_ID, youtu.be/VIDEO_ID, and youtube.com/shorts/VIDEO_ID are all supported, including share links.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Why is the max resolution thumbnail not showing?</div>
+      <div class="faq-a">Not every YouTube video has a maxresdefault (1280×720) thumbnail. This is common for older or lower-quality uploads. In that case, use the HQ (480×360) or MQ (320×180) option, which are available for all videos.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I actually save the thumbnail?</div>
+      <div class="faq-a">Click "Open in New Tab" for the resolution you want. Once the image opens, right-click it and choose "Save Image As" to download the JPG file. On mobile, long-press the image to get the save option.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I use the thumbnail commercially?</div>
+      <div class="faq-a">YouTube thumbnails are owned by the video creator and protected by copyright. You may use them for personal reference, but any commercial use or redistribution requires permission from the original creator.</div>
+    </div>
+  </section>
+
+</div>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <ins class="adsbygoogle" style="display:block;width:100%;min-height:250px"
+      data-ad-client="ca-pub-6464921081676309" data-ad-slot="1419180025"
+      data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div class="ad-card">
+    <script src="https://ads-partners.coupang.com/g.js"></script>
+    <script>new PartnersCoupang.G({"id":986943,"template":"carousel","trackingCode":"AF5600192","width":"160","height":"200","tsource":""});</script>
+  </div>
+</aside>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo-footer">WooaImage</span>
+        <p>Free online image tools. Compress, convert, and edit images safely — no uploads to servers.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Image Conversion</h4>
+        <a href="jpg-to-png.html">JPG → PNG</a>
+        <a href="png-to-jpg.html">PNG → JPG</a>
+        <a href="image-to-webp.html">Image → WebP</a>
+        <a href="webp-to-jpg.html">WebP → JPG/PNG</a>
+        <a href="png-to-ico.html">PNG → ICO</a>
+      </div>
+      <div class="footer-links">
+        <h4>Image Editing</h4>
+        <a href="compress-image.html">Compress Image</a>
+        <a href="resize-image.html">Resize Image</a>
+        <a href="rotate-image.html">Rotate / Flip</a>
+        <a href="crop-image.html">Crop Image</a>
+        <a href="image-filter.html">Image Filter</a>
+        <a href="exif-remove.html">Remove EXIF</a>
+        <a href="merge-image.html">Merge Images</a>
+        <a href="mosaic-image.html">Mosaic / Blur</a>
+        <a href="add-text-image.html">Add Text</a>
+        <a href="round-corner.html">Round Corners</a>
+        <a href="split-image.html">Split Image</a>
+        <a href="youtube-thumbnail.html">YouTube Thumbnail</a>
+      </div>
+      <div class="footer-links">
+        <h4>Utility · OCR</h4>
+        <a href="image-to-base64.html">Image → Base64</a>
+        <a href="watermark-image.html">Add Watermark</a>
+        <a href="image-info.html">Image Info</a>
+        <a href="ocr-image.html">Image OCR</a>
+        <a href="ocr-pdf.html">PDF OCR</a>
+      </div>
+      <div class="footer-links">
+        <h4>Info</h4>
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+      <div class="footer-links">
+        <h4>WooaHouse Services</h4>
+        <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">PDFKit</a>
+        <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">WooaColor</a>
+        <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">WooaText</a>
+        <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">WooaQR</a>
+        <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">WooaFont</a>
+        <a href="https://wooahouse.com/" target="_blank" rel="noopener">WooaHouse</a>
+        <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">WooaMac</a>
+        <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">WooaPC</a>
+        <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">WooaVS</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <p class="coupang-notice">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+  </div>
+</footer>
+
+<script src="../js/pwa-install.js"></script>
+<script>
+  const QUALITIES = [
+    { key: 'maxresdefault', label: 'Max Resolution', size: '1280 × 720', badge: '🏆' },
+    { key: 'hqdefault',     label: 'High Quality',   size: '480 × 360',  badge: '⭐' },
+    { key: 'mqdefault',     label: 'Medium Quality', size: '320 × 180',  badge: '👍' },
+    { key: 'sddefault',     label: 'Standard',       size: '640 × 480',  badge: '📷' },
+  ];
+
+  function extractVideoId(url) {
+    url = url.trim();
+    let m = url.match(/[?&]v=([A-Za-z0-9_-]{11})/);
+    if (m) return m[1];
+    m = url.match(/youtu\.be\/([A-Za-z0-9_-]{11})/);
+    if (m) return m[1];
+    m = url.match(/shorts\/([A-Za-z0-9_-]{11})/);
+    if (m) return m[1];
+    m = url.match(/embed\/([A-Za-z0-9_-]{11})/);
+    if (m) return m[1];
+    m = url.match(/^([A-Za-z0-9_-]{11})$/);
+    if (m) return m[1];
+    return null;
+  }
+
+  function fetchThumbnails() {
+    const input = document.getElementById('urlInput').value.trim();
+    const errorMsg = document.getElementById('errorMsg');
+    const resultSection = document.getElementById('resultSection');
+    const thumbGrid = document.getElementById('thumbGrid');
+
+    errorMsg.style.display = 'none';
+    resultSection.style.display = 'none';
+    thumbGrid.innerHTML = '';
+
+    const videoId = extractVideoId(input);
+    if (!videoId) {
+      errorMsg.style.display = 'block';
+      return;
+    }
+
+    QUALITIES.forEach(q => {
+      const imgUrl = `https://img.youtube.com/vi/${videoId}/${q.key}.jpg`;
+      const card = document.createElement('div');
+      card.className = 'thumb-card';
+      card.innerHTML = `
+        <img src="${imgUrl}" alt="${q.label} thumbnail" onerror="this.closest('.thumb-card').style.opacity='0.45'">
+        <div class="thumb-card-body">
+          <div>
+            <span class="thumb-quality">${q.badge} ${q.label}</span>
+            <span class="thumb-size"> — ${q.size}</span>
+          </div>
+          <div class="thumb-actions">
+            <a class="btn-open" href="${imgUrl}" target="_blank" rel="noopener">Open in New Tab</a>
+            <button class="btn-copy-url" onclick="copyUrl('${imgUrl}', this)">Copy URL</button>
+          </div>
+        </div>
+      `;
+      thumbGrid.appendChild(card);
+    });
+
+    resultSection.style.display = 'block';
+  }
+
+  function copyUrl(url, btn) {
+    navigator.clipboard.writeText(url).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.style.background = '#D1FAE5';
+      btn.style.color = '#065F46';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 1500);
+    });
+  }
+
+  document.getElementById('urlInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') fetchThumbnails();
+  });
+</script>
+</body>
+</html>
