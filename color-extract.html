@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZGENFSXWC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9ZGENFSXWC');
+</script>
+  <meta charset="UTF-8">
+  <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
+  <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 색상 팔레트 추출 무료 — 사진에서 색상 뽑기 온라인 | WooaImage</title>
+  <meta name="description" content="사진에서 주요 색상을 자동으로 추출하세요! HEX·RGB·HSL 코드를 클릭 한 번에 복사. 최대 12가지 색상 추출 가능, 디자인 배색·브랜드 컬러 참고에 완벽합니다. 파일 서버 저장 없이 완전 무료로 이용하세요.">
+  <meta name="keywords" content="이미지색상추출,사진색상뽑기,색상팔레트추출,이미지팔레트,색상코드추출,HEX추출,이미지주요색상,색상파레트,무료색상추출">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/color-extract.html">
+  <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/color-extract.html">
+  <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/color-extract.html">
+  <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/color-extract.html">
+  <meta property="og:title" content="이미지 색상 팔레트 추출 무료 | WooaImage">
+  <meta property="og:description" content="사진에서 주요 색상 자동 추출! HEX·RGB·HSL 코드 복사. 완전 무료.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/color-extract.html">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:image" content="https://imagekit.wooahouse.com/og-image.png">
+  <meta property="og:site_name" content="WooaImage">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="이미지 색상 팔레트 추출 무료 | WooaImage">
+  <meta name="twitter:description" content="사진에서 주요 색상 자동 추출! HEX·RGB·HSL 코드 복사. 디자인 배색에 완벽. 완전 무료.">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "이미지 색상 팔레트 추출",
+  "url": "https://imagekit.wooahouse.com/color-extract.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"몇 가지 색상을 추출할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"최대 12가지 주요 색상을 추출합니다. 색상 수는 슬라이더로 조절할 수 있습니다."}},
+    {"@type":"Question","name":"색상 코드를 복사하려면?","acceptedAnswer":{"@type":"Answer","text":"추출된 각 색상 카드를 클릭하면 HEX 코드가 클립보드에 복사됩니다. RGB·HSL 코드도 표시됩니다."}},
+    {"@type":"Question","name":"사진이 서버에 저장되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요, 모든 처리는 브라우저의 Canvas API로 이루어지며 이미지는 외부로 전송되지 않습니다."}}
+  ]
+}
+</script>
+  <style>
+    .lang-switcher { display:flex; align-items:center; gap:4px; }
+    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
+    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
+    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
+    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+
+    .palette-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; margin-top: 16px; }
+    .color-card { border-radius: 10px; overflow: hidden; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.15s, box-shadow 0.15s; position: relative; }
+    .color-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+    .color-swatch { height: 90px; width: 100%; }
+    .color-info { padding: 8px; background: #fff; }
+    .color-hex { font-size: 0.85rem; font-weight: 700; color: #1A1A2E; font-family: monospace; }
+    .color-rgb { font-size: 0.7rem; color: #6B7280; margin-top: 2px; }
+    .color-copy-tip { position:absolute; top:4px; right:4px; background:rgba(0,0,0,0.6); color:#fff; font-size:0.65rem; padding:2px 6px; border-radius:4px; opacity:0; transition:opacity 0.2s; }
+    .color-card:hover .color-copy-tip { opacity:1; }
+    .color-copied { position:absolute; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.4); display:flex;align-items:center;justify-content:center; color:#fff; font-weight:700; font-size:0.9rem; border-radius:10px; opacity:0; transition:opacity 0.3s; pointer-events:none; }
+    .color-card.flash .color-copied { opacity:1; }
+
+    .preview-img-wrap { margin-top:12px; border-radius:10px; overflow:hidden; max-height:300px; display:flex; justify-content:center; background:#F1F5F9; }
+    .preview-img-wrap img { max-height:300px; max-width:100%; object-fit:contain; }
+
+    .palette-bar { display:flex; height:48px; border-radius:8px; overflow:hidden; margin-top:12px; }
+    .palette-bar-item { flex:1; }
+
+    .count-control { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+    .count-control label { font-size:0.85rem; color:#374151; font-weight:600; }
+    .count-control input[type=range] { flex:1; }
+    .count-val { font-weight:700; color:#0EA5E9; min-width:24px; text-align:center; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="rotate-image.html">회전/뒤집기</a>
+      <a href="crop-image.html">자르기</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <a href="color-extract.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/color-extract.html">EN</a>
+      </div>
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">소개</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar"><span class="our-sites-label">WooaHouse Services</span><div class="our-sites-links"><a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a><a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a><a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener" class="active">🖼️ WooaImage</a><a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a><a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a><a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a><a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a><a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a><a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a><a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a><a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a><a href="https://wooaaudio.wooahouse.com/" target="_blank" rel="noopener">🎵 WooaAudio</a><a href="https://wooaviewer.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaViewer</a><a href="https://wooadev.wooahouse.com/" target="_blank" rel="noopener">🛠️ WooaDev</a><a href="https://wooaocr.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaOCR</a><a href="https://wooasheet.wooahouse.com/" target="_blank" rel="noopener">📊 WooaSheet</a><a href="https://wooaseo.wooahouse.com/" target="_blank" rel="noopener">🔎 WooaSEO</a></div></div>
+
+<div class="mobile-top-ad">
+  <ins class="adsbygoogle" style="display:block;width:100%;height:80px" data-ad-client="ca-pub-6464921081676309" data-ad-slot="7080296704" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>색상 팔레트 추출</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🎨</span>
+    <h1>이미지 색상 팔레트 추출 — 사진에서 색상 코드 뽑기</h1>
+    <p>사진에서 주요 색상을 자동으로 추출해 HEX·RGB·HSL 코드를 확인하세요. 클릭하면 바로 복사!</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG, WebP 등 이미지를 업로드하세요</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+  </div>
+
+  <div id="optionsPanel" style="display:none;margin-top:16px;">
+    <div class="preview-img-wrap"><img id="previewImg" alt="이미지 미리보기"></div>
+
+    <div class="options-panel" style="margin-top:16px;">
+      <div class="count-control">
+        <label>추출 색상 수</label>
+        <input type="range" id="countSlider" min="4" max="12" value="8" step="1">
+        <span class="count-val" id="countVal">8</span>
+      </div>
+      <button class="btn-convert" id="extractBtn">🎨 색상 추출</button>
+    </div>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div id="resultSection" style="display:none;margin-top:16px;">
+    <div id="paletteBar" class="palette-bar"></div>
+    <div class="palette-grid" id="paletteGrid"></div>
+    <div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6464921081676309" data-ad-slot="1419180025" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+
+  <canvas id="canvas" style="display:none"></canvas>
+
+  <div class="cross-link-banner">
+    <span>이미지를 Before/After로 비교하고 싶으신가요?</span>
+    <a href="image-compare.html">↔️ 이미지 비교 슬라이더 →</a>
+  </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 몇 가지 색상을 추출할 수 있나요?</h3>
+        <p style="color:#555;margin:0;">최대 12가지 주요 색상을 추출합니다. 색상 수는 슬라이더로 4~12개 사이에서 조절할 수 있습니다.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 색상 코드를 복사하려면?</h3>
+        <p style="color:#555;margin:0;">추출된 각 색상 카드를 클릭하면 HEX 코드가 클립보드에 복사됩니다. RGB·HSL 코드도 함께 표시됩니다.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. 사진이 서버에 저장되나요?</h3>
+        <p style="color:#555;margin:0;">아니요, 모든 처리는 브라우저의 Canvas API로 이루어지며 이미지는 외부로 전송되지 않습니다.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="1419180025"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div class="ad-card" style="margin-top:16px;overflow:hidden;">
+    <script src="https://ads-partners.coupang.com/g.js"></script>
+    <script>
+      new PartnersCoupang.G({"id":974224,"trackingCode":"AF5600192","subId":null,"template":"carousel","width":"300","height":"250"});
+    </script>
+  </div>
+</aside>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo-footer">WooaImage</span>
+        <p>무료 온라인 이미지 도구 모음. 압축, 변환, 편집 등 모든 이미지 작업을 안전하게 처리하세요.</p>
+      </div>
+      <div class="footer-links">
+        <h4>이미지 변환</h4>
+        <a href="jpg-to-png.html">JPG → PNG</a>
+        <a href="png-to-jpg.html">PNG → JPG</a>
+        <a href="image-to-webp.html">이미지 → WebP</a>
+        <a href="webp-to-jpg.html">WebP → JPG/PNG</a>
+        <a href="png-to-ico.html">PNG → ICO</a>
+      </div>
+      <div class="footer-links">
+        <h4>이미지 편집</h4>
+        <a href="compress-image.html">이미지 압축</a>
+        <a href="resize-image.html">이미지 리사이즈</a>
+        <a href="rotate-image.html">회전/뒤집기</a>
+        <a href="crop-image.html">이미지 자르기</a>
+        <a href="image-filter.html">이미지 필터</a>
+        <a href="exif-remove.html">EXIF 제거</a>
+        <a href="merge-image.html">이미지 합치기</a>
+        <a href="mosaic-image.html">이미지 모자이크</a>
+        <a href="add-text-image.html">이미지 텍스트 추가</a>
+        <a href="round-corner.html">이미지 둥근 모서리</a>
+        <a href="split-image.html">이미지 분할</a>
+        <a href="youtube-thumbnail.html">유튜브 썸네일 저장</a>
+      </div>
+      <div class="footer-links">
+        <h4>유틸리티 · OCR</h4>
+        <a href="image-to-base64.html">이미지 → Base64</a>
+        <a href="watermark-image.html">워터마크 추가</a>
+        <a href="image-info.html">이미지 정보</a>
+        <a href="ocr-image.html">이미지 텍스트 추출</a>
+        <a href="ocr-pdf.html">PDF 텍스트 추출</a>
+        <a href="image-compare.html">이미지 비교 슬라이더</a>
+        <a href="color-extract.html">이미지 색상 추출</a>
+        <a href="og-image.html">OG 이미지 생성기</a>
+      </div>
+      <div class="footer-links">
+        <h4>정보</h4>
+        <a href="about.html">서비스 소개</a>
+        <a href="privacy.html">개인정보처리방침</a>
+      </div>
+      <div class="footer-links">
+        <h4>WooaHouse 서비스</h4>
+        <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">PDFKit</a>
+        <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">WooaColor</a>
+        <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">WooaText</a>
+        <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">WooaQR</a>
+        <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">WooaFont</a>
+        <a href="https://wooahouse.com/" target="_blank" rel="noopener">WooaHouse</a>
+        <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">WooaMac</a>
+        <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">WooaPC</a>
+        <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">WooaVS</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. 모든 권리 보유.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="about.html">소개</a>
+      </div>
+    </div>
+    <p class="coupang-notice">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+  </div>
+</footer>
+
+<script src="js/pwa-install.js"></script>
+<script>
+  let imgData = null;
+
+  const countSlider = document.getElementById('countSlider');
+  const countVal = document.getElementById('countVal');
+  countSlider.addEventListener('input', () => { countVal.textContent = countSlider.value; });
+
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); const f = e.dataTransfer.files[0]; if(f) loadFile(f); });
+  dropZone.addEventListener('click', e => { if(e.target.tagName==='LABEL'||e.target.tagName==='INPUT') return; document.getElementById('fileInput').click(); });
+  document.getElementById('fileInput').addEventListener('change', e => { if(e.target.files[0]) loadFile(e.target.files[0]); });
+
+  function loadFile(file) {
+    if (!file.type.startsWith('image/')) { showError('이미지 파일만 업로드할 수 있습니다.'); return; }
+    hideError();
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.getElementById('canvas');
+        const maxDim = 200; // downsample for speed
+        const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+        document.getElementById('previewImg').src = ev.target.result;
+        document.getElementById('optionsPanel').style.display = 'block';
+        document.getElementById('resultSection').style.display = 'none';
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  document.getElementById('extractBtn').addEventListener('click', () => {
+    if (!imgData) return;
+    const k = parseInt(countSlider.value);
+    const colors = extractColors(imgData, k);
+    renderPalette(colors);
+    document.getElementById('resultSection').style.display = 'block';
+    document.getElementById('resultSection').scrollIntoView({ behavior:'smooth', block:'nearest' });
+  });
+
+  // Simple median-cut color quantization
+  function extractColors(data, k) {
+    // Sample pixels
+    const pixels = [];
+    for (let i = 0; i < data.length; i += 4) {
+      if (data[i+3] < 128) continue; // skip transparent
+      pixels.push([data[i], data[i+1], data[i+2]]);
+    }
+    // k-means simplified: start with spread seeds
+    if (pixels.length === 0) return [];
+    const step = Math.max(1, Math.floor(pixels.length / k));
+    let centers = pixels.filter((_, i) => i % step === 0).slice(0, k);
+    while (centers.length < k) centers.push(pixels[Math.floor(Math.random() * pixels.length)]);
+
+    for (let iter = 0; iter < 10; iter++) {
+      const clusters = Array.from({length: k}, () => []);
+      for (const px of pixels) {
+        let best = 0, bestDist = Infinity;
+        for (let c = 0; c < centers.length; c++) {
+          const d = colorDist(px, centers[c]);
+          if (d < bestDist) { bestDist = d; best = c; }
+        }
+        clusters[best].push(px);
+      }
+      centers = clusters.map(cl => {
+        if (!cl.length) return [128, 128, 128];
+        return [
+          Math.round(cl.reduce((s,p)=>s+p[0],0)/cl.length),
+          Math.round(cl.reduce((s,p)=>s+p[1],0)/cl.length),
+          Math.round(cl.reduce((s,p)=>s+p[2],0)/cl.length)
+        ];
+      });
+    }
+    // Sort by perceived brightness
+    return centers.sort((a,b) => (0.299*b[0]+0.587*b[1]+0.114*b[2]) - (0.299*a[0]+0.587*a[1]+0.114*a[2]));
+  }
+
+  function colorDist(a, b) {
+    return (a[0]-b[0])**2 + (a[1]-b[1])**2 + (a[2]-b[2])**2;
+  }
+
+  function rgbToHex(r,g,b) {
+    return '#' + [r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('').toUpperCase();
+  }
+
+  function rgbToHsl(r,g,b) {
+    r/=255; g/=255; b/=255;
+    const max=Math.max(r,g,b), min=Math.min(r,g,b);
+    let h,s,l=(max+min)/2;
+    if(max===min){h=s=0;}
+    else{const d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);
+      switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;default:h=((r-g)/d+4)/6;}
+    }
+    return `hsl(${Math.round(h*360)}, ${Math.round(s*100)}%, ${Math.round(l*100)}%)`;
+  }
+
+  function renderPalette(colors) {
+    const barEl = document.getElementById('paletteBar');
+    const gridEl = document.getElementById('paletteGrid');
+    barEl.innerHTML = colors.map(c => `<div class="palette-bar-item" style="background:${rgbToHex(c[0],c[1],c[2])}"></div>`).join('');
+    gridEl.innerHTML = colors.map(c => {
+      const hex = rgbToHex(c[0],c[1],c[2]);
+      const hsl = rgbToHsl(c[0],c[1],c[2]);
+      const brightness = 0.299*c[0]+0.587*c[1]+0.114*c[2];
+      const textColor = brightness > 128 ? '#1A1A2E' : '#FFFFFF';
+      return `<div class="color-card" onclick="copyColor('${hex}', this)">
+        <div class="color-swatch" style="background:${hex}">
+          <div class="color-copy-tip">클릭하여 복사</div>
+          <div class="color-copied">복사됨!</div>
+        </div>
+        <div class="color-info">
+          <div class="color-hex">${hex}</div>
+          <div class="color-rgb">rgb(${c[0]}, ${c[1]}, ${c[2]})</div>
+          <div class="color-rgb">${hsl}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function copyColor(hex, card) {
+    navigator.clipboard.writeText(hex).then(() => {
+      card.classList.add('flash');
+      setTimeout(() => card.classList.remove('flash'), 800);
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = hex; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      card.classList.add('flash'); setTimeout(() => card.classList.remove('flash'), 800);
+    });
+  }
+
+  function showError(msg) { const e = document.getElementById('errorMsg'); e.textContent = msg; e.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+</script>
+</body>
+</html>

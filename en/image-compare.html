@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZGENFSXWC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9ZGENFSXWC');
+</script>
+  <meta charset="UTF-8">
+  <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
+  <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Comparison Slider Free – Before/After Photo Compare Online | WooaImage</title>
+  <meta name="description" content="Compare two images with a draggable before/after slider. Perfect for photo editing comparisons, retouching checks, and design reviews. Free, browser-based.">
+  <meta name="keywords" content="image compare, before after slider, photo comparison, image before after, compare images online, image diff, before after photo free">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/en/image-compare.html">
+  <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/image-compare.html">
+  <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/image-compare.html">
+  <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/image-compare.html">
+  <meta property="og:title" content="Image Comparison Slider – Before/After Compare | WooaImage">
+  <meta property="og:description" content="Drag a slider to compare two images side by side. Free before/after photo comparison tool.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/en/image-compare.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://imagekit.wooahouse.com/og-image.png">
+  <meta property="og:site_name" content="WooaImage">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Image Comparison Slider – Before/After Compare | WooaImage">
+  <meta name="twitter:description" content="Drag a slider to compare two images side by side. Free before/after photo comparison tool. No signup required.">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="../css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Image Comparison Slider",
+  "url": "https://imagekit.wooahouse.com/en/image-compare.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"JPG, PNG, WebP, GIF and any image format supported by your browser can be used."}},
+    {"@type":"Question","name":"Do both images need to be the same size?","acceptedAnswer":{"@type":"Answer","text":"No. Images of different sizes can be compared — the viewer automatically scales them to match."}},
+    {"@type":"Question","name":"Can I save the comparison result?","acceptedAnswer":{"@type":"Answer","text":"Position the slider where you want and take a screenshot to save the comparison view."}}
+  ]
+}
+</script>
+  <style>
+    .lang-switcher { display:flex; align-items:center; gap:4px; }
+    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
+    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
+    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
+    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+
+    .upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    @media (max-width: 600px) { .upload-grid { grid-template-columns: 1fr; } }
+    .upload-box { border: 2px dashed #CBD5E1; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; background: #F8FAFC; transition: border-color 0.2s, background 0.2s; }
+    .upload-box:hover, .upload-box.drag-over { border-color: #0EA5E9; background: #F0F9FF; }
+    .upload-box.has-file { border-color: #22C55E; background: #F0FDF4; }
+    .upload-label { font-size:0.85rem; font-weight:700; color:#374151; margin-bottom:8px; }
+    .upload-icon { font-size:2rem; margin-bottom:6px; }
+    .upload-filename { font-size:0.75rem; color:#22C55E; font-weight:600; margin-top:6px; word-break:break-all; }
+
+    .compare-viewer { position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.12); cursor: col-resize; user-select: none; touch-action: none; background: #000; }
+    .compare-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .compare-img-after { clip-path: inset(0 50% 0 0); }
+    .compare-divider { position: absolute; top: 0; bottom: 0; width: 3px; background: #fff; left: 50%; transform: translateX(-50%); pointer-events: none; box-shadow: 0 0 6px rgba(0,0,0,0.5); }
+    .compare-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.3); cursor: col-resize; }
+    .compare-label { position: absolute; top: 12px; padding: 4px 10px; background: rgba(0,0,0,0.55); color: #fff; font-size: 0.78rem; font-weight: 700; border-radius: 6px; pointer-events: none; }
+    .label-before { left: 12px; }
+    .label-after { right: 12px; }
+    .compare-wrap { margin-top: 16px; }
+    .compare-hint { text-align:center; font-size:0.8rem; color:#6B7280; margin-top:8px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">Compress</a>
+      <a href="resize-image.html">Resize</a>
+      <a href="rotate-image.html">Rotate</a>
+      <a href="crop-image.html">Crop</a>
+      <a href="../index.html">All Tools ›</a>
+    </nav>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <a href="../image-compare.html">KO</a>
+        <span>|</span>
+        <a href="image-compare.html" class="active">EN</a>
+      </div>
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
+    </div>
+  </div>
+</header>
+
+<div class="our-sites-bar"><span class="our-sites-label">WooaHouse Services</span><div class="our-sites-links"><a href="https://wooahouse.com/" target="_blank" rel="noopener">🔗 WooaHouse</a><a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">📄 WooaPDF</a><a href="https://imagekit.wooahouse.com/" target="_blank" rel="noopener" class="active">🖼️ WooaImage</a><a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">🎨 WooaColor</a><a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">✏️ WooaText</a><a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">📱 WooaQR</a><a href="https://calckit.wooahouse.com/" target="_blank" rel="noopener">🧮 WooaCalc</a><a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">🔤 WooaFont</a><a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">🍎 WooaMac</a><a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">🖥️ WooaPC</a><a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">💻 WooaVS</a><a href="https://wooaaudio.wooahouse.com/" target="_blank" rel="noopener">🎵 WooaAudio</a><a href="https://wooaviewer.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaViewer</a><a href="https://wooadev.wooahouse.com/" target="_blank" rel="noopener">🛠️ WooaDev</a><a href="https://wooaocr.wooahouse.com/" target="_blank" rel="noopener">🔍 WooaOCR</a><a href="https://wooasheet.wooahouse.com/" target="_blank" rel="noopener">📊 WooaSheet</a><a href="https://wooaseo.wooahouse.com/" target="_blank" rel="noopener">🔎 WooaSEO</a></div></div>
+
+<div class="mobile-top-ad">
+  <ins class="adsbygoogle" style="display:block;width:100%;height:80px" data-ad-client="ca-pub-6464921081676309" data-ad-slot="7080296704" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="../index.html">🏠 Home</a>
+    <span>›</span>
+    <span>Image Compare</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">↔️</span>
+    <h1>Image Comparison Slider – Before/After Photo Compare</h1>
+    <p>Drag the slider to compare two images side by side. Perfect for photo editing, retouching, and design reviews!</p>
+  </div>
+
+  <div class="upload-grid">
+    <div>
+      <div class="upload-label">🖼️ Before Image</div>
+      <div class="upload-box" id="dropBefore">
+        <div class="upload-icon">📸</div>
+        <div>Drop image here or</div>
+        <label for="fileBefore" class="btn-select" style="margin-top:8px;display:inline-block;">Select File</label>
+        <input type="file" id="fileBefore" accept="image/*" style="display:none">
+        <div class="upload-filename" id="nameBefore"></div>
+      </div>
+    </div>
+    <div>
+      <div class="upload-label">🖼️ After Image</div>
+      <div class="upload-box" id="dropAfter">
+        <div class="upload-icon">✨</div>
+        <div>Drop image here or</div>
+        <label for="fileAfter" class="btn-select" style="margin-top:8px;display:inline-block;">Select File</label>
+        <input type="file" id="fileAfter" accept="image/*" style="display:none">
+        <div class="upload-filename" id="nameAfter"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="compare-wrap" id="compareWrap" style="display:none">
+    <div class="compare-viewer" id="compareViewer">
+      <img class="compare-img" id="imgBefore" alt="Before">
+      <img class="compare-img compare-img-after" id="imgAfter" alt="After">
+      <div class="compare-divider" id="divider"></div>
+      <div class="compare-handle" id="handle">↔</div>
+      <div class="compare-label label-before">BEFORE</div>
+      <div class="compare-label label-after">AFTER</div>
+    </div>
+    <div class="compare-hint">← Drag the slider left or right to compare →</div>
+
+    <div style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6464921081676309" data-ad-slot="1419180025" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+
+  <div class="cross-link-banner">
+    <span>Want to extract color palette from an image?</span>
+    <a href="color-extract.html">🎨 Color Palette Extractor →</a>
+  </div>
+
+  <section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. What image formats are supported?</h3>
+        <p style="color:#555;margin:0;">JPG, PNG, WebP, GIF and any image format supported by your browser can be used.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Do both images need to be the same size?</h3>
+        <p style="color:#555;margin:0;">No. Images of different sizes can be compared — the viewer automatically scales them to match.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Can I save the comparison result?</h3>
+        <p style="color:#555;margin:0;">Position the slider where you want and take a screenshot to save the comparison view.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar">
+  <div class="ad-card">
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="1419180025"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div class="ad-card" style="margin-top:16px;overflow:hidden;">
+    <script src="https://ads-partners.coupang.com/g.js"></script>
+    <script>
+      new PartnersCoupang.G({"id":974224,"trackingCode":"AF5600192","subId":null,"template":"carousel","width":"300","height":"250"});
+    </script>
+  </div>
+</aside>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo-footer">WooaImage</span>
+        <p>Free online image tools. Compress, convert, and edit images safely — all in your browser.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Image Conversion</h4>
+        <a href="jpg-to-png.html">JPG → PNG</a>
+        <a href="png-to-jpg.html">PNG → JPG</a>
+        <a href="image-to-webp.html">Image → WebP</a>
+        <a href="webp-to-jpg.html">WebP → JPG/PNG</a>
+        <a href="png-to-ico.html">PNG → ICO</a>
+      </div>
+      <div class="footer-links">
+        <h4>Image Editing</h4>
+        <a href="compress-image.html">Compress Image</a>
+        <a href="resize-image.html">Resize Image</a>
+        <a href="rotate-image.html">Rotate &amp; Flip</a>
+        <a href="crop-image.html">Crop Image</a>
+        <a href="image-filter.html">Image Filters</a>
+        <a href="exif-remove.html">Remove EXIF</a>
+        <a href="merge-image.html">Merge Images</a>
+        <a href="mosaic-image.html">Image Mosaic</a>
+        <a href="add-text-image.html">Add Text to Image</a>
+        <a href="round-corner.html">Rounded Corners</a>
+        <a href="split-image.html">Split Image</a>
+        <a href="youtube-thumbnail.html">YouTube Thumbnail</a>
+      </div>
+      <div class="footer-links">
+        <h4>Utilities &amp; OCR</h4>
+        <a href="../image-to-base64.html">Image → Base64</a>
+        <a href="../watermark-image.html">Add Watermark</a>
+        <a href="../image-info.html">Image Info</a>
+        <a href="../ocr-image.html">Image OCR</a>
+        <a href="../ocr-pdf.html">PDF OCR</a>
+        <a href="image-compare.html">Image Compare</a>
+        <a href="color-extract.html">Color Extractor</a>
+        <a href="og-image.html">OG Image Generator</a>
+      </div>
+      <div class="footer-links">
+        <h4>Info</h4>
+        <a href="../about.html">About</a>
+        <a href="../privacy.html">Privacy Policy</a>
+      </div>
+      <div class="footer-links">
+        <h4>WooaHouse Services</h4>
+        <a href="https://pdfkit.wooahouse.com/" target="_blank" rel="noopener">PDFKit</a>
+        <a href="https://colorkit.wooahouse.com/" target="_blank" rel="noopener">WooaColor</a>
+        <a href="https://textkit.wooahouse.com/" target="_blank" rel="noopener">WooaText</a>
+        <a href="https://qrkit.wooahouse.com/" target="_blank" rel="noopener">WooaQR</a>
+        <a href="https://fontkit.wooahouse.com/" target="_blank" rel="noopener">WooaFont</a>
+        <a href="https://wooahouse.com/" target="_blank" rel="noopener">WooaHouse</a>
+        <a href="https://mactools.wooahouse.com/" target="_blank" rel="noopener">WooaMac</a>
+        <a href="https://pctools.wooahouse.com/" target="_blank" rel="noopener">WooaPC</a>
+        <a href="https://vskit.wooahouse.com/" target="_blank" rel="noopener">WooaVS</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 WooaImage. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <p class="coupang-notice">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+  </div>
+</footer>
+
+<script src="../js/pwa-install.js"></script>
+<script>
+  let urlBefore = null, urlAfter = null;
+  let posX = 50;
+  let dragging = false;
+
+  function setupDrop(dropId, inputId, imgId, nameId, isBefore) {
+    const drop = document.getElementById(dropId);
+    const input = document.getElementById(inputId);
+    drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag-over'); });
+    drop.addEventListener('dragleave', () => drop.classList.remove('drag-over'));
+    drop.addEventListener('drop', e => {
+      e.preventDefault(); drop.classList.remove('drag-over');
+      const f = e.dataTransfer.files[0]; if (f) loadImg(f, imgId, nameId, dropId, isBefore);
+    });
+    drop.addEventListener('click', e => { if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') return; input.click(); });
+    input.addEventListener('change', e => { if (e.target.files[0]) loadImg(e.target.files[0], imgId, nameId, dropId, isBefore); });
+  }
+
+  function loadImg(file, imgId, nameId, dropId, isBefore) {
+    if (!file.type.startsWith('image/')) { showError('Please upload an image file.'); return; }
+    hideError();
+    const url = URL.createObjectURL(file);
+    if (isBefore) { if (urlBefore) URL.revokeObjectURL(urlBefore); urlBefore = url; }
+    else { if (urlAfter) URL.revokeObjectURL(urlAfter); urlAfter = url; }
+    document.getElementById(imgId).src = url;
+    document.getElementById(nameId).textContent = '✓ ' + file.name;
+    document.getElementById(dropId).classList.add('has-file');
+    if (urlBefore && urlAfter) initCompare();
+  }
+
+  function initCompare() {
+    const viewer = document.getElementById('compareViewer');
+    const before = document.getElementById('imgBefore');
+
+    document.getElementById('compareWrap').style.display = 'block';
+
+    const doInit = () => {
+      const ratio = before.naturalHeight / before.naturalWidth || 0.6;
+      const w = viewer.offsetWidth || 600;
+      viewer.style.height = Math.min(Math.round(w * ratio), 600) + 'px';
+      updateSlider(50);
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+
+    if (before.complete && before.naturalWidth > 0) {
+      doInit();
+    } else {
+      before.onload = doInit;
+    }
+  }
+
+  function updateSlider(pct) {
+    posX = Math.max(2, Math.min(98, pct));
+    document.getElementById('imgAfter').style.clipPath = `inset(0 ${100 - posX}% 0 0)`;
+    document.getElementById('divider').style.left = posX + '%';
+    document.getElementById('handle').style.left = posX + '%';
+  }
+
+  function getPos(e, viewer) {
+    const rect = viewer.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    return ((clientX - rect.left) / rect.width) * 100;
+  }
+
+  const viewer = document.getElementById('compareViewer');
+  viewer.addEventListener('mousedown', e => { dragging = true; updateSlider(getPos(e, viewer)); });
+  document.addEventListener('mousemove', e => { if (dragging) updateSlider(getPos(e, viewer)); });
+  document.addEventListener('mouseup', () => dragging = false);
+  viewer.addEventListener('touchstart', e => { dragging = true; updateSlider(getPos(e, viewer)); }, {passive:true});
+  document.addEventListener('touchmove', e => { if (dragging) updateSlider(getPos(e, viewer)); }, {passive:true});
+  document.addEventListener('touchend', () => dragging = false);
+
+  setupDrop('dropBefore', 'fileBefore', 'imgBefore', 'nameBefore', true);
+  setupDrop('dropAfter', 'fileAfter', 'imgAfter', 'nameAfter', false);
+
+  function showError(msg) { const e = document.getElementById('errorMsg'); e.textContent = msg; e.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+</script>
+</body>
+</html>
