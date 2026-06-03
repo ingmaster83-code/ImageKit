@@ -17,7 +17,7 @@
 브라우저에서 직접 이미지를 압축·변환·편집하는 무료 도구 모음.
 파일이 서버에 저장되지 않아 안전.
 
-## 도구 목록 (18개)
+## 도구 목록 (23개)
 ### 기본 변환
 - jpg-to-png.html, png-to-jpg.html, image-to-webp.html, webp-to-jpg.html
 ### 편집
@@ -32,6 +32,12 @@
 ### OCR (최근 추가)
 - **ocr-image.html** — 이미지 텍스트 추출 (Tesseract.js v4, 한/영)
 - **ocr-pdf.html** — PDF 텍스트 OCR (PDF.js + Tesseract.js, 스캔 PDF용)
+### 포맷 변환 확장 (최근 추가)
+- **tiff-to-jpg.html** — TIFF→JPG/PNG 변환 (UTIF.js, 일괄 처리)
+- **bmp-to-jpg.html** — BMP→JPG/PNG 변환 (Canvas API)
+- **avif-to-jpg.html** — AVIF→JPG/PNG 변환 (Canvas API)
+- **ico-to-png.html** — ICO→PNG 변환 (Canvas API, 모든 크기 추출)
+- **image-opacity.html** — 투명도 조절 (Canvas + globalAlpha 슬라이더)
 
 ## 작업 규칙
 - 모든 이미지 처리는 Canvas API로 브라우저에서만 처리 (서버 전송 금지)
