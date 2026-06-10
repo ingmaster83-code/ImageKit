@@ -341,7 +341,7 @@
 
     try {
       // 버튼 클릭 시점에 동적으로 import
-      const { removeBackground } = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/index.browser.mjs');
+      const { removeBackground } = await import('https://esm.sh/@imgly/background-removal@1.4.5');
 
       const blob = await removeBackground(selectedFile, {
         progress: (key, current, total) => {
