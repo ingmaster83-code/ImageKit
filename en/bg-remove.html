@@ -387,6 +387,16 @@
       document.getElementById('resultPreview').src = resultUrl;
       document.getElementById('resultSubtitle').textContent = `Result Size: ${formatSize(blob.size)}`;
       document.getElementById('resultPanel').style.display = 'block';
+      // Download button countdown (dot animation)
+      const dlBtn = document.getElementById('downloadBtn');
+      if (dlBtn) {
+        dlBtn.disabled = true;
+        const origText = dlBtn.textContent;
+        const dots = ['⏳ Preparing download', '⏳ Preparing download.', '⏳ Preparing download..', '⏳ Preparing download...'];
+        let dotIdx = 0;
+        const dotTimer = setInterval(() => { dotIdx = (dotIdx + 1) % dots.length; dlBtn.textContent = dots[dotIdx]; }, 400);
+        setTimeout(() => { clearInterval(dotTimer); dlBtn.disabled = false; dlBtn.textContent = origText; }, 6000);
+      }
       progressFill.style.width = '100%';
       progressPercent.textContent = '100%';
       progressStatus.textContent = 'Done!';
