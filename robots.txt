@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
 Sitemap: https://imagekit.wooahouse.com/sitemap.xml
+
+#DaumWebMasterTool:2d43d03c255dce4a7d06365e72be839cc67cb1020b661ae106f895001acb47ec:5OHFs/qHHlfCvAas17iLzw==
