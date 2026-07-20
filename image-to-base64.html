@@ -113,12 +113,17 @@
       display: block;
       margin-bottom: 12px;
     }
-  
+
     .lang-switcher { display:flex; align-items:center; gap:4px; }
     .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
     .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
     .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+    .b64-item { background: #F9FAFB; border-radius: var(--radius-sm); padding: 14px; margin-bottom: 12px; }
+    .b64-item:last-child { margin-bottom: 0; }
+    .b64-item-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .b64-item-thumb { width: 44px; height: 44px; object-fit: cover; border-radius: 6px; background: #E5E7EB; flex-shrink: 0; }
+    .b64-item-name { font-weight: 600; font-size: 0.88rem; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -169,24 +174,20 @@
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
-    <p>JPG, PNG, WebP, GIF 등 모든 이미지 형식 가능</p>
+    <p>JPG, PNG, WebP, GIF 등 모든 이미지 형식 가능 (여러 파일 가능)</p>
     <label for="fileInput" class="btn-select">이미지 파일 선택</label>
-    <input type="file" id="fileInput" accept="image/*" style="display:none">
+    <input type="file" id="fileInput" accept="image/*" multiple style="display:none">
   </div>
 
   <div id="resultPanel" class="options-panel" style="display:none">
-    <div class="options-title">변환 결과</div>
+    <div class="options-title">변환 결과 (<span id="fileCount">0</span>개)</div>
 
-    <img id="previewImg" class="preview-img" alt="미리보기">
-
-    <div class="base64-meta" id="base64Meta"></div>
-
-    <textarea class="base64-output" id="base64Output" readonly></textarea>
+    <div id="resultList"></div>
 
     <div style="display:flex; align-items:center; margin-top:12px; flex-wrap:wrap; gap:8px;">
-      <button class="btn-action" id="copyBtn">📋 복사</button>
+      <button class="btn-action" id="downloadAllTxtBtn">⬇️ 전체 텍스트 파일로 다운로드</button>
       <span class="copy-success" id="copySuccess">✅ 복사됨!</span>
-      <button class="btn-action" onclick="clearFile()" style="margin-left:auto;">✕ 초기화</button>
+      <button class="btn-action" onclick="clearFiles()" style="margin-left:auto;">✕ 초기화</button>
     </div>
   </div>
 
@@ -213,63 +214,90 @@
 <footer class="footer"></footer>
 
 <script>
+  let results = []; // { name, size, dataUrl }
+
   const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
   dropZone.addEventListener('drop', e => {
     e.preventDefault(); dropZone.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file) loadFile(file);
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    if (files.length) loadFiles(files);
   });
   dropZone.addEventListener('click', e => {
-    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
-    document.getElementById('fileInput').click();
+    if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
+    fileInput.click();
   });
-  document.getElementById('fileInput').addEventListener('change', e => {
-    if (e.target.files[0]) loadFile(e.target.files[0]);
+  fileInput.addEventListener('change', e => {
+    const files = Array.from(e.target.files);
+    if (files.length) loadFiles(files);
+    fileInput.value = '';
   });
 
-  function loadFile(file) {
-    if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
-    }
+  async function loadFiles(files) {
     hideError();
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const dataUrl = e.target.result;
-      document.getElementById('previewImg').src = dataUrl;
-      document.getElementById('base64Output').value = dataUrl;
-      document.getElementById('base64Meta').innerHTML =
-        `<strong>파일명:</strong> ${file.name} &nbsp;|&nbsp; ` +
-        `<strong>원본 크기:</strong> ${formatSize(file.size)} &nbsp;|&nbsp; ` +
-        `<strong>Data URL 길이:</strong> ${dataUrl.length.toLocaleString()} 자`;
-      document.getElementById('resultPanel').style.display = 'block';
-      document.getElementById('copySuccess').style.display = 'none';
-    };
-    reader.readAsDataURL(file);
+    for (const file of files) {
+      const dataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => resolve(e.target.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+      if (!results.some(r => r.name === file.name && r.size === file.size)) {
+        results.push({ name: file.name, size: file.size, dataUrl });
+      }
+    }
+    renderResults();
   }
 
-  document.getElementById('copyBtn').addEventListener('click', () => {
-    const txt = document.getElementById('base64Output').value;
-    if (!txt) return;
-    navigator.clipboard.writeText(txt).then(() => {
-      const s = document.getElementById('copySuccess');
-      s.style.display = 'inline';
-      setTimeout(() => s.style.display = 'none', 2000);
-    }).catch(() => {
-      document.getElementById('base64Output').select();
-      document.execCommand('copy');
-      const s = document.getElementById('copySuccess');
-      s.style.display = 'inline';
-      setTimeout(() => s.style.display = 'none', 2000);
+  function renderResults() {
+    document.getElementById('fileCount').textContent = results.length;
+    document.getElementById('resultList').innerHTML = results.map((r, i) => `
+      <div class="b64-item">
+        <div class="b64-item-head">
+          <img class="b64-item-thumb" src="${r.dataUrl}" alt="${r.name}">
+          <div class="b64-item-name">${r.name}</div>
+          <button class="btn-action" onclick="copyOne(${i})">📋 복사</button>
+        </div>
+        <div class="base64-meta">원본 크기: ${formatSize(r.size)} · Data URL 길이: ${r.dataUrl.length.toLocaleString()}자</div>
+        <textarea class="base64-output" readonly>${r.dataUrl}</textarea>
+      </div>
+    `).join('');
+    document.getElementById('resultPanel').style.display = 'block';
+    document.getElementById('copySuccess').style.display = 'none';
+  }
+
+  function copyOne(idx) {
+    const txt = results[idx].dataUrl;
+    navigator.clipboard.writeText(txt).then(showCopySuccess).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = txt; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove();
+      showCopySuccess();
     });
+  }
+  function showCopySuccess() {
+    const s = document.getElementById('copySuccess');
+    s.style.display = 'inline';
+    setTimeout(() => s.style.display = 'none', 2000);
+  }
+
+  document.getElementById('downloadAllTxtBtn').addEventListener('click', () => {
+    if (!results.length) return;
+    const text = results.map(r => `${r.name}\n${r.dataUrl}\n`).join('\n---\n\n');
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'base64_images.txt'; a.click();
+    URL.revokeObjectURL(url);
   });
 
-  function clearFile() {
+  function clearFiles() {
+    results = [];
     document.getElementById('resultPanel').style.display = 'none';
-    document.getElementById('base64Output').value = '';
-    document.getElementById('previewImg').src = '';
-    document.getElementById('fileInput').value = '';
+    document.getElementById('resultList').innerHTML = '';
+    fileInput.value = '';
     hideError();
   }
 
