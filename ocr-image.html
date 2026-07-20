@@ -186,6 +186,11 @@
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
     .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
     .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+    .ocr-item { background: #FAFAFA; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 12px; }
+    .ocr-item:last-child { margin-bottom: 0; }
+    .ocr-item-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .ocr-item-thumb { width: 44px; height: 44px; object-fit: cover; border-radius: 6px; background: #E5E7EB; flex-shrink: 0; }
+    .ocr-item-name { font-weight: 600; font-size: 0.88rem; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -244,16 +249,14 @@
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
-    <p>JPG, PNG, WebP, BMP, GIF 파일 지원</p>
+    <p>JPG, PNG, WebP, BMP, GIF 파일 지원 (여러 파일 가능)</p>
     <label for="fileInput" class="btn-select">이미지 파일 선택</label>
-    <input type="file" id="fileInput" accept="image/*" style="display:none">
+    <input type="file" id="fileInput" accept="image/*" multiple style="display:none">
   </div>
 
-  <div id="previewPanel" style="display:none">
-    <div class="img-preview-wrap">
-      <img id="imgPreview" src="" alt="선택된 이미지">
-    </div>
-    <div id="fileInfoBar" style="margin-top:10px; font-size:0.85rem; color:var(--text-light); text-align:center;"></div>
+  <div id="previewPanel" style="display:none" class="panel">
+    <div class="panel-title">선택된 파일 (<span id="fileCount">0</span>개)</div>
+    <div id="fileList"></div>
   </div>
 
   <div id="progressPanel" style="display:none" class="panel">
@@ -265,19 +268,15 @@
   <div id="resultPanel" style="display:none" class="panel">
     <div class="result-toolbar">
       <div class="panel-title" style="margin-bottom:0;">인식 결과</div>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <span class="char-count" id="charCount"></span>
-        <button class="btn-copy" id="copyBtn" onclick="copyResult()">📋 복사</button>
-        <button class="btn-copy" id="downloadTxtBtn" onclick="downloadTxt()" style="background:var(--primary-light); color:var(--primary);">⬇️ TXT 저장</button>
-      </div>
+      <button class="btn-copy" id="downloadTxtBtn" onclick="downloadTxt()" style="background:var(--primary-light); color:var(--primary);">⬇️ 전체 TXT 저장</button>
     </div>
-    <textarea class="ocr-result-area" id="ocrResult" placeholder="인식된 텍스트가 여기에 표시됩니다."></textarea>
+    <div id="ocrResultList"></div>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
 
   <div id="startPanel" style="display:none">
-    <button class="btn-convert" id="startBtn">🔍 텍스트 인식 시작</button>
+    <button class="btn-convert" id="startBtn">🔍 전체 파일 텍스트 인식</button>
   </div>
 
   <div class="ocr-warning" style="margin-top: 24px;">
@@ -334,10 +333,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
 <script>
-  let selectedFile = null;
+  let selectedFiles = [];
   let selectedLang = 'kor';
+  let ocrResults = []; // { name, text }
 
-  // 언어 버튼
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -346,75 +345,98 @@
     });
   });
 
-  // 드롭존
   const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
   dropZone.addEventListener('drop', e => {
     e.preventDefault(); dropZone.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file) loadFile(file);
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    if (files.length) addFiles(files);
   });
   dropZone.addEventListener('click', e => {
-    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
-    document.getElementById('fileInput').click();
+    if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
+    fileInput.click();
   });
-  document.getElementById('fileInput').addEventListener('change', e => {
-    if (e.target.files[0]) loadFile(e.target.files[0]);
-    e.target.value = '';
+  fileInput.addEventListener('change', e => {
+    const files = Array.from(e.target.files);
+    if (files.length) addFiles(files);
+    fileInput.value = '';
   });
 
-  function loadFile(file) {
-    if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
-    }
+  function addFiles(newFiles) {
     hideError();
-    selectedFile = file;
+    newFiles.forEach(f => { if (!selectedFiles.some(s => s.name === f.name && s.size === f.size)) selectedFiles.push(f); });
+    renderFileList();
+  }
 
-    const reader = new FileReader();
-    reader.onload = e => {
-      document.getElementById('imgPreview').src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-
-    document.getElementById('fileInfoBar').textContent = `${file.name} · ${formatSize(file.size)}`;
+  function renderFileList() {
+    ocrResults = [];
+    document.getElementById('fileCount').textContent = selectedFiles.length;
+    document.getElementById('fileList').innerHTML = selectedFiles.map((f, i) =>
+      `<div class="file-item"><span class="file-item-icon">🖼️</span><div class="file-item-info"><div class="file-item-name">${f.name}</div><div class="file-item-size">${formatSize(f.size)}</div></div><button class="file-item-remove" onclick="removeFile(${i})">✕</button></div>`
+    ).join('');
     document.getElementById('previewPanel').style.display = 'block';
     document.getElementById('startPanel').style.display = 'block';
+    document.getElementById('startBtn').textContent = '🔍 전체 파일 텍스트 인식';
     document.getElementById('resultPanel').style.display = 'none';
     document.getElementById('progressPanel').style.display = 'none';
+  }
+
+  function removeFile(idx) {
+    selectedFiles.splice(idx, 1);
+    if (!selectedFiles.length) {
+      document.getElementById('previewPanel').style.display = 'none';
+      document.getElementById('startPanel').style.display = 'none';
+      return;
+    }
+    renderFileList();
   }
 
   document.getElementById('startBtn').addEventListener('click', runOCR);
 
   async function runOCR() {
-    if (!selectedFile) return;
+    if (!selectedFiles.length) return;
 
     document.getElementById('startPanel').style.display = 'none';
     document.getElementById('resultPanel').style.display = 'none';
     document.getElementById('progressPanel').style.display = 'block';
     hideError();
+    ocrResults = [];
 
     setProgress(0, '언어 데이터 로딩 중...');
 
     try {
+      // 워커는 한 번만 생성해서 전체 파일에 재사용
       const worker = await Tesseract.createWorker(selectedLang, 1, {
         logger: m => {
           if (m.status === 'loading tesseract core') setProgress(5, '엔진 로딩 중...');
           else if (m.status === 'initializing tesseract') setProgress(15, '엔진 초기화 중...');
           else if (m.status === 'loading language traineddata') setProgress(30, `언어 데이터 다운로드 중... ${Math.round((m.progress||0)*100)}%`);
-          else if (m.status === 'initializing api') setProgress(60, 'API 초기화 중...');
-          else if (m.status === 'recognizing text') setProgress(60 + Math.round((m.progress||0)*35), `텍스트 인식 중... ${Math.round((m.progress||0)*100)}%`);
+          else if (m.status === 'initializing api') setProgress(40, 'API 초기화 중...');
         }
       });
 
-      const { data: { text } } = await worker.recognize(selectedFile);
+      let html = '';
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const file = selectedFiles[i];
+        const base = Math.round((i / selectedFiles.length) * 100);
+        setProgress(base, `${i+1}/${selectedFiles.length} 인식 중... (${file.name})`);
+        try {
+          const { data: { text } } = await worker.recognize(file);
+          const cleaned = text.trim();
+          ocrResults.push({ name: file.name, text: cleaned });
+          const url = URL.createObjectURL(file);
+          html += `<div class="ocr-item"><div class="ocr-item-head"><img class="ocr-item-thumb" src="${url}" alt="${file.name}"><div class="ocr-item-name">${file.name}</div><span class="char-count">${cleaned.length.toLocaleString('ko-KR')}자</span><button class="btn-copy" onclick="copyOne(${ocrResults.length - 1})">📋 복사</button></div><textarea class="ocr-result-area" style="min-height:100px;">${cleaned}</textarea></div>`;
+        } catch (err) {
+          ocrResults.push({ name: file.name, text: '' });
+          html += `<div class="ocr-item"><div class="ocr-item-name">${file.name}</div><p style="color:#DC2626;font-size:0.85rem;">인식 실패</p></div>`;
+        }
+      }
       await worker.terminate();
 
       setProgress(100, '완료!');
-
-      const cleaned = text.trim();
-      document.getElementById('ocrResult').value = cleaned;
-      document.getElementById('charCount').textContent = `${cleaned.length.toLocaleString('ko-KR')}자`;
+      document.getElementById('ocrResultList').innerHTML = html;
 
       setTimeout(() => {
         document.getElementById('progressPanel').style.display = 'none';
@@ -435,26 +457,20 @@
     document.getElementById('progressStatus').textContent = msg;
   }
 
-  function copyResult() {
-    const text = document.getElementById('ocrResult').value;
+  function copyOne(idx) {
+    const text = ocrResults[idx].text;
     if (!text) return;
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.getElementById('copyBtn');
-      btn.textContent = '✅ 복사됨';
-      btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = '📋 복사'; btn.classList.remove('copied'); }, 2000);
-    });
+    navigator.clipboard.writeText(text);
   }
 
   function downloadTxt() {
-    const text = document.getElementById('ocrResult').value;
-    if (!text) return;
+    if (!ocrResults.length) return;
+    const text = ocrResults.map(r => `${r.name}\n${r.text}\n`).join('\n---\n\n');
     const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    const baseName = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') : 'ocr-result';
-    a.download = baseName + '_ocr.txt';
+    a.download = 'ocr_results.txt';
     a.click();
     URL.revokeObjectURL(url);
   }
