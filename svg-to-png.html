@@ -84,6 +84,17 @@
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
     .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
     .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+    .converted-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #F9FAFB; border-radius: var(--radius-sm); margin-bottom: 8px; }
+    .converted-item:last-child { margin-bottom: 0; }
+    .converted-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; background: #E5E7EB; }
+    .converted-info { flex: 1; min-width: 0; }
+    .converted-name { font-weight: 500; font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .converted-size { font-size: 0.76rem; color: var(--text-light); }
+    .converted-status { font-size: 0.76rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; }
+    .status-done { background: #F0FDF4; color: #16A34A; }
+    .status-error { background: #FEF2F2; color: #DC2626; }
+    .btn-download-sm { background: #22C55E; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .btn-download-sm:hover { background: #16A34A; }
   </style>
 </head>
 <body>
@@ -134,14 +145,14 @@
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🔷</span>
     <h3>SVG 파일을 여기에 끌어다 놓으세요</h3>
-    <p>.svg 파일을 업로드하세요</p>
+    <p>.svg 파일을 업로드하세요 (여러 파일 가능)</p>
     <label for="fileInput" class="btn-select">SVG 파일 선택</label>
-    <input type="file" id="fileInput" accept=".svg,image/svg+xml" style="display:none">
+    <input type="file" id="fileInput" accept=".svg,image/svg+xml" multiple style="display:none">
   </div>
 
-  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
-    <div class="file-list-title">선택된 파일</div>
-    <div id="fileInfo"></div>
+  <div id="fileListPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일 (<span id="fileCount">0</span>개)</div>
+    <div id="fileList"></div>
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
@@ -170,18 +181,23 @@
       </div>
     </div>
 
-    <div class="canvas-preview-wrap" id="canvasWrap" style="display:none; margin-top:16px;">
-      <canvas id="previewCanvas" style="max-width:100%; border-radius:8px; border:1px solid #e5e7eb;"></canvas>
-    </div>
+    <button class="btn-convert" id="convertBtn">🔄 변환 시작</button>
+  </div>
 
-    <div id="sizeInfo" style="margin-top:8px; font-size:0.85rem; color:#666; display:none;"></div>
-
-    <div class="download-share-group" style="margin-top:20px;">
-      <button class="btn-convert" id="downloadBtn">⬇️ PNG 다운로드</button>
-    </div>
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label"><span id="progressText">변환 중...</span><span id="progressPercent">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div id="resultPanel" class="result-panel">
+    <div class="result-header"><span class="result-icon">✅</span><div><div class="result-title">변환 완료!</div><div class="result-subtitle" id="resultSubtitle"></div></div></div>
+    <div id="resultList"></div>
+    <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+      <button class="btn-download" id="downloadAllBtn" style="display:none;">⬇️ 모두 다운로드 (ZIP)</button>
+    </div>
+  </div>
 
     <div class="related-tools">
   <h2>함께 쓰면 좋은 도구</h2>
@@ -203,48 +219,60 @@
 
 <footer class="footer"></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script>
-  let selectedFile = null;
-  let svgImg = null;
-  let svgWidth = 0, svgHeight = 0;
+  let selectedFiles = [];
+  let convertedResults = [];
 
   const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
   dropZone.addEventListener('drop', e => {
     e.preventDefault(); dropZone.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file) loadFile(file);
+    const files = Array.from(e.dataTransfer.files).filter(f => f.name.toLowerCase().endsWith('.svg') || f.type === 'image/svg+xml');
+    if (files.length) addFiles(files);
   });
   dropZone.addEventListener('click', e => {
-    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
-    document.getElementById('fileInput').click();
+    if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
+    fileInput.click();
   });
-  document.getElementById('fileInput').addEventListener('change', e => {
-    if (e.target.files[0]) loadFile(e.target.files[0]);
-  });
-
-  document.getElementById('scaleSelect').addEventListener('change', renderPreview);
-  document.getElementById('outputFormat').addEventListener('change', () => {
-    const fmt = document.getElementById('outputFormat').value;
-    const extMap = {'image/png':'PNG','image/webp':'WebP','image/jpeg':'JPG'};
-    document.getElementById('downloadBtn').textContent = `⬇️ ${extMap[fmt]} 다운로드`;
-    renderPreview();
+  fileInput.addEventListener('change', e => {
+    const files = Array.from(e.target.files);
+    if (files.length) addFiles(files);
+    fileInput.value = '';
   });
 
-  async function loadFile(file) {
-    if (!file.name.toLowerCase().endsWith('.svg') && file.type !== 'image/svg+xml') {
-      showError('SVG 파일만 업로드할 수 있습니다.'); return;
-    }
+  function addFiles(newFiles) {
     hideError();
-    selectedFile = file;
+    newFiles.forEach(f => { if (!selectedFiles.some(s => s.name === f.name && s.size === f.size)) selectedFiles.push(f); });
+    renderFileList();
+  }
+  function renderFileList() {
+    convertedResults = [];
+    document.getElementById('fileCount').textContent = selectedFiles.length;
+    document.getElementById('fileList').innerHTML = selectedFiles.map((f, i) =>
+      `<div class="file-item"><span class="file-item-icon">🔷</span><div class="file-item-info"><div class="file-item-name">${f.name}</div><div class="file-item-size">${formatSize(f.size)}</div></div><button class="file-item-remove" onclick="removeFile(${i})">✕</button></div>`
+    ).join('');
+    document.getElementById('fileListPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+  }
+  function removeFile(idx) {
+    selectedFiles.splice(idx, 1);
+    if (!selectedFiles.length) {
+      document.getElementById('fileListPanel').style.display = 'none';
+      document.getElementById('optionsPanel').style.display = 'none';
+      return;
+    }
+    renderFileList();
+  }
 
+  async function loadSvgImg(file) {
     const text = await file.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(text, 'image/svg+xml');
     const svgEl = doc.querySelector('svg');
-
-    // Determine SVG size
     let w = parseFloat(svgEl?.getAttribute('width')) || 0;
     let h = parseFloat(svgEl?.getAttribute('height')) || 0;
     const vb = svgEl?.getAttribute('viewBox');
@@ -255,78 +283,78 @@
     }
     if (!w) w = 300;
     if (!h) h = 300;
-    svgWidth = w;
-    svgHeight = h;
-
     const url = URL.createObjectURL(file);
-    svgImg = await new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = reject;
-      img.src = url;
+    const img = await new Promise((resolve, reject) => {
+      const im = new Image();
+      im.onload = () => resolve(im);
+      im.onerror = reject;
+      im.src = url;
     });
-
-    document.getElementById('fileInfo').innerHTML = `
-      <div class="file-item">
-        <span class="file-item-icon">🔷</span>
-        <div class="file-item-info">
-          <div class="file-item-name">${file.name}</div>
-          <div class="file-item-size">${formatSize(file.size)} · ${Math.round(w)}×${Math.round(h)} px</div>
-        </div>
-        <button class="file-item-remove" onclick="clearFile()">✕</button>
-      </div>`;
-    document.getElementById('fileInfoPanel').style.display = 'block';
-    document.getElementById('optionsPanel').style.display = 'block';
-    document.getElementById('canvasWrap').style.display = 'block';
-    renderPreview();
+    return { img, w, h };
   }
 
-  function renderPreview() {
-    if (!svgImg) return;
+  document.getElementById('convertBtn').addEventListener('click', async () => {
+    if (!selectedFiles.length) return;
     const scale = parseInt(document.getElementById('scaleSelect').value);
     const format = document.getElementById('outputFormat').value;
-    const canvas = document.getElementById('previewCanvas');
-    const cw = Math.round(svgWidth * scale);
-    const ch = Math.round(svgHeight * scale);
-    canvas.width = cw;
-    canvas.height = ch;
-    const ctx = canvas.getContext('2d');
-    if (format === 'image/jpeg') {
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, cw, ch);
-    } else {
-      ctx.clearRect(0, 0, cw, ch);
-    }
-    ctx.drawImage(svgImg, 0, 0, cw, ch);
-    const sizeEl = document.getElementById('sizeInfo');
-    sizeEl.style.display = 'block';
-    sizeEl.textContent = `출력 해상도: ${cw} × ${ch} px`;
-  }
-
-  function clearFile() {
-    selectedFile = null; svgImg = null;
-    document.getElementById('fileInfoPanel').style.display = 'none';
-    document.getElementById('optionsPanel').style.display = 'none';
-    document.getElementById('canvasWrap').style.display = 'none';
-    document.getElementById('sizeInfo').style.display = 'none';
-    document.getElementById('fileInput').value = '';
-    hideError();
-  }
-
-  document.getElementById('downloadBtn').addEventListener('click', () => {
-    if (!svgImg) return;
-    const canvas = document.getElementById('previewCanvas');
-    const format = document.getElementById('outputFormat').value;
+    const extMap = { 'image/png': '.png', 'image/webp': '.webp', 'image/jpeg': '.jpg' };
     const quality = format === 'image/jpeg' ? 0.92 : undefined;
-    canvas.toBlob(blob => {
-      const extMap = {'image/png':'.png','image/webp':'.webp','image/jpeg':'.jpg'};
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = selectedFile.name.replace(/\.svg$/i, '') + extMap[format];
-      a.click();
-      URL.revokeObjectURL(url);
-    }, format, quality);
+
+    const btn = document.getElementById('convertBtn');
+    btn.disabled = true; btn.textContent = '변환 중...';
+    hideError();
+    convertedResults = [];
+    const pw = document.getElementById('progressWrap'), pf = document.getElementById('progressFill'), pp = document.getElementById('progressPercent'), pt = document.getElementById('progressText');
+    pw.style.display = 'block';
+
+    let html = '', ok = 0;
+    for (let i = 0; i < selectedFiles.length; i++) {
+      const file = selectedFiles[i];
+      const pct = Math.round((i / selectedFiles.length) * 100);
+      pf.style.width = pct + '%'; pp.textContent = pct + '%'; pt.textContent = `${i+1}/${selectedFiles.length} 변환 중...`;
+      try {
+        const { img, w, h } = await loadSvgImg(file);
+        const cw = Math.round(w * scale), ch = Math.round(h * scale);
+        const canvas = document.createElement('canvas');
+        canvas.width = cw; canvas.height = ch;
+        const ctx = canvas.getContext('2d');
+        if (format === 'image/jpeg') { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, cw, ch); }
+        ctx.drawImage(img, 0, 0, cw, ch);
+        const outputBlob = await new Promise(res => canvas.toBlob(res, format, quality));
+
+        const url = URL.createObjectURL(outputBlob);
+        const outName = file.name.replace(/\.svg$/i, '') + extMap[format];
+        convertedResults.push({ blob: outputBlob, name: outName, url });
+
+        html += `<div class="converted-item"><img class="converted-thumb" src="${url}" alt="${outName}"><div class="converted-info"><div class="converted-name">${outName}</div><div class="converted-size">${cw}×${ch} · ${formatSize(outputBlob.size)}</div></div><span class="converted-status status-done">완료</span><button class="btn-download-sm" onclick="downloadSingle(${convertedResults.length - 1})">다운로드</button></div>`;
+        ok++;
+      } catch (e) {
+        html += `<div class="converted-item"><div style="width:60px;height:60px;background:#FEE2E2;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">❌</div><div class="converted-info"><div class="converted-name">${file.name}</div><div class="converted-size" style="color:#DC2626;">변환 실패</div></div><span class="converted-status status-error">실패</span></div>`;
+      }
+    }
+
+    pf.style.width = '100%'; pp.textContent = '100%'; pt.textContent = '완료!';
+    document.getElementById('resultList').innerHTML = html;
+    document.getElementById('resultSubtitle').textContent = `${ok}/${selectedFiles.length}개 파일 변환 완료`;
+    document.getElementById('resultPanel').style.display = 'block';
+    if (convertedResults.length > 1) document.getElementById('downloadAllBtn').style.display = 'inline-flex';
+
+    btn.disabled = false; btn.textContent = '🔄 변환 시작';
+    setTimeout(() => { pw.style.display = 'none'; }, 1500);
+  });
+
+  function downloadSingle(idx) { const r = convertedResults[idx]; const a = document.createElement('a'); a.href = r.url; a.download = r.name; a.click(); }
+  document.getElementById('downloadAllBtn').addEventListener('click', async () => {
+    if (!convertedResults.length) return;
+    const btn = document.getElementById('downloadAllBtn');
+    btn.disabled = true; btn.textContent = 'ZIP 생성 중...';
+    const zip = new JSZip();
+    convertedResults.forEach(r => zip.file(r.name, r.blob));
+    const content = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(content);
+    const a = document.createElement('a'); a.href = url; a.download = 'svg_to_png.zip'; a.click();
+    URL.revokeObjectURL(url);
+    btn.disabled = false; btn.textContent = '⬇️ 모두 다운로드 (ZIP)';
   });
 
   function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
