@@ -140,6 +140,16 @@
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
     .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
     .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+    .converted-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #F9FAFB; border-radius: var(--radius-sm); margin-bottom: 8px; }
+    .converted-item:last-child { margin-bottom: 0; }
+    .converted-info { flex: 1; min-width: 0; }
+    .converted-name { font-weight: 500; font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .converted-size { font-size: 0.76rem; color: var(--text-light); }
+    .converted-status { font-size: 0.76rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; }
+    .status-done { background: #F0FDF4; color: #16A34A; }
+    .status-error { background: #FEF2F2; color: #DC2626; }
+    .btn-download-sm { background: #22C55E; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .btn-download-sm:hover { background: #16A34A; }
   </style>
 </head>
 <body>
@@ -194,14 +204,14 @@
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
-    <p>PNG, JPG 파일을 업로드하세요 (정사각형 권장)</p>
+    <p>PNG, JPG 파일을 업로드하세요 (여러 파일 가능, 정사각형 권장)</p>
     <label for="fileInput" class="btn-select">이미지 파일 선택</label>
-    <input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg,image/webp" style="display:none">
+    <input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg,image/webp" multiple style="display:none">
   </div>
 
-  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
-    <div class="file-list-title">선택된 파일</div>
-    <div id="fileInfo"></div>
+  <div id="fileListPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일 (<span id="fileCount">0</span>개)</div>
+    <div id="fileList"></div>
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
@@ -231,12 +241,6 @@
         </div>
       </div>
     </div>
-    <div class="option-row" style="margin-top:16px;">
-      <span class="option-label">미리보기</span>
-      <div class="option-control">
-        <div class="preview-thumbs" id="previewThumbs"></div>
-      </div>
-    </div>
     <button class="btn-convert" id="convertBtn">🏷️ ICO 변환 시작</button>
   </div>
 
@@ -250,16 +254,19 @@
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   </div>
 
-  <div class="result-panel" id="resultPanel">    <div class="result-header">
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
         <div class="result-title">ICO 변환 완료!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
-
-<div id="resultAd" style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px"></div>
-    <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ ICO 파일 다운로드</button>
+    <div id="resultAd" style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px"></div>
+    <div id="resultList"></div>
+    <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+      <button class="btn-download" id="downloadAllBtn" style="display:none;">⬇️ 모두 다운로드 (ZIP)</button>
+    </div>
   </div>
 
     <div class="related-tools">
@@ -283,18 +290,16 @@
 
 <footer class="footer"></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script>
-  let selectedFile = null;
-  let loadedImg   = null;
-  let resultBlob  = null;
+  let selectedFiles = [];
+  let convertedResults = [];
 
   const SIZES = [16, 32, 48, 64, 128, 256];
 
-  // Checkbox styling
   document.querySelectorAll('.size-option input[type="checkbox"]').forEach(cb => {
     cb.addEventListener('change', () => {
       cb.closest('.size-option').classList.toggle('checked', cb.checked);
-      updatePreviews();
     });
   });
 
@@ -305,155 +310,132 @@
     });
   }
 
-  function updatePreviews() {
-    if (!loadedImg) return;
-    const sizes = getSelectedSizes();
-    const wrap = document.getElementById('previewThumbs');
-    wrap.innerHTML = '';
-    sizes.forEach(sz => {
-      const canvas = document.createElement('canvas');
-      canvas.width = sz; canvas.height = sz;
-      canvas.style.width  = Math.min(sz, 64) + 'px';
-      canvas.style.height = Math.min(sz, 64) + 'px';
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(loadedImg, 0, 0, sz, sz);
-      const div = document.createElement('div');
-      div.className = 'preview-thumb';
-      div.appendChild(canvas);
-      const label = document.createElement('span');
-      label.textContent = `${sz}×${sz}`;
-      div.appendChild(label);
-      wrap.appendChild(div);
-    });
-  }
-
   const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
   dropZone.addEventListener('drop', e => {
     e.preventDefault(); dropZone.classList.remove('drag-over');
-    if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.match(/^image\//));
+    if (files.length) addFiles(files);
   });
   dropZone.addEventListener('click', e => {
-    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
-    document.getElementById('fileInput').click();
+    if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
+    fileInput.click();
   });
-  document.getElementById('fileInput').addEventListener('change', e => {
-    if (e.target.files[0]) loadFile(e.target.files[0]);
+  fileInput.addEventListener('change', e => {
+    const files = Array.from(e.target.files);
+    if (files.length) addFiles(files);
+    fileInput.value = '';
   });
 
-  function loadFile(file) {
-    if (!file.type.match(/^image\//)) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
-    }
+  function addFiles(newFiles) {
     hideError();
-    selectedFile = file;
-    resultBlob = null;
-
-    document.getElementById('fileInfo').innerHTML = `
-      <div class="file-item">
-        <span class="file-item-icon">🖼️</span>
-        <div class="file-item-info">
-          <div class="file-item-name">${file.name}</div>
-          <div class="file-item-size">${formatSize(file.size)} · ${file.type}</div>
-        </div>
-        <button class="file-item-remove" onclick="clearFile()">✕</button>
-      </div>`;
-    document.getElementById('fileInfoPanel').style.display = 'block';
-    document.getElementById('resultPanel').style.display = 'none';
-
-    const img = new Image();
-    img.onload = () => {
-      loadedImg = img;
-      document.getElementById('optionsPanel').style.display = 'block';
-      updatePreviews();
-    };
-    img.src = URL.createObjectURL(file);
+    newFiles.forEach(f => { if (!selectedFiles.some(s => s.name === f.name && s.size === f.size)) selectedFiles.push(f); });
+    renderFileList();
   }
-
-  function clearFile() {
-    selectedFile = null; loadedImg = null;
-    document.getElementById('fileInfoPanel').style.display = 'none';
-    document.getElementById('optionsPanel').style.display = 'none';
+  function renderFileList() {
+    convertedResults = [];
+    document.getElementById('fileCount').textContent = selectedFiles.length;
+    document.getElementById('fileList').innerHTML = selectedFiles.map((f, i) =>
+      `<div class="file-item"><span class="file-item-icon">🖼️</span><div class="file-item-info"><div class="file-item-name">${f.name}</div><div class="file-item-size">${formatSize(f.size)}</div></div><button class="file-item-remove" onclick="removeFile(${i})">✕</button></div>`
+    ).join('');
+    document.getElementById('fileListPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
     document.getElementById('resultPanel').style.display = 'none';
-    document.getElementById('progressWrap').style.display = 'none';
-    document.getElementById('fileInput').value = '';
-    hideError();
+  }
+  function removeFile(idx) {
+    selectedFiles.splice(idx, 1);
+    if (!selectedFiles.length) {
+      document.getElementById('fileListPanel').style.display = 'none';
+      document.getElementById('optionsPanel').style.display = 'none';
+      return;
+    }
+    renderFileList();
   }
 
   document.getElementById('convertBtn').addEventListener('click', async () => {
-    if (!loadedImg) return;
+    if (!selectedFiles.length) return;
     const sizes = getSelectedSizes();
     if (sizes.length === 0) { showError('크기를 하나 이상 선택해 주세요.'); return; }
 
     const btn = document.getElementById('convertBtn');
     btn.disabled = true; btn.textContent = '⏳ 변환 중...';
     hideError();
-    document.getElementById('progressWrap').style.display = 'block';
-    document.getElementById('progressFill').style.width = '20%';
-    document.getElementById('progressText').textContent = '이미지 준비 중...';
+    convertedResults = [];
+    const pw = document.getElementById('progressWrap'), pf = document.getElementById('progressFill'), pct = document.getElementById('progressPct'), pt = document.getElementById('progressText');
+    pw.style.display = 'block';
 
-    try {
-      // Render each size as PNG into memory
-      const pngDataList = [];
-      for (let i = 0; i < sizes.length; i++) {
-        const sz = sizes[i];
-        const canvas = document.createElement('canvas');
-        canvas.width = sz; canvas.height = sz;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(loadedImg, 0, 0, sz, sz);
-        const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
-        const buf = await blob.arrayBuffer();
-        pngDataList.push({ size: sz, data: new Uint8Array(buf) });
-        document.getElementById('progressFill').style.width = `${20 + (i+1)/sizes.length * 60}%`;
+    let html = '', ok = 0;
+    for (let fi = 0; fi < selectedFiles.length; fi++) {
+      const file = selectedFiles[fi];
+      const basePct = Math.round((fi / selectedFiles.length) * 100);
+      pf.style.width = basePct + '%'; pct.textContent = basePct + '%';
+      pt.textContent = `${fi+1}/${selectedFiles.length} 변환 중... (${file.name})`;
+      try {
+        const img = await loadImg(file);
+        const pngDataList = [];
+        for (const sz of sizes) {
+          const canvas = document.createElement('canvas');
+          canvas.width = sz; canvas.height = sz;
+          canvas.getContext('2d').drawImage(img, 0, 0, sz, sz);
+          const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+          const buf = await blob.arrayBuffer();
+          pngDataList.push({ size: sz, data: new Uint8Array(buf) });
+        }
+        const icoBlob = buildIco(pngDataList);
+        const url = URL.createObjectURL(icoBlob);
+        const outName = file.name.replace(/\.[^.]+$/, '') + '.ico';
+        convertedResults.push({ blob: icoBlob, name: outName, url });
+        html += `<div class="converted-item"><div class="converted-info"><div class="converted-name">${outName}</div><div class="converted-size">${sizes.join(', ')}px · ${formatSize(icoBlob.size)}</div></div><span class="converted-status status-done">완료</span><button class="btn-download-sm" onclick="downloadSingle(${convertedResults.length - 1})">다운로드</button></div>`;
+        ok++;
+      } catch (err) {
+        html += `<div class="converted-item"><div class="converted-info"><div class="converted-name">${file.name}</div><div class="converted-size" style="color:#DC2626;">변환 실패</div></div><span class="converted-status status-error">실패</span></div>`;
       }
-
-      document.getElementById('progressText').textContent = 'ICO 파일 생성 중...';
-      document.getElementById('progressFill').style.width = '90%';
-
-      const icoBlob = buildIco(pngDataList);
-      resultBlob = icoBlob;
-
-      document.getElementById('progressFill').style.width = '100%';
-      document.getElementById('progressText').textContent = '완료!';
-      document.getElementById('progressWrap').style.display = 'none';
-
-      document.getElementById('resultSubtitle').textContent =
-        `${sizes.join(', ')}px 크기 포함 · ${formatSize(icoBlob.size)}`;
-
-      const panel = document.getElementById('resultPanel');
-      panel.style.display = 'block';
-      panel.scrollIntoView({ behavior: 'smooth' });
-      // result 패널 광고 동적 로드
-      const resultAd = document.getElementById('resultAd');
-      if (resultAd && !resultAd.dataset.adLoaded) {
-        const ins = document.createElement('ins');
-        ins.className = 'adsbygoogle';
-        ins.style.cssText = 'display:block';
-        ins.setAttribute('data-ad-client', 'ca-pub-6464921081676309');
-        ins.setAttribute('data-ad-slot', '9432796175');
-        ins.setAttribute('data-ad-format', 'auto');
-        ins.setAttribute('data-full-width-responsive', 'true');
-        resultAd.appendChild(ins);
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-        resultAd.dataset.adLoaded = '1';
-      }    // 다운로드 버튼 대기 (점 애니메이션)
-      const dlBtn = document.getElementById('downloadBtn');
-      if (dlBtn) {
-        dlBtn.disabled = true;
-        const origText = dlBtn.textContent;
-        const dots = ['⏳ 다운로드 준비중', '⏳ 다운로드 준비중.', '⏳ 다운로드 준비중..', '⏳ 다운로드 준비중...'];
-        let dotIdx = 0;
-        const dotTimer = setInterval(() => { dotIdx = (dotIdx + 1) % dots.length; dlBtn.textContent = dots[dotIdx]; }, 400);
-        setTimeout(() => { clearInterval(dotTimer); dlBtn.disabled = false; dlBtn.textContent = origText; }, 6000);
-      }
-
-    } catch(err) {
-      showError('변환 중 오류가 발생했습니다: ' + err.message);
-      document.getElementById('progressWrap').style.display = 'none';
     }
+
+    pf.style.width = '100%'; pct.textContent = '100%'; pt.textContent = '완료!';
+    document.getElementById('resultSubtitle').textContent = `${ok}/${selectedFiles.length}개 파일 변환 완료`;
+
+    const panel = document.getElementById('resultPanel');
+    document.getElementById('resultList').innerHTML = html;
+    panel.style.display = 'block';
+    panel.scrollIntoView({ behavior: 'smooth' });
+    if (convertedResults.length > 1) document.getElementById('downloadAllBtn').style.display = 'inline-flex';
+
+    const resultAd = document.getElementById('resultAd');
+    if (resultAd && !resultAd.dataset.adLoaded) {
+      const ins = document.createElement('ins');
+      ins.className = 'adsbygoogle';
+      ins.style.cssText = 'display:block';
+      ins.setAttribute('data-ad-client', 'ca-pub-6464921081676309');
+      ins.setAttribute('data-ad-slot', '9432796175');
+      ins.setAttribute('data-ad-format', 'auto');
+      ins.setAttribute('data-full-width-responsive', 'true');
+      resultAd.appendChild(ins);
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      resultAd.dataset.adLoaded = '1';
+    }
+
     btn.disabled = false; btn.textContent = '🏷️ ICO 변환 시작';
+    setTimeout(() => { pw.style.display = 'none'; }, 1500);
   });
+
+  function downloadSingle(idx) { const r = convertedResults[idx]; const a = document.createElement('a'); a.href = r.url; a.download = r.name; a.click(); }
+  document.getElementById('downloadAllBtn').addEventListener('click', async () => {
+    if (!convertedResults.length) return;
+    const btn = document.getElementById('downloadAllBtn');
+    btn.disabled = true; btn.textContent = 'ZIP 생성 중...';
+    const zip = new JSZip();
+    convertedResults.forEach(r => zip.file(r.name, r.blob));
+    const content = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(content);
+    const a = document.createElement('a'); a.href = url; a.download = 'png_to_ico.zip'; a.click();
+    URL.revokeObjectURL(url);
+    btn.disabled = false; btn.textContent = '⬇️ 모두 다운로드 (ZIP)';
+  });
+
+  function loadImg(f) { return new Promise((res, rej) => { const img = new Image(); img.onload = () => res(img); img.onerror = rej; img.src = URL.createObjectURL(f); }); }
 
   // Build ICO binary with embedded PNG images
   function buildIco(images) {
@@ -490,16 +472,6 @@
 
     return new Blob([buf], { type: 'image/x-icon' });
   }
-
-  document.getElementById('downloadBtn').addEventListener('click', () => {
-    if (!resultBlob) return;
-    const url = URL.createObjectURL(resultBlob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '.ico';
-    a.click();
-    URL.revokeObjectURL(url);
-  });
 
   function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
   function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
