@@ -69,7 +69,7 @@
     {
       "@type": "Question",
       "name": "여러 이미지에 일괄 적용할 수 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "현재는 이미지 1개씩 처리합니다. 일괄 처리는 향후 지원 예정입니다."}
+      "acceptedAnswer": {"@type": "Answer","text": "네, 여러 이미지를 한 번에 선택하면 동일한 워터마크 설정으로 일괄 적용 후 ZIP으로 받을 수 있습니다."}
     },
     {
       "@type": "Question",
@@ -106,6 +106,17 @@
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
     .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
     .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+    .converted-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #F9FAFB; border-radius: var(--radius-sm); margin-bottom: 8px; }
+    .converted-item:last-child { margin-bottom: 0; }
+    .converted-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; background: #E5E7EB; }
+    .converted-info { flex: 1; min-width: 0; }
+    .converted-name { font-weight: 500; font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .converted-size { font-size: 0.76rem; color: var(--text-light); }
+    .converted-status { font-size: 0.76rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; }
+    .status-done { background: #F0FDF4; color: #16A34A; }
+    .status-error { background: #FEF2F2; color: #DC2626; }
+    .btn-download-sm { background: #22C55E; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .btn-download-sm:hover { background: #16A34A; }
   </style>
 </head>
 <body>
@@ -156,14 +167,14 @@
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
-    <p>JPG, PNG, WebP 파일을 업로드하세요</p>
+    <p>JPG, PNG, WebP 파일을 업로드하세요 (여러 파일 가능)</p>
     <label for="fileInput" class="btn-select">이미지 파일 선택</label>
-    <input type="file" id="fileInput" accept="image/*" style="display:none">
+    <input type="file" id="fileInput" accept="image/*" multiple style="display:none">
   </div>
 
-  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
-    <div class="file-list-title">선택된 파일</div>
-    <div id="fileInfo"></div>
+  <div id="fileListPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일 (<span id="fileCount">0</span>개)</div>
+    <div id="fileList"></div>
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
@@ -230,13 +241,24 @@
       <canvas id="previewCanvas"></canvas>
     </div>
 
-    <div class="download-share-group">
-      <button class="btn-convert" id="downloadBtn">⬇️ 워터마크 이미지 다운로드</button>
-      <button class="btn-share" id="shareBtn" style="display:none;">📤 공유하기</button>
-    </div>
+    <button class="btn-convert" id="convertBtn">💧 전체 파일에 적용</button>
+  </div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label"><span id="progressText">처리 중...</span><span id="progressPercent">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div id="resultPanel" class="result-panel">
+    <div class="result-header"><span class="result-icon">✅</span><div><div class="result-title">처리 완료!</div><div class="result-subtitle" id="resultSubtitle"></div></div></div>
+    <div id="resultList"></div>
+    <div class="download-share-group">
+      <button class="btn-download" id="downloadAllBtn" style="display:none;">⬇️ 모두 다운로드 (ZIP)</button>
+      <button class="btn-share" id="shareBtn" style="display:none;">📤 공유하기</button>
+    </div>
+  </div>
 
     <div class="related-tools">
   <h2>함께 쓰면 좋은 도구</h2>
@@ -249,7 +271,7 @@
 </div>
 <div class="wooa-orig-anchor"></div>
 <div class="tips-panel"><h3>💡 Tips</h3><ul><li>텍스트 워터마크는 폰트·크기·투명도를 조정해 자연스럽게 삽입하세요.</li><li>이미지 워터마크(로고)는 모서리에 작게 배치하면 방해가 덜 합니다.</li><li>저작권 보호 목적이라면 중앙에 반투명하게 삽입하는 것이 효과적입니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>텍스트와 이미지 워터마크 모두 지원하나요?</summary><p>텍스트 워터마크를 지원하며 폰트 크기, 색상, 투명도를 설정할 수 있습니다.</p></details><details><summary>여러 이미지에 일괄 적용할 수 있나요?</summary><p>현재는 이미지 1개씩 처리합니다. 일괄 처리는 향후 지원 예정입니다.</p></details><details><summary>워터마크 위치를 지정할 수 있나요?</summary><p>9가지 위치(중앙, 모서리, 중간) 중 선택할 수 있습니다.</p></details><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>텍스트와 이미지 워터마크 모두 지원하나요?</summary><p>텍스트 워터마크를 지원하며 폰트 크기, 색상, 투명도를 설정할 수 있습니다.</p></details><details><summary>여러 이미지에 일괄 적용할 수 있나요?</summary><p>네, 여러 이미지를 한 번에 선택하면 동일한 워터마크 설정으로 일괄 적용 후 ZIP으로 받을 수 있습니다.</p></details><details><summary>워터마크 위치를 지정할 수 있나요?</summary><p>9가지 위치(중앙, 모서리, 중간) 중 선택할 수 있습니다.</p></details><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
 
 </main>
 
@@ -258,28 +280,32 @@
 
 <footer class="footer"></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script>
-  let selectedFile = null;
-  let origImg = null;
+  let selectedFiles = [];
+  let convertedResults = [];
+  let previewImg = null;
   let currentPos = 'bottom-right';
 
   const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
   dropZone.addEventListener('drop', e => {
     e.preventDefault(); dropZone.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file) loadFile(file);
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    if (files.length) addFiles(files);
   });
   dropZone.addEventListener('click', e => {
-    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
-    document.getElementById('fileInput').click();
+    if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
+    fileInput.click();
   });
-  document.getElementById('fileInput').addEventListener('change', e => {
-    if (e.target.files[0]) loadFile(e.target.files[0]);
+  fileInput.addEventListener('change', e => {
+    const files = Array.from(e.target.files);
+    if (files.length) addFiles(files);
+    fileInput.value = '';
   });
 
-  // Position grid
   document.querySelectorAll('.pos-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.pos-btn').forEach(b => b.classList.remove('active'));
@@ -298,38 +324,49 @@
     });
   });
 
-  async function loadFile(file) {
-    if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.'); return;
-    }
+  async function addFiles(newFiles) {
     hideError();
-    selectedFile = file;
-    origImg = await loadImage(file);
-
-    document.getElementById('fileInfo').innerHTML = `
-      <div class="file-item">
-        <span class="file-item-icon">🖼️</span>
-        <div class="file-item-info">
-          <div class="file-item-name">${file.name}</div>
-          <div class="file-item-size">${formatSize(file.size)} · ${origImg.naturalWidth}×${origImg.naturalHeight}</div>
-        </div>
-        <button class="file-item-remove" onclick="clearFile()">✕</button>
-      </div>`;
-    document.getElementById('fileInfoPanel').style.display = 'block';
-    document.getElementById('optionsPanel').style.display = 'block';
+    newFiles.forEach(f => { if (!selectedFiles.some(s => s.name === f.name && s.size === f.size)) selectedFiles.push(f); });
+    renderFileList();
+    previewImg = await loadImage(selectedFiles[0]);
     document.getElementById('canvasWrap').style.display = 'block';
     renderPreview();
   }
 
+  function renderFileList() {
+    convertedResults = [];
+    document.getElementById('fileCount').textContent = selectedFiles.length;
+    document.getElementById('fileList').innerHTML = selectedFiles.map((f, i) =>
+      `<div class="file-item"><span class="file-item-icon">🖼️</span><div class="file-item-info"><div class="file-item-name">${f.name}</div><div class="file-item-size">${formatSize(f.size)}</div></div><button class="file-item-remove" onclick="removeFile(${i})">✕</button></div>`
+    ).join('');
+    document.getElementById('fileListPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+  }
+
+  async function removeFile(idx) {
+    selectedFiles.splice(idx, 1);
+    if (!selectedFiles.length) {
+      document.getElementById('fileListPanel').style.display = 'none';
+      document.getElementById('optionsPanel').style.display = 'none';
+      document.getElementById('canvasWrap').style.display = 'none';
+      return;
+    }
+    renderFileList();
+    previewImg = await loadImage(selectedFiles[0]);
+    renderPreview();
+  }
+
   function renderPreview() {
-    if (!origImg) return;
-    const canvas = document.getElementById('previewCanvas');
-    const W = origImg.naturalWidth;
-    const H = origImg.naturalHeight;
-    canvas.width = W;
-    canvas.height = H;
+    if (!previewImg) return;
+    drawWatermark(document.getElementById('previewCanvas'), previewImg);
+  }
+
+  function drawWatermark(canvas, img) {
+    const W = img.naturalWidth, H = img.naturalHeight;
+    canvas.width = W; canvas.height = H;
     const ctx = canvas.getContext('2d');
-    ctx.drawImage(origImg, 0, 0);
+    ctx.drawImage(img, 0, 0);
 
     const text = document.getElementById('wmText').value || '© WooaImage';
     const color = document.getElementById('wmColor').value;
@@ -343,10 +380,7 @@
     ctx.fillStyle = color;
     ctx.textBaseline = 'middle';
 
-    const tm = ctx.measureText(text);
-    const tw = tm.width;
     const th = size;
-
     let x, y;
     switch(currentPos) {
       case 'top-left':     x = padding; y = padding + th/2; ctx.textAlign='left'; break;
@@ -361,37 +395,68 @@
       default:             x = W - padding; y = H - padding - th/2; ctx.textAlign='right';
     }
 
-    // Shadow for visibility
     ctx.shadowColor = 'rgba(0,0,0,0.5)';
     ctx.shadowBlur = 4;
     ctx.fillText(text, x, y);
     ctx.restore();
   }
 
-  function clearFile() {
-    selectedFile = null; origImg = null;
-    document.getElementById('fileInfoPanel').style.display = 'none';
-    document.getElementById('optionsPanel').style.display = 'none';
-    document.getElementById('canvasWrap').style.display = 'none';
-    document.getElementById('fileInput').value = '';
-    hideError();
-  }
-
-  document.getElementById('downloadBtn').addEventListener('click', async () => {
-    if (!origImg) return;
-    renderPreview();
-    const canvas = document.getElementById('previewCanvas');
+  document.getElementById('convertBtn').addEventListener('click', async () => {
+    if (!selectedFiles.length) return;
     const fmt = document.getElementById('outputFormat').value;
-    const quality = fmt === 'image/png' ? undefined : 0.92;
-    const blob = await new Promise(resolve => canvas.toBlob(resolve, fmt, quality));
-
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
     const extMap = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp' };
-    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_watermark' + (extMap[fmt] || '.jpg');
-    a.click();
+    const quality = fmt === 'image/png' ? undefined : 0.92;
+
+    const btn = document.getElementById('convertBtn');
+    btn.disabled = true; btn.textContent = '처리 중...';
+    convertedResults = [];
+    const pw = document.getElementById('progressWrap'), pf = document.getElementById('progressFill'), pp = document.getElementById('progressPercent'), pt = document.getElementById('progressText');
+    pw.style.display = 'block';
+
+    let html = '', ok = 0;
+    for (let i = 0; i < selectedFiles.length; i++) {
+      const file = selectedFiles[i];
+      const pct = Math.round((i / selectedFiles.length) * 100);
+      pf.style.width = pct + '%'; pp.textContent = pct + '%'; pt.textContent = `${i+1}/${selectedFiles.length} 처리 중...`;
+      try {
+        const img = i === 0 ? previewImg : await loadImage(file);
+        const canvas = document.createElement('canvas');
+        drawWatermark(canvas, img);
+        const outputBlob = await new Promise(resolve => canvas.toBlob(resolve, fmt, quality));
+
+        const url = URL.createObjectURL(outputBlob);
+        const outName = file.name.replace(/\.[^.]+$/, '') + '_watermark' + (extMap[fmt] || '.jpg');
+        convertedResults.push({ blob: outputBlob, name: outName, url });
+
+        html += `<div class="converted-item"><img class="converted-thumb" src="${url}" alt="${outName}"><div class="converted-info"><div class="converted-name">${outName}</div><div class="converted-size">${formatSize(outputBlob.size)}</div></div><span class="converted-status status-done">완료</span><button class="btn-download-sm" onclick="downloadSingle(${convertedResults.length - 1})">다운로드</button></div>`;
+        ok++;
+      } catch (err) {
+        html += `<div class="converted-item"><div style="width:60px;height:60px;background:#FEE2E2;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">❌</div><div class="converted-info"><div class="converted-name">${file.name}</div><div class="converted-size" style="color:#DC2626;">처리 실패</div></div><span class="converted-status status-error">실패</span></div>`;
+      }
+    }
+
+    pf.style.width = '100%'; pp.textContent = '100%'; pt.textContent = '완료!';
+    document.getElementById('resultList').innerHTML = html;
+    document.getElementById('resultSubtitle').textContent = `${ok}/${selectedFiles.length}개 파일 처리 완료`;
+    document.getElementById('resultPanel').style.display = 'block';
+    if (convertedResults.length > 1) document.getElementById('downloadAllBtn').style.display = 'inline-flex';
+
+    btn.disabled = false; btn.textContent = '💧 전체 파일에 적용';
+    setTimeout(() => { pw.style.display = 'none'; }, 1500);
+  });
+
+  function downloadSingle(idx) { const r = convertedResults[idx]; const a = document.createElement('a'); a.href = r.url; a.download = r.name; a.click(); }
+  document.getElementById('downloadAllBtn').addEventListener('click', async () => {
+    if (!convertedResults.length) return;
+    const btn = document.getElementById('downloadAllBtn');
+    btn.disabled = true; btn.textContent = 'ZIP 생성 중...';
+    const zip = new JSZip();
+    convertedResults.forEach(r => zip.file(r.name, r.blob));
+    const content = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(content);
+    const a = document.createElement('a'); a.href = url; a.download = 'watermarked_images.zip'; a.click();
     URL.revokeObjectURL(url);
+    btn.disabled = false; btn.textContent = '⬇️ 모두 다운로드 (ZIP)';
   });
 
   function loadImage(file) {
@@ -417,16 +482,10 @@
       if (navigator.canShare({ files: [testFile] })) shareBtn.style.display = 'inline-flex';
     }
     shareBtn.addEventListener('click', async () => {
-      if (!origImg) return;
-      const canvas = document.getElementById('previewCanvas');
-      const format = document.getElementById('outputFormat').value;
-      const quality = format === 'image/jpeg' ? parseInt(document.getElementById('opacity').value) / 100 : undefined;
-      const blob = await new Promise(resolve => canvas.toBlob(resolve, format, 0.92));
-      const extMap = {'image/jpeg':'.jpg','image/png':'.png','image/webp':'.webp'};
-      const ext = extMap[format] || '.jpg';
-      const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_watermarked' + ext : 'watermarked' + ext;
-      const file = new File([blob], fname, { type: format });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/watermark-image.html' }); }
+      if (!convertedResults.length) return;
+      const first = convertedResults[0];
+      const file = new File([first.blob], first.name, { type: first.blob.type });
+      try { await navigator.share({ files: [file], title: first.name + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/watermark-image.html' }); }
       catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
     });
   })();
