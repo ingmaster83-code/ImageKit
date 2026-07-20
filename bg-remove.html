@@ -135,6 +135,17 @@
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
     .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
     .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+    .converted-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #F9FAFB; border-radius: var(--radius-sm); margin-bottom: 8px; }
+    .converted-item:last-child { margin-bottom: 0; }
+    .converted-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; background: #E5E7EB; }
+    .converted-info { flex: 1; min-width: 0; }
+    .converted-name { font-weight: 500; font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .converted-size { font-size: 0.76rem; color: var(--text-light); }
+    .converted-status { font-size: 0.76rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; }
+    .status-done { background: #F0FDF4; color: #16A34A; }
+    .status-error { background: #FEF2F2; color: #DC2626; }
+    .btn-download-sm { background: #22C55E; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .btn-download-sm:hover { background: #16A34A; }
   </style>
 </head>
 <body>
@@ -189,19 +200,19 @@
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
-    <p>JPG, PNG, WebP 파일을 업로드하세요</p>
+    <p>JPG, PNG, WebP 파일을 업로드하세요 (여러 파일 가능)</p>
     <label for="fileInput" class="btn-select">이미지 파일 선택</label>
-    <input type="file" id="fileInput" accept="image/*" style="display:none">
+    <input type="file" id="fileInput" accept="image/*" multiple style="display:none">
   </div>
 
-  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
-    <div class="file-list-title">선택된 파일</div>
-    <div id="fileInfo"></div>
+  <div id="fileListPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일 (<span id="fileCount">0</span>개)</div>
+    <div id="fileList"></div>
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
     <div class="options-title">배경 제거</div>
-    <button class="btn-convert" id="processBtn">🤖 배경 제거 시작</button>
+    <button class="btn-convert" id="processBtn">🤖 전체 파일 배경 제거</button>
   </div>
 
   <div class="progress-wrap" id="progressWrap">
@@ -215,6 +226,8 @@
     <div class="progress-status" id="progressStatus">AI 모델 로딩 중...</div>
   </div>
 
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
   <div id="resultPanel" class="result-panel">
     <div class="result-header">
       <span class="result-icon">✅</span>
@@ -223,29 +236,15 @@
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
-    <div class="compare-wrap">
-      <div class="compare-box">
-        <h4>원본</h4>
-        <img id="originalPreview" alt="원본 이미지">
-      </div>
-      <div class="compare-box">
-        <h4>결과 (투명 배경)</h4>
-        <div class="transparency-bg" style="display:inline-block; border-radius:var(--radius-sm);">
-          <img id="resultPreview" alt="배경 제거 결과" style="display:block;">
-        </div>
-      </div>
-    </div>
+    <div id="resultList"></div>
     <div style="margin-top:20px; text-align:center;">
-      
-<div class="download-share-group">
-  <button class="btn-download" id="downloadBtn">⬇️ 투명 PNG 다운로드</button>
-  <button class="btn-share" id="shareBtn" style="display:none;">📤 공유하기</button>
-</div>
-<div id="resultAd" style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px"></div>
+      <div class="download-share-group">
+        <button class="btn-download" id="downloadAllBtn" style="display:none;">⬇️ 모두 다운로드 (ZIP)</button>
+        <button class="btn-share" id="shareBtn" style="display:none;">📤 공유하기</button>
+      </div>
+      <div id="resultAd" style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px"></div>
     </div>
   </div>
-
-  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
 
     <div class="related-tools">
   <h2>함께 쓰면 좋은 도구</h2>
@@ -268,10 +267,10 @@
 
 <footer class="footer"></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script>
-  // AI 라이브러리와 분리 — 파일 UI는 즉시 동작
-  let selectedFile = null;
-  let resultBlob = null;
+  let selectedFiles = [];
+  let convertedResults = [];
 
   const dropZone = document.getElementById('dropZone');
   const fileInput = document.getElementById('fileInput');
@@ -280,53 +279,52 @@
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
   dropZone.addEventListener('drop', e => {
     e.preventDefault(); dropZone.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file) loadFile(file);
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    if (files.length) addFiles(files);
   });
   dropZone.addEventListener('click', e => {
     if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
     fileInput.click();
   });
   fileInput.addEventListener('change', e => {
-    if (e.target.files[0]) loadFile(e.target.files[0]);
+    const files = Array.from(e.target.files);
+    if (files.length) addFiles(files);
     fileInput.value = '';
   });
 
-  function loadFile(file) {
-    if (!file.type.startsWith('image/')) {
-      showError('이미지 파일만 업로드할 수 있습니다.');
-      return;
-    }
+  function addFiles(newFiles) {
     hideError();
-    selectedFile = file;
-    resultBlob = null;
-
-    const img = new Image();
-    img.onload = () => {
-      document.getElementById('fileInfo').innerHTML = `
-        <div class="file-item">
-          <span class="file-item-icon">🖼️</span>
-          <div class="file-item-info">
-            <div class="file-item-name">${file.name}</div>
-            <div class="file-item-size">${formatSize(file.size)} · ${img.naturalWidth}×${img.naturalHeight}</div>
-          </div>
-          <button class="file-item-remove" id="clearBtn">✕</button>
-        </div>`;
-      document.getElementById('clearBtn').addEventListener('click', clearFile);
-      document.getElementById('fileInfoPanel').style.display = 'block';
-      document.getElementById('optionsPanel').style.display = 'block';
-      document.getElementById('resultPanel').style.display = 'none';
-      document.getElementById('originalPreview').src = img.src;
-    };
-    img.src = URL.createObjectURL(file);
+    newFiles.forEach(f => { if (!selectedFiles.some(s => s.name === f.name && s.size === f.size)) selectedFiles.push(f); });
+    renderFileList();
   }
 
+  function renderFileList() {
+    convertedResults = [];
+    document.getElementById('fileCount').textContent = selectedFiles.length;
+    document.getElementById('fileList').innerHTML = selectedFiles.map((f, i) =>
+      `<div class="file-item"><span class="file-item-icon">🖼️</span><div class="file-item-info"><div class="file-item-name">${f.name}</div><div class="file-item-size">${formatSize(f.size)}</div></div><button class="file-item-remove" onclick="window.__bgRemoveRemoveFile(${i})">✕</button></div>`
+    ).join('');
+    document.getElementById('fileListPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+  }
+  window.__bgRemoveRemoveFile = function(idx) {
+    selectedFiles.splice(idx, 1);
+    if (!selectedFiles.length) {
+      document.getElementById('fileListPanel').style.display = 'none';
+      document.getElementById('optionsPanel').style.display = 'none';
+      return;
+    }
+    renderFileList();
+  };
+
   document.getElementById('processBtn').addEventListener('click', async () => {
-    if (!selectedFile) return;
+    if (!selectedFiles.length) return;
 
     const btn = document.getElementById('processBtn');
     btn.disabled = true;
     btn.textContent = '처리 중...';
+    convertedResults = [];
 
     const progressWrap = document.getElementById('progressWrap');
     const progressFill = document.getElementById('progressFill');
@@ -336,31 +334,37 @@
     progressFill.style.width = '0%';
     progressStatus.textContent = 'AI 모델 로딩 중...';
 
+    let html = '', ok = 0;
     try {
-      // 버튼 클릭 시점에 동적으로 import
+      // 모델은 한 번만 import(첫 파일 처리 시 캐시됨), 이후 파일들은 재사용
       const { removeBackground } = await import('https://esm.sh/@imgly/background-removal@1.4.5');
 
-      const blob = await removeBackground(selectedFile, {
-        progress: (key, current, total) => {
-          const pct = total > 0 ? Math.round((current / total) * 100) : 0;
-          progressFill.style.width = pct + '%';
-          progressPercent.textContent = pct + '%';
-          if (key.includes('download')) {
-            progressStatus.textContent = 'AI 모델 다운로드 중...';
-          } else if (key.includes('compute') || key.includes('inference')) {
-            progressStatus.textContent = '배경 제거 처리 중...';
-          } else {
-            progressStatus.textContent = key + '...';
-          }
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const file = selectedFiles[i];
+        progressStatus.textContent = `${i+1}/${selectedFiles.length} 처리 중... (${file.name})`;
+        try {
+          const blob = await removeBackground(file, {
+            progress: (key, current, total) => {
+              const pct = total > 0 ? Math.round((current / total) * 100) : 0;
+              progressFill.style.width = pct + '%';
+              progressPercent.textContent = pct + '%';
+            }
+          });
+          const url = URL.createObjectURL(blob);
+          const outName = file.name.replace(/\.[^.]+$/, '') + '_nobg.png';
+          convertedResults.push({ blob, name: outName, url });
+          html += `<div class="converted-item"><img class="converted-thumb" src="${url}" alt="${outName}"><div class="converted-info"><div class="converted-name">${outName}</div><div class="converted-size">${formatSize(blob.size)}</div></div><span class="converted-status status-done">완료</span><button class="btn-download-sm" onclick="window.__bgRemoveDownloadSingle(${convertedResults.length - 1})">다운로드</button></div>`;
+          ok++;
+        } catch (err) {
+          html += `<div class="converted-item"><div style="width:60px;height:60px;background:#FEE2E2;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">❌</div><div class="converted-info"><div class="converted-name">${file.name}</div><div class="converted-size" style="color:#DC2626;">처리 실패</div></div><span class="converted-status status-error">실패</span></div>`;
         }
-      });
+      }
 
-      resultBlob = blob;
-      const resultUrl = URL.createObjectURL(blob);
-      document.getElementById('resultPreview').src = resultUrl;
-      document.getElementById('resultSubtitle').textContent = `결과 크기: ${formatSize(blob.size)}`;
+      document.getElementById('resultList').innerHTML = html;
+      document.getElementById('resultSubtitle').textContent = `${ok}/${selectedFiles.length}개 파일 처리 완료`;
       document.getElementById('resultPanel').style.display = 'block';
-      // result 패널 광고 동적 로드
+      if (convertedResults.length > 1) document.getElementById('downloadAllBtn').style.display = 'inline-flex';
+
       const resultAd = document.getElementById('resultAd');
       if (resultAd && !resultAd.dataset.adLoaded) {
         const ins = document.createElement('ins');
@@ -374,16 +378,6 @@
         (window.adsbygoogle = window.adsbygoogle || []).push({});
         resultAd.dataset.adLoaded = '1';
       }
-      // 다운로드 버튼 대기 (점 애니메이션)
-      const dlBtn = document.getElementById('downloadBtn');
-      if (dlBtn) {
-        dlBtn.disabled = true;
-        const origText = dlBtn.textContent;
-        const dots = ['⏳ 다운로드 준비중', '⏳ 다운로드 준비중.', '⏳ 다운로드 준비중..', '⏳ 다운로드 준비중...'];
-        let dotIdx = 0;
-        const dotTimer = setInterval(() => { dotIdx = (dotIdx + 1) % dots.length; dlBtn.textContent = dots[dotIdx]; }, 400);
-        setTimeout(() => { clearInterval(dotTimer); dlBtn.disabled = false; dlBtn.textContent = origText; }, 6000);
-      }
       progressFill.style.width = '100%';
       progressPercent.textContent = '100%';
       progressStatus.textContent = '완료!';
@@ -392,31 +386,28 @@
       showError('배경 제거 중 오류가 발생했습니다: ' + err.message);
     } finally {
       btn.disabled = false;
-      btn.textContent = '🤖 배경 제거 시작';
+      btn.textContent = '🤖 전체 파일 배경 제거';
       setTimeout(() => { progressWrap.style.display = 'none'; }, 2000);
     }
   });
 
-  document.getElementById('downloadBtn').addEventListener('click', () => {
-    if (!resultBlob) return;
-    const url = URL.createObjectURL(resultBlob);
+  window.__bgRemoveDownloadSingle = function(idx) {
+    const r = convertedResults[idx];
     const a = document.createElement('a');
-    a.href = url;
-    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_nobg.png';
-    a.click();
+    a.href = r.url; a.download = r.name; a.click();
+  };
+  document.getElementById('downloadAllBtn').addEventListener('click', async () => {
+    if (!convertedResults.length) return;
+    const btn = document.getElementById('downloadAllBtn');
+    btn.disabled = true; btn.textContent = 'ZIP 생성 중...';
+    const zip = new JSZip();
+    convertedResults.forEach(r => zip.file(r.name, r.blob));
+    const content = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(content);
+    const a = document.createElement('a'); a.href = url; a.download = 'nobg_images.zip'; a.click();
     URL.revokeObjectURL(url);
+    btn.disabled = false; btn.textContent = '⬇️ 모두 다운로드 (ZIP)';
   });
-
-  function clearFile() {
-    selectedFile = null;
-    resultBlob = null;
-    document.getElementById('fileInfoPanel').style.display = 'none';
-    document.getElementById('optionsPanel').style.display = 'none';
-    document.getElementById('resultPanel').style.display = 'none';
-    document.getElementById('progressWrap').style.display = 'none';
-    fileInput.value = '';
-    hideError();
-  }
 
   function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
   function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
@@ -434,10 +425,10 @@
       if (navigator.canShare({ files: [testFile] })) shareBtn.style.display = 'inline-flex';
     }
     shareBtn.addEventListener('click', async () => {
-      if (!resultBlob) return;
-      const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_nobg.png' : 'nobg.png';
-      const file = new File([resultBlob], fname, { type: 'image/png' });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/bg-remove.html' }); }
+      if (!convertedResults.length) return;
+      const first = convertedResults[0];
+      const file = new File([first.blob], first.name, { type: 'image/png' });
+      try { await navigator.share({ files: [file], title: first.name + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/bg-remove.html' }); }
       catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
     });
   })();
