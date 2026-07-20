@@ -156,6 +156,17 @@
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
     .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
     .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+    .converted-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #F9FAFB; border-radius: var(--radius-sm); margin-bottom: 8px; }
+    .converted-item:last-child { margin-bottom: 0; }
+    .converted-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; background: #E5E7EB; }
+    .converted-info { flex: 1; min-width: 0; }
+    .converted-name { font-weight: 500; font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .converted-size { font-size: 0.76rem; color: var(--text-light); }
+    .converted-status { font-size: 0.76rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; }
+    .status-done { background: #F0FDF4; color: #16A34A; }
+    .status-error { background: #FEF2F2; color: #DC2626; }
+    .btn-download-sm { background: #22C55E; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .btn-download-sm:hover { background: #16A34A; }
   </style>
 </head>
 <body>
@@ -206,14 +217,14 @@
   <div class="drop-zone" id="dropZone">
     <span class="drop-zone-icon">🖼️</span>
     <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
-    <p>JPG, PNG, WebP 파일을 업로드하세요</p>
+    <p>JPG, PNG, WebP 파일을 업로드하세요 (여러 파일 가능)</p>
     <label for="fileInput" class="btn-select">이미지 파일 선택</label>
-    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg" style="display:none">
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/jpg" multiple style="display:none">
   </div>
 
-  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
-    <div class="file-list-title">선택된 파일</div>
-    <div id="fileInfo"></div>
+  <div id="fileListPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일 (<span id="fileCount">0</span>개)</div>
+    <div id="fileList"></div>
   </div>
 
   <div id="optionsPanel" class="options-panel" style="display:none">
@@ -291,7 +302,7 @@
       </div>
     </div>
 
-    <button class="btn-convert" id="applyBtn" style="margin-top:20px;">🎨 필터 적용 & 저장 준비</button>
+    <button class="btn-convert" id="applyBtn" style="margin-top:20px;">🎨 전체 파일에 적용</button>
   </div>
 
   <div id="errorMsg" class="alert alert-error" style="display:none"></div>
@@ -304,19 +315,17 @@
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   </div>
 
-  <div class="result-panel" id="resultPanel">    <div class="result-header">
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
       <span class="result-icon">✅</span>
       <div>
         <div class="result-title">필터 적용 완료!</div>
         <div class="result-subtitle" id="resultSubtitle"></div>
       </div>
     </div>
-    <div class="preview-image-wrap">
-      <img id="resultImg" src="" alt="필터 적용된 이미지 미리보기" style="max-width:100%;border-radius:8px;">
-    </div>
-
-<div class="download-share-group">
-      <button class="btn-download" id="downloadBtn" style="margin-top:16px;">⬇️ 필터 이미지 다운로드</button>
+    <div id="resultList"></div>
+    <div class="download-share-group">
+      <button class="btn-download" id="downloadAllBtn" style="display:none;">⬇️ 모두 다운로드 (ZIP)</button>
       <button class="btn-share" id="shareBtn" style="display:none;">📤 공유하기</button>
     </div>
     <div id="resultAd" style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px"></div>
@@ -343,10 +352,11 @@
 
 <footer class="footer"></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script>
-  let selectedFile = null;
+  let selectedFiles = [];
+  let convertedResults = [];
   let originalImg = null;
-  let resultBlob = null;
 
   // Filter defaults
   const defaults = { brightness:100, contrast:100, saturate:100, hue:0, grayscale:0, sepia:0, blur:0, sharpness:0 };
@@ -444,177 +454,177 @@
     updatePreview();
   });
 
+  function applyFilterToImage(img) {
+    const filterStr = getFilterCSS();
+    const sharpness = parseFloat(document.getElementById('sharpness').value);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.filter = filterStr;
+    ctx.drawImage(img, 0, 0);
+    ctx.filter = 'none';
+
+    if (sharpness > 0) {
+      const strength = sharpness / 100 * 2;
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const src = new Uint8ClampedArray(imgData.data);
+      const w = canvas.width, h = canvas.height;
+      const k = [-strength/4, -strength/4, -strength/4, -strength/4,
+                  1 + strength, -strength/4, -strength/4, -strength/4, -strength/4];
+      for (let y = 1; y < h-1; y++) {
+        for (let x = 1; x < w-1; x++) {
+          const i = (y * w + x) * 4;
+          for (let c = 0; c < 3; c++) {
+            let v = 0;
+            v += src[((y-1)*w+(x-1))*4+c] * k[0];
+            v += src[((y-1)*w+x)*4+c]     * k[1];
+            v += src[((y-1)*w+(x+1))*4+c] * k[2];
+            v += src[(y*w+(x-1))*4+c]     * k[3];
+            v += src[i+c]                  * k[4];
+            v += src[(y*w+(x+1))*4+c]     * k[5];
+            v += src[((y+1)*w+(x-1))*4+c] * k[6];
+            v += src[((y+1)*w+x)*4+c]     * k[7];
+            v += src[((y+1)*w+(x+1))*4+c] * k[8];
+            imgData.data[i+c] = Math.max(0, Math.min(255, v));
+          }
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+    }
+    return canvas;
+  }
+
   // Drag & drop
   const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
   dropZone.addEventListener('drop', e => {
     e.preventDefault(); dropZone.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file) loadFile(file);
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.match(/^image\/(jpeg|png|webp)/));
+    if (files.length) addFiles(files);
   });
   dropZone.addEventListener('click', e => {
-    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
-    document.getElementById('fileInput').click();
+    if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
+    fileInput.click();
   });
-  document.getElementById('fileInput').addEventListener('change', e => {
-    if (e.target.files[0]) loadFile(e.target.files[0]);
+  fileInput.addEventListener('change', e => {
+    const files = Array.from(e.target.files);
+    if (files.length) addFiles(files);
+    fileInput.value = '';
   });
 
-  function loadFile(file) {
-    if (!file.type.match(/^image\/(jpeg|png|webp)/)) {
-      showError('JPG, PNG, WebP 파일만 업로드할 수 있습니다.'); return;
-    }
+  async function addFiles(newFiles) {
     hideError();
-    selectedFile = file;
-    resultBlob = null;
-
-    document.getElementById('fileInfo').innerHTML = `
-      <div class="file-item">
-        <span class="file-item-icon">🖼️</span>
-        <div class="file-item-info">
-          <div class="file-item-name">${file.name}</div>
-          <div class="file-item-size">${formatSize(file.size)} · ${file.type}</div>
-        </div>
-        <button class="file-item-remove" onclick="clearFile()">✕</button>
-      </div>`;
-    document.getElementById('fileInfoPanel').style.display = 'block';
-    document.getElementById('optionsPanel').style.display = 'block';
-    document.getElementById('resultPanel').style.display = 'none';
-
-    const img = new Image();
-    img.onload = () => {
-      originalImg = img;
-      document.getElementById('originalImg').src = img.src;
-      document.getElementById('previewImg').src = img.src;
-      document.getElementById('previewWrap').style.display = 'flex';
-      updatePreview();
-    };
-    img.src = URL.createObjectURL(file);
+    newFiles.forEach(f => { if (!selectedFiles.some(s => s.name === f.name && s.size === f.size)) selectedFiles.push(f); });
+    renderFileList();
+    originalImg = await loadImg(selectedFiles[0]);
+    document.getElementById('originalImg').src = originalImg.src;
+    document.getElementById('previewImg').src = originalImg.src;
+    document.getElementById('previewWrap').style.display = 'flex';
+    updatePreview();
   }
 
-  function clearFile() {
-    selectedFile = null;
-    originalImg = null;
-    document.getElementById('fileInfoPanel').style.display = 'none';
-    document.getElementById('optionsPanel').style.display = 'none';
+  function renderFileList() {
+    convertedResults = [];
+    document.getElementById('fileCount').textContent = selectedFiles.length;
+    document.getElementById('fileList').innerHTML = selectedFiles.map((f, i) =>
+      `<div class="file-item"><span class="file-item-icon">🖼️</span><div class="file-item-info"><div class="file-item-name">${f.name}</div><div class="file-item-size">${formatSize(f.size)}</div></div><button class="file-item-remove" onclick="removeFile(${i})">✕</button></div>`
+    ).join('');
+    document.getElementById('fileListPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
     document.getElementById('resultPanel').style.display = 'none';
-    document.getElementById('progressWrap').style.display = 'none';
-    document.getElementById('fileInput').value = '';
-    document.getElementById('previewWrap').style.display = 'none';
-    hideError();
+  }
+
+  async function removeFile(idx) {
+    selectedFiles.splice(idx, 1);
+    if (!selectedFiles.length) {
+      document.getElementById('fileListPanel').style.display = 'none';
+      document.getElementById('optionsPanel').style.display = 'none';
+      document.getElementById('previewWrap').style.display = 'none';
+      return;
+    }
+    renderFileList();
+    originalImg = await loadImg(selectedFiles[0]);
+    document.getElementById('originalImg').src = originalImg.src;
+    document.getElementById('previewImg').src = originalImg.src;
+    updatePreview();
   }
 
   document.getElementById('applyBtn').addEventListener('click', async () => {
-    if (!originalImg) return;
+    if (!selectedFiles.length) return;
     const btn = document.getElementById('applyBtn');
     btn.disabled = true; btn.textContent = '⏳ 처리 중...';
     hideError();
-    document.getElementById('progressWrap').style.display = 'block';
-    document.getElementById('progressFill').style.width = '40%';
-    document.getElementById('progressText').textContent = '필터 적용 중...';
+    convertedResults = [];
+    const pw = document.getElementById('progressWrap'), pf = document.getElementById('progressFill'), pt = document.getElementById('progressText');
+    pw.style.display = 'block';
 
-    try {
-      const filterStr = getFilterCSS();
-      const sharpness = parseFloat(document.getElementById('sharpness').value);
+    let html = '', ok = 0;
+    for (let i = 0; i < selectedFiles.length; i++) {
+      const file = selectedFiles[i];
+      const pct = Math.round((i / selectedFiles.length) * 100);
+      pf.style.width = pct + '%'; pt.textContent = `${i+1}/${selectedFiles.length} 처리 중...`;
+      try {
+        const img = i === 0 ? originalImg : await loadImg(file);
+        const canvas = applyFilterToImage(img);
+        const mimeType = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+        const quality = mimeType === 'image/jpeg' ? 0.92 : undefined;
+        const outputBlob = await new Promise(resolve => canvas.toBlob(resolve, mimeType, quality));
 
-      const canvas = document.createElement('canvas');
-      canvas.width  = originalImg.naturalWidth;
-      canvas.height = originalImg.naturalHeight;
-      const ctx = canvas.getContext('2d');
-      ctx.filter = filterStr;
-      ctx.drawImage(originalImg, 0, 0);
-      ctx.filter = 'none';
+        const url = URL.createObjectURL(outputBlob);
+        const ext = mimeType === 'image/png' ? '.png' : '.jpg';
+        const outName = file.name.replace(/\.[^.]+$/, '') + '_filtered' + ext;
+        convertedResults.push({ blob: outputBlob, name: outName, url });
 
-      if (sharpness > 0) {
-        const strength = sharpness / 100 * 2;
-        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const src = new Uint8ClampedArray(imgData.data);
-        const w = canvas.width, h = canvas.height;
-        const k = [-strength/4, -strength/4, -strength/4, -strength/4,
-                    1 + strength, -strength/4, -strength/4, -strength/4, -strength/4];
-        for (let y = 1; y < h-1; y++) {
-          for (let x = 1; x < w-1; x++) {
-            const i = (y * w + x) * 4;
-            for (let c = 0; c < 3; c++) {
-              let v = 0;
-              v += src[((y-1)*w+(x-1))*4+c] * k[0];
-              v += src[((y-1)*w+x)*4+c]     * k[1];
-              v += src[((y-1)*w+(x+1))*4+c] * k[2];
-              v += src[(y*w+(x-1))*4+c]     * k[3];
-              v += src[i+c]                  * k[4];
-              v += src[(y*w+(x+1))*4+c]     * k[5];
-              v += src[((y+1)*w+(x-1))*4+c] * k[6];
-              v += src[((y+1)*w+x)*4+c]     * k[7];
-              v += src[((y+1)*w+(x+1))*4+c] * k[8];
-              imgData.data[i+c] = Math.max(0, Math.min(255, v));
-            }
-          }
-        }
-        ctx.putImageData(imgData, 0, 0);
+        html += `<div class="converted-item"><img class="converted-thumb" src="${url}" alt="${outName}"><div class="converted-info"><div class="converted-name">${outName}</div><div class="converted-size">${formatSize(outputBlob.size)}</div></div><span class="converted-status status-done">완료</span><button class="btn-download-sm" onclick="downloadSingle(${convertedResults.length - 1})">다운로드</button></div>`;
+        ok++;
+      } catch (err) {
+        html += `<div class="converted-item"><div style="width:60px;height:60px;background:#FEE2E2;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">❌</div><div class="converted-info"><div class="converted-name">${file.name}</div><div class="converted-size" style="color:#DC2626;">처리 실패</div></div><span class="converted-status status-error">실패</span></div>`;
       }
-
-      document.getElementById('progressFill').style.width = '80%';
-
-      const mimeType = selectedFile.type === 'image/png' ? 'image/png' : 'image/jpeg';
-      const quality  = mimeType === 'image/jpeg' ? 0.92 : undefined;
-      const blob = await new Promise(resolve => canvas.toBlob(resolve, mimeType, quality));
-      resultBlob = blob;
-
-      document.getElementById('progressFill').style.width = '100%';
-      document.getElementById('progressText').textContent = '완료!';
-      document.getElementById('progressWrap').style.display = 'none';
-
-      const url = URL.createObjectURL(blob);
-      document.getElementById('resultImg').src = url;
-      document.getElementById('resultSubtitle').textContent =
-        `${originalImg.naturalWidth} × ${originalImg.naturalHeight}px · ${formatSize(blob.size)}`;
-
-      const panel = document.getElementById('resultPanel');
-      panel.style.display = 'block';
-      panel.scrollIntoView({ behavior: 'smooth' });
-      // result 패널 광고 동적 로드
-      const resultAd = document.getElementById('resultAd');
-      if (resultAd && !resultAd.dataset.adLoaded) {
-        const ins = document.createElement('ins');
-        ins.className = 'adsbygoogle';
-        ins.style.cssText = 'display:block';
-        ins.setAttribute('data-ad-client', 'ca-pub-6464921081676309');
-        ins.setAttribute('data-ad-slot', '9432796175');
-        ins.setAttribute('data-ad-format', 'auto');
-        ins.setAttribute('data-full-width-responsive', 'true');
-        resultAd.appendChild(ins);
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-        resultAd.dataset.adLoaded = '1';
-      }    // 다운로드 버튼 대기 (점 애니메이션)
-      const dlBtn = document.getElementById('downloadBtn');
-      if (dlBtn) {
-        dlBtn.disabled = true;
-        const origText = dlBtn.textContent;
-        const dots = ['⏳ 다운로드 준비중', '⏳ 다운로드 준비중.', '⏳ 다운로드 준비중..', '⏳ 다운로드 준비중...'];
-        let dotIdx = 0;
-        const dotTimer = setInterval(() => { dotIdx = (dotIdx + 1) % dots.length; dlBtn.textContent = dots[dotIdx]; }, 400);
-        setTimeout(() => { clearInterval(dotTimer); dlBtn.disabled = false; dlBtn.textContent = origText; }, 6000);
-      }
-
-    } catch(err) {
-      showError('처리 중 오류가 발생했습니다: ' + err.message);
-      document.getElementById('progressWrap').style.display = 'none';
     }
-    btn.disabled = false; btn.textContent = '🎨 필터 적용 & 저장 준비';
+
+    pf.style.width = '100%'; pt.textContent = '완료!';
+    document.getElementById('resultList').innerHTML = html;
+    document.getElementById('resultSubtitle').textContent = `${ok}/${selectedFiles.length}개 파일 처리 완료`;
+    document.getElementById('resultPanel').style.display = 'block';
+    if (convertedResults.length > 1) document.getElementById('downloadAllBtn').style.display = 'inline-flex';
+
+    const resultAd = document.getElementById('resultAd');
+    if (resultAd && !resultAd.dataset.adLoaded) {
+      const ins = document.createElement('ins');
+      ins.className = 'adsbygoogle';
+      ins.style.cssText = 'display:block';
+      ins.setAttribute('data-ad-client', 'ca-pub-6464921081676309');
+      ins.setAttribute('data-ad-slot', '9432796175');
+      ins.setAttribute('data-ad-format', 'auto');
+      ins.setAttribute('data-full-width-responsive', 'true');
+      resultAd.appendChild(ins);
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      resultAd.dataset.adLoaded = '1';
+    }
+
+    btn.disabled = false; btn.textContent = '🎨 전체 파일에 적용';
+    setTimeout(() => { pw.style.display = 'none'; }, 1500);
   });
 
-  document.getElementById('downloadBtn').addEventListener('click', () => {
-    if (!resultBlob) return;
-    const url = URL.createObjectURL(resultBlob);
-    const a = document.createElement('a');
-    a.href = url;
-    const ext = resultBlob.type === 'image/png' ? '.png' : '.jpg';
-    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_filtered' + ext;
-    a.click();
+  function downloadSingle(idx) { const r = convertedResults[idx]; const a = document.createElement('a'); a.href = r.url; a.download = r.name; a.click(); }
+  document.getElementById('downloadAllBtn').addEventListener('click', async () => {
+    if (!convertedResults.length) return;
+    const btn = document.getElementById('downloadAllBtn');
+    btn.disabled = true; btn.textContent = 'ZIP 생성 중...';
+    const zip = new JSZip();
+    convertedResults.forEach(r => zip.file(r.name, r.blob));
+    const content = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(content);
+    const a = document.createElement('a'); a.href = url; a.download = 'filtered_images.zip'; a.click();
     URL.revokeObjectURL(url);
+    btn.disabled = false; btn.textContent = '⬇️ 모두 다운로드 (ZIP)';
   });
 
+  function loadImg(f) { return new Promise((res, rej) => { const img = new Image(); img.onload = () => res(img); img.onerror = rej; img.src = URL.createObjectURL(f); }); }
   function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
   function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
   function formatSize(b) {
@@ -633,11 +643,10 @@
       }
     }
     shareBtn.addEventListener('click', async () => {
-      if (!resultBlob) return;
-      const ext = resultBlob.type === 'image/png' ? '.png' : '.jpg';
-      const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_filtered' + ext : 'filtered' + ext;
-      const file = new File([resultBlob], fname, { type: resultBlob.type });
-      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/image-filter.html' }); }
+      if (!convertedResults.length) return;
+      const first = convertedResults[0];
+      const file = new File([first.blob], first.name, { type: first.blob.type });
+      try { await navigator.share({ files: [file], title: first.name + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/image-filter.html' }); }
       catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
     });
   })();
