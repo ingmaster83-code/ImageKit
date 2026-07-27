@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZGENFSXWC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9ZGENFSXWC');
+</script>
+  <meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
+  <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ID Photo Maker Free Online – Passport, Resume, Visa Photo Sizes | WooaImage</title>
+  <meta name="description" content="Upload a photo and crop it to the exact size for passport (3.5×4.5cm), resume/ID (3×4cm), business-card size (5×7cm) and more, then generate a print-ready photo sheet. 100% browser-based, nothing is uploaded.">
+  <meta name="keywords" content="id photo maker, passport photo online, id photo size, resume photo, visa photo maker, print photo sheet, id photo crop">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/en/id-photo.html">
+  <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/id-photo.html">
+  <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/id-photo.html">
+  <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/id-photo.html">
+  <meta property="og:title" content="ID Photo Maker Free Online – Passport, Resume, Visa Photo Sizes | WooaImage">
+  <meta property="og:description" content="Crop your photo to the exact passport, resume, or visa photo size and generate a print-ready photo sheet, all in your browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/en/id-photo.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://imagekit.wooahouse.com/og-image.png">
+<meta property="og:site_name" content="WooaImage">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ID Photo Maker Free Online – Passport, Resume, Visa Photo Sizes | WooaImage">
+<meta name="twitter:description" content="Crop your photo to the exact passport, resume, or visa photo size and generate a print-ready photo sheet, all in your browser.">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="../css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ID Photo Maker",
+  "url": "https://imagekit.wooahouse.com/en/id-photo.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are passport and ID photo sizes different?",
+      "acceptedAnswer": {"@type": "Answer","text": "Yes. A passport photo is 3.5×4.5cm, a resume/ID photo is 3×4cm, and a business-card size photo is 5×7cm. Pick the preset you need and it's applied automatically."}
+    },
+    {
+      "@type": "Question",
+      "name": "How do I use the print sheet?",
+      "acceptedAnswer": {"@type": "Answer","text": "Check \"Make a print sheet\" to arrange multiple copies of your photo on a single 4×6 inch print sheet. Take the downloaded file to a photo studio or convenience-store photo printer to print it."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I change the background to white?",
+      "acceptedAnswer": {"@type": "Answer","text": "To remove and replace the background, first use our AI Background Remover to make it transparent, then crop it to size here."}
+    }
+  ]
+}
+</script>
+  <style>
+    .idp-preview-wrap {
+      position: relative;
+      margin-top: 16px;
+      background: #F3F4F6;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .idp-overlay {
+      position: absolute;
+      border: 2px solid var(--primary);
+      background: rgba(14,165,233,0.15);
+      pointer-events: none;
+    }
+    #previewCanvas { display: block; max-width: 100%; }
+    .idp-info { font-size:0.82rem; color:var(--text-light); margin-top:8px; }
+    .preset-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:8px; margin-bottom:16px; }
+    .preset-btn { border:1.5px solid var(--border-color,#E5E7EB); border-radius:var(--radius-sm); padding:10px 8px; background:#fff; cursor:pointer; font-size:0.82rem; text-align:center; transition:all .15s; }
+    .preset-btn strong { display:block; font-size:0.88rem; margin-bottom:2px; }
+    .preset-btn.active { border-color:var(--primary); background:rgba(14,165,233,0.08); color:var(--primary); }
+    .idp-slider-row { display:flex; align-items:center; gap:10px; margin-top:10px; }
+    .idp-slider-row label { min-width:70px; font-size:0.85rem; color:var(--text-light); }
+    .idp-slider-row input[type=range] { flex:1; }
+
+    .lang-switcher { display:flex; align-items:center; gap:4px; }
+    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
+    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
+    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
+    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">Compress</a>
+      <a href="resize-image.html">Resize</a>
+      <a href="crop-image.html">Crop</a>
+      <a href="id-photo.html">ID Photo</a>
+      <a href="../index.html">All Tools ›</a>
+    </nav>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <a href="../id-photo.html">KO</a>
+        <span>|</span>
+        <a href="id-photo.html" class="active">EN</a>
+      </div>
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">About</a>
+    </div>
+  </div>
+</header>
+
+<script src="../js/wooa-sites-bar.js"></script>
+<div class="mobile-top-ad">
+  <ins class="adsbygoogle" style="display:block;width:100%;height:80px" data-ad-client="ca-pub-6464921081676309" data-ad-slot="7080296704" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="../index.html">🏠 Home</a>
+    <span>›</span>
+    <span>ID Photo Maker</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🪪</span>
+    <h1>ID Photo Maker – Free Online</h1>
+    <p>Crop your photo to the exact size for a passport, resume, or business-card ID photo, and generate a print-ready sheet in one step.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>Drop your photo file here</h3>
+    <p>Upload JPG, PNG, or WebP files</p>
+    <label for="fileInput" class="btn-select">Select Photo File</label>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+  </div>
+
+  <div id="fileInfoPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">Selected File</div>
+    <div id="fileInfo"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">Choose a Size</div>
+    <div class="preset-grid" id="presetGrid">
+      <button type="button" class="preset-btn active" data-preset="passport" data-w="35" data-h="45">
+        <strong>Passport</strong>3.5×4.5cm
+      </button>
+      <button type="button" class="preset-btn" data-preset="id34" data-w="30" data-h="40">
+        <strong>ID / Resume</strong>3×4cm
+      </button>
+      <button type="button" class="preset-btn" data-preset="id57" data-w="50" data-h="70">
+        <strong>Business-card size</strong>5×7cm
+      </button>
+      <button type="button" class="preset-btn" data-preset="visa" data-w="50.8" data-h="50.8">
+        <strong>US Visa</strong>2×2 in
+      </button>
+      <button type="button" class="preset-btn" data-preset="custom" data-w="35" data-h="45">
+        <strong>Custom</strong>Enter manually
+      </button>
+    </div>
+
+    <div class="crop-controls" id="customSizeRow" style="display:none">
+      <div class="crop-field">
+        <label>Width (mm)</label>
+        <input type="number" id="customW" min="10" max="200" value="35" step="0.1">
+      </div>
+      <div class="crop-field">
+        <label>Height (mm)</label>
+        <input type="number" id="customH" min="10" max="200" value="45" step="0.1">
+      </div>
+    </div>
+
+    <p style="font-size:0.85rem; color:var(--text-light); margin:14px 0 4px;">Use the sliders to position and size the crop area. (Output is rendered at 300dpi print quality)</p>
+
+    <div class="idp-slider-row">
+      <label>Horizontal</label>
+      <input type="range" id="posX" min="0" max="100" value="50">
+    </div>
+    <div class="idp-slider-row">
+      <label>Vertical</label>
+      <input type="range" id="posY" min="0" max="100" value="35">
+    </div>
+    <div class="idp-slider-row">
+      <label>Zoom</label>
+      <input type="range" id="scaleZoom" min="20" max="100" value="55">
+    </div>
+
+    <p class="idp-info" id="idpInfo"></p>
+
+    <div style="text-align:center; margin-top:16px;">
+      <div class="idp-preview-wrap">
+        <canvas id="previewCanvas"></canvas>
+        <div class="idp-overlay" id="idpOverlay"></div>
+      </div>
+    </div>
+
+    <div class="option-row" style="margin-top:16px;">
+      <span class="option-label">Output Format</span>
+      <div class="option-control">
+        <select id="outputFormat">
+          <option value="image/jpeg">JPG</option>
+          <option value="image/png">PNG</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="option-row">
+      <span class="option-label">Also make a print sheet</span>
+      <div class="option-control">
+        <input type="checkbox" id="makeSheet">
+      </div>
+    </div>
+
+    <button class="btn-convert" id="cropBtn">🪪 Create ID Photo</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="result-panel" id="resultPanel">    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">Your ID photo is ready!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div class="preview-image-wrap">
+      <img id="resultImg" src="" alt="ID photo preview">
+    </div>
+
+<div class="download-share-group" style="margin-top:16px;">
+  <button class="btn-download" id="downloadBtn">⬇️ Download Photo</button>
+  <button class="btn-download" id="downloadSheetBtn" style="display:none;">🖨️ Download Print Sheet</button>
+  <button class="btn-share" id="shareBtn" style="display:none;">📤 Share</button>
+</div>
+<div id="resultAd" style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px"></div>
+  </div>
+
+    <div class="related-tools">
+  <h2>Related Tools</h2>
+  <div class="related-grid">
+    <a href="bg-remove.html" class="related-card"><span class="related-icon">🪄</span><span>AI Background Remover</span></a>
+    <a href="crop-image.html" class="related-card"><span class="related-icon">✂️</span><span>Crop Image</span></a>
+    <a href="compress-image.html" class="related-card"><span class="related-icon">🗜️</span><span>Compress Image</span></a>
+    <a href="resize-image.html" class="related-card"><span class="related-icon">📐</span><span>Resize Image</span></a>
+  </div>
+</div>
+<div class="wooa-orig-anchor"></div>
+<div class="tips-panel"><h3>💡 Tips</h3><ul><li>If the background is messy, run AI Background Remover first, then use this tool.</li><li>Position the face slightly above center vertically for a natural ID-photo composition.</li><li>Making a print sheet lets you print several copies at once at a photo studio or convenience-store printer, saving cost.</li></ul></div>
+<section class="faq-section" style="max-width:800px;margin:3rem auto;padding:0 1rem;">
+    <h2 style="font-size:1.4rem;margin-bottom:1.5rem;">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Are passport and ID photo sizes different?</h3>
+        <p style="color:#555;margin:0;">Yes. A passport photo is 3.5×4.5cm, a resume/ID photo is 3×4cm, and a business-card size photo is 5×7cm. Pick the preset you need and it's applied automatically.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. How do I use the print sheet?</h3>
+        <p style="color:#555;margin:0;">Check "Make a print sheet" to arrange multiple copies of your photo on a single 4×6 inch print sheet, then print the downloaded file at a photo studio or convenience-store printer.</p>
+      </div>
+      <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Can I change the background to white?</h3>
+        <p style="color:#555;margin:0;">To remove and replace the background, first use our AI Background Remover to make it transparent, then crop it to size here.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<aside class="tool-sidebar"></aside>
+</div>
+
+<footer class="footer"></footer>
+
+<script>
+  let selectedFile = null;
+  let origImg = null;
+  let resultBlob = null;
+  let sheetBlob = null;
+  let displayScale = 1;
+  const MAX_PREVIEW_W = 700;
+  const DPI = 300;
+  let curPreset = 'passport';
+  let curWmm = 35, curHmm = 45;
+
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  dropZone.addEventListener('click', e => {
+    if (e.target.tagName === 'LABEL' || e.target.id === 'fileInput') return;
+    document.getElementById('fileInput').click();
+  });
+  document.getElementById('fileInput').addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      curPreset = btn.dataset.preset;
+      document.getElementById('customSizeRow').style.display = curPreset === 'custom' ? 'flex' : 'none';
+      if (curPreset === 'custom') {
+        curWmm = parseFloat(document.getElementById('customW').value) || 35;
+        curHmm = parseFloat(document.getElementById('customH').value) || 45;
+      } else {
+        curWmm = parseFloat(btn.dataset.w);
+        curHmm = parseFloat(btn.dataset.h);
+      }
+      updateOverlay();
+    });
+  });
+  ['customW','customH'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      if (curPreset !== 'custom') return;
+      curWmm = parseFloat(document.getElementById('customW').value) || 35;
+      curHmm = parseFloat(document.getElementById('customH').value) || 45;
+      updateOverlay();
+    });
+  });
+
+  ['posX','posY','scaleZoom'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updateOverlay);
+  });
+
+  async function loadFile(file) {
+    if (!file.type.startsWith('image/')) {
+      showError('Please select an image file.'); return;
+    }
+    hideError();
+    selectedFile = file;
+    resultBlob = null; sheetBlob = null;
+    origImg = await loadImage(file);
+
+    const iw = origImg.naturalWidth, ih = origImg.naturalHeight;
+    displayScale = iw > MAX_PREVIEW_W ? MAX_PREVIEW_W / iw : 1;
+
+    const canvas = document.getElementById('previewCanvas');
+    canvas.width = Math.round(iw * displayScale);
+    canvas.height = Math.round(ih * displayScale);
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(origImg, 0, 0, canvas.width, canvas.height);
+
+    document.getElementById('fileInfo').innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🖼️</span>
+        <div class="file-item-info">
+          <div class="file-item-name">${file.name}</div>
+          <div class="file-item-size">${formatSize(file.size)} · ${iw}×${ih}</div>
+        </div>
+        <button class="file-item-remove" onclick="clearFile()">✕</button>
+      </div>`;
+    document.getElementById('fileInfoPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+    updateOverlay();
+  }
+
+  function computeCropBox() {
+    const iw = origImg.naturalWidth, ih = origImg.naturalHeight;
+    const ratio = curWmm / curHmm;
+    const zoom = parseInt(document.getElementById('scaleZoom').value) / 100;
+
+    let boxH = ih * zoom;
+    let boxW = boxH * ratio;
+    if (boxW > iw) { boxW = iw; boxH = boxW / ratio; }
+
+    const px = parseInt(document.getElementById('posX').value) / 100;
+    const py = parseInt(document.getElementById('posY').value) / 100;
+    const x = Math.max(0, Math.min(iw - boxW, (iw - boxW) * px));
+    const y = Math.max(0, Math.min(ih - boxH, (ih - boxH) * py));
+    return { x, y, w: boxW, h: boxH };
+  }
+
+  function updateOverlay() {
+    if (!origImg) return;
+    const box = computeCropBox();
+    const ov = document.getElementById('idpOverlay');
+    ov.style.left = Math.round(box.x * displayScale) + 'px';
+    ov.style.top = Math.round(box.y * displayScale) + 'px';
+    ov.style.width = Math.round(box.w * displayScale) + 'px';
+    ov.style.height = Math.round(box.h * displayScale) + 'px';
+
+    const outW = Math.round(curWmm / 25.4 * DPI);
+    const outH = Math.round(curHmm / 25.4 * DPI);
+    document.getElementById('idpInfo').textContent = `Output size: ${curWmm}×${curHmm}mm (${outW}×${outH}px, ${DPI}dpi)`;
+  }
+
+  function clearFile() {
+    selectedFile = null; origImg = null;
+    document.getElementById('fileInfoPanel').style.display = 'none';
+    document.getElementById('optionsPanel').style.display = 'none';
+    document.getElementById('resultPanel').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    hideError();
+  }
+
+  document.getElementById('cropBtn').addEventListener('click', async () => {
+    if (!origImg) return;
+    hideError();
+    const box = computeCropBox();
+    if (box.w < 1 || box.h < 1) { showError('Please choose a valid area.'); return; }
+
+    const outW = Math.round(curWmm / 25.4 * DPI);
+    const outH = Math.round(curHmm / 25.4 * DPI);
+    const format = document.getElementById('outputFormat').value;
+
+    const canvas = document.createElement('canvas');
+    canvas.width = outW;
+    canvas.height = outH;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(origImg, box.x, box.y, box.w, box.h, 0, 0, outW, outH);
+
+    const quality = format === 'image/png' ? undefined : 0.95;
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, format, quality));
+    resultBlob = blob;
+
+    const url = URL.createObjectURL(blob);
+    document.getElementById('resultImg').src = url;
+    document.getElementById('resultSubtitle').textContent = `${outW}×${outH}px (${formatSize(blob.size)})`;
+
+    // Print sheet (4×6 in = 102×152mm at 300dpi)
+    const downloadSheetBtn = document.getElementById('downloadSheetBtn');
+    if (document.getElementById('makeSheet').checked) {
+      const sheetWmm = 102, sheetHmm = 152;
+      const sheetW = Math.round(sheetWmm / 25.4 * DPI);
+      const sheetH = Math.round(sheetHmm / 25.4 * DPI);
+      const margin = Math.round(DPI * 0.06);
+      const cols = Math.max(1, Math.floor((sheetW - margin) / (outW + margin)));
+      const rows = Math.max(1, Math.floor((sheetH - margin) / (outH + margin)));
+
+      const sheetCanvas = document.createElement('canvas');
+      sheetCanvas.width = sheetW; sheetCanvas.height = sheetH;
+      const sctx = sheetCanvas.getContext('2d');
+      sctx.fillStyle = '#ffffff';
+      sctx.fillRect(0, 0, sheetW, sheetH);
+      const totalW = cols * outW + (cols - 1) * margin;
+      const totalH = rows * outH + (rows - 1) * margin;
+      const startX = Math.round((sheetW - totalW) / 2);
+      const startY = Math.round((sheetH - totalH) / 2);
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const dx = startX + c * (outW + margin);
+          const dy = startY + r * (outH + margin);
+          sctx.drawImage(canvas, dx, dy, outW, outH);
+        }
+      }
+      sheetBlob = await new Promise(resolve => sheetCanvas.toBlob(resolve, 'image/jpeg', 0.95));
+      downloadSheetBtn.style.display = 'inline-flex';
+    } else {
+      sheetBlob = null;
+      downloadSheetBtn.style.display = 'none';
+    }
+
+    const panel = document.getElementById('resultPanel');
+    panel.style.display = 'block';
+    panel.scrollIntoView({ behavior: 'smooth' });
+      const resultAd = document.getElementById('resultAd');
+      if (resultAd && !resultAd.dataset.adLoaded) {
+        const ins = document.createElement('ins');
+        ins.className = 'adsbygoogle';
+        ins.style.cssText = 'display:block';
+        ins.setAttribute('data-ad-client', 'ca-pub-6464921081676309');
+        ins.setAttribute('data-ad-slot', '9432796175');
+        ins.setAttribute('data-ad-format', 'auto');
+        ins.setAttribute('data-full-width-responsive', 'true');
+        resultAd.appendChild(ins);
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        resultAd.dataset.adLoaded = '1';
+      }
+      const dlBtn = document.getElementById('downloadBtn');
+      if (dlBtn) {
+        dlBtn.disabled = true;
+        const origText = dlBtn.textContent;
+        const dots = ['⏳ Preparing download', '⏳ Preparing download.', '⏳ Preparing download..', '⏳ Preparing download...'];
+        let dotIdx = 0;
+        const dotTimer = setInterval(() => { dotIdx = (dotIdx + 1) % dots.length; dlBtn.textContent = dots[dotIdx]; }, 400);
+        setTimeout(() => { clearInterval(dotTimer); dlBtn.disabled = false; dlBtn.textContent = origText; }, 6000);
+      }
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    const format = document.getElementById('outputFormat').value;
+    const extMap = { 'image/jpeg': '.jpg', 'image/png': '.png' };
+    a.download = selectedFile.name.replace(/\.[^.]+$/, '') + '_id_photo' + (extMap[format] || '.jpg');
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById('downloadSheetBtn').addEventListener('click', () => {
+    if (!sheetBlob) return;
+    const url = URL.createObjectURL(sheetBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = (selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') : 'photo') + '_print_sheet.jpg';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+
+  (function() {
+    const shareBtn = document.getElementById('shareBtn');
+    if (navigator.share && navigator.canShare) {
+      const testFile = new File(['test'], 'test.png', { type: 'image/png' });
+      if (navigator.canShare({ files: [testFile] })) shareBtn.style.display = 'inline-flex';
+    }
+    shareBtn.addEventListener('click', async () => {
+      if (!resultBlob) return;
+      const mime = resultBlob.type || 'image/jpeg';
+      const extMap = {'image/jpeg':'.jpg','image/png':'.png'};
+      const ext = extMap[mime] || '.jpg';
+      const fname = selectedFile ? selectedFile.name.replace(/\.[^.]+$/, '') + '_id_photo' + ext : 'id_photo' + ext;
+      const file = new File([resultBlob], fname, { type: mime });
+      try { await navigator.share({ files: [file], title: fname + ' — WooaImage', text: 'Created with WooaImage\nhttps://imagekit.wooahouse.com/en/id-photo.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('Share failed.'); }
+    });
+  })();
+</script>
+
+<script src="../js/wooahouse-originals-tool-en.js"></script>
+<script>window.PWA_CONFIG={appName:"WooaImage",themeColor:"#0EA5E9",icon:"🖼️",convertIds:['convertBtn','compressBtn','mergeBtn','splitBtn','deleteBtn','applyBtn','rotateBtn','unlockBtn','processBtn','cropBtn','generateBtn','resizeBtn','startBtn','generateAllBtn','printBtn']};</script>
+<script src="../js/pwa-install.js"></script>
+<script src="../js/wooa-sidebar-en.js"></script>
+<script src="../js/wooa-footer-en.js"></script>
+</body>
+</html>
