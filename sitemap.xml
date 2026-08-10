@@ -325,6 +325,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://imagekit.wooahouse.com/image-to-avif.html</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imagekit.wooahouse.com/en/image-to-avif.html</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://imagekit.wooahouse.com/ico-to-png.html</loc>
     <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
