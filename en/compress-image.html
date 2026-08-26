@@ -17,15 +17,15 @@
   <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
   <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Compress Image Free Online No Install – Reduce JPG PNG File Size | WooaImage</title>
-  <meta name="description" content="Compress JPG and PNG images for free. Adjust quality with a slider, compare original vs compressed size. 100% browser-based, never uploaded No installation required.">
-  <meta name="keywords" content="compress image, reduce image size, JPG compressor, PNG compressor, image file size reducer, compress image free online">
+  <title>Compress Image Free Online – Reduce to 10KB, 20KB, 50KB Target Size | WooaImage</title>
+  <meta name="description" content="Compress JPG and PNG images for free. Adjust quality with a slider, or set an exact target size like 10KB/20KB/50KB for form uploads and ID photos. 100% browser-based, never uploaded.">
+  <meta name="keywords" content="compress image, reduce image size, JPG compressor, PNG compressor, image file size reducer, compress image free online, compress image to 10kb, compress image to 20kb, compress image to 50kb, target size compression">
   <link rel="canonical" href="https://imagekit.wooahouse.com/en/compress-image.html">
   <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/compress-image.html">
   <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/compress-image.html">
   <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/compress-image.html">
   <meta property="og:title" content="Compress Image Free Online No Install – Reduce JPG PNG File Size | WooaImage">
-  <meta property="og:description" content="Compress JPG and PNG images for free. Adjust quality with a slider, compare original vs compressed size. 100% browser-based, never uploaded No installation required.">
+  <meta property="og:description" content="Compress JPG and PNG images for free. Adjust quality with a slider, or set an exact target size like 10KB/20KB/50KB. 100% browser-based, never uploaded.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://imagekit.wooahouse.com/en/compress-image.html">
   <meta property="og:locale" content="en_US">
@@ -85,6 +85,14 @@
         "@type": "Answer",
         "text": "No. All processing happens entirely in your browser. Your files are never uploaded to any server, ensuring 100% privacy and data security. Safe for sensitive documents and enterprise security environments."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I compress to an exact size like 10KB or 20KB?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Switch to \"Target Size\" mode and pick a 10KB/20KB/50KB preset, or enter a custom KB value — the tool automatically finds the right quality to stay under that size. Useful for exam application forms, ID photo uploads, and government portals with strict size limits."
+      }
     }
   ]
 }
@@ -95,6 +103,15 @@
     .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
     .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
     .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+    .size-mode-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+    .size-mode-tab { flex: 1; text-align: center; padding: 10px 8px; border: 2px solid #E5E7EB; border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: var(--text-light); transition: border-color .15s, background .15s, color .15s; }
+    .size-mode-tab.active { border-color: var(--primary); background: #F0F9FF; color: var(--primary); }
+    .kb-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .kb-preset-btn { border: 2px solid #E5E7EB; border-radius: 8px; padding: 8px 14px; font-size: 0.82rem; font-weight: 600; cursor: pointer; background: white; font-family: inherit; color: var(--text-dark); transition: border-color .15s, background .15s; }
+    .kb-preset-btn.selected { border-color: var(--primary); background: #F0F9FF; color: var(--primary); }
+    .kb-preset-btn .kb-preset-desc { display: block; font-size: 0.68rem; font-weight: 400; color: var(--text-light); margin-top: 2px; }
+    .kb-custom-row { display: flex; align-items: center; gap: 8px; }
+    .kb-custom-row input { width: 100px; padding: 8px 10px; border: 2px solid #E5E7EB; border-radius: 8px; font-family: inherit; font-size: 0.88rem; }
   </style>
 </head>
 <body>
@@ -157,7 +174,13 @@
 
   <div id="optionsPanel" class="options-panel" style="display:none">
     <div class="options-title">Compression Settings</div>
-    <div class="option-row">
+
+    <div class="size-mode-tabs">
+      <div class="size-mode-tab active" id="modeQualityTab" onclick="setSizeMode('quality')">🎚️ Quality Slider</div>
+      <div class="size-mode-tab" id="modeTargetTab" onclick="setSizeMode('target')">🎯 Target Size</div>
+    </div>
+
+    <div id="qualityModeRow" class="option-row">
       <span class="option-label">Compression Quality</span>
       <div class="option-control">
         <input type="range" id="qualitySlider" min="10" max="95" value="75" style="margin-bottom:6px;">
@@ -168,6 +191,21 @@
         </div>
       </div>
     </div>
+
+    <div id="targetModeRow" style="display:none">
+      <div class="kb-presets">
+        <button type="button" class="kb-preset-btn" data-kb="10" onclick="selectKbPreset(10)">10KB<span class="kb-preset-desc">signature</span></button>
+        <button type="button" class="kb-preset-btn" data-kb="20" onclick="selectKbPreset(20)">20KB<span class="kb-preset-desc">exam forms</span></button>
+        <button type="button" class="kb-preset-btn" data-kb="50" onclick="selectKbPreset(50)">50KB<span class="kb-preset-desc">portal upload</span></button>
+        <button type="button" class="kb-preset-btn" data-kb="100" onclick="selectKbPreset(100)">100KB<span class="kb-preset-desc">general use</span></button>
+      </div>
+      <div class="kb-custom-row">
+        <span class="option-label" style="margin:0;">Custom</span>
+        <input type="number" id="kbCustomInput" min="1" placeholder="e.g. 30" oninput="selectKbPreset(null)">
+        <span style="font-size:0.85rem; color:var(--text-light);">KB or less</span>
+      </div>
+    </div>
+
     <button class="btn-convert" id="compressBtn">🗜️ Compress</button>
   </div>
 
@@ -237,6 +275,10 @@
         <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. What formats are supported?</h3>
         <p style="color:#555;margin:0;">JPG, PNG, and WebP are all supported.</p>
       </div>
+      <div class="faq-item" style="margin-bottom:1.2rem;padding:1rem;background:#f8f9fa;border-radius:8px;">
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Can I compress to an exact size like 10KB or 20KB?</h3>
+        <p style="color:#555;margin:0;">Yes. Switch to "Target Size" mode and pick a 10KB/20KB/50KB preset, or enter a custom KB value — the tool automatically finds the right quality to stay under that size.</p>
+      </div>
       <div class="faq-item" style="padding:1rem;background:#f8f9fa;border-radius:8px;">
         <h3 style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">Q. Are compressed images stored on a server?</h3>
         <p style="color:#555;margin:0;">No. All processing happens locally in your browser and nothing is ever sent externally.</p>
@@ -255,10 +297,64 @@
   let selectedFile = null;
   let resultBlob = null;
   let resultMime = 'image/jpeg';
+  let sizeMode = 'quality';
+  let targetKb = 20;
 
   const qualitySlider = document.getElementById('qualitySlider');
   const qualityVal = document.getElementById('qualityVal');
   qualitySlider.addEventListener('input', () => { qualityVal.textContent = qualitySlider.value + '%'; });
+
+  function setSizeMode(mode) {
+    sizeMode = mode;
+    document.getElementById('modeQualityTab').classList.toggle('active', mode === 'quality');
+    document.getElementById('modeTargetTab').classList.toggle('active', mode === 'target');
+    document.getElementById('qualityModeRow').style.display = mode === 'quality' ? 'flex' : 'none';
+    document.getElementById('targetModeRow').style.display = mode === 'target' ? 'block' : 'none';
+  }
+
+  function selectKbPreset(kb) {
+    const input = document.getElementById('kbCustomInput');
+    if (kb === null) {
+      targetKb = parseInt(input.value) || 0;
+      document.querySelectorAll('.kb-preset-btn').forEach(b => b.classList.remove('selected'));
+      return;
+    }
+    targetKb = kb;
+    input.value = '';
+    document.querySelectorAll('.kb-preset-btn').forEach(b => b.classList.toggle('selected', parseInt(b.dataset.kb) === kb));
+  }
+  selectKbPreset(20);
+
+  async function compressToTarget(img, targetBytes) {
+    let scale = 1.0;
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      let lo = 0.05, hi = 0.95, best = null;
+      for (let i = 0; i < 7; i++) {
+        const q = (lo + hi) / 2;
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', q));
+        if (blob.size <= targetBytes) { best = blob; lo = q; } else { hi = q; }
+      }
+      if (best) return best;
+      const lowestBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.05));
+      if (lowestBlob.size <= targetBytes) return lowestBlob;
+      scale *= 0.7;
+    }
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+    canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    return await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.05));
+  }
 
   const dropZone = document.getElementById('dropZone');
   dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
@@ -311,7 +407,12 @@
 
   document.getElementById('compressBtn').addEventListener('click', async () => {
     if (!selectedFile) return;
+    if (sizeMode === 'target' && (!targetKb || targetKb < 1)) {
+      showError('Enter a target size in KB or pick a preset.');
+      return;
+    }
     const quality = parseInt(qualitySlider.value) / 100;
+    const targetBytes = targetKb * 1024;
     const btn = document.getElementById('compressBtn');
     btn.disabled = true; btn.textContent = '⏳ Processing...';
     hideError();
@@ -324,18 +425,23 @@
       document.getElementById('progressFill').style.width = '60%';
       document.getElementById('progressText').textContent = 'Compressing...';
 
-      const canvas = document.createElement('canvas');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext('2d');
-      // White background for PNG→JPEG
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
+      let blob;
+      if (sizeMode === 'target') {
+        blob = await compressToTarget(img, targetBytes);
+      } else {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        // White background for PNG→JPEG
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+        blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+      }
 
       document.getElementById('progressFill').style.width = '85%';
 
-      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
       resultBlob = blob;
       resultMime = 'image/jpeg';
 

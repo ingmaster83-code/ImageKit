@@ -17,15 +17,15 @@
   <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
   <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>이미지 압축기 — JPG·PNG 용량 줄이기 무료 온라인 | WooaImage</title>
-  <meta name="description" content="JPG·PNG 업로드 → 품질 슬라이더로 압축률 조절, 원본 대비 용량 즉시 비교. 파일은 서버에 저장되지 않아 안전.">
-  <meta name="keywords" content="이미지압축, 사진압축, JPG압축, PNG압축, 이미지용량줄이기, 무료이미지압축, 온라인이미지압축">
+  <title>이미지 압축기 — JPG·PNG 용량 줄이기, 10KB·20KB·50KB 목표용량 압축 무료 | WooaImage</title>
+  <meta name="description" content="JPG·PNG 업로드 → 품질 슬라이더로 압축률 조절하거나, 10KB·20KB·50KB 등 목표 용량을 지정해 자동 압축. 증명사진·시험 응시원서 용량 규정에 딱 맞게. 파일은 서버에 저장되지 않아 안전.">
+  <meta name="keywords" content="이미지압축, 사진압축, JPG압축, PNG압축, 이미지용량줄이기, 무료이미지압축, 온라인이미지압축, 사진용량줄이기10kb, 증명사진20kb압축, 사진50kb압축, 목표용량압축">
   <link rel="canonical" href="https://imagekit.wooahouse.com/compress-image.html">
   <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/compress-image.html">
   <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/compress-image.html">
   <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/compress-image.html">
   <meta property="og:title" content="이미지 압축기 — JPG·PNG 용량 줄이기 무료 온라인 | WooaImage">
-  <meta property="og:description" content="JPG·PNG 업로드 → 품질 슬라이더로 압축률 조절, 원본 대비 용량 즉시 비교. 파일은 서버에 저장되지 않아 안전.">
+  <meta property="og:description" content="JPG·PNG 업로드 → 품질 슬라이더로 압축률 조절하거나, 10KB·20KB·50KB 목표 용량을 지정해 자동 압축. 파일은 서버에 저장되지 않아 안전.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://imagekit.wooahouse.com/compress-image.html">
   <meta property="og:locale" content="ko_KR">
@@ -76,6 +76,11 @@
       "@type": "Question",
       "name": "압축된 이미지가 서버에 저장되나요?",
       "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "10KB, 20KB처럼 정확한 용량으로 압축할 수 있나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "네, '목표 용량 지정' 모드에서 10KB·20KB·50KB 프리셋을 선택하거나 원하는 KB 값을 직접 입력하면 해당 용량 이하로 자동 압축됩니다. 시험 응시원서, 증명사진 업로드 등 용량 제한이 있는 곳에 유용합니다."}
     }
   ]
 }
@@ -97,6 +102,15 @@
     .status-error { background: #FEF2F2; color: #DC2626; }
     .btn-download-sm { background: #22C55E; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: inherit; flex-shrink: 0; }
     .btn-download-sm:hover { background: #16A34A; }
+    .size-mode-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+    .size-mode-tab { flex: 1; text-align: center; padding: 10px 8px; border: 2px solid #E5E7EB; border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: var(--text-light); transition: border-color .15s, background .15s, color .15s; }
+    .size-mode-tab.active { border-color: var(--primary); background: #F0F9FF; color: var(--primary); }
+    .kb-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .kb-preset-btn { border: 2px solid #E5E7EB; border-radius: 8px; padding: 8px 14px; font-size: 0.82rem; font-weight: 600; cursor: pointer; background: white; font-family: inherit; color: var(--text-dark); transition: border-color .15s, background .15s; }
+    .kb-preset-btn.selected { border-color: var(--primary); background: #F0F9FF; color: var(--primary); }
+    .kb-preset-btn .kb-preset-desc { display: block; font-size: 0.68rem; font-weight: 400; color: var(--text-light); margin-top: 2px; }
+    .kb-custom-row { display: flex; align-items: center; gap: 8px; }
+    .kb-custom-row input { width: 100px; padding: 8px 10px; border: 2px solid #E5E7EB; border-radius: 8px; font-family: inherit; font-size: 0.88rem; }
   </style>
 </head>
 <body>
@@ -159,7 +173,13 @@
 
   <div id="optionsPanel" class="options-panel" style="display:none">
     <div class="options-title">압축 설정</div>
-    <div class="option-row">
+
+    <div class="size-mode-tabs">
+      <div class="size-mode-tab active" id="modeQualityTab" onclick="setSizeMode('quality')">🎚️ 품질 직접 조절</div>
+      <div class="size-mode-tab" id="modeTargetTab" onclick="setSizeMode('target')">🎯 목표 용량 지정</div>
+    </div>
+
+    <div id="qualityModeRow" class="option-row">
       <span class="option-label">압축 품질</span>
       <div class="option-control">
         <input type="range" id="qualitySlider" min="10" max="95" value="75" style="margin-bottom:6px;">
@@ -170,6 +190,21 @@
         </div>
       </div>
     </div>
+
+    <div id="targetModeRow" style="display:none">
+      <div class="kb-presets">
+        <button type="button" class="kb-preset-btn" data-kb="10" onclick="selectKbPreset(10)">10KB<span class="kb-preset-desc">서명·인감</span></button>
+        <button type="button" class="kb-preset-btn" data-kb="20" onclick="selectKbPreset(20)">20KB<span class="kb-preset-desc">시험 응시원서</span></button>
+        <button type="button" class="kb-preset-btn" data-kb="50" onclick="selectKbPreset(50)">50KB<span class="kb-preset-desc">포털 업로드</span></button>
+        <button type="button" class="kb-preset-btn" data-kb="100" onclick="selectKbPreset(100)">100KB<span class="kb-preset-desc">일반 첨부</span></button>
+      </div>
+      <div class="kb-custom-row">
+        <span class="option-label" style="margin:0;">직접 입력</span>
+        <input type="number" id="kbCustomInput" min="1" placeholder="예: 30" oninput="selectKbPreset(null)">
+        <span style="font-size:0.85rem; color:var(--text-light);">KB 이하로</span>
+      </div>
+    </div>
+
     <button class="btn-convert" id="compressBtn">🗜️ 압축 시작</button>
   </div>
 
@@ -226,8 +261,8 @@
 </div>
 <div class="wooa-orig-anchor"></div>
 
-  <div class="tips-panel"><h3>💡 Tips</h3><ul><li>JPEG는 사진에, PNG는 투명 배경 이미지에 적합합니다.</li><li>품질 80% 이상이면 육안으로 차이를 느끼기 어렵습니다.</li><li>WebP 형식으로 변환하면 JPEG보다 30~50% 더 작은 파일을 만들 수 있습니다.</li><li>여러 이미지를 한 번에 선택하면 일괄 압축 후 ZIP으로 받을 수 있습니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>압축 후 이미지 품질이 떨어지나요?</summary><p>압축 수준을 조절할 수 있으며 적절한 수준에서는 육안으로 차이가 거의 없습니다.</p></details><details><summary>어떤 형식을 지원하나요?</summary><p>JPG, PNG, WebP 등 주요 이미지 형식을 지원합니다.</p></details><details><summary>압축된 이미지가 서버에 저장되나요?</summary><p>아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p></details></div>
+  <div class="tips-panel"><h3>💡 Tips</h3><ul><li>JPEG는 사진에, PNG는 투명 배경 이미지에 적합합니다.</li><li>품질 80% 이상이면 육안으로 차이를 느끼기 어렵습니다.</li><li>시험 응시원서·증명사진처럼 용량 규정이 있으면 "목표 용량 지정" 모드를 쓰세요 — 10KB·20KB·50KB 중 선택하거나 직접 입력할 수 있습니다.</li><li>여러 이미지를 한 번에 선택하면 일괄 압축 후 ZIP으로 받을 수 있습니다.</li></ul></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>압축 후 이미지 품질이 떨어지나요?</summary><p>압축 수준을 조절할 수 있으며 적절한 수준에서는 육안으로 차이가 거의 없습니다.</p></details><details><summary>10KB, 20KB처럼 정확한 용량으로 압축할 수 있나요?</summary><p>네, "목표 용량 지정" 모드에서 10KB·20KB·50KB 프리셋을 선택하거나 원하는 KB 값을 직접 입력하면 해당 용량 이하로 자동 압축됩니다. 시험 응시원서, 증명사진 업로드 등 용량 제한이 있는 곳에 유용합니다.</p></details><details><summary>압축된 이미지가 서버에 저장되나요?</summary><p>아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p></details></div>
 
 </main>
 
@@ -240,10 +275,67 @@
 <script>
   let selectedFiles = [];
   let convertedResults = [];
+  let sizeMode = 'quality';
+  let targetKb = 20;
 
   const qualitySlider = document.getElementById('qualitySlider');
   const qualityVal = document.getElementById('qualityVal');
   qualitySlider.addEventListener('input', () => { qualityVal.textContent = qualitySlider.value + '%'; });
+
+  function setSizeMode(mode) {
+    sizeMode = mode;
+    document.getElementById('modeQualityTab').classList.toggle('active', mode === 'quality');
+    document.getElementById('modeTargetTab').classList.toggle('active', mode === 'target');
+    document.getElementById('qualityModeRow').style.display = mode === 'quality' ? 'flex' : 'none';
+    document.getElementById('targetModeRow').style.display = mode === 'target' ? 'block' : 'none';
+  }
+
+  function selectKbPreset(kb) {
+    const input = document.getElementById('kbCustomInput');
+    if (kb === null) {
+      targetKb = parseInt(input.value) || 0;
+      document.querySelectorAll('.kb-preset-btn').forEach(b => b.classList.remove('selected'));
+      return;
+    }
+    targetKb = kb;
+    input.value = '';
+    document.querySelectorAll('.kb-preset-btn').forEach(b => b.classList.toggle('selected', parseInt(b.dataset.kb) === kb));
+  }
+  selectKbPreset(20);
+
+  // 목표 용량 이하가 될 때까지 품질을 낮춰가며 압축 (실패 시 해상도도 축소)
+  async function compressToTarget(img, targetBytes) {
+    let scale = 1.0;
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      let lo = 0.05, hi = 0.95, best = null;
+      for (let i = 0; i < 7; i++) {
+        const q = (lo + hi) / 2;
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', q));
+        if (blob.size <= targetBytes) { best = blob; lo = q; } else { hi = q; }
+      }
+      if (best) return best;
+      // 최저 품질(0.05)에서도 목표 용량을 못 넘으면 해상도를 줄여 재시도
+      const lowestBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.05));
+      if (lowestBlob.size <= targetBytes) return lowestBlob;
+      scale *= 0.7;
+    }
+    // 마지막 시도 결과라도 반환 (완전히 도달하지 못했을 수 있음)
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+    canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    return await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.05));
+  }
 
   const dropZone = document.getElementById('dropZone');
   const fileInput = document.getElementById('fileInput');
@@ -306,7 +398,12 @@
 
   document.getElementById('compressBtn').addEventListener('click', async () => {
     if (selectedFiles.length === 0) return;
+    if (sizeMode === 'target' && (!targetKb || targetKb < 1)) {
+      showError('목표 용량(KB)을 입력하거나 프리셋을 선택하세요.');
+      return;
+    }
     const quality = parseInt(qualitySlider.value) / 100;
+    const targetBytes = targetKb * 1024;
     const btn = document.getElementById('compressBtn');
     btn.disabled = true; btn.textContent = '⏳ 처리 중...';
     hideError();
@@ -331,16 +428,20 @@
 
       try {
         const img = await loadImage(file);
-        const canvas = document.createElement('canvas');
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        const ctx = canvas.getContext('2d');
-        // White background for PNG→JPEG
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0);
-
-        const outputBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+        let outputBlob;
+        if (sizeMode === 'target') {
+          outputBlob = await compressToTarget(img, targetBytes);
+        } else {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext('2d');
+          // White background for PNG→JPEG
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+          outputBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+        }
 
         totalOrig += file.size;
         totalComp += outputBlob.size;

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZGENFSXWC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9ZGENFSXWC');
+</script>
+  <meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="naver-site-verification" content="7396a327607b884b9bef1283dfd3a5c6115a2b50" />
+  <meta name="google-site-verification" content="tNM8tmr_6DFold03YSScWz4KEtu5Zo0Fsqc03u5Afms" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 DPI 변경 — 화질 손실 없이 인쇄용 300dpi 설정 무료 | WooaImage</title>
+  <meta name="description" content="JPG·PNG 이미지의 DPI(해상도) 값을 화질 손실 없이 변경합니다. 픽셀을 다시 그리지 않고 메타데이터만 수정해 인쇄소 납품·문서 삽입용 300dpi 등으로 즉시 설정.">
+  <meta name="keywords" content="이미지DPI변경, 사진DPI300으로, 인쇄용DPI설정, JPG DPI변경, PNG DPI변경, 이미지해상도변경, 무료DPI변경">
+  <link rel="canonical" href="https://imagekit.wooahouse.com/dpi-change.html">
+  <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/dpi-change.html">
+  <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/dpi-change.html">
+  <link rel="alternate" hreflang="x-default" href="https://imagekit.wooahouse.com/en/dpi-change.html">
+  <meta property="og:title" content="이미지 DPI 변경 — 화질 손실 없이 인쇄용 300dpi 설정 무료 | WooaImage">
+  <meta property="og:description" content="JPG·PNG 이미지의 DPI 값을 화질 손실 없이 변경합니다. 인쇄소 납품·문서 삽입용 300dpi 등으로 즉시 설정. 파일은 서버에 저장되지 않아 안전.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagekit.wooahouse.com/dpi-change.html">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:image" content="https://imagekit.wooahouse.com/og-image.png">
+<meta property="og:site_name" content="WooaImage">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="이미지 DPI 변경 — 화질 손실 없이 인쇄용 300dpi 설정 무료 | WooaImage">
+<meta name="twitter:description" content="JPG·PNG 이미지의 DPI 값을 화질 손실 없이 변경합니다. 인쇄소 납품·문서 삽입용 300dpi 등으로 즉시 설정.">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+<script src="js/ad-dev-placeholder.js"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0EA5E9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WooaImage">
+  <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "이미지 DPI 변경",
+  "url": "https://imagekit.wooahouse.com/dpi-change.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "KRW"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "DPI를 바꾸면 화질이 떨어지나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "아니요. 픽셀을 다시 그리거나 압축하지 않고 이미지 파일의 DPI 메타데이터만 직접 수정하므로 원본 화질이 100% 그대로 유지됩니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "DPI를 바꾸면 이미지 크기(픽셀)도 바뀌나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "아니요. 가로·세로 픽셀 수는 변하지 않습니다. DPI는 인쇄했을 때의 밀도 정보일 뿐이며, 화면에서 보이는 이미지도 그대로입니다."}
+    },
+    {
+      "@type": "Question",
+      "name": "어떤 형식을 지원하나요?",
+      "acceptedAnswer": {"@type": "Answer","text": "JPG와 PNG를 지원합니다. JPG는 JFIF 헤더, PNG는 pHYs 청크에 DPI 값을 기록합니다."}
+    },
+    {
+      "@type": "Question","name": "파일이 서버에 업로드되나요?","acceptedAnswer": {"@type": "Answer","text": "아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 완전히 안전합니다."}
+    }
+  ]
+}
+</script>
+  <style>
+    .lang-switcher { display:flex; align-items:center; gap:4px; }
+    .lang-switcher a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; font-weight:600; padding:3px 8px; border-radius:12px; transition:background 0.15s; }
+    .lang-switcher a.active { color:white; background:rgba(255,255,255,0.25); }
+    .lang-switcher a:hover { color:white; background:rgba(255,255,255,0.18); }
+    .lang-switcher span { color:rgba(255,255,255,0.3); font-size:0.75rem; }
+    .dpi-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .dpi-preset-btn { border: 2px solid #E5E7EB; border-radius: 8px; padding: 8px 14px; font-size: 0.82rem; font-weight: 600; cursor: pointer; background: white; font-family: inherit; color: var(--text-dark); transition: border-color .15s, background .15s; }
+    .dpi-preset-btn.selected { border-color: var(--primary); background: #F0F9FF; color: var(--primary); }
+    .dpi-preset-btn .dpi-preset-desc { display: block; font-size: 0.68rem; font-weight: 400; color: var(--text-light); margin-top: 2px; }
+    .dpi-custom-row { display: flex; align-items: center; gap: 8px; }
+    .dpi-custom-row input { width: 100px; padding: 8px 10px; border: 2px solid #E5E7EB; border-radius: 8px; font-family: inherit; font-size: 0.88rem; }
+    .converted-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #F9FAFB; border-radius: var(--radius-sm); margin-bottom: 8px; }
+    .converted-item:last-child { margin-bottom: 0; }
+    .converted-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; background: #E5E7EB; }
+    .converted-info { flex: 1; min-width: 0; }
+    .converted-name { font-weight: 500; font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .converted-size { font-size: 0.76rem; color: var(--text-light); }
+    .converted-status { font-size: 0.76rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; }
+    .status-done { background: #F0FDF4; color: #16A34A; }
+    .status-error { background: #FEF2F2; color: #DC2626; }
+    .btn-download-sm { background: #22C55E; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .btn-download-sm:hover { background: #16A34A; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">WooaImage</a>
+    <nav>
+      <a href="jpg-to-png.html">JPG→PNG</a>
+      <a href="compress-image.html">이미지 압축</a>
+      <a href="resize-image.html">리사이즈</a>
+      <a href="dpi-change.html">DPI 변경</a>
+      <a href="index.html">전체 도구 ›</a>
+    </nav>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <a href="dpi-change.html" class="active">KO</a>
+        <span>|</span>
+        <a href="en/dpi-change.html">EN</a>
+      </div>
+      <a href="about.html" style="color:rgba(255,255,255,0.85); font-size:0.85rem; text-decoration:none; margin-left:8px;">소개</a>
+    </div>
+  </div>
+</header>
+
+<script src="js/wooa-sites-bar.js"></script>
+<div class="mobile-top-ad">
+  <ins class="adsbygoogle" style="display:block;width:100%;height:80px" data-ad-client="ca-pub-6464921081676309" data-ad-slot="7080296704" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="page-with-sidebar">
+<main class="tool-page">
+
+  <div class="breadcrumb">
+    <a href="index.html">🏠 홈</a>
+    <span>›</span>
+    <span>DPI 변경</span>
+  </div>
+
+  <div class="tool-header">
+    <span class="tool-header-icon">🎯</span>
+    <h1>이미지 DPI 변경 무료 온라인 — 화질 손실 없이 해상도 값 설정</h1>
+    <p>픽셀을 다시 그리지 않고 DPI 메타데이터만 수정합니다. 인쇄소 납품, 문서 삽입용으로 300dpi 등을 즉시 설정하세요.</p>
+  </div>
+
+  <div class="drop-zone" id="dropZone">
+    <span class="drop-zone-icon">🖼️</span>
+    <h3>이미지 파일을 여기에 끌어다 놓으세요</h3>
+    <p>JPG, PNG 파일을 업로드하세요 (여러 파일 가능)</p>
+    <label for="fileInput" class="btn-select">이미지 파일 선택</label>
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/jpg" multiple style="display:none">
+  </div>
+
+  <div id="fileListPanel" class="file-list-panel" style="display:none">
+    <div class="file-list-title">선택된 파일 (<span id="fileCount">0</span>개)</div>
+    <div id="fileList"></div>
+  </div>
+
+  <div id="optionsPanel" class="options-panel" style="display:none">
+    <div class="options-title">DPI 설정</div>
+    <div class="dpi-presets">
+      <button type="button" class="dpi-preset-btn" data-dpi="72" onclick="selectDpiPreset(72)">72dpi<span class="dpi-preset-desc">웹·화면용</span></button>
+      <button type="button" class="dpi-preset-btn" data-dpi="150" onclick="selectDpiPreset(150)">150dpi<span class="dpi-preset-desc">일반 인쇄</span></button>
+      <button type="button" class="dpi-preset-btn" data-dpi="300" onclick="selectDpiPreset(300)">300dpi<span class="dpi-preset-desc">인화·인쇄소 납품</span></button>
+      <button type="button" class="dpi-preset-btn" data-dpi="600" onclick="selectDpiPreset(600)">600dpi<span class="dpi-preset-desc">고해상도 인쇄</span></button>
+    </div>
+    <div class="dpi-custom-row">
+      <span class="option-label" style="margin:0;">직접 입력</span>
+      <input type="number" id="dpiCustomInput" min="1" placeholder="예: 240" oninput="selectDpiPreset(null)">
+      <span style="font-size:0.85rem; color:var(--text-light);">dpi</span>
+    </div>
+    <button class="btn-convert" id="applyBtn" style="margin-top:16px;">🎯 DPI 적용</button>
+  </div>
+
+  <div id="errorMsg" class="alert alert-error" style="display:none"></div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <span id="progressText">처리 중...</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-header">
+      <span class="result-icon">✅</span>
+      <div>
+        <div class="result-title">DPI 적용 완료!</div>
+        <div class="result-subtitle" id="resultSubtitle"></div>
+      </div>
+    </div>
+    <div id="resultList"></div>
+    <div class="download-share-group">
+      <button class="btn-download" id="downloadAllBtn" style="display:none;">⬇️ 모두 다운로드 (ZIP)</button>
+      <button class="btn-share" id="shareBtn" style="display:none;">📤 공유하기</button>
+    </div>
+    <div id="resultAd" style="text-align:center;margin:16px auto;max-width:728px;padding:0 8px"></div>
+  </div>
+
+    <div class="related-tools">
+  <h2>함께 쓰면 좋은 도구</h2>
+  <div class="related-grid">
+    <a href="compress-image.html" class="related-card"><span class="related-icon">🗜️</span><span>이미지 압축</span></a>
+    <a href="resize-image.html" class="related-card"><span class="related-icon">📐</span><span>이미지 리사이즈</span></a>
+    <a href="id-photo.html" class="related-card"><span class="related-icon">🪪</span><span>증명사진 만들기</span></a>
+    <a href="image-info.html" class="related-card"><span class="related-icon">ℹ️</span><span>이미지 정보 확인</span></a>
+  </div>
+</div>
+<div class="wooa-orig-anchor"></div>
+
+  <div class="tips-panel"><h3>💡 Tips</h3><ul><li>DPI는 인쇄 시 밀도 정보일 뿐, 화면에서 보이는 이미지 크기(픽셀)는 바뀌지 않습니다.</li><li>인쇄소·출판사 납품 규정에서 흔히 요구하는 값은 300dpi입니다.</li><li>웹에 올릴 이미지는 72dpi로도 충분합니다 — 파일 용량과 무관합니다.</li></ul></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>DPI를 바꾸면 화질이 떨어지나요?</summary><p>아니요. 픽셀을 다시 그리거나 압축하지 않고 이미지 파일의 DPI 메타데이터만 직접 수정하므로 원본 화질이 100% 그대로 유지됩니다.</p></details><details><summary>DPI를 바꾸면 이미지 크기(픽셀)도 바뀌나요?</summary><p>아니요. 가로·세로 픽셀 수는 변하지 않습니다. DPI는 인쇄했을 때의 밀도 정보일 뿐이며, 화면에서 보이는 이미지도 그대로입니다.</p></details><details><summary>어떤 형식을 지원하나요?</summary><p>JPG와 PNG를 지원합니다. JPG는 JFIF 헤더, PNG는 pHYs 청크에 DPI 값을 기록합니다.</p></details><details><summary>파일이 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 완전히 안전합니다.</p></details></div>
+
+</main>
+
+<aside class="tool-sidebar"></aside>
+</div>
+
+<footer class="footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script>
+  let selectedFiles = [];
+  let convertedResults = [];
+  let targetDpi = 300;
+
+  function selectDpiPreset(dpi) {
+    const input = document.getElementById('dpiCustomInput');
+    if (dpi === null) {
+      targetDpi = parseInt(input.value) || 0;
+      document.querySelectorAll('.dpi-preset-btn').forEach(b => b.classList.remove('selected'));
+      return;
+    }
+    targetDpi = dpi;
+    input.value = '';
+    document.querySelectorAll('.dpi-preset-btn').forEach(b => b.classList.toggle('selected', parseInt(b.dataset.dpi) === dpi));
+  }
+  selectDpiPreset(300);
+
+  // ---- CRC32 (PNG 청크용) ----
+  const CRC_TABLE = (() => {
+    const t = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) {
+      let c = n;
+      for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+      t[n] = c >>> 0;
+    }
+    return t;
+  })();
+  function crc32(bytes) {
+    let c = 0xFFFFFFFF;
+    for (let i = 0; i < bytes.length; i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+    return (c ^ 0xFFFFFFFF) >>> 0;
+  }
+
+  function setDpiPng(bytes, dpi) {
+    // PNG: signature(8) + chunks. pHYs 청크: ppuX(4) ppuY(4) unit(1) — 미터당 픽셀수
+    const ppm = Math.round(dpi / 0.0254);
+    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    if (view.getUint32(0) !== 0x89504E47) throw new Error('올바른 PNG 파일이 아닙니다.');
+
+    // pHYs 데이터 구성
+    const physData = new Uint8Array(9);
+    const pdv = new DataView(physData.buffer);
+    pdv.setUint32(0, ppm);
+    pdv.setUint32(4, ppm);
+    physData[8] = 1; // unit: meter
+
+    const typeBytes = new Uint8Array([0x70, 0x48, 0x59, 0x73]); // "pHYs"
+    const crcInput = new Uint8Array(4 + 9);
+    crcInput.set(typeBytes, 0);
+    crcInput.set(physData, 4);
+    const crc = crc32(crcInput);
+
+    const newChunk = new Uint8Array(4 + 4 + 9 + 4);
+    const ndv = new DataView(newChunk.buffer);
+    ndv.setUint32(0, 9); // length
+    newChunk.set(typeBytes, 4);
+    newChunk.set(physData, 8);
+    ndv.setUint32(17, crc);
+
+    // 기존 청크를 순회하며 IHDR 직후 위치 찾고, 기존 pHYs 있으면 제거
+    let pos = 8;
+    let ihdrEnd = -1;
+    const removeRanges = [];
+    while (pos < bytes.length) {
+      const len = view.getUint32(pos);
+      const type = String.fromCharCode(bytes[pos+4], bytes[pos+5], bytes[pos+6], bytes[pos+7]);
+      const chunkTotal = 4 + 4 + len + 4;
+      if (type === 'IHDR' && ihdrEnd === -1) ihdrEnd = pos + chunkTotal;
+      if (type === 'pHYs') removeRanges.push([pos, pos + chunkTotal]);
+      if (type === 'IEND') break;
+      pos += chunkTotal;
+    }
+    if (ihdrEnd === -1) throw new Error('IHDR 청크를 찾을 수 없습니다.');
+
+    let out = Array.from(bytes);
+    // 뒤에서부터 제거해야 인덱스가 안 밀림
+    removeRanges.sort((a,b) => b[0]-a[0]).forEach(([s,e]) => out.splice(s, e - s));
+    // ihdrEnd는 제거로 인해 앞쪽이면 영향 없음(제거 대상은 pHYs, IHDR보다 항상 뒤에 있음)
+    out.splice(ihdrEnd, 0, ...newChunk);
+    return new Uint8Array(out);
+  }
+
+  function setDpiJpeg(bytes, dpi) {
+    if (!(bytes[0] === 0xFF && bytes[1] === 0xD8)) throw new Error('올바른 JPG 파일이 아닙니다.');
+    const out = new Uint8Array(bytes); // 복사본 (같은 길이 유지 가능한 경우)
+
+    // APP0(JFIF) 세그먼트 존재 여부 확인
+    if (bytes[2] === 0xFF && bytes[3] === 0xE0 &&
+        bytes[6]===0x4A && bytes[7]===0x46 && bytes[8]===0x49 && bytes[9]===0x46 && bytes[10]===0x00) {
+      // 기존 JFIF APP0 패치: units=1(inch), Xdensity, Ydensity
+      out[13] = 1;
+      out[14] = (dpi >> 8) & 0xFF; out[15] = dpi & 0xFF;
+      out[16] = (dpi >> 8) & 0xFF; out[17] = dpi & 0xFF;
+      return out;
+    }
+
+    // JFIF APP0가 없으면 새로 삽입 (SOI 직후)
+    const app0 = new Uint8Array(20);
+    app0[0]=0xFF; app0[1]=0xE0;
+    app0[2]=0x00; app0[3]=0x10; // length = 16
+    app0[4]=0x4A; app0[5]=0x46; app0[6]=0x49; app0[7]=0x46; app0[8]=0x00; // "JFIF\0"
+    app0[9]=0x01; app0[10]=0x02; // version 1.2
+    app0[11]=0x01; // units = inch
+    app0[12]=(dpi>>8)&0xFF; app0[13]=dpi&0xFF;
+    app0[14]=(dpi>>8)&0xFF; app0[15]=dpi&0xFF;
+    app0[16]=0x00; app0[17]=0x00; // thumbnail w/h = 0
+
+    const result = new Uint8Array(bytes.length + 18);
+    result[0] = 0xFF; result[1] = 0xD8;
+    result.set(app0, 2);
+    result.set(bytes.subarray(2), 2 + 18);
+    return result;
+  }
+
+  function applyDpi(file, bytes, dpi) {
+    const isPng = file.type === 'image/png' || /\.png$/i.test(file.name);
+    return isPng ? setDpiPng(bytes, dpi) : setDpiJpeg(bytes, dpi);
+  }
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.match(/^image\/(jpeg|png)/));
+    if (files.length) addFiles(files);
+  });
+  dropZone.addEventListener('click', e => {
+    if (e.target.tagName === 'LABEL' || e.target === fileInput) return;
+    fileInput.click();
+  });
+  fileInput.addEventListener('change', e => {
+    const files = Array.from(e.target.files);
+    if (files.length) addFiles(files);
+    fileInput.value = '';
+  });
+
+  function addFiles(newFiles) {
+    hideError();
+    newFiles.forEach(f => { if (!selectedFiles.some(s => s.name === f.name && s.size === f.size)) selectedFiles.push(f); });
+    renderFileList();
+  }
+
+  function renderFileList() {
+    convertedResults = [];
+    document.getElementById('fileCount').textContent = selectedFiles.length;
+    document.getElementById('fileList').innerHTML = selectedFiles.map((f, i) =>
+      `<div class="file-item"><span class="file-item-icon">🖼️</span><div class="file-item-info"><div class="file-item-name">${f.name}</div><div class="file-item-size">${formatSize(f.size)} · ${f.type}</div></div><button class="file-item-remove" onclick="removeFile(${i})">✕</button></div>`
+    ).join('');
+    document.getElementById('fileListPanel').style.display = 'block';
+    document.getElementById('optionsPanel').style.display = 'block';
+    document.getElementById('resultPanel').style.display = 'none';
+  }
+
+  function removeFile(idx) {
+    selectedFiles.splice(idx, 1);
+    if (!selectedFiles.length) {
+      document.getElementById('fileListPanel').style.display = 'none';
+      document.getElementById('optionsPanel').style.display = 'none';
+      return;
+    }
+    renderFileList();
+  }
+
+  document.getElementById('applyBtn').addEventListener('click', async () => {
+    if (!selectedFiles.length) return;
+    if (!targetDpi || targetDpi < 1) { showError('DPI 값을 입력하거나 프리셋을 선택하세요.'); return; }
+    const btn = document.getElementById('applyBtn');
+    btn.disabled = true; btn.textContent = '⏳ 처리 중...';
+    hideError();
+    convertedResults = [];
+    const pw = document.getElementById('progressWrap'), pf = document.getElementById('progressFill'), pt = document.getElementById('progressText');
+    pw.style.display = 'block';
+
+    let html = '', ok = 0;
+    for (let i = 0; i < selectedFiles.length; i++) {
+      const file = selectedFiles[i];
+      const pct = Math.round((i / selectedFiles.length) * 100);
+      pf.style.width = pct + '%'; pt.textContent = `${i+1}/${selectedFiles.length} 처리 중...`;
+      try {
+        const buf = new Uint8Array(await file.arrayBuffer());
+        const outBytes = applyDpi(file, buf, targetDpi);
+        const outputBlob = new Blob([outBytes], { type: file.type });
+        const url = URL.createObjectURL(outputBlob);
+        const outName = file.name.replace(/\.([^.]+)$/, `_${targetDpi}dpi.$1`);
+        convertedResults.push({ blob: outputBlob, name: outName, url });
+
+        html += `<div class="converted-item"><img class="converted-thumb" src="${url}" alt="${outName}"><div class="converted-info"><div class="converted-name">${outName}</div><div class="converted-size">${formatSize(outputBlob.size)} · ${targetDpi}dpi 적용됨</div></div><span class="converted-status status-done">완료</span><button class="btn-download-sm" onclick="downloadSingle(${convertedResults.length - 1})">다운로드</button></div>`;
+        ok++;
+      } catch (err) {
+        html += `<div class="converted-item"><div style="width:60px;height:60px;background:#FEE2E2;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">❌</div><div class="converted-info"><div class="converted-name">${file.name}</div><div class="converted-size" style="color:#DC2626;">처리 실패: ${err.message}</div></div><span class="converted-status status-error">실패</span></div>`;
+      }
+    }
+
+    pf.style.width = '100%'; pt.textContent = '완료!';
+    document.getElementById('resultList').innerHTML = html;
+    document.getElementById('resultSubtitle').textContent = `${ok}/${selectedFiles.length}개 파일에 ${targetDpi}dpi 적용 완료`;
+    document.getElementById('resultPanel').style.display = 'block';
+    document.getElementById('resultPanel').scrollIntoView({ behavior: 'smooth' });
+    if (convertedResults.length > 1) document.getElementById('downloadAllBtn').style.display = 'inline-flex';
+
+    const resultAd = document.getElementById('resultAd');
+    if (resultAd && !resultAd.dataset.adLoaded) {
+      const ins = document.createElement('ins');
+      ins.className = 'adsbygoogle';
+      ins.style.cssText = 'display:block';
+      ins.setAttribute('data-ad-client', 'ca-pub-6464921081676309');
+      ins.setAttribute('data-ad-slot', '9432796175');
+      ins.setAttribute('data-ad-format', 'auto');
+      ins.setAttribute('data-full-width-responsive', 'true');
+      resultAd.appendChild(ins);
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      resultAd.dataset.adLoaded = '1';
+    }
+
+    btn.disabled = false; btn.textContent = '🎯 DPI 적용';
+    setTimeout(() => { pw.style.display = 'none'; }, 1500);
+  });
+
+  function downloadSingle(idx) { const r = convertedResults[idx]; const a = document.createElement('a'); a.href = r.url; a.download = r.name; a.click(); }
+  document.getElementById('downloadAllBtn').addEventListener('click', async () => {
+    if (!convertedResults.length) return;
+    const btn = document.getElementById('downloadAllBtn');
+    btn.disabled = true; btn.textContent = 'ZIP 생성 중...';
+    const zip = new JSZip();
+    convertedResults.forEach(r => zip.file(r.name, r.blob));
+    const content = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(content);
+    const a = document.createElement('a'); a.href = url; a.download = 'dpi_changed_images.zip'; a.click();
+    URL.revokeObjectURL(url);
+    btn.disabled = false; btn.textContent = '⬇️ 모두 다운로드 (ZIP)';
+  });
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+
+  // 공유하기
+  (function() {
+    const shareBtn = document.getElementById('shareBtn');
+    if (navigator.share && navigator.canShare) {
+      const testFile = new File(['test'], 'test.png', { type: 'image/png' });
+      if (navigator.canShare({ files: [testFile] })) {
+        shareBtn.style.display = 'inline-flex';
+      }
+    }
+    shareBtn.addEventListener('click', async () => {
+      if (!convertedResults.length) return;
+      const first = convertedResults[0];
+      const file = new File([first.blob], first.name, { type: first.blob.type });
+      try { await navigator.share({ files: [file], title: first.name + ' — WooaImage', text: 'WooaImage를 통해 변환한 파일입니다.\nhttps://imagekit.wooahouse.com/dpi-change.html' }); }
+      catch(e) { if (e.name !== 'AbortError') alert('공유에 실패했습니다.'); }
+    });
+  })();
+</script>
+
+<script src="js/wooahouse-originals-tool.js"></script>
+<script>window.PWA_CONFIG={appName:"WooaImage",themeColor:"#0EA5E9",icon:"🖼️",convertIds:['convertBtn','compressBtn','mergeBtn','splitBtn','deleteBtn','applyBtn','rotateBtn','unlockBtn','processBtn','cropBtn','generateBtn','resizeBtn','startBtn','generateAllBtn','printBtn']};</script>
+<script src="js/pwa-install.js"></script>
+<script src="js/wooa-sidebar.js"></script>
+<script src="js/wooa-footer.js"></script>
+</body>
+</html>

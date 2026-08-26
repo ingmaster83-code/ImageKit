@@ -276,6 +276,13 @@
       </div>
       <div class="filter-row">
         <div class="filter-row-header">
+          <span class="filter-label">🌙 Invert</span>
+          <span class="filter-val" id="invertVal">0%</span>
+        </div>
+        <input type="range" id="invert" min="0" max="100" value="0">
+      </div>
+      <div class="filter-row">
+        <div class="filter-row-header">
           <span class="filter-label">💨 Blur</span>
           <span class="filter-val" id="blurVal">0px</span>
         </div>
@@ -374,9 +381,9 @@
   let resultBlob = null;
 
   // Filter defaults
-  const defaults = { brightness:100, contrast:100, saturate:100, hue:0, grayscale:0, sepia:0, blur:0, sharpness:0 };
+  const defaults = { brightness:100, contrast:100, saturate:100, hue:0, grayscale:0, sepia:0, invert:0, blur:0, sharpness:0 };
 
-  const sliders = ['brightness','contrast','saturate','hue','grayscale','sepia','blur','sharpness'];
+  const sliders = ['brightness','contrast','saturate','hue','grayscale','sepia','invert','blur','sharpness'];
 
   function getFilterCSS() {
     const b  = document.getElementById('brightness').value;
@@ -385,8 +392,9 @@
     const h  = document.getElementById('hue').value;
     const g  = document.getElementById('grayscale').value;
     const se = document.getElementById('sepia').value;
+    const iv = document.getElementById('invert').value;
     const bl = document.getElementById('blur').value;
-    return `brightness(${b}%) contrast(${c}%) saturate(${s}%) hue-rotate(${h}deg) grayscale(${g}%) sepia(${se}%) blur(${bl}px)`;
+    return `brightness(${b}%) contrast(${c}%) saturate(${s}%) hue-rotate(${h}deg) grayscale(${g}%) sepia(${se}%) invert(${iv}%) blur(${bl}px)`;
   }
 
   function updateLabel(id) {
@@ -398,6 +406,7 @@
       hue:        v => `${v}°`,
       grayscale:  v => `${v}%`,
       sepia:      v => `${v}%`,
+      invert:     v => `${v}%`,
       blur:       v => `${v}px`,
       sharpness:  v => `${v}%`
     };

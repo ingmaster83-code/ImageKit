@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이미지 필터 — 밝기·대비·채도·흑백·세피아 조정 무료 | WooaImage</title>
   <meta name="description" content="이미지 업로드 → 밝기·대비·채도·색조·흑백·세피아·블러 필터 실시간 적용. 슬라이더 미리보기 후 저장.">
-  <meta name="keywords" content="이미지필터, 사진필터, 밝기조정, 대비조정, 채도조정, 흑백변환, 세피아필터, 블러효과, 온라인이미지편집, 무료사진편집">
+  <meta name="keywords" content="이미지필터, 사진필터, 밝기조정, 대비조정, 채도조정, 흑백변환, 세피아필터, 블러효과, 온라인이미지편집, 무료사진편집, 이미지반전, 네거티브효과">
   <link rel="canonical" href="https://imagekit.wooahouse.com/image-filter.html">
   <link rel="alternate" hreflang="ko" href="https://imagekit.wooahouse.com/image-filter.html">
   <link rel="alternate" hreflang="en" href="https://imagekit.wooahouse.com/en/image-filter.html">
@@ -65,7 +65,7 @@
     {
       "@type": "Question",
       "name": "어떤 필터를 적용할 수 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "밝기, 대비, 채도, 색조(Hue), 흑백, 세피아, 블러(흐림) 7가지 필터를 슬라이더로 조정할 수 있습니다."}
+      "acceptedAnswer": {"@type": "Answer","text": "밝기, 대비, 채도, 색조(Hue), 흑백, 세피아, 반전(네거티브), 블러(흐림), 선명도 9가지 필터를 슬라이더로 조정할 수 있습니다."}
     },
     {
       "@type": "Question",
@@ -278,6 +278,13 @@
       </div>
       <div class="filter-row">
         <div class="filter-row-header">
+          <span class="filter-label">🌙 반전</span>
+          <span class="filter-val" id="invertVal">0%</span>
+        </div>
+        <input type="range" id="invert" min="0" max="100" value="0">
+      </div>
+      <div class="filter-row">
+        <div class="filter-row-header">
           <span class="filter-label">💨 블러</span>
           <span class="filter-val" id="blurVal">0px</span>
         </div>
@@ -344,7 +351,7 @@
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>밝기·대비·채도를 조정해 사진을 더 생동감 있게 만들 수 있습니다.</li><li>흑백 필터는 감성적인 사진을 만들 때 유용합니다.</li><li>필터 적용 전 원본을 따로 저장해두면 언제든 되돌릴 수 있습니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>어떤 필터를 적용할 수 있나요?</summary><p>밝기, 대비, 채도, 색조(Hue), 흑백, 세피아, 블러(흐림), 선명도 8가지 필터를 슬라이더로 조정할 수 있습니다.</p></details><details><summary>필터가 실시간으로 적용되나요?</summary><p>네, 슬라이더를 움직이면 미리보기 이미지에 즉시 반영됩니다.</p></details><details><summary>필터를 적용한 이미지가 서버에 저장되나요?</summary><p>아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>어떤 필터를 적용할 수 있나요?</summary><p>밝기, 대비, 채도, 색조(Hue), 흑백, 세피아, 반전(네거티브), 블러(흐림), 선명도 9가지 필터를 슬라이더로 조정할 수 있습니다.</p></details><details><summary>필터가 실시간으로 적용되나요?</summary><p>네, 슬라이더를 움직이면 미리보기 이미지에 즉시 반영됩니다.</p></details><details><summary>필터를 적용한 이미지가 서버에 저장되나요?</summary><p>아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p></details></div>
 
 </main>
 
@@ -360,9 +367,9 @@
   let originalImg = null;
 
   // Filter defaults
-  const defaults = { brightness:100, contrast:100, saturate:100, hue:0, grayscale:0, sepia:0, blur:0, sharpness:0 };
+  const defaults = { brightness:100, contrast:100, saturate:100, hue:0, grayscale:0, sepia:0, invert:0, blur:0, sharpness:0 };
 
-  const sliders = ['brightness','contrast','saturate','hue','grayscale','sepia','blur','sharpness'];
+  const sliders = ['brightness','contrast','saturate','hue','grayscale','sepia','invert','blur','sharpness'];
 
   function getFilterCSS() {
     const b  = document.getElementById('brightness').value;
@@ -371,8 +378,9 @@
     const h  = document.getElementById('hue').value;
     const g  = document.getElementById('grayscale').value;
     const se = document.getElementById('sepia').value;
+    const iv = document.getElementById('invert').value;
     const bl = document.getElementById('blur').value;
-    return `brightness(${b}%) contrast(${c}%) saturate(${s}%) hue-rotate(${h}deg) grayscale(${g}%) sepia(${se}%) blur(${bl}px)`;
+    return `brightness(${b}%) contrast(${c}%) saturate(${s}%) hue-rotate(${h}deg) grayscale(${g}%) sepia(${se}%) invert(${iv}%) blur(${bl}px)`;
   }
 
   function updateLabel(id) {
@@ -384,6 +392,7 @@
       hue:        v => `${v}°`,
       grayscale:  v => `${v}%`,
       sepia:      v => `${v}%`,
+      invert:     v => `${v}%`,
       blur:       v => `${v}px`,
       sharpness:  v => `${v}%`
     };
