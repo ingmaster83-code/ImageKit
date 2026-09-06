@@ -49,27 +49,7 @@
   }
   </script>
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "얼마나 크게 업스케일할 수 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "최대 4배까지 업스케일을 지원합니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "업스케일 후 화질이 좋아지나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "고급 보간 알고리즘으로 자연스럽게 확대되지만 원본 해상도의 손실은 복구되지 않습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "어떤 형식으로 저장되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "PNG 형식으로 저장되어 품질 손실 없이 저장됩니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"얼마나 크게 업스케일할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"2배 또는 4배까지 지원합니다. 4배는 픽셀 수가 16배가 되므로 처리에 시간이 더 걸립니다."}},{"@type":"Question","name":"업스케일 후 화질이 정말 좋아지나요?","acceptedAnswer":{"@type":"Answer","text":"가장자리가 또렷해지고 계단 현상이 줄어듭니다. 다만 원본에 없는 세밀한 질감이 생기지는 않습니다."}},{"@type":"Question","name":"어떤 형식으로 저장되나요?","acceptedAnswer":{"@type":"Answer","text":"PNG로 저장되어 확대 과정의 추가 손실이 없습니다."}},{"@type":"Question","name":"사진과 일러스트 중 어느 쪽이 잘 되나요?","acceptedAnswer":{"@type":"Answer","text":"선과 면이 뚜렷한 로고·일러스트·글자 이미지가 사진보다 결과가 깨끗합니다."}},{"@type":"Question","name":"AI 업스케일과 뭐가 다른가요?","acceptedAnswer":{"@type":"Answer","text":"이 도구는 고품질 보간 + 샤프닝 방식으로 브라우저에서 빠르게 처리합니다. 무거운 AI 초해상도만큼은 아니지만 설치·업로드 없이 즉시 쓸 수 있습니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
 <script src="js/ad-dev-placeholder.js"></script>
@@ -347,10 +327,11 @@
     <a href="mp4-to-gif.html" class="related-card"><span class="related-icon">🎥</span><span>MP4 → GIF</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 업스케일링 사용법</h2><ol><li>화질을 키우고 싶은 이미지를 업로드합니다.</li><li>확대 배율(2배·4배)을 선택합니다.</li><li>보간·샤프닝이 적용된 고해상도 이미지를 다운로드합니다.</li></ol><h3>업스케일의 한계</h3><p class="note">없던 디테일을 완벽히 만들어내지는 못합니다. 계단 현상을 줄이고 윤곽을 또렷하게 다듬는 수준입니다. 심하게 흐리거나 뭉개진 이미지는 한계가 있으며, 원본이 어느 정도 선명할수록 결과가 좋습니다.</p><h3>활용 예시</h3><p class="note">오래된 저해상도 프로필 사진 키우기, 작은 로고를 인쇄용으로 확대, 썸네일만 남은 이미지 활용 등에 씁니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>저해상도 이미지를 2~4배 크기로 확대하면서 선명도를 유지합니다.</li><li>인물 사진, 제품 이미지 등에서 특히 효과적입니다.</li><li>과도한 업스케일은 오히려 부자연스러운 결과를 낼 수 있습니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>얼마나 크게 업스케일할 수 있나요?</summary><p>최대 4배까지 업스케일을 지원합니다.</p></details><details><summary>업스케일 후 화질이 좋아지나요?</summary><p>고급 보간 알고리즘으로 자연스럽게 확대되지만 원본 해상도의 손실은 복구되지 않습니다.</p></details><details><summary>어떤 형식으로 저장되나요?</summary><p>PNG 형식으로 저장되어 품질 손실 없이 저장됩니다.</p></details><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>얼마나 크게 업스케일할 수 있나요?</summary><p>2배 또는 4배까지 지원합니다. 4배는 픽셀 수가 16배가 되므로 처리에 시간이 더 걸립니다.</p></details><details><summary>업스케일 후 화질이 정말 좋아지나요?</summary><p>가장자리가 또렷해지고 계단 현상이 줄어듭니다. 다만 원본에 없는 세밀한 질감이 생기지는 않습니다.</p></details><details><summary>어떤 형식으로 저장되나요?</summary><p>PNG로 저장되어 확대 과정의 추가 손실이 없습니다.</p></details><details><summary>사진과 일러스트 중 어느 쪽이 잘 되나요?</summary><p>선과 면이 뚜렷한 로고·일러스트·글자 이미지가 사진보다 결과가 깨끗합니다.</p></details><details><summary>AI 업스케일과 뭐가 다른가요?</summary><p>이 도구는 고품질 보간 + 샤프닝 방식으로 브라우저에서 빠르게 처리합니다. 무거운 AI 초해상도만큼은 아니지만 설치·업로드 없이 즉시 쓸 수 있습니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

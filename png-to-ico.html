@@ -58,27 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "ICO 파일이란 무엇인가요?",
-      "acceptedAnswer": {"@type": "Answer","text": "ICO는 웹사이트 파비콘(브라우저 탭 아이콘)이나 윈도우 아이콘에 사용되는 이미지 형식입니다. 여러 크기의 이미지를 하나의 파일에 담을 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "어떤 크기를 선택해야 하나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "웹 파비콘은 16x16과 32x32가 기본입니다. 고해상도 디스플레이용으로는 48x48, 64x64도 추가하면 좋습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "이미지가 서버에 저장되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ICO 파일이란 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"여러 해상도를 담는 아이콘 형식입니다. 파비콘은 관례적으로 favicon.ico 하나로 여러 크기를 제공합니다."}},{"@type":"Question","name":"어떤 크기를 선택해야 하나요?","acceptedAnswer":{"@type":"Answer","text":"16×16·32×32는 필수, 48×48을 더하면 대부분의 환경을 커버합니다. 원본은 256×256 이상으로 준비하세요."}},{"@type":"Question","name":"원본이 정사각형이 아니면?","acceptedAnswer":{"@type":"Answer","text":"먼저 자르기로 1:1로 만든 뒤 변환하세요. 비정사각형은 찌그러지거나 잘립니다."}},{"@type":"Question","name":"투명 배경도 되나요?","acceptedAnswer":{"@type":"Answer","text":"네. 투명 PNG를 넣으면 배경이 투명한 아이콘이 됩니다."}},{"@type":"Question","name":"요즘은 PNG·SVG 파비콘도 쓰던데요?","acceptedAnswer":{"@type":"Answer","text":"맞습니다. 다만 구형 브라우저 호환을 위해 favicon.ico를 함께 두는 것이 안전합니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
 <style>
   .size-options {
@@ -279,10 +259,11 @@
     <a href="webp-to-jpg.html" class="related-card"><span class="related-icon">📷</span><span>WebP → JPG/PNG</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>PNG → ICO 변환 사용법</h2><ol><li>정사각형 PNG 이미지를 업로드합니다(512×512 권장).</li><li>포함할 크기(16·32·48·64 등)를 선택합니다.</li><li>favicon.ico로 다운로드합니다.</li></ol><h3>파비콘 만들기</h3><p class="note">파비콘은 브라우저 탭·즐겨찾기에 표시되는 작은 아이콘입니다. 16×16에서도 알아볼 수 있게 단순한 도형·글자 하나가 좋습니다. 만든 favicon.ico를 사이트 루트에 올리고 &lt;link rel="icon"&gt;으로 연결합니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>파비콘은 16×16, 32×32, 64×64 픽셀이 표준 크기입니다.</li><li>ICO 파일에 여러 크기를 함께 포함하면 다양한 환경에서 최적의 아이콘이 표시됩니다.</li><li>배경이 투명한 PNG를 사용하면 더 깔끔한 아이콘이 만들어집니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>ICO 파일이란 무엇인가요?</summary><p>ICO는 웹사이트 파비콘(브라우저 탭 아이콘)이나 윈도우 아이콘에 사용되는 이미지 형식입니다. 여러 크기의 이미지를 하나의 파일에 담을 수 있습니다.</p></details><details><summary>어떤 크기를 선택해야 하나요?</summary><p>웹 파비콘은 16×16과 32×32가 기본입니다. 고해상도 디스플레이용으로는 48×48, 64×64도 추가하면 좋습니다.</p></details><details><summary>이미지가 서버에 저장되나요?</summary><p>아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>ICO 파일이란 무엇인가요?</summary><p>여러 해상도를 담는 아이콘 형식입니다. 파비콘은 관례적으로 favicon.ico 하나로 여러 크기를 제공합니다.</p></details><details><summary>어떤 크기를 선택해야 하나요?</summary><p>16×16·32×32는 필수, 48×48을 더하면 대부분의 환경을 커버합니다. 원본은 256×256 이상으로 준비하세요.</p></details><details><summary>원본이 정사각형이 아니면?</summary><p>먼저 자르기로 1:1로 만든 뒤 변환하세요. 비정사각형은 찌그러지거나 잘립니다.</p></details><details><summary>투명 배경도 되나요?</summary><p>네. 투명 PNG를 넣으면 배경이 투명한 아이콘이 됩니다.</p></details><details><summary>요즘은 PNG·SVG 파비콘도 쓰던데요?</summary><p>맞습니다. 다만 구형 브라우저 호환을 위해 favicon.ico를 함께 두는 것이 안전합니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

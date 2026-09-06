@@ -49,27 +49,7 @@
   }
   </script>
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "어떤 이미지에서 배경 제거가 잘 되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "인물, 제품 사진처럼 배경과 피사체의 경계가 뚜렷한 이미지에서 가장 좋은 결과를 얻을 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "배경 제거 후 파일 형식은 무엇인가요?",
-      "acceptedAnswer": {"@type": "Answer","text": "투명 배경을 지원하는 PNG 형식으로 저장됩니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "처음 사용할 때 왜 느린가요?",
-      "acceptedAnswer": {"@type": "Answer","text": "AI 모델을 처음 로드하는 데 시간이 걸립니다. 이후에는 빠르게 처리됩니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"어떤 이미지에서 배경 제거가 잘 되나요?","acceptedAnswer":{"@type":"Answer","text":"피사체와 배경의 대비가 뚜렷한 인물·제품 사진이 잘 됩니다. 머리카락 끝, 반투명 물체는 경계가 거칠 수 있습니다."}},{"@type":"Question","name":"배경 제거 후 파일 형식은?","acceptedAnswer":{"@type":"Answer","text":"투명도를 지원하는 PNG로 저장됩니다."}},{"@type":"Question","name":"처음 사용할 때 왜 느린가요?","acceptedAnswer":{"@type":"Answer","text":"AI 모델(수 MB~수십 MB)을 브라우저로 처음 내려받기 때문입니다. 두 번째부터는 캐시되어 빠릅니다."}},{"@type":"Question","name":"제거된 배경에 다른 색을 넣을 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"투명 PNG로 저장한 뒤 이미지 테두리·필터 도구나 편집 도구에서 배경색을 깔면 됩니다."}},{"@type":"Question","name":"처리가 인터넷 없이도 되나요?","acceptedAnswer":{"@type":"Answer","text":"AI 모델을 한 번 받은 뒤에는 브라우저 안에서 처리되므로 이미지가 외부로 나가지 않습니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
 <script src="js/ad-dev-placeholder.js"></script>
@@ -256,10 +236,11 @@
     <a href="upscale-image.html" class="related-card"><span class="related-icon">🔍</span><span>이미지 업스케일</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 배경 제거 사용법</h2><ol><li>배경을 지울 이미지를 업로드합니다.</li><li>AI가 자동으로 인물·사물을 인식해 배경을 투명하게 만듭니다. 처음 한 번은 AI 모델을 내려받느라 몇 초 걸립니다.</li><li>투명 배경 PNG로 다운로드합니다.</li></ol><h3>어떤 이미지가 잘 되나요</h3><p class="note">인물, 제품, 동물처럼 피사체와 배경의 경계가 뚜렷한 사진이 가장 깨끗하게 처리됩니다. 머리카락·반투명 유리·복잡한 배경은 경계가 거칠게 남을 수 있습니다.</p><h3>활용 예시</h3><p class="note">증명사진 배경을 흰색으로 교체, 쇼핑몰 상품 누끼(배경 제거), 프로필·스티커 제작, 발표자료에 인물 오려 넣기 등에 씁니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>배경이 단색이거나 대비가 뚜렷할수록 제거 결과가 좋습니다.</li><li>제거 후 남은 잔여물은 이미지 편집 도구로 다듬을 수 있습니다.</li><li>배경 제거 후 다른 배경 이미지를 합성하는 데 활용하세요.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>어떤 이미지에서 배경 제거가 잘 되나요?</summary><p>인물, 제품 사진처럼 배경과 피사체의 경계가 뚜렷한 이미지에서 가장 좋은 결과를 얻을 수 있습니다.</p></details><details><summary>배경 제거 후 파일 형식은 무엇인가요?</summary><p>투명 배경을 지원하는 PNG 형식으로 저장됩니다.</p></details><details><summary>처음 사용할 때 왜 느린가요?</summary><p>AI 모델을 처음 로드하는 데 시간이 걸립니다. 이후에는 빠르게 처리됩니다.</p></details><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>어떤 이미지에서 배경 제거가 잘 되나요?</summary><p>피사체와 배경의 대비가 뚜렷한 인물·제품 사진이 잘 됩니다. 머리카락 끝, 반투명 물체는 경계가 거칠 수 있습니다.</p></details><details><summary>배경 제거 후 파일 형식은?</summary><p>투명도를 지원하는 PNG로 저장됩니다.</p></details><details><summary>처음 사용할 때 왜 느린가요?</summary><p>AI 모델(수 MB~수십 MB)을 브라우저로 처음 내려받기 때문입니다. 두 번째부터는 캐시되어 빠릅니다.</p></details><details><summary>제거된 배경에 다른 색을 넣을 수 있나요?</summary><p>투명 PNG로 저장한 뒤 이미지 테두리·필터 도구나 편집 도구에서 배경색을 깔면 됩니다.</p></details><details><summary>처리가 인터넷 없이도 되나요?</summary><p>AI 모델을 한 번 받은 뒤에는 브라우저 안에서 처리되므로 이미지가 외부로 나가지 않습니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

@@ -58,27 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "어떤 정보를 확인할 수 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "파일명, 크기, 픽셀 해상도, 형식, EXIF 데이터(촬영 날짜, 카메라 모델 등)를 확인할 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "EXIF 데이터가 없는 이미지도 분석되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "네, EXIF가 없어도 기본 파일 정보(크기, 해상도, 형식)는 확인할 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "이미지가 서버로 전송되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 분석은 브라우저에서만 처리됩니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"어떤 정보를 확인할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"파일명, 용량, 가로×세로 픽셀, 형식(JPG/PNG 등), 그리고 EXIF가 있으면 촬영일시·카메라·GPS 정보까지 보여줍니다."}},{"@type":"Question","name":"EXIF 데이터가 없는 이미지도 분석되나요?","acceptedAnswer":{"@type":"Answer","text":"네. EXIF가 없어도 파일 형식·해상도·용량 등 기본 정보는 표시됩니다. 캡처·편집한 이미지는 대개 EXIF가 없습니다."}},{"@type":"Question","name":"GPS 위치가 나오면 어떻게 하나요?","acceptedAnswer":{"@type":"Answer","text":"공유 전에 EXIF 제거 도구로 위치정보를 지우세요."}},{"@type":"Question","name":"DPI(인쇄 해상도)도 나오나요?","acceptedAnswer":{"@type":"Answer","text":"파일에 DPI 정보가 있으면 표시됩니다. 값을 바꾸려면 DPI 변경 도구를 쓰세요."}},{"@type":"Question","name":"여러 이미지를 한 번에 볼 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"한 장씩 상세하게 보여주는 방식입니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <style>
     .info-table {
@@ -197,9 +177,10 @@
     <a href="image-compare.html" class="related-card"><span class="related-icon">↔️</span><span>이미지 비교</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 정보 확인 사용법</h2><ol><li>확인할 이미지를 업로드합니다.</li><li>파일명·용량·해상도(픽셀)·형식·색상 정보와 EXIF(촬영 정보)가 표시됩니다.</li></ol><h3>어디에 쓰나요</h3><p class="note">제출용 사진의 해상도·용량이 규정에 맞는지 확인, 다운로드한 이미지가 실제로 어떤 형식·크기인지 점검, 사진에 위치정보(GPS)가 들어 있는지 확인할 때 씁니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 <div class="tips-panel"><h3>💡 Tips</h3><ul><li>EXIF 데이터에는 촬영 날짜, 카메라 모델, GPS 위치 등이 포함될 수 있습니다.</li><li>공유 전 개인 정보가 담긴 EXIF를 제거하려면 EXIF 제거 도구를 사용하세요.</li><li>DPI 정보는 인쇄 크기 계산에 활용할 수 있습니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>어떤 정보를 확인할 수 있나요?</summary><p>파일명, 크기, 픽셀 해상도, 형식, EXIF 데이터(촬영 날짜, 카메라 모델 등)를 확인할 수 있습니다.</p></details><details><summary>EXIF 데이터가 없는 이미지도 분석되나요?</summary><p>네, EXIF가 없어도 기본 파일 정보(크기, 해상도, 형식)는 확인할 수 있습니다.</p></details><details><summary>이미지가 서버로 전송되나요?</summary><p>아니요, 모든 분석은 브라우저에서만 처리됩니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>어떤 정보를 확인할 수 있나요?</summary><p>파일명, 용량, 가로×세로 픽셀, 형식(JPG/PNG 등), 그리고 EXIF가 있으면 촬영일시·카메라·GPS 정보까지 보여줍니다.</p></details><details><summary>EXIF 데이터가 없는 이미지도 분석되나요?</summary><p>네. EXIF가 없어도 파일 형식·해상도·용량 등 기본 정보는 표시됩니다. 캡처·편집한 이미지는 대개 EXIF가 없습니다.</p></details><details><summary>GPS 위치가 나오면 어떻게 하나요?</summary><p>공유 전에 EXIF 제거 도구로 위치정보를 지우세요.</p></details><details><summary>DPI(인쇄 해상도)도 나오나요?</summary><p>파일에 DPI 정보가 있으면 표시됩니다. 값을 바꾸려면 DPI 변경 도구를 쓰세요.</p></details><details><summary>여러 이미지를 한 번에 볼 수 있나요?</summary><p>한 장씩 상세하게 보여주는 방식입니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

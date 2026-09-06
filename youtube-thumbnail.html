@@ -57,27 +57,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "어떤 URL 형식을 지원하나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "youtube.com/watch?v=, youtu.be/, youtube.com/shorts/ 등 YouTube 영상 URL이라면 모두 지원합니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "최고화질 썸네일이 없는 경우는?",
-      "acceptedAnswer": {"@type": "Answer","text": "최고화질(1280×720)이 없는 영상도 있습니다. 그 경우 고화질(480×360) 또는 중간화질(320×180)을 사용하세요."}
-    },
-    {
-      "@type": "Question",
-      "name": "어떻게 저장하나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "원하는 화질의 '새 탭에서 열기' 버튼을 클릭한 뒤, 이미지 위에서 우클릭 → '다른 이름으로 저장'을 선택하세요."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"저작권 문제가 없나요?","acceptedAnswer":{"@type":"Answer","text":"썸네일 이미지의 저작권은 영상 제작자에게 있습니다. 개인 참고·정당한 인용 범위를 넘어 재사용하면 안 됩니다."}},{"@type":"Question","name":"최고화질이 안 나오는 영상이 있어요.","acceptedAnswer":{"@type":"Answer","text":"업로더가 커스텀 썸네일을 고화질로 넣지 않았거나 오래된 영상입니다. 이 경우 hqdefault가 최대 해상도입니다."}},{"@type":"Question","name":"쇼츠(Shorts) 썸네일도 되나요?","acceptedAnswer":{"@type":"Answer","text":"쇼츠도 영상 URL을 넣으면 대표 프레임 이미지를 받을 수 있습니다."}},{"@type":"Question","name":"재생목록·채널 URL도 되나요?","acceptedAnswer":{"@type":"Answer","text":"개별 영상 URL(watch?v=... 형태)이 필요합니다."}},{"@type":"Question","name":"내 영상 썸네일 백업용으로 써도 되나요?","acceptedAnswer":{"@type":"Answer","text":"네. 본인 영상이면 자유롭게 받아 보관할 수 있습니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <style>
     .lang-switcher { display:flex; align-items:center; gap:4px; }
@@ -241,8 +221,9 @@
     <a href="image-compare.html" class="related-card"><span class="related-icon">↔️</span><span>이미지 비교</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>유튜브 썸네일 다운로드 사용법</h2><ol><li>유튜브 영상 URL을 붙여넣습니다.</li><li>해당 영상의 썸네일이 해상도별(최고화질 1280×720부터 기본화질까지)로 표시됩니다.</li><li>원하는 해상도를 골라 다운로드합니다.</li></ol><h3>해상도 안내</h3><p class="note">maxresdefault(1280×720)는 업로더가 고화질 썸네일을 설정한 영상에서만 제공됩니다. 없으면 hqdefault(480×360)가 최대입니다. 오래된 영상일수록 고해상도가 없을 수 있습니다.</p></section>
 <div class="wooa-orig-anchor"></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>저작권 문제가 없나요?</summary><p>썸네일 이미지의 저작권은 영상 제작자에게 있습니다. 개인 참고·정당한 인용 범위를 넘어 재사용하면 안 됩니다.</p></details><details><summary>최고화질이 안 나오는 영상이 있어요.</summary><p>업로더가 커스텀 썸네일을 고화질로 넣지 않았거나 오래된 영상입니다. 이 경우 hqdefault가 최대 해상도입니다.</p></details><details><summary>쇼츠(Shorts) 썸네일도 되나요?</summary><p>쇼츠도 영상 URL을 넣으면 대표 프레임 이미지를 받을 수 있습니다.</p></details><details><summary>재생목록·채널 URL도 되나요?</summary><p>개별 영상 URL(watch?v=... 형태)이 필요합니다.</p></details><details><summary>내 영상 썸네일 백업용으로 써도 되나요?</summary><p>네. 본인 영상이면 자유롭게 받아 보관할 수 있습니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </div>
 

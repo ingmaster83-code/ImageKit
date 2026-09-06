@@ -58,27 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "정확한 픽셀 단위로 자를 수 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "네, 좌표와 크기를 직접 입력하거나 드래그로 영역을 선택할 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "특정 비율(16:9, 1:1 등)로 자를 수 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "비율 고정 옵션을 선택하면 원하는 비율로 자를 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "자른 이미지의 형식은?",
-      "acceptedAnswer": {"@type": "Answer","text": "원본 형식을 유지하며 JPG 또는 PNG로 다운로드됩니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"정확한 픽셀 단위로 자를 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. X·Y 시작 좌표와 너비·높이를 픽셀로 입력해 정밀하게 자를 수 있습니다."}},{"@type":"Question","name":"특정 비율(16:9, 1:1)로 자를 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 고정 비율을 선택하면 드래그할 때 그 비율이 유지됩니다."}},{"@type":"Question","name":"자른 이미지의 형식은?","acceptedAnswer":{"@type":"Answer","text":"원본 형식(JPG는 JPG, PNG는 PNG)을 유지합니다."}},{"@type":"Question","name":"자르면 화질이 떨어지나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 선택 영역의 픽셀을 그대로 잘라내므로 화질 손실이 없습니다."}},{"@type":"Question","name":"여러 사진을 같은 위치로 자를 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"한 장씩 처리하는 방식입니다. 동일한 크기·구도의 사진이면 같은 좌표값을 재사용하세요."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <style>
     .crop-preview-wrap {
@@ -239,9 +219,10 @@
     <a href="image-filter.html" class="related-card"><span class="related-icon">🎨</span><span>이미지 필터</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 자르기 사용법</h2><ol><li>이미지를 업로드합니다.</li><li>드래그로 자를 영역을 지정하거나, X·Y 좌표와 너비·높이를 픽셀로 정확히 입력합니다. 16:9·1:1 등 고정 비율도 선택할 수 있습니다.</li><li>자른 이미지를 다운로드합니다.</li></ol><h3>어디에 쓰나요</h3><p class="note">불필요한 배경 제거, SNS 규격(인스타 1:1, 유튜브 썸네일 16:9)에 맞추기, 증명사진 얼굴 중심으로 자르기 등에 씁니다. 자르기는 픽셀을 버리는 작업이라 화질 손실은 없습니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 <div class="tips-panel"><h3>💡 Tips</h3><ul><li>드래그로 자를 영역을 직접 지정하거나 고정 비율(1:1, 4:3 등)을 선택할 수 있습니다.</li><li>얼굴 사진은 정사각형으로 자르면 SNS 프로필용으로 적합합니다.</li><li>자르기 전 원본 이미지를 복사해두면 다시 되돌릴 수 있습니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>정확한 픽셀 단위로 자를 수 있나요?</summary><p>네, 좌표와 크기를 직접 입력하거나 드래그로 영역을 선택할 수 있습니다.</p></details><details><summary>특정 비율(16:9, 1:1 등)로 자를 수 있나요?</summary><p>비율 고정 옵션을 선택하면 원하는 비율로 자를 수 있습니다.</p></details><details><summary>자른 이미지의 형식은?</summary><p>원본 형식을 유지하며 JPG 또는 PNG로 다운로드됩니다.</p></details><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>정확한 픽셀 단위로 자를 수 있나요?</summary><p>네. X·Y 시작 좌표와 너비·높이를 픽셀로 입력해 정밀하게 자를 수 있습니다.</p></details><details><summary>특정 비율(16:9, 1:1)로 자를 수 있나요?</summary><p>네. 고정 비율을 선택하면 드래그할 때 그 비율이 유지됩니다.</p></details><details><summary>자른 이미지의 형식은?</summary><p>원본 형식(JPG는 JPG, PNG는 PNG)을 유지합니다.</p></details><details><summary>자르면 화질이 떨어지나요?</summary><p>아니요. 선택 영역의 픽셀을 그대로 잘라내므로 화질 손실이 없습니다.</p></details><details><summary>여러 사진을 같은 위치로 자를 수 있나요?</summary><p>한 장씩 처리하는 방식입니다. 동일한 크기·구도의 사진이면 같은 좌표값을 재사용하세요.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

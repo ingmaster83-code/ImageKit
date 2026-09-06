@@ -58,27 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "AVIF 형식의 장점이 뭔가요?",
-      "acceptedAnswer": {"@type": "Answer","text": "JPG/PNG는 물론 WebP보다도 용량이 더 작으면서 화질이 유지되는 차세대 이미지 포맷입니다. 웹사이트 로딩 속도 최적화에 특히 유리합니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "모든 브라우저에서 AVIF가 지원되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "AVIF 표시(디코딩)는 최신 Chrome·Edge·Firefox·Safari에서 모두 지원됩니다. 변환 자체는 이 도구가 브라우저 내에서 자체적으로 처리하므로 구형 브라우저에서도 변환은 가능합니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "첫 변환이 느린 이유가 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "첫 변환 시 AVIF 인코더(약 1~2MB)를 브라우저에 한 번만 불러옵니다. 이후 변환부터는 바로 처리됩니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"AVIF 형식의 장점이 뭔가요?","acceptedAnswer":{"@type":"Answer","text":"현존 이미지 형식 중 압축 효율이 가장 좋습니다. 같은 용량이면 화질이, 같은 화질이면 용량이 유리합니다."}},{"@type":"Question","name":"모든 브라우저에서 AVIF가 지원되나요?","acceptedAnswer":{"@type":"Answer","text":"크롬·파이어폭스·사파리 최신 버전은 지원합니다. 구형 대비는 &lt;picture&gt;로 WebP·JPG fallback을 두세요."}},{"@type":"Question","name":"첫 변환이 느린 이유가 있나요?","acceptedAnswer":{"@type":"Answer","text":"AVIF 인코더(WASM)를 브라우저로 처음 받고, AV1 압축 자체가 연산량이 많기 때문입니다. 이후엔 빨라집니다."}},{"@type":"Question","name":"WebP와 AVIF 중 뭘 써야 하나요?","acceptedAnswer":{"@type":"Answer","text":"호환성 우선이면 WebP, 용량·화질 최적화가 우선이면 AVIF입니다. 둘 다 만들어 fallback으로 제공하는 것이 이상적입니다."}},{"@type":"Question","name":"투명도가 유지되나요?","acceptedAnswer":{"@type":"Answer","text":"네. AVIF도 알파 채널을 지원합니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <style>
     .lang-switcher { display:flex; align-items:center; gap:4px; }
@@ -205,9 +185,10 @@
     <a href="compress-image.html" class="related-card"><span class="related-icon">📦</span><span>이미지 압축</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 AVIF 변환 사용법</h2><ol><li>JPG·PNG 이미지를 업로드합니다.</li><li>품질을 선택합니다(첫 변환은 인코더 로딩으로 느립니다).</li><li>AVIF로 변환해 다운로드합니다.</li></ol><h3>AVIF vs WebP</h3><p class="note">AVIF는 WebP보다도 20~30% 더 작으면서 화질이 좋고, 특히 어두운 영역·그라데이션 표현이 뛰어납니다. 다만 인코딩이 느리고 아주 오래된 브라우저는 지원하지 않습니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 <div class="tips-panel"><h3>💡 Tips</h3><ul><li>AVIF는 같은 화질 기준으로 WebP보다도 더 작아, 웹 최적화에 가장 유리한 포맷입니다.</li><li>품질을 낮출수록 용량이 더 줄지만 60% 이하로는 화질 저하가 눈에 띌 수 있습니다.</li><li>첫 변환 시 인코더를 한 번만 불러오므로 약간의 시간이 걸릴 수 있습니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>AVIF 형식의 장점이 뭔가요?</summary><p>JPG/PNG는 물론 WebP보다도 용량이 더 작으면서 화질이 유지되는 차세대 이미지 포맷입니다. 웹사이트 로딩 속도 최적화에 특히 유리합니다.</p></details><details><summary>모든 브라우저에서 AVIF가 지원되나요?</summary><p>AVIF 표시(디코딩)는 최신 Chrome·Edge·Firefox·Safari에서 모두 지원됩니다. 변환 자체는 이 도구가 브라우저 내에서 자체적으로 처리하므로 구형 브라우저에서도 변환은 가능합니다.</p></details><details><summary>첫 변환이 느린 이유가 있나요?</summary><p>첫 변환 시 AVIF 인코더(약 1~2MB)를 브라우저에 한 번만 불러옵니다. 이후 변환부터는 바로 처리됩니다.</p></details><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>AVIF 형식의 장점이 뭔가요?</summary><p>현존 이미지 형식 중 압축 효율이 가장 좋습니다. 같은 용량이면 화질이, 같은 화질이면 용량이 유리합니다.</p></details><details><summary>모든 브라우저에서 AVIF가 지원되나요?</summary><p>크롬·파이어폭스·사파리 최신 버전은 지원합니다. 구형 대비는 &lt;picture&gt;로 WebP·JPG fallback을 두세요.</p></details><details><summary>첫 변환이 느린 이유가 있나요?</summary><p>AVIF 인코더(WASM)를 브라우저로 처음 받고, AV1 압축 자체가 연산량이 많기 때문입니다. 이후엔 빨라집니다.</p></details><details><summary>WebP와 AVIF 중 뭘 써야 하나요?</summary><p>호환성 우선이면 WebP, 용량·화질 최적화가 우선이면 AVIF입니다. 둘 다 만들어 fallback으로 제공하는 것이 이상적입니다.</p></details><details><summary>투명도가 유지되나요?</summary><p>네. AVIF도 알파 채널을 지원합니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

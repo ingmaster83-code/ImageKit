@@ -58,27 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "EXIF 데이터란 무엇인가요?",
-      "acceptedAnswer": {"@type": "Answer","text": "EXIF는 사진에 자동으로 저장되는 메타데이터로 GPS 위치, 촬영일시, 카메라 제조사·기종, 노출값 등 다양한 정보를 포함합니다. SNS에 사진을 올리기 전 삭제하면 개인정보를 보호할 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "EXIF 제거 후 이미지 품질이 변하나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "Canvas를 이용해 원본 해상도 그대로 재저장하므로 화질 변화가 거의 없습니다. JPEG의 경우 92% 품질로 저장됩니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "이미지가 서버에 저장되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"EXIF 데이터란 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"사진 파일에 함께 저장되는 촬영 정보입니다. 날짜·시간, 카메라·렌즈 모델, 노출 설정, 그리고 GPS 위치까지 포함될 수 있습니다."}},{"@type":"Question","name":"EXIF 제거 후 이미지 품질이 변하나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 그림 데이터는 그대로이고 부가 정보만 삭제되므로 화질·용량 변화가 거의 없습니다."}},{"@type":"Question","name":"일부 정보만 골라 지울 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"이 도구는 EXIF 전체를 제거합니다. 특정 값만 확인하려면 이미지 정보 도구를 사용하세요."}},{"@type":"Question","name":"SNS에 올리면 어차피 지워지지 않나요?","acceptedAnswer":{"@type":"Answer","text":"인스타그램 등 일부 서비스는 업로드 시 EXIF를 제거하지만, 원본을 메신저·이메일·클라우드로 직접 공유하면 그대로 전달됩니다."}},{"@type":"Question","name":"여러 장을 한꺼번에 처리할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 여러 파일을 올리면 일괄 제거해 ZIP으로 받을 수 있습니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
 <style>
   .exif-table {
@@ -227,10 +207,11 @@
     <a href="crop-image.html" class="related-card"><span class="related-icon">✂️</span><span>이미지 자르기</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>EXIF 데이터 제거 사용법</h2><ol><li>사진을 업로드합니다(여러 장 가능).</li><li>GPS 위치·촬영 일시·카메라 기종 등 EXIF 메타데이터가 제거됩니다.</li><li>깨끗해진 이미지를 다운로드합니다. 화면에 보이는 그림은 그대로입니다.</li></ol><h3>EXIF가 왜 위험한가</h3><p class="note">스마트폰 사진에는 촬영 장소의 GPS 좌표가 저장되는 경우가 많습니다. 이 사진을 중고거래·SNS·부동산 매물에 그대로 올리면 집 주소가 노출될 수 있습니다. 업로드 전 EXIF 제거가 안전합니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>사진에 저장된 GPS 위치, 촬영 날짜, 기기 정보를 제거합니다.</li><li>SNS 업로드 전 개인 정보 보호를 위해 EXIF를 삭제하는 것이 좋습니다.</li><li>EXIF 제거 후에도 이미지 품질에는 변화가 없습니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>EXIF 데이터란 무엇인가요?</summary><p>EXIF는 사진에 자동으로 저장되는 메타데이터로 GPS 위치, 촬영일시, 카메라 제조사·기종, 노출값 등 다양한 정보를 포함합니다. SNS에 사진을 올리기 전 삭제하면 개인정보를 보호할 수 있습니다.</p></details><details><summary>EXIF 제거 후 이미지 품질이 변하나요?</summary><p>Canvas를 이용해 원본 해상도 그대로 재저장하므로 화질 변화가 거의 없습니다. JPEG의 경우 92% 품질로 저장됩니다.</p></details><details><summary>이미지가 서버에 저장되나요?</summary><p>아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>EXIF 데이터란 무엇인가요?</summary><p>사진 파일에 함께 저장되는 촬영 정보입니다. 날짜·시간, 카메라·렌즈 모델, 노출 설정, 그리고 GPS 위치까지 포함될 수 있습니다.</p></details><details><summary>EXIF 제거 후 이미지 품질이 변하나요?</summary><p>아니요. 그림 데이터는 그대로이고 부가 정보만 삭제되므로 화질·용량 변화가 거의 없습니다.</p></details><details><summary>일부 정보만 골라 지울 수 있나요?</summary><p>이 도구는 EXIF 전체를 제거합니다. 특정 값만 확인하려면 이미지 정보 도구를 사용하세요.</p></details><details><summary>SNS에 올리면 어차피 지워지지 않나요?</summary><p>인스타그램 등 일부 서비스는 업로드 시 EXIF를 제거하지만, 원본을 메신저·이메일·클라우드로 직접 공유하면 그대로 전달됩니다.</p></details><details><summary>여러 장을 한꺼번에 처리할 수 있나요?</summary><p>네. 여러 파일을 올리면 일괄 제거해 ZIP으로 받을 수 있습니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

@@ -58,32 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "압축 후 이미지 품질이 떨어지나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "압축 수준을 조절할 수 있으며 적절한 수준에서는 육안으로 차이가 거의 없습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "어떤 형식을 지원하나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "JPG, PNG, WebP 등 주요 이미지 형식을 지원합니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "압축된 이미지가 서버에 저장되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "10KB, 20KB처럼 정확한 용량으로 압축할 수 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "네, '목표 용량 지정' 모드에서 10KB·20KB·50KB 프리셋을 선택하거나 원하는 KB 값을 직접 입력하면 해당 용량 이하로 자동 압축됩니다. 시험 응시원서, 증명사진 업로드 등 용량 제한이 있는 곳에 유용합니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"압축하면 화질이 많이 떨어지나요?","acceptedAnswer":{"@type":"Answer","text":"품질 85% 정도까지는 눈에 잘 띄지 않으면서 용량이 크게 줄어듭니다. 그 아래로 내리면 하늘·그라데이션 부분에 얼룩이 보이기 시작합니다."}},{"@type":"Question","name":"10KB, 20KB처럼 정확한 용량으로 압축할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. \"목표 용량 지정\" 모드에서 원하는 KB 값을 넣으면 그 이하가 될 때까지 품질을 자동으로 조절합니다."}},{"@type":"Question","name":"증명사진 규격(예: 100KB 이하)에 맞출 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 여권 온라인 신청, 각종 응시원서의 사진 용량 제한에 맞춰 목표 용량을 지정하면 됩니다."}},{"@type":"Question","name":"한 번 압축한 이미지를 또 압축하면?","acceptedAnswer":{"@type":"Answer","text":"화질만 더 나빠지고 용량은 거의 안 줄어듭니다. 원본에서 한 번에 목표 용량으로 압축하는 것이 좋습니다."}},{"@type":"Question","name":"여러 장을 한꺼번에 압축할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 여러 파일을 올리면 같은 설정으로 일괄 압축해 ZIP으로 받을 수 있습니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <style>
     .lang-switcher { display:flex; align-items:center; gap:4px; }
@@ -259,10 +234,11 @@
     <a href="image-filter.html" class="related-card"><span class="related-icon">🎨</span><span>이미지 필터</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 압축 사용법</h2><ol><li>JPG·PNG 이미지를 업로드합니다(여러 장 가능).</li><li>품질 슬라이더로 압축률을 조절하거나, "목표 용량 지정" 모드에서 10KB·20KB·50KB·100KB 등을 입력합니다.</li><li>미리보기로 화질을 확인하고 압축된 이미지를 다운로드합니다.</li></ol><h3>압축 방식</h3><p class="note">JPG는 손실 압축이라 품질을 낮출수록 용량이 줄지만 계단 현상(아티팩트)이 생깁니다. PNG는 무손실이라 색 수를 줄이는 방식으로 압축됩니다. 사진은 JPG 80~85% 품질이 화질·용량 균형점입니다.</p><h3>활용 예시</h3><p class="note">증명사진·시험 응시원서·정부 포털 첨부는 보통 10KB~200KB 제한이 있습니다. 목표 용량을 규정값으로 지정하면 한 번에 규격에 맞는 파일이 나옵니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>JPEG는 사진에, PNG는 투명 배경 이미지에 적합합니다.</li><li>품질 80% 이상이면 육안으로 차이를 느끼기 어렵습니다.</li><li>시험 응시원서·증명사진처럼 용량 규정이 있으면 "목표 용량 지정" 모드를 쓰세요 — 10KB·20KB·50KB 중 선택하거나 직접 입력할 수 있습니다.</li><li>여러 이미지를 한 번에 선택하면 일괄 압축 후 ZIP으로 받을 수 있습니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>압축 후 이미지 품질이 떨어지나요?</summary><p>압축 수준을 조절할 수 있으며 적절한 수준에서는 육안으로 차이가 거의 없습니다.</p></details><details><summary>10KB, 20KB처럼 정확한 용량으로 압축할 수 있나요?</summary><p>네, "목표 용량 지정" 모드에서 10KB·20KB·50KB 프리셋을 선택하거나 원하는 KB 값을 직접 입력하면 해당 용량 이하로 자동 압축됩니다. 시험 응시원서, 증명사진 업로드 등 용량 제한이 있는 곳에 유용합니다.</p></details><details><summary>압축된 이미지가 서버에 저장되나요?</summary><p>아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>압축하면 화질이 많이 떨어지나요?</summary><p>품질 85% 정도까지는 눈에 잘 띄지 않으면서 용량이 크게 줄어듭니다. 그 아래로 내리면 하늘·그라데이션 부분에 얼룩이 보이기 시작합니다.</p></details><details><summary>10KB, 20KB처럼 정확한 용량으로 압축할 수 있나요?</summary><p>네. "목표 용량 지정" 모드에서 원하는 KB 값을 넣으면 그 이하가 될 때까지 품질을 자동으로 조절합니다.</p></details><details><summary>증명사진 규격(예: 100KB 이하)에 맞출 수 있나요?</summary><p>네. 여권 온라인 신청, 각종 응시원서의 사진 용량 제한에 맞춰 목표 용량을 지정하면 됩니다.</p></details><details><summary>한 번 압축한 이미지를 또 압축하면?</summary><p>화질만 더 나빠지고 용량은 거의 안 줄어듭니다. 원본에서 한 번에 목표 용량으로 압축하는 것이 좋습니다.</p></details><details><summary>여러 장을 한꺼번에 압축할 수 있나요?</summary><p>네. 여러 파일을 올리면 같은 설정으로 일괄 압축해 ZIP으로 받을 수 있습니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

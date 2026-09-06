@@ -54,32 +54,7 @@
   }
   </script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "MP4를 GIF로 변환할 때 파일이 서버에 업로드되나요?",
-        "acceptedAnswer": {"@type":"Answer","text":"아니요. 모든 변환은 브라우저 내에서 처리되며 파일이 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다."}
-      },
-      {
-        "@type": "Question",
-        "name": "변환 가능한 최대 파일 크기는?",
-        "acceptedAnswer": {"@type":"Answer","text":"최대 50MB까지 지원합니다. 브라우저 메모리 한계로 대용량 파일은 탭이 느려질 수 있습니다."}
-      },
-      {
-        "@type": "Question",
-        "name": "GIF 파일이 MP4보다 큰 이유는?",
-        "acceptedAnswer": {"@type":"Answer","text":"GIF는 프레임마다 이미지를 저장하는 방식이라 동영상 대비 용량이 훨씬 큽니다. FPS를 낮추거나 해상도를 줄이면 GIF 크기를 줄일 수 있습니다."}
-      },
-      {
-        "@type": "Question",
-        "name": "어떤 동영상 포맷을 지원하나요?",
-        "acceptedAnswer": {"@type":"Answer","text":"브라우저에서 재생 가능한 MP4, WebM, OGG 등의 형식을 지원합니다. MP4(H.264)가 가장 호환성이 좋습니다."}
-      }
-    ]
-  }
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"어떤 포맷의 동영상을 지원하나요?","acceptedAnswer":{"@type":"Answer","text":"브라우저가 재생할 수 있는 MP4(H.264)가 가장 안정적입니다. 일부 MOV·WebM도 됩니다."}},{"@type":"Question","name":"GIF 파일이 너무 크면 어떻게 하나요?","acceptedAnswer":{"@type":"Answer","text":"구간을 짧게, 해상도를 낮게, FPS를 10 정도로 낮추면 용량이 크게 줄어듭니다."}},{"@type":"Question","name":"소리는 어떻게 되나요?","acceptedAnswer":{"@type":"Answer","text":"GIF는 소리를 담을 수 없어 영상만 변환됩니다."}},{"@type":"Question","name":"변환 구간을 프레임 단위로 지정할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"초 단위(소수점 포함)로 시작·종료를 지정합니다."}},{"@type":"Question","name":"세로 영상(쇼츠)도 되나요?","acceptedAnswer":{"@type":"Answer","text":"네. 원본 비율을 유지한 채 변환됩니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
   </script>
   <style>
     .lang-switcher { display:flex; align-items:center; gap:4px; }
@@ -419,9 +394,10 @@ function resetAll() {
   videoFile = null;
 }
 </script>
-  <div class="wooa-orig-anchor"></div>
+  <section class="tool-guide"><h2>MP4 → GIF 변환 사용법</h2><ol><li>MP4 동영상을 업로드합니다.</li><li>시작·종료 시간으로 변환할 구간을 지정하고 FPS(초당 프레임), 해상도를 설정합니다.</li><li>GIF로 변환해 다운로드합니다.</li></ol><h3>GIF 용량 주의</h3><p class="note">GIF는 동영상 코덱보다 압축 효율이 낮아, 몇 초짜리도 수 MB가 됩니다. 3~5초 이내, 가로 480px 이하, 10~15fps로 자르는 것이 실용적입니다. 긴 영상은 GIF보다 MP4가 낫습니다.</p></section>
+<div class="wooa-orig-anchor"></div>
 <div class="tips-panel"><h3>💡 Tips</h3><ul><li>변환할 구간을 짧게 잡을수록 파일 크기가 줄어듭니다.</li><li>GIF는 256색 제한이 있어 단순한 애니메이션에 적합합니다.</li><li>루프 횟수를 0으로 설정하면 무한 반복 GIF가 됩니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>어떤 포맷의 동영상을 지원하나요?</summary><p>MP4(H.264) 형식을 지원합니다.</p></details><details><summary>GIF 파일이 너무 크면 어떻게 하나요?</summary><p>변환 구간을 짧게 줄이거나 프레임 수를 낮추면 파일 크기를 줄일 수 있습니다.</p></details><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>어떤 포맷의 동영상을 지원하나요?</summary><p>브라우저가 재생할 수 있는 MP4(H.264)가 가장 안정적입니다. 일부 MOV·WebM도 됩니다.</p></details><details><summary>GIF 파일이 너무 크면 어떻게 하나요?</summary><p>구간을 짧게, 해상도를 낮게, FPS를 10 정도로 낮추면 용량이 크게 줄어듭니다.</p></details><details><summary>소리는 어떻게 되나요?</summary><p>GIF는 소리를 담을 수 없어 영상만 변환됩니다.</p></details><details><summary>변환 구간을 프레임 단위로 지정할 수 있나요?</summary><p>초 단위(소수점 포함)로 시작·종료를 지정합니다.</p></details><details><summary>세로 영상(쇼츠)도 되나요?</summary><p>네. 원본 비율을 유지한 채 변환됩니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 <script src="js/wooahouse-originals-tool.js"></script>
 <script>window.PWA_CONFIG={appName:"WooaImage",themeColor:"#0EA5E9",icon:"🖼️",convertIds:['convertBtn','compressBtn','mergeBtn','splitBtn','deleteBtn','applyBtn','rotateBtn','unlockBtn','processBtn','cropBtn','generateBtn','resizeBtn','startBtn','generateAllBtn','printBtn']};</script>
 <script src="js/pwa-install.js"></script>

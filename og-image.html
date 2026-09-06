@@ -56,15 +56,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {"@type":"Question","name":"OG 이미지란 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"OG 이미지(Open Graph Image)는 링크를 SNS나 메신저에 공유할 때 표시되는 미리보기 이미지입니다. Facebook, Twitter, Kakao, Slack 등에서 자동으로 표시됩니다."}},
-    {"@type":"Question","name":"OG 이미지 권장 크기는?","acceptedAnswer":{"@type":"Answer","text":"표준 크기는 1200×630픽셀(1.91:1 비율)입니다. 이 도구는 해당 크기로 자동 생성합니다."}},
-    {"@type":"Question","name":"생성된 이미지를 어떻게 사용하나요?","acceptedAnswer":{"@type":"Answer","text":"PNG로 다운로드 후 웹서버에 업로드하고, HTML head 태그에 <meta property=\"og:image\" content=\"이미지URL\">을 추가하면 됩니다."}}
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"OG 이미지란 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"Open Graph 프로토콜의 대표 이미지로, 링크 미리보기(카드)에 나타나는 썸네일입니다."}},{"@type":"Question","name":"OG 이미지 권장 크기는?","acceptedAnswer":{"@type":"Answer","text":"1200×630 픽셀입니다. 최소 600×315 이상이어야 큰 카드로 표시됩니다."}},{"@type":"Question","name":"생성된 이미지를 어떻게 사용하나요?","acceptedAnswer":{"@type":"Answer","text":"서버에 업로드한 뒤 그 URL을 &lt;meta property=\"og:image\" content=\"...\"&gt;에 넣습니다."}},{"@type":"Question","name":"공유했는데 이미지가 안 바뀌어요.","acceptedAnswer":{"@type":"Answer","text":"SNS가 이전 이미지를 캐시합니다. 페이스북 공유 디버거, 카카오 캐시 초기화 도구로 갱신하세요."}},{"@type":"Question","name":"글자가 잘리지 않게 하려면?","acceptedAnswer":{"@type":"Answer","text":"중요한 텍스트는 가장자리에서 60px 이상 안쪽에 두세요. 플랫폼마다 잘리는 영역이 조금씩 다릅니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <style>
     .lang-switcher { display:flex; align-items:center; gap:4px; }
@@ -201,10 +193,11 @@
     <a href="youtube-thumbnail.html" class="related-card"><span class="related-icon">▶️</span><span>유튜브 썸네일</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>OG 이미지 생성기 사용법</h2><ol><li>제목, 설명, 배경색(또는 배경 이미지)을 입력합니다.</li><li>1200×630 규격으로 미리보기를 확인하며 글자 크기·위치를 조정합니다.</li><li>PNG로 다운로드해 웹페이지 &lt;head&gt;의 og:image에 지정합니다.</li></ol><h3>OG 이미지란</h3><p class="note">링크를 카카오톡·페이스북·슬랙 등에 공유할 때 표시되는 대표 이미지입니다. HTML의 &lt;meta property="og:image"&gt; 태그로 지정하며, 권장 크기는 1200×630(1.91:1)입니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>OG 이미지 권장 크기는 1200×630px입니다.</li><li>텍스트를 이미지 중앙에 배치하면 SNS 미리보기에서 잘 보입니다.</li><li>배경 색상과 텍스트 색상의 대비가 강할수록 가독성이 높아집니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>OG 이미지란 무엇인가요?</summary><p>OG 이미지(Open Graph Image)는 링크를 SNS나 메신저에 공유할 때 표시되는 미리보기 이미지입니다. Facebook, Twitter, Kakao, Slack 등에서 자동으로 표시됩니다.</p></details><details><summary>OG 이미지 권장 크기는?</summary><p>표준 크기는 1200×630픽셀(1.91:1 비율)입니다. 이 도구는 해당 크기로 자동 생성합니다.</p></details><details><summary>생성된 이미지를 어떻게 사용하나요?</summary><p>PNG로 다운로드 후 웹서버에 업로드하고, HTML head 태그에 &lt;meta property="og:image" content="이미지URL"&gt;을 추가하면 됩니다.</p></details><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>OG 이미지란 무엇인가요?</summary><p>Open Graph 프로토콜의 대표 이미지로, 링크 미리보기(카드)에 나타나는 썸네일입니다.</p></details><details><summary>OG 이미지 권장 크기는?</summary><p>1200×630 픽셀입니다. 최소 600×315 이상이어야 큰 카드로 표시됩니다.</p></details><details><summary>생성된 이미지를 어떻게 사용하나요?</summary><p>서버에 업로드한 뒤 그 URL을 &lt;meta property="og:image" content="..."&gt;에 넣습니다.</p></details><details><summary>공유했는데 이미지가 안 바뀌어요.</summary><p>SNS가 이전 이미지를 캐시합니다. 페이스북 공유 디버거, 카카오 캐시 초기화 도구로 갱신하세요.</p></details><details><summary>글자가 잘리지 않게 하려면?</summary><p>중요한 텍스트는 가장자리에서 60px 이상 안쪽에 두세요. 플랫폼마다 잘리는 영역이 조금씩 다릅니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

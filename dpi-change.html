@@ -58,30 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "DPI를 바꾸면 화질이 떨어지나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "아니요. 픽셀을 다시 그리거나 압축하지 않고 이미지 파일의 DPI 메타데이터만 직접 수정하므로 원본 화질이 100% 그대로 유지됩니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "DPI를 바꾸면 이미지 크기(픽셀)도 바뀌나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "아니요. 가로·세로 픽셀 수는 변하지 않습니다. DPI는 인쇄했을 때의 밀도 정보일 뿐이며, 화면에서 보이는 이미지도 그대로입니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "어떤 형식을 지원하나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "JPG와 PNG를 지원합니다. JPG는 JFIF 헤더, PNG는 pHYs 청크에 DPI 값을 기록합니다."}
-    },
-    {
-      "@type": "Question","name": "파일이 서버에 업로드되나요?","acceptedAnswer": {"@type": "Answer","text": "아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 완전히 안전합니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"DPI를 바꾸면 화질이 떨어지나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 픽셀을 다시 그리지 않고 숫자(메타데이터)만 바꾸므로 화질 손실이 전혀 없습니다."}},{"@type":"Question","name":"DPI를 바꾸면 이미지 크기(픽셀)도 바뀌나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 픽셀 수는 그대로입니다. 바뀌는 것은 인쇄 시 계산되는 물리적 크기(인치·cm)뿐입니다."}},{"@type":"Question","name":"72dpi 이미지를 300dpi로 바꾸면 인쇄가 선명해지나요?","acceptedAnswer":{"@type":"Answer","text":"픽셀이 부족하면 선명해지지 않습니다. 예: 500×500px 이미지를 300dpi로 하면 인쇄 크기가 약 4cm로 작아질 뿐입니다. 큰 인쇄물은 픽셀 자체가 커야 합니다."}},{"@type":"Question","name":"어떤 형식을 지원하나요?","acceptedAnswer":{"@type":"Answer","text":"JPG와 PNG의 DPI 메타데이터를 변경할 수 있습니다."}},{"@type":"Question","name":"인쇄소에서 요구하는 dpi는 보통 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"일반 인쇄물은 300dpi, 대형 현수막·배너는 100~150dpi면 충분합니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <style>
     .lang-switcher { display:flex; align-items:center; gap:4px; }
@@ -216,10 +193,11 @@
     <a href="image-info.html" class="related-card"><span class="related-icon">ℹ️</span><span>이미지 정보 확인</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 DPI 변경 사용법</h2><ol><li>JPG·PNG 이미지를 업로드합니다.</li><li>목표 DPI 값(인쇄 납품은 보통 300, 웹은 72)을 입력합니다.</li><li>DPI 정보만 바뀐 파일을 다운로드합니다.</li></ol><h3>DPI란 무엇인가</h3><p class="note">DPI(dots per inch)는 "1인치를 몇 개의 점으로 인쇄할지"를 나타내는 값으로, 파일의 메타데이터에만 저장됩니다. 실제 픽셀 수는 그대로이고, 인쇄 시 물리적 크기(가로 3000px ÷ 300dpi = 10인치) 계산에만 쓰입니다.</p><h3>활용 예시</h3><p class="note">인쇄소가 "300dpi 이상"을 요구할 때, 워드·한글 문서에 넣을 때 크기가 이상하게 잡힐 때 DPI 값을 조정합니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>DPI는 인쇄 시 밀도 정보일 뿐, 화면에서 보이는 이미지 크기(픽셀)는 바뀌지 않습니다.</li><li>인쇄소·출판사 납품 규정에서 흔히 요구하는 값은 300dpi입니다.</li><li>웹에 올릴 이미지는 72dpi로도 충분합니다 — 파일 용량과 무관합니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>DPI를 바꾸면 화질이 떨어지나요?</summary><p>아니요. 픽셀을 다시 그리거나 압축하지 않고 이미지 파일의 DPI 메타데이터만 직접 수정하므로 원본 화질이 100% 그대로 유지됩니다.</p></details><details><summary>DPI를 바꾸면 이미지 크기(픽셀)도 바뀌나요?</summary><p>아니요. 가로·세로 픽셀 수는 변하지 않습니다. DPI는 인쇄했을 때의 밀도 정보일 뿐이며, 화면에서 보이는 이미지도 그대로입니다.</p></details><details><summary>어떤 형식을 지원하나요?</summary><p>JPG와 PNG를 지원합니다. JPG는 JFIF 헤더, PNG는 pHYs 청크에 DPI 값을 기록합니다.</p></details><details><summary>파일이 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 완전히 안전합니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>DPI를 바꾸면 화질이 떨어지나요?</summary><p>아니요. 픽셀을 다시 그리지 않고 숫자(메타데이터)만 바꾸므로 화질 손실이 전혀 없습니다.</p></details><details><summary>DPI를 바꾸면 이미지 크기(픽셀)도 바뀌나요?</summary><p>아니요. 픽셀 수는 그대로입니다. 바뀌는 것은 인쇄 시 계산되는 물리적 크기(인치·cm)뿐입니다.</p></details><details><summary>72dpi 이미지를 300dpi로 바꾸면 인쇄가 선명해지나요?</summary><p>픽셀이 부족하면 선명해지지 않습니다. 예: 500×500px 이미지를 300dpi로 하면 인쇄 크기가 약 4cm로 작아질 뿐입니다. 큰 인쇄물은 픽셀 자체가 커야 합니다.</p></details><details><summary>어떤 형식을 지원하나요?</summary><p>JPG와 PNG의 DPI 메타데이터를 변경할 수 있습니다.</p></details><details><summary>인쇄소에서 요구하는 dpi는 보통 얼마인가요?</summary><p>일반 인쇄물은 300dpi, 대형 현수막·배너는 100~150dpi면 충분합니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

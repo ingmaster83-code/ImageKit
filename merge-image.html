@@ -58,27 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "몇 장까지 합칠 수 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "최대 10장까지 합칠 수 있습니다. 가로 또는 세로 방향을 선택해 이어붙일 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "이미지 크기가 다르면 어떻게 되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "가로 방향 합치기의 경우 높이를 기준으로, 세로 방향 합치기의 경우 너비를 기준으로 맞추어 합칩니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "이미지가 서버에 저장되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"몇 장까지 합칠 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"장수 제한은 없습니다. 다만 전체 픽셀이 매우 커지면 브라우저 처리와 저장에 시간이 걸립니다."}},{"@type":"Question","name":"이미지 크기가 다르면 어떻게 되나요?","acceptedAnswer":{"@type":"Answer","text":"세로로 합칠 때는 너비를, 가로로 합칠 때는 높이를 기준으로 맞춥니다. 정렬(왼쪽/가운데) 옵션이 있습니다."}},{"@type":"Question","name":"간격에 색을 넣을 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 이미지 사이 간격과 배경색을 지정할 수 있어 구분선처럼 쓸 수 있습니다."}},{"@type":"Question","name":"격자(2×2)로 배치할 수도 있나요?","acceptedAnswer":{"@type":"Answer","text":"격자 배치는 콜라주 도구가 더 적합합니다. 이 도구는 한 줄 이어붙이기 전용입니다."}},{"@type":"Question","name":"순서를 바꿀 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 업로드 후 썸네일을 드래그해 순서를 조정합니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
 <style>
   .merge-file-list {
@@ -289,10 +269,11 @@
     <a href="crop-image.html" class="related-card"><span class="related-icon">✂️</span><span>이미지 자르기</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 합치기 사용법</h2><ol><li>이어붙일 이미지를 여러 장 업로드합니다.</li><li>가로 또는 세로 방향을 선택하고 간격·배경색을 조정합니다.</li><li>하나로 합쳐진 이미지를 다운로드합니다.</li></ol><h3>어디에 쓰나요</h3><p class="note">카톡 대화 캡처 여러 장 세로로 잇기, 전후 비교 사진 가로로 나란히, 상품 상세컷 이어붙이기, 스토리보드 만들기 등에 씁니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>이미지를 가로 또는 세로로 이어 붙일 수 있습니다.</li><li>서로 다른 크기의 이미지를 합칠 때 정렬 방식을 선택하세요.</li><li>비교 자료, 전후 사진 등을 만들 때 유용합니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>몇 장까지 합칠 수 있나요?</summary><p>최대 10장까지 합칠 수 있습니다. 가로 또는 세로 방향을 선택해 이어붙일 수 있습니다.</p></details><details><summary>이미지 크기가 다르면 어떻게 되나요?</summary><p>가로 방향 합치기의 경우 높이를 기준으로, 세로 방향 합치기의 경우 너비를 기준으로 맞추어 합칩니다.</p></details><details><summary>이미지가 서버에 저장되나요?</summary><p>아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>몇 장까지 합칠 수 있나요?</summary><p>장수 제한은 없습니다. 다만 전체 픽셀이 매우 커지면 브라우저 처리와 저장에 시간이 걸립니다.</p></details><details><summary>이미지 크기가 다르면 어떻게 되나요?</summary><p>세로로 합칠 때는 너비를, 가로로 합칠 때는 높이를 기준으로 맞춥니다. 정렬(왼쪽/가운데) 옵션이 있습니다.</p></details><details><summary>간격에 색을 넣을 수 있나요?</summary><p>네. 이미지 사이 간격과 배경색을 지정할 수 있어 구분선처럼 쓸 수 있습니다.</p></details><details><summary>격자(2×2)로 배치할 수도 있나요?</summary><p>격자 배치는 콜라주 도구가 더 적합합니다. 이 도구는 한 줄 이어붙이기 전용입니다.</p></details><details><summary>순서를 바꿀 수 있나요?</summary><p>네. 업로드 후 썸네일을 드래그해 순서를 조정합니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

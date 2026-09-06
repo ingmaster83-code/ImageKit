@@ -58,27 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "JPG를 PNG로 변환하면 품질이 좋아지나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "JPG 압축 손실은 되돌릴 수 없지만 PNG로 변환하면 이후 편집 시 추가 손실을 방지할 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "파일 크기가 커지나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "PNG는 무손실 형식이므로 JPG보다 파일 크기가 커질 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "투명 배경으로 변환되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "JPG에는 투명도가 없으므로 흰색 배경으로 변환됩니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"JPG를 PNG로 변환하면 품질이 좋아지나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. JPG에서 이미 손실된 화질은 복구되지 않습니다. 다만 이후 편집·재저장 시 추가 손실은 막을 수 있습니다."}},{"@type":"Question","name":"파일 크기가 커지나요?","acceptedAnswer":{"@type":"Answer","text":"보통 커집니다. PNG는 무손실이라 사진의 경우 JPG보다 2~5배 커질 수 있습니다."}},{"@type":"Question","name":"투명 배경으로 변환되나요?","acceptedAnswer":{"@type":"Answer","text":"JPG에는 투명 정보가 없어 변환만으로는 배경이 흰색으로 채워집니다. 배경을 지우려면 배경 제거 도구를 쓰세요."}},{"@type":"Question","name":"언제 PNG로 바꿔야 하나요?","acceptedAnswer":{"@type":"Answer","text":"스크린샷, 글자·선이 많은 이미지, 투명 배경이 필요할 때, 무손실 편집이 필요할 때입니다."}},{"@type":"Question","name":"여러 장을 한 번에 변환할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 여러 파일을 올려 일괄 변환하고 ZIP으로 받습니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <style>
     .lang-switcher { display:flex; align-items:center; gap:4px; }
@@ -202,10 +182,11 @@
     <a href="webp-to-png.html" class="related-card"><span class="related-icon">🖼️</span><span>WebP → PNG</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>JPG → PNG 변환 사용법</h2><ol><li>JPG 이미지를 업로드합니다(여러 장 가능).</li><li>출력 형식(PNG)을 확인하고 변환합니다.</li><li>변환된 파일을 다운로드합니다.</li></ol><h3>JPG와 PNG의 차이</h3><p class="note">JPG는 손실 압축으로 사진에 적합하고 투명도가 없습니다. PNG는 무손실이라 글자·로고·스크린샷이 선명하고 투명 배경을 지원합니다. JPG를 PNG로 바꿔도 이미 손실된 화질이 복구되지는 않습니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>PNG는 투명 배경을 지원하므로 로고·아이콘에 적합합니다.</li><li>JPEG의 압축 손상이 누적되기 전에 PNG로 변환해두면 품질을 보존할 수 있습니다.</li><li>파일 크기가 커질 수 있으므로 웹용이라면 WebP도 고려하세요.</li><li>여러 JPG 파일을 한 번에 선택하면 일괄 변환 후 ZIP으로 받을 수 있습니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>JPG를 PNG로 변환하면 품질이 좋아지나요?</summary><p>JPG 압축 손실은 되돌릴 수 없지만 PNG로 변환하면 이후 편집 시 추가 손실을 방지할 수 있습니다.</p></details><details><summary>파일 크기가 커지나요?</summary><p>PNG는 무손실 형식이므로 JPG보다 파일 크기가 커질 수 있습니다.</p></details><details><summary>투명 배경으로 변환되나요?</summary><p>JPG에는 투명도가 없으므로 흰색 배경으로 변환됩니다.</p></details><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>JPG를 PNG로 변환하면 품질이 좋아지나요?</summary><p>아니요. JPG에서 이미 손실된 화질은 복구되지 않습니다. 다만 이후 편집·재저장 시 추가 손실은 막을 수 있습니다.</p></details><details><summary>파일 크기가 커지나요?</summary><p>보통 커집니다. PNG는 무손실이라 사진의 경우 JPG보다 2~5배 커질 수 있습니다.</p></details><details><summary>투명 배경으로 변환되나요?</summary><p>JPG에는 투명 정보가 없어 변환만으로는 배경이 흰색으로 채워집니다. 배경을 지우려면 배경 제거 도구를 쓰세요.</p></details><details><summary>언제 PNG로 바꿔야 하나요?</summary><p>스크린샷, 글자·선이 많은 이미지, 투명 배경이 필요할 때, 무손실 편집이 필요할 때입니다.</p></details><details><summary>여러 장을 한 번에 변환할 수 있나요?</summary><p>네. 여러 파일을 올려 일괄 변환하고 ZIP으로 받습니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

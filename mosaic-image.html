@@ -58,27 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "전체 모자이크와 영역 선택 모자이크의 차이는?",
-      "acceptedAnswer": {"@type": "Answer","text": "전체 모자이크는 이미지 전체에 픽셀화 효과를 적용합니다. 영역 선택 모자이크는 마우스로 드래그해 특정 부분(얼굴, 번호판 등)만 선택하여 적용합니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "블록 크기가 클수록 어떻게 되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "블록 크기가 클수록 모자이크가 더 거칠고 강하게 적용되어 원본 내용을 더 잘 가립니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "이미지가 서버에 저장되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"전체 모자이크와 영역 선택 모자이크의 차이는?","acceptedAnswer":{"@type":"Answer","text":"전체는 이미지 전부를 픽셀화하고, 영역 선택은 드래그한 부분(얼굴·번호판 등)만 처리합니다."}},{"@type":"Question","name":"블록 크기가 클수록 어떻게 되나요?","acceptedAnswer":{"@type":"Answer","text":"더 거칠게(알아보기 어렵게) 처리됩니다. 개인정보 보호 목적이면 크게, 배경 흐림 목적이면 작게 씁니다."}},{"@type":"Question","name":"모자이크한 부분을 되돌릴 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"저장 후에는 원래 픽셀 정보가 사라져 복원할 수 없습니다. 원본은 따로 보관하세요."}},{"@type":"Question","name":"블러(흐림)와 모자이크 중 뭐가 안전한가요?","acceptedAnswer":{"@type":"Answer","text":"약한 블러는 딥러닝으로 복원 시도가 가능합니다. 개인정보는 큰 블록 모자이크나 단색 덮기가 더 안전합니다."}},{"@type":"Question","name":"영상에도 적용되나요?","acceptedAnswer":{"@type":"Answer","text":"이 도구는 이미지 전용입니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
 <style>
   .mode-btns {
@@ -286,10 +266,11 @@
     <a href="crop-image.html" class="related-card"><span class="related-icon">✂️</span><span>이미지 자르기</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 모자이크 사용법</h2><ol><li>이미지를 업로드합니다.</li><li>전체 모자이크 또는 드래그로 특정 영역을 선택합니다. 블록 크기를 조절합니다.</li><li>모자이크 처리된 이미지를 다운로드합니다.</li></ol><h3>개인정보 보호 주의</h3><p class="note">얼굴·차량 번호판·주소·신분증 번호를 가릴 때 씁니다. 블록이 너무 크지 않으면 AI로 복원될 수 있으니, 민감한 정보는 블록을 충분히 크게 하거나 완전히 검게 덮는 것이 안전합니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>모자이크 크기를 크게 할수록 더 강하게 가려집니다.</li><li>얼굴·번호판 등 개인 정보를 보호할 때 유용합니다.</li><li>가릴 영역을 정밀하게 선택하려면 브러시 크기를 줄이세요.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>전체 모자이크와 영역 선택 모자이크의 차이는?</summary><p>전체 모자이크는 이미지 전체에 픽셀화 효과를 적용합니다. 영역 선택 모자이크는 마우스로 드래그해 특정 부분(얼굴, 번호판 등)만 선택하여 적용합니다.</p></details><details><summary>블록 크기가 클수록 어떻게 되나요?</summary><p>블록 크기가 클수록 모자이크가 더 거칠고 강하게 적용되어 원본 내용을 더 잘 가립니다.</p></details><details><summary>이미지가 서버에 저장되나요?</summary><p>아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>전체 모자이크와 영역 선택 모자이크의 차이는?</summary><p>전체는 이미지 전부를 픽셀화하고, 영역 선택은 드래그한 부분(얼굴·번호판 등)만 처리합니다.</p></details><details><summary>블록 크기가 클수록 어떻게 되나요?</summary><p>더 거칠게(알아보기 어렵게) 처리됩니다. 개인정보 보호 목적이면 크게, 배경 흐림 목적이면 작게 씁니다.</p></details><details><summary>모자이크한 부분을 되돌릴 수 있나요?</summary><p>저장 후에는 원래 픽셀 정보가 사라져 복원할 수 없습니다. 원본은 따로 보관하세요.</p></details><details><summary>블러(흐림)와 모자이크 중 뭐가 안전한가요?</summary><p>약한 블러는 딥러닝으로 복원 시도가 가능합니다. 개인정보는 큰 블록 모자이크나 단색 덮기가 더 안전합니다.</p></details><details><summary>영상에도 적용되나요?</summary><p>이 도구는 이미지 전용입니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

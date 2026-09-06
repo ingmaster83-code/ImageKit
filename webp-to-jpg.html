@@ -58,27 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "WebP를 JPG로 변환해야 하는 이유가 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "일부 구형 소프트웨어나 기기에서 WebP를 지원하지 않을 때 JPG로 변환하면 호환성이 높아집니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "변환 시 품질 손실이 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "약간의 압축 손실이 발생할 수 있습니다. 품질 값을 높게 설정하면 최소화됩니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "애니메이션 WebP도 변환되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "현재는 정지 이미지 변환만 지원합니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"WebP를 JPG로 변환해야 하는 이유가 있나요?","acceptedAnswer":{"@type":"Answer","text":"한글·오래된 포토샵·일부 SNS·인화 서비스가 WebP를 지원하지 않기 때문입니다."}},{"@type":"Question","name":"변환 시 품질 손실이 있나요?","acceptedAnswer":{"@type":"Answer","text":"WebP → JPG는 손실 → 손실이라 미세한 저하가 있습니다. 품질 90% 이상으로 변환하면 거의 티가 안 납니다."}},{"@type":"Question","name":"애니메이션 WebP도 변환되나요?","acceptedAnswer":{"@type":"Answer","text":"움직이는 WebP는 첫 프레임만 정지 이미지로 변환됩니다. 움직임을 유지하려면 GIF로 변환하세요."}},{"@type":"Question","name":"투명 배경 WebP는요?","acceptedAnswer":{"@type":"Answer","text":"투명이 필요하면 PNG로, 필요 없으면 JPG로 변환하세요. JPG는 투명을 흰색으로 채웁니다."}},{"@type":"Question","name":"여러 장 일괄 변환되나요?","acceptedAnswer":{"@type":"Answer","text":"네. 한꺼번에 변환해 ZIP으로 받습니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <style>
     .lang-switcher { display:flex; align-items:center; gap:4px; }
@@ -218,9 +198,10 @@
     <a href="webp-to-png.html" class="related-card"><span class="related-icon">🖼️</span><span>WebP → PNG</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>WebP → JPG 변환 사용법</h2><ol><li>WebP 이미지를 업로드합니다.</li><li>출력 형식(JPG 또는 PNG)을 선택합니다.</li><li>변환된 파일을 다운로드합니다.</li></ol><h3>WebP를 왜 변환하나</h3><p class="note">WebP는 구글이 만든 고효율 웹 이미지 형식입니다. 웹에서 저장하면 WebP로 받아지는 경우가 많은데, 카톡·구형 프로그램·일부 편집기·문서에 넣을 때 안 열려 JPG/PNG 변환이 필요합니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 <div class="tips-panel"><h3>💡 Tips</h3><ul><li>WebP는 일부 프로그램에서 열리지 않을 수 있어 JPG로 변환하면 범용성이 높아집니다.</li><li>변환 시 품질을 90 이상으로 설정하면 화질 손실이 최소화됩니다.</li><li>여러 WebP 파일을 한 번에 선택하면 일괄 변환 후 ZIP으로 받을 수 있습니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>WebP를 JPG로 변환해야 하는 이유가 있나요?</summary><p>일부 구형 소프트웨어나 기기에서 WebP를 지원하지 않을 때 JPG로 변환하면 호환성이 높아집니다.</p></details><details><summary>변환 시 품질 손실이 있나요?</summary><p>약간의 압축 손실이 발생할 수 있습니다. 품질 값을 높게 설정하면 최소화됩니다.</p></details><details><summary>애니메이션 WebP도 변환되나요?</summary><p>현재는 정지 이미지 변환만 지원합니다.</p></details><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>WebP를 JPG로 변환해야 하는 이유가 있나요?</summary><p>한글·오래된 포토샵·일부 SNS·인화 서비스가 WebP를 지원하지 않기 때문입니다.</p></details><details><summary>변환 시 품질 손실이 있나요?</summary><p>WebP → JPG는 손실 → 손실이라 미세한 저하가 있습니다. 품질 90% 이상으로 변환하면 거의 티가 안 납니다.</p></details><details><summary>애니메이션 WebP도 변환되나요?</summary><p>움직이는 WebP는 첫 프레임만 정지 이미지로 변환됩니다. 움직임을 유지하려면 GIF로 변환하세요.</p></details><details><summary>투명 배경 WebP는요?</summary><p>투명이 필요하면 PNG로, 필요 없으면 JPG로 변환하세요. JPG는 투명을 흰색으로 채웁니다.</p></details><details><summary>여러 장 일괄 변환되나요?</summary><p>네. 한꺼번에 변환해 ZIP으로 받습니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

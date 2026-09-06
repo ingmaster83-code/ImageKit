@@ -60,27 +60,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "몇 x 몇으로 분할할 수 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "가로와 세로를 각각 1~6까지 설정할 수 있어 최대 6x6=36조각으로 분할할 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "분할된 이미지를 한꺼번에 다운로드할 수 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "네, 모든 조각을 ZIP 파일로 묶어 한 번에 다운로드할 수 있습니다. 개별 다운로드도 가능합니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "이미지가 서버에 저장되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"몇 x 몇으로 분할할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"2×2부터 4×4까지, 그리고 세로/가로 방향 분할을 지원합니다."}},{"@type":"Question","name":"분할된 이미지를 한꺼번에 받을 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 조각들이 순번이 붙은 파일명으로 ZIP에 담겨 한 번에 다운로드됩니다."}},{"@type":"Question","name":"원본 비율이 격자와 안 맞으면?","acceptedAnswer":{"@type":"Answer","text":"가장자리 조각의 크기가 다를 수 있습니다. 인스타 그리드는 미리 3:N 비율로 잘라두면 깔끔합니다."}},{"@type":"Question","name":"분할하면 화질이 떨어지나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 픽셀을 그대로 나누므로 손실이 없습니다."}},{"@type":"Question","name":"다시 합칠 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"이미지 합치기/콜라주 도구로 순서대로 배치하면 됩니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
 <style>
   .grid-selector {
@@ -305,10 +285,11 @@
     <a href="crop-image.html" class="related-card"><span class="related-icon">✂️</span><span>이미지 자르기</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 분할 사용법</h2><ol><li>분할할 이미지를 업로드합니다.</li><li>격자 크기(2×2, 3×3, 4×4 등)를 선택합니다.</li><li>조각들이 ZIP으로 묶여 다운로드됩니다.</li></ol><h3>인스타그램 그리드</h3><p class="note">한 장의 큰 이미지를 3×3(또는 3×N)으로 잘라 프로필 피드에 순서대로 올리면, 프로필 화면에서 하나의 큰 그림처럼 보입니다. 조각 파일명에 순서 번호가 붙어 업로드 순서를 헷갈리지 않습니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>이미지를 격자 형태로 균등하게 나누거나 원하는 크기로 분할할 수 있습니다.</li><li>인스타그램 그리드용 이미지를 만들 때 많이 사용됩니다.</li><li>분할된 조각 파일명에는 행·열 번호가 포함됩니다.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>몇 x 몇으로 분할할 수 있나요?</summary><p>가로와 세로를 각각 1~6까지 설정할 수 있어 최대 6×6 = 36조각으로 분할할 수 있습니다.</p></details><details><summary>분할된 이미지를 한꺼번에 다운로드할 수 있나요?</summary><p>네, 모든 조각을 ZIP 파일로 묶어 한 번에 다운로드할 수 있습니다. 개별 다운로드도 가능합니다.</p></details><details><summary>이미지가 서버에 저장되나요?</summary><p>아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>몇 x 몇으로 분할할 수 있나요?</summary><p>2×2부터 4×4까지, 그리고 세로/가로 방향 분할을 지원합니다.</p></details><details><summary>분할된 이미지를 한꺼번에 받을 수 있나요?</summary><p>네. 조각들이 순번이 붙은 파일명으로 ZIP에 담겨 한 번에 다운로드됩니다.</p></details><details><summary>원본 비율이 격자와 안 맞으면?</summary><p>가장자리 조각의 크기가 다를 수 있습니다. 인스타 그리드는 미리 3:N 비율로 잘라두면 깔끔합니다.</p></details><details><summary>분할하면 화질이 떨어지나요?</summary><p>아니요. 픽셀을 그대로 나누므로 손실이 없습니다.</p></details><details><summary>다시 합칠 수 있나요?</summary><p>이미지 합치기/콜라주 도구로 순서대로 배치하면 됩니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

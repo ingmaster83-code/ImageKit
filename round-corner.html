@@ -58,27 +58,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "둥근 모서리 결과물은 어떤 형식으로 저장되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "모서리 주변 투명도를 지원하기 위해 PNG 형식으로 저장됩니다. 배경색을 설정하면 해당 색상으로 채워진 PNG가 생성됩니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "원형 이미지도 만들 수 있나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "네, 둥글기 슬라이더를 최대(50%)로 설정하면 원형 이미지를 만들 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "이미지가 서버에 저장되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"둥근 모서리 결과물은 어떤 형식으로 저장되나요?","acceptedAnswer":{"@type":"Answer","text":"잘린 모서리를 투명하게 처리하기 위해 PNG로 저장됩니다."}},{"@type":"Question","name":"원형 이미지도 만들 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"네. 둥글기를 최대로 올리면 정사각형은 완전한 원, 직사각형은 타원이 됩니다."}},{"@type":"Question","name":"네 모서리 중 일부만 둥글게 할 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"기본은 네 모서리 동일 적용입니다."}},{"@type":"Question","name":"배경색을 넣을 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"둥근 이미지를 만든 뒤 테두리 도구에서 배경을 깔면 됩니다."}},{"@type":"Question","name":"원본이 정사각형이 아니어도 원형이 되나요?","acceptedAnswer":{"@type":"Answer","text":"직사각형은 타원이 됩니다. 정원을 원하면 먼저 자르기로 1:1로 만드세요."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
 <style>
   .preview-compare {
@@ -277,10 +257,11 @@
     <a href="crop-image.html" class="related-card"><span class="related-icon">✂️</span><span>이미지 자르기</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 둥근 모서리 사용법</h2><ol><li>이미지를 업로드합니다.</li><li>둥글기(radius) 슬라이더를 조절합니다. 최대로 올리면 원형이 됩니다.</li><li>투명 배경 PNG로 저장합니다.</li></ol><h3>어디에 쓰나요</h3><p class="note">프로필 사진을 원형으로, 앱 아이콘·썸네일 모서리를 둥글게, 카드 UI에 들어갈 이미지 등에 씁니다. 잘린 모서리는 투명해지므로 PNG로 저장됩니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 
   <div class="tips-panel"><h3>💡 Tips</h3><ul><li>모서리 반경을 크게 할수록 더 동그란 형태가 됩니다. 50% 이상이면 원형이 됩니다.</li><li>앱 아이콘이나 SNS 프로필 사진에 둥근 모서리가 많이 사용됩니다.</li><li>배경 투명도를 유지하려면 PNG 형식으로 저장하세요.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>둥근 모서리 결과물은 어떤 형식으로 저장되나요?</summary><p>모서리 주변 투명도를 지원하기 위해 PNG 형식으로 저장됩니다. 배경색을 설정하면 해당 색상으로 채워진 PNG가 생성됩니다.</p></details><details><summary>원형 이미지도 만들 수 있나요?</summary><p>네, 둥글기 슬라이더를 최대(50%)로 설정하면 원형 이미지를 만들 수 있습니다.</p></details><details><summary>이미지가 서버에 저장되나요?</summary><p>아니요, 모든 처리는 브라우저에서만 이루어지며 외부로 전송되지 않습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>둥근 모서리 결과물은 어떤 형식으로 저장되나요?</summary><p>잘린 모서리를 투명하게 처리하기 위해 PNG로 저장됩니다.</p></details><details><summary>원형 이미지도 만들 수 있나요?</summary><p>네. 둥글기를 최대로 올리면 정사각형은 완전한 원, 직사각형은 타원이 됩니다.</p></details><details><summary>네 모서리 중 일부만 둥글게 할 수 있나요?</summary><p>기본은 네 모서리 동일 적용입니다.</p></details><details><summary>배경색을 넣을 수 있나요?</summary><p>둥근 이미지를 만든 뒤 테두리 도구에서 배경을 깔면 됩니다.</p></details><details><summary>원본이 정사각형이 아니어도 원형이 되나요?</summary><p>직사각형은 타원이 됩니다. 정원을 원하면 먼저 자르기로 1:1로 만드세요.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 

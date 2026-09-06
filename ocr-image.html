@@ -70,27 +70,7 @@
 }
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "한국어 텍스트도 인식되나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "네, 한국어·영어·한영 혼합 모드를 선택하여 정확한 텍스트 추출이 가능합니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "인식 정확도가 어느 정도인가요?",
-      "acceptedAnswer": {"@type": "Answer","text": "깨끗하고 선명한 이미지에서 높은 정확도를 보이며, 손글씨나 흐린 이미지는 정확도가 낮을 수 있습니다."}
-    },
-    {
-      "@type": "Question",
-      "name": "어떤 이미지 형식을 지원하나요?",
-      "acceptedAnswer": {"@type": "Answer","text": "JPG, PNG, WebP 등 일반적인 이미지 형식을 모두 지원합니다."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"한국어 텍스트도 인식되나요?","acceptedAnswer":{"@type":"Answer","text":"네. 한국어와 영어를 인식합니다. 두 언어가 섞인 문서도 처리됩니다."}},{"@type":"Question","name":"인식 정확도가 어느 정도인가요?","acceptedAnswer":{"@type":"Answer","text":"인쇄된 깔끔한 글자는 95% 이상, 사진·저해상도·손글씨는 크게 낮아집니다. 결과는 항상 검토가 필요합니다."}},{"@type":"Question","name":"어떤 이미지 형식을 지원하나요?","acceptedAnswer":{"@type":"Answer","text":"JPG·PNG·WebP 등 일반 이미지 형식을 지원합니다. 스캔 PDF는 PDF OCR 도구를 쓰세요."}},{"@type":"Question","name":"표 형태 데이터도 인식되나요?","acceptedAnswer":{"@type":"Answer","text":"글자는 인식되지만 셀 구조(행·열)는 유지되지 않아 정렬이 흐트러질 수 있습니다."}},{"@type":"Question","name":"인식 후 원본 서식(굵기·색)이 유지되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 순수 텍스트만 추출됩니다."}},{"@type":"Question","name":"이미지가 서버에 업로드되나요?","acceptedAnswer":{"@type":"Answer","text":"아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다."}}]}
 </script>
   <style>
     .lang-btns { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -321,9 +301,10 @@
     <a href="image-to-webp.html" class="related-card"><span class="related-icon">⚡</span><span>이미지 → WebP</span></a>
   </div>
 </div>
+<section class="tool-guide"><h2>이미지 텍스트 추출(OCR) 사용법</h2><ol><li>글자가 있는 이미지·스크린샷을 업로드합니다.</li><li>OCR 엔진이 한국어·영어 텍스트를 인식합니다. 처음엔 인식 데이터를 받느라 시간이 걸립니다.</li><li>추출된 텍스트를 복사하거나 저장합니다.</li></ol><h3>인식이 잘 되는 조건</h3><p class="note">글자가 수평이고, 배경과 대비가 뚜렷하며, 해상도가 충분한(글자 높이 20px 이상) 이미지가 잘 됩니다. 손글씨, 심하게 기울어진 사진, 화려한 배경 위 글자는 정확도가 떨어집니다.</p></section>
 <div class="wooa-orig-anchor"></div>
 <div class="tips-panel"><h3>💡 Tips</h3><ul><li>선명하고 대비가 뚜렷한 이미지에서 인식률이 높습니다.</li><li>텍스트를 가로로 정렬한 이미지에서 가장 정확합니다.</li><li>인식 후 오탈자가 있을 수 있으니 반드시 검토하세요.</li></ul></div>
-<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>한국어 텍스트도 인식되나요?</summary><p>네, 한국어·영어·한영 혼합 모드를 선택하여 정확한 텍스트 추출이 가능합니다.</p></details><details><summary>인식 정확도가 어느 정도인가요?</summary><p>깨끗하고 선명한 이미지에서 높은 정확도를 보이며, 손글씨나 흐린 이미지는 정확도가 낮을 수 있습니다.</p></details><details><summary>어떤 이미지 형식을 지원하나요?</summary><p>JPG, PNG, WebP 등 일반적인 이미지 형식을 모두 지원합니다.</p></details><details><summary>파일이 서버에 저장되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 파일은 서버로 전송되지 않습니다. 개인정보와 민감한 데이터가 외부로 유출될 걱정이 없으며, 기업 보안 환경에서도 안심하고 사용할 수 있습니다.</p></details></div>
+<div class="faq-section"><h2>자주 묻는 질문</h2><details><summary>한국어 텍스트도 인식되나요?</summary><p>네. 한국어와 영어를 인식합니다. 두 언어가 섞인 문서도 처리됩니다.</p></details><details><summary>인식 정확도가 어느 정도인가요?</summary><p>인쇄된 깔끔한 글자는 95% 이상, 사진·저해상도·손글씨는 크게 낮아집니다. 결과는 항상 검토가 필요합니다.</p></details><details><summary>어떤 이미지 형식을 지원하나요?</summary><p>JPG·PNG·WebP 등 일반 이미지 형식을 지원합니다. 스캔 PDF는 PDF OCR 도구를 쓰세요.</p></details><details><summary>표 형태 데이터도 인식되나요?</summary><p>글자는 인식되지만 셀 구조(행·열)는 유지되지 않아 정렬이 흐트러질 수 있습니다.</p></details><details><summary>인식 후 원본 서식(굵기·색)이 유지되나요?</summary><p>아니요. 순수 텍스트만 추출됩니다.</p></details><details><summary>이미지가 서버에 업로드되나요?</summary><p>아니요. 모든 처리는 브라우저 안에서만 이루어지며 이미지는 서버로 전송·저장되지 않습니다. 개인 사진이나 민감한 문서도 외부 유출 걱정 없이 사용할 수 있습니다.</p></details></div>
 
 </main>
 
